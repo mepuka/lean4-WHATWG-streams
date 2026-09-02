@@ -62,7 +62,7 @@ root = "bin.Census"
 # swap, which is the cutover proof.
 [[require]]
 name = "hash"
-git = "https://github.com/mepuka/lean4-hash"
+git = "https://github.com/pure-algebra/lean4-hash"
 rev = "0168306b7068b97758e3f2d4307eeb97aa31a104"
 
 # The generic effect algebra every standard here builds against (RS-D1 as
@@ -71,5 +71,5 @@ rev = "0168306b7068b97758e3f2d4307eeb97aa31a104"
 # Nothing imports it until the first Stratum S packet (P4).
 [[require]]
 name = "effects"
-git = "https://github.com/mepuka/lean4-effects"
+git = "https://github.com/pure-algebra/lean4-effects"
 rev = "5611c3a3cd4cd4b830c76d6c25c7dba6034c973a"

@@ -81,7 +81,7 @@ sealed, and its row is in "Vendored, sealed" above with the same digest.
 
 | Source | Commit | Used for |
 | --- | --- | --- |
-| `mepuka/lean4-effect4` | `e9075e192bb3065e3900ccabe7c0c2a6df1ddffc` | the router hierarchy, breaker/builder order, counterexample register, assurance threshold, the axiom gate (ported to `WhatwgTest/Audit/AxiomGate.lean`), the coverage-metric discipline |
+| `pure-algebra/lean4-effect4` | `e9075e192bb3065e3900ccabe7c0c2a6df1ddffc` | the router hierarchy, breaker/builder order, counterexample register, assurance threshold, the axiom gate (ported to `WhatwgTest/Audit/AxiomGate.lean`), the coverage-metric discipline |
 | `mepuka/foldlab` `formal/fips202` | `8d36195970b83a1439ec705b9a504617554b8062` | the Pass A / Pass B contract shape and the spec-to-implementation refinement decomposition reused by `docs/SHA256-DAG.md`; its `TOOLING-NOTES.md` requirements on gates as checked programs |
 
 ## Pending
@@ -94,4 +94,4 @@ sealed, and its row is in "Vendored, sealed" above with the same digest.
 | foldlab `.staging/fips202-library/SPEC.md` (decision 45, R-1 approved 2026-09-01) | S1 | the staging discipline `docs/SHA256-DAG.md` adapts; at foldlab commit `8d36195970b83a1439ec705b9a504617554b8062` plus the uncommitted working-tree file read 2026-09-01 |
 | wpt.fyi run identifiers for Chromium, Gecko, WebKit at the WPT pin | P8 | not recorded |
 | reference implementation npm dependency lock at the pin | P8 | not installed |
-| `mepuka/lean4-nlp` benchmark corpus commit | R0 | not yet read |
+| `pure-algebra/lean4-nlp` benchmark corpus commit | R0 | not yet read |

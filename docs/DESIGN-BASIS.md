@@ -158,6 +158,6 @@ is unchanged.
   [*Choice Trees: Representing Nondeterministic, Recursive, and Impure Programs in Coq*](https://arxiv.org/abs/2211.06863).
 - NIST, [FIPS 180-4, *Secure Hash Standard*](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), August 2015.
 - Lean, [source at `v4.33.1`](https://github.com/leanprover/lean4/tree/v4.33.1).
-- `mepuka/lean4-effect4` at `e9075e192bb3065e3900ccabe7c0c2a6df1ddffc` and
+- `pure-algebra/lean4-effect4` at `e9075e192bb3065e3900ccabe7c0c2a6df1ddffc` and
   `mepuka/foldlab` `formal/fips202` at `8d36195970b83a1439ec705b9a504617554b8062`,
   as process precedents.

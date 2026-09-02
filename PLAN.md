@@ -47,7 +47,7 @@ checked TypeScript. Host conformance is measured, never assumed.
 | Phase | Deliverable | Exit gate |
 | --- | --- | --- |
 | P0 — bootstrap | independent Lake package, exact toolchain, six routers, sealed pins, Lean gates, CI, provenance | `lake build` green; all four gate executables green; pins cross-checked |
-| R0 — research hold | implementation-strategy and performance notes for the Lean standard library, and the accumulated text-processing benchmarks from `mepuka/lean4-nlp`, written up as an authored design input | notes landed under `docs/research/`; the P1 census generator's representation decisions cite them |
+| R0 — research hold | implementation-strategy and performance notes for the Lean standard library, and the accumulated text-processing benchmarks from `pure-algebra/lean4-nlp`, written up as an authored design input | notes landed under `docs/research/`; the P1 census generator's representation decisions cite them |
 | P1 — inventory | census generator over `index.bs`: one row per abstract operation, internal slot, IDL member, and stated requirement, anchored by span digest; every row classified | every row has one disposition; the census join gate is green; missing rows fail cutover |
 | P2 — breadth scaffold | empty modules for every category, central contracts and counterexample registers, generated assurance schema | no semantic declarations; scaffold build and declaration scan green |
 | P3 — queue-with-sizes and queuing strategies | the first representative: total, kernel-reducible operations with their invariants | breaker battery green; laws proved; axiom receipts recorded |
@@ -131,7 +131,7 @@ deciding gate meanwhile and CI builds the production targets.
 **`[[require]] effects` taken 2026-09-02 (slice W4 of `docs/WHATWG-PACKAGE-PLAN.md`, ruling WP-5), acceptance probe under the dependency policy below:** exact pin `5611c3a3cd4cd4b830c76d6c25c7dba6034c973a` (tag `v0.1.0`); license at that commit Apache-2.0 (MIT on the package's `main` since the same day); transitive cost zero (its manifest lists no packages); toolchain identical (`leanprover/lean4:v4.33.1`); `lake build effects/Effects` elaborates under this toolchain; the algebra is a materially deeper public abstraction by the family ruling (every standard builds against it) and fixes no result universe or first-order representation here, since nothing imports it until P4. Its parity receipt against lean4-effect4 `217d3e4` is in that package.
 
 **The algebra dependency is settled by the operator on the Mac:**
-`mepuka/lean4-effects` v0.1.0 (commit `5611c3a`) is the standalone
+`pure-algebra/lean4-effects` v0.1.0 (commit `5611c3a`) is the standalone
 `Effects.Algebra` package, already required by lean4-effect4 at that
 commit; its README names WHATWG Streams as the first web-standard
 reification built against it. RS-D1 and `docs/ALGEBRA-PACKAGE-PLAN.md` are

@@ -1,7 +1,7 @@
 # Plan: extracting `Effect4.Algebra` into a standalone package (RS-D1)
 
 Status: **SUPERSEDED 2026-09-02.** The operator executed the extraction on
-the Mac as `mepuka/lean4-effects` (v0.1.0, commit `5611c3a`, namespace
+the Mac as `pure-algebra/lean4-effects` (v0.1.0, commit `5611c3a`, namespace
 `Effects`, history preserved by `git filter-repo`, parity receipt
 `generated/algebra-parity.tsv` over 215 constants, sixty theorem receipts
 inside `propext`/`Quot.sound`), consumed by lean4-effect4 at that commit.
@@ -106,7 +106,7 @@ lean4-effect4 and is the one that waits on the Mac work. Step 6 waits on P3.
 
 | Id | Question | Default |
 | --- | --- | --- |
-| AP-1 | Repository name and namespace | `mepuka/lean4-effect-algebra`, namespace `EffectAlgebra` |
+| AP-1 | Repository name and namespace | `pure-algebra/lean4-effect-algebra`, namespace `EffectAlgebra` |
 | AP-2 | History-preserving move or fresh copy with a provenance pin | history-preserving, so blame survives |
 | AP-3 | Does lean4-effect4 keep a re-export shim, and for how long | one tagged release, then removed |
 | AP-4 | Who is the executing seat and on which host | decided when the hold lifts |
