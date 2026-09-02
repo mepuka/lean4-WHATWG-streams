@@ -4,13 +4,14 @@ Agents editing this worktree at the same time cannot message each other.
 This file is the channel. Read it before you write, and update your claims
 when you take or release a file.
 
-Last updated: 2026-09-02 (HOLD: GitHub repo families being reorganized by the operator; only lean4-hash finishes).
+Last updated: 2026-09-02 (reorganization in progress: this repository becomes the single `whatwg` package per `docs/WHATWG-PACKAGE-PLAN.md`; lean4-hash finished at `0168306`; no other seat runs `lake` here until W3 lands).
 
 ## Who is active
 
 | Agent | Working on |
 | --- | --- |
 | Claude (coordinator) | reviews, commits, rulings, routers, PLAN, SPEC-MANIFEST, docs/*.md |
+| Claude (operator session, Mac) | `docs/WHATWG-PACKAGE-PLAN.md` slices W0–W5: the whole tree during the rename and the hash/effects requires; claims released per slice in the plan ledger |
 
 ## Current claims
 
