@@ -1,6 +1,16 @@
 {"version": "1.2.0",
  "packagesDir": ".lake/packages",
- "packages": [],
- "name": "whatwgstreams",
+ "packages":
+ [{"url": "https://github.com/mepuka/lean4-hash",
+   "type": "git",
+   "subDir": null,
+   "scope": "",
+   "rev": "0168306b7068b97758e3f2d4307eeb97aa31a104",
+   "name": "hash",
+   "manifestFile": "lake-manifest.json",
+   "inputRev": "0168306b7068b97758e3f2d4307eeb97aa31a104",
+   "inherited": false,
+   "configFile": "lakefile.toml"}],
+ "name": "whatwg",
  "lakeDir": ".lake",
  "fixedToolchain": false}

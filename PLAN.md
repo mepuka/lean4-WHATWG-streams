@@ -60,7 +60,7 @@ checked TypeScript. Host conformance is measured, never assumed.
 | P10 — logic | `wlp`, totality, the `wp` decomposition theorem, EffHOL modality instance | decomposition theorem proved for the chosen semantics |
 | P11 — targets | closed combinator alphabet, typed TypeScript IR, lowering, render, host harness | typing and simulation proofs; deterministic bytes; exact coverage |
 | P12 — bridges | Node legacy streams calculus, Effect Channel embedding (cross-repository) | each bridge names its loss and its mask |
-| S1 — SHA-256 proof lane | the three-layer `Spec`/`Impl`/`Fast` SHA-256 with the `Impl = Spec` refinement and the pointwise `Fast = Impl` bridge, a `Digest`/`Hex` API, root split so consumers never pay for kernel known-answer tests, a typed audit line, streaming, and SHA-224, in stages S1.0–S1.7 per `docs/SHA256-DAG.md` | every edge of `SHA256-PG-IMPL-EQ-SPEC` closed; `Gates` consumes `Sha256.sha256` and regenerates `generated/vendor-manifest.tsv` byte-identically; `leanchecker --fresh`, dual-host, and lean4lean receipts recorded |
+| S1 — SHA-256 proof lane (landed; moved to lean4-hash at step 6, 2026-09-02) | the three-layer `Spec`/`Impl`/`Fast` SHA-256 with the `Impl = Spec` refinement and the pointwise `Fast = Impl` bridge, a `Digest`/`Hex` API, root split so consumers never pay for kernel known-answer tests, a typed audit line, streaming, and SHA-224, in stages S1.0–S1.7 per `docs/SHA256-DAG.md` | every edge of `SHA256-PG-IMPL-EQ-SPEC` closed; `Gates` consumes `Sha256.sha256` and regenerates `generated/vendor-manifest.tsv` byte-identically; `leanchecker --fresh`, dual-host, and lean4lean receipts recorded |
 
 S1 is independent of P1 through P12 and may run beside any of them. Its
 staging, built-ins ledger, do-not-use list, stop conditions, report shape,
@@ -100,8 +100,8 @@ dependencies. The six routers exist. The specification source, its reference
 implementation, and the WPT `streams/` directory are vendored at exact
 commits and sealed by a Lean-checked manifest. The four Lean gate executables
 and the elaboration-time axiom gate are green. Every pin has a digest recorded
-in `docs/PROVENANCE.md`, cross-checked between the in-tree SHA-256 and a
-second implementation.
+in `docs/PROVENANCE.md`, cross-checked between the proved SHA-256 (now the
+required `hash` package) and a second implementation.
 
 R0 is complete: all three documents are landed under `docs/research/` with
 their decision-bearing findings in `docs/research/README.md`.
@@ -115,7 +115,7 @@ excluded`. P2 placed 52 declaration-free breadth stubs under
 `Whatwg/Streams/`, one per area and named sub-area of the architecture
 table, every one reachable from the root and audited (78 modules). Lane S1
 landed the same day (`a8f08d0`): every digest the repository pins is
-computed by the proved SHA-256. The RS-D1 algebra package is planned in
+computed by the proved SHA-256, since W3 the required `hash` package. The RS-D1 algebra package is planned in
 `docs/ALGEBRA-PACKAGE-PLAN.md` and held until the operator's incoming
 lean4-effect4 work lands.
 
@@ -137,7 +137,7 @@ therefore superseded. This repository takes `[[require]] effects` when the
 first Stratum S packet (P4) opens; P3 is Stratum V data and needs nothing
 from it.
 
-**P3 landed 2026-09-02:** the builder proved all 99 frozen theorems with zero battery edits (447 declarations from the two fenced modules, 375 axiom-free, 2 at `[propext, Quot.sound]`), the coordinator allocated the ruled `P3-R1` instance to `Whatwg/Streams/Data/DyadicSize.lean`, the known-red set is empty again, and every gate is green. The first breaker-then-builder packet of the streams calculi is closed; `DATA-PG-QUEUE` has every applicable edge closed. The coverage numerator packet landed 2026-09-02: the block reads `denominator 410; owned-with-green 12/410; green 12, partial 6, absent 392; census 450 rows, 40 excluded`, printed from the Lean emit and refused on any disagreement. **Reorganization (operator, 2026-09-02):** `lean4-hash` finished at `0168306`. This repository becomes the single `whatwg` package, one library per standard, per `docs/WHATWG-PACKAGE-PLAN.md`; hash step 6 is its slice W3 and the effects require its slice W4. P4 and foldlab step 7 wait for W5.
+**P3 landed 2026-09-02:** the builder proved all 99 frozen theorems with zero battery edits (447 declarations from the two fenced modules, 375 axiom-free, 2 at `[propext, Quot.sound]`), the coordinator allocated the ruled `P3-R1` instance to `Whatwg/Streams/Data/DyadicSize.lean`, the known-red set is empty again, and every gate is green. The first breaker-then-builder packet of the streams calculi is closed; `DATA-PG-QUEUE` has every applicable edge closed. The coverage numerator packet landed 2026-09-02: the block reads `denominator 410; owned-with-green 12/410; green 12, partial 6, absent 392; census 450 rows, 40 excluded`, printed from the Lean emit and refused on any disagreement. **Reorganization (operator, 2026-09-02):** `lean4-hash` finished at `0168306`. This repository becomes the single `whatwg` package, one library per standard, per `docs/WHATWG-PACKAGE-PLAN.md`; hash step 6 landed as its slice W3 (`[[require]] hash` at `0168306`; the vendor manifest regenerated byte-identically through `Hash.Sha256.sha256`; the `Sha256/` tree, its audit root, executable, contract, and counterexamples left) and the effects require is its slice W4. P4 and foldlab step 7 wait for W5.
 
 **Operator direction 2026-09-02: the SHA-256 lane and foldlab's accepted
 SHA3-512 library are extracted into one shared hash package that this

@@ -155,7 +155,8 @@ decides the route.
 Every proof graph carries the same ten edges, each `required-open`,
 `required-closed`, or `not-applicable` with a stated reason: identity,
 construction, semantics, laws, representation, counterexamples, bridges,
-targets, trust, coverage. `docs/SHA256-DAG.md` is the first instance.
+targets, trust, coverage. `docs/SHA256-DAG.md` was the first instance; it
+moved with its lane to lean4-hash, and `docs/DATA-DAG.md` is the first here.
 
 ## Packages cloned from this skeleton (ruled 2026-09-02)
 

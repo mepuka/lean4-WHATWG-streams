@@ -126,16 +126,21 @@ published WPT results cited by run identifier.
 
 Every decision about whether the tree is green is made by a Lean program
 under the pinned toolchain and audited by the same axiom gate as the proofs:
-SHA-256, the vendor seal, the citation gate, and the trust self-test. Shell
+the vendor seal, the citation gate, and the trust self-test; the digests they
+compute come from the required `hash` package, audited by its own gate. Shell
 files only orchestrate. The axiom gate forbids `Lean.ofReduceBool`, which
 excludes `native_decide` and `bv_decide` from every proof in this repository.
 
 ## DB-10 — the SHA-256 the gates depend on has its own proof graph
 
-Digests decide what bytes this repository trusts. The in-tree SHA-256 is
-executable evidence cross-checked against a second implementation until
-`docs/SHA256-DAG.md` closes its `Impl = Spec` refinement under the fips202
-discipline. No document may call it verified before then.
+Digests decide what bytes this repository trusts. The SHA-256 the gates
+compute them with is the `hash` package (lean4-hash, required by exact
+commit), whose `Impl = Spec` refinement and `Fast = Impl` bridge are proved
+under the fips202 discipline and whose proof graph is `docs/SHA256-DAG.md`
+there. This repository's `docs/SHA256-DAG.md` is a pointer. At the swap
+(step 6 of `docs/HASH-PACKAGE-PLAN.md`) the vendor manifest regenerated
+byte-identically through the package, so every digest this repository pins
+is unchanged.
 
 ## Primary sources
 

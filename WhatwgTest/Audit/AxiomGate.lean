@@ -49,8 +49,7 @@ so that a file dropped into the audit tree cannot silently acquire the wider
 ceiling. Each entry is checked for staleness below. -/
 private def auditImplementationModules : List Name :=
   [ `WhatwgTest.Audit.AxiomGate,
-    `WhatwgTest.Audit.SpecCoverage,
-    `Sha256.Audit ]
+    `WhatwgTest.Audit.SpecCoverage ]
 
 /-- Exact public declarations admitted to the implementation ceiling outside
 an implementation module. Empty at P0; a later target renderer names its
@@ -91,12 +90,11 @@ private def resolveImplementationDeclarations
     | _ => throw s!"Whatwg axiom gate: private implementation exemption {owner}/{originalName} matched {privateCandidates.length} declarations; expected exactly one"
   return resolved
 
-/-- `Sha256/` is the fourth audited tree (`docs/SHA256-DAG.md` §5.1). It is
-bound by the semantic ceiling like `Whatwg/Streams/`, not by the tooling
-ceiling: only `Sha256.Audit`, named exactly in `auditImplementationModules`
-above, may reach `Classical.choice`. -/
+/-- The two semantic trees. The SHA-256 lane that used to be a third one is
+the required `hash` package since step 6 of `docs/HASH-PACKAGE-PLAN.md`; its
+own gate audits it there, and nothing under a dependency is inspected here. -/
 private def semanticTreePrefixes : List Name :=
-  [`Whatwg, `WhatwgTest, `Sha256]
+  [`Whatwg, `WhatwgTest]
 
 private def belongsToAuditedTree (moduleName : Name) : Bool :=
   semanticTreePrefixes.any (·.isPrefixOf moduleName) ||
@@ -201,12 +199,10 @@ private def auditedSources (projectRoot : System.FilePath) : IO (Array System.Fi
   let production ← leanFilesBelow (projectRoot / "Whatwg")
   let tests ← leanFilesBelow (projectRoot / "WhatwgTest")
   let tooling ← leanFilesBelow (projectRoot / "Gates")
-  let sha256 ← leanFilesBelow (projectRoot / "Sha256")
-  return production ++ tests ++ tooling ++ sha256
+  return production ++ tests ++ tooling
     |>.push (projectRoot / "Whatwg.lean")
     |>.push (projectRoot / "Gates.lean")
     |>.push (projectRoot / "WhatwgTest.lean")
-    |>.push (projectRoot / "Sha256.lean")
 
 open Lean Elab Command in
 elab "#whatwg_streams_axiom_gate" : command => do

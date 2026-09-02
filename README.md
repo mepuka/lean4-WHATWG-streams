@@ -19,15 +19,14 @@ modelled or proved.
 ## Build and gates
 
 The toolchain is pinned by `lean-toolchain` to exactly
-`leanprover/lean4:v4.33.1`, with no Lake dependencies. Consumers of the
-`Sha256` library take that exact pin, not a floor (ruling R-9 in
-docs/SHA256-DAG.md); every proof receipt in this repository is stated
-against that kernel. Everything below runs from any directory inside the
+`leanprover/lean4:v4.33.1`. The one Lake dependency is `hash`
+([lean4-hash](https://github.com/mepuka/lean4-hash)) at an exact commit: the
+proved SHA-256 every gate computes digests with. Every proof receipt in this
+repository is stated against that kernel. Everything below runs from any directory inside the
 checkout.
 
 ```text
 lake build                       # libraries, the elaboration-time axiom gate, the gate executables
-lake exe sha256 --self-test      # the in-tree SHA-256 against the FIPS 180-4 vectors
 lake exe vendorseal              # vendor/ against generated/vendor-manifest.tsv, both directions
 lake exe citations               # no line-numbered citation into a protected authored document
 lake exe trustselftest           # planted partial/unsafe/choice/sorry/native_decide/malformed/unreachable are each rejected
@@ -53,11 +52,10 @@ CI builds the production libraries and gate executables and then runs it.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) owns module boundaries.
 - [`docs/PROVENANCE.md`](docs/PROVENANCE.md) records every pin with its
   digest, fetch command, and cross-check.
-- [`docs/SHA256-DAG.md`](docs/SHA256-DAG.md) is the proof plan for the SHA-256
-  the gates depend on.
-- [`docs/HASH-PACKAGE-PLAN.md`](docs/HASH-PACKAGE-PLAN.md) plans the
-  extraction of the SHA-256 lane and foldlab's SHA3-512 into one shared,
-  proved hash library that this repository will depend on.
+- [`docs/HASH-PACKAGE-PLAN.md`](docs/HASH-PACKAGE-PLAN.md) records the
+  extraction of the SHA-256 lane and foldlab's SHA3-512 into lean4-hash, the
+  shared proved hash library this repository now depends on; its
+  `docs/SHA256-DAG.md` is the proof graph.
 - [`docs/REIFICATION-STRATEGY.md`](docs/REIFICATION-STRATEGY.md) is the
   draft cross-standard design: three strata of one effects algebra, the
   specification dependency graph as a handler tower, two realizers per

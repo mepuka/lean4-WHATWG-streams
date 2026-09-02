@@ -35,7 +35,7 @@ imports both.
 | `Whatwg/Streams/Bridge` | Node legacy streams calculus and Effect Channel embedding (P12) |
 | `Whatwg/Streams/Meta` | declaration introspection and deterministic emitters |
 | `Whatwg/Streams/Audit` | per-packet axiom receipts and closure snapshots |
-| `Sha256` | the S1 proven SHA-256: `Spec`, `Impl`, bridge (separate library at the semantic ceiling; `Gates` consumes `Impl`) |
+| (`Hash`, from lean4-hash) | the proved SHA-256 the gates compute digests with; required by exact commit, never re-declared here |
 
 Tests mirror these areas under `WhatwgTest/Streams/`. Durable attacks live
 under `WhatwgTest/Streams/Counterexamples/`, while their stable registry and

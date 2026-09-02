@@ -19,13 +19,7 @@ jobs:
       # self-test below verifies the declared red set, excises it, and runs
       # the axiom gate on the green remainder, so it is the deciding gate.
       - name: Build production libraries and gate executables
-        run: lake --wfail build Whatwg Gates Sha256 sha256 vendorseal citations trustselftest census
-      - name: Build the audited SHA-256 root with warnings as errors
-        run: lake --wfail build Sha256Verified
-      - name: Recheck the SHA-256 audit root with an independent kernel
-        run: lake env leanchecker --fresh Sha256.Verified
-      - name: SHA-256 self-test against FIPS 180-4 vectors
-        run: lake exe sha256 --self-test
+        run: lake --wfail build Whatwg Gates vendorseal citations trustselftest census
       - name: Vendor seal in both directions
         run: lake exe vendorseal
       - name: Internal-citation gate

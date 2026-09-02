@@ -15,7 +15,7 @@ full, then open only the authority documents named for the current task.
 | `docs/AGENT-ROUTING.md` | the router hierarchy, declaration records, and the assurance threshold |
 | `docs/SPEC-COVERAGE.md` | definition, vocabulary, and the one report format of specification coverage |
 | `docs/PROVENANCE.md` | every pin: digest, fetch command, cross-check, license |
-| `docs/SHA256-DAG.md` | the proof graph for the SHA-256 the gates depend on |
+| `docs/SHA256-DAG.md` | pointer: the SHA-256 proof graph lives in lean4-hash, which the gates require |
 | `test/contracts/` | breaker-authored contracts and executable falsifiers |
 | `test/counterexamples/` | central counterexample register and durable witnesses |
 | `Whatwg/Streams/` | library declarations and proofs |
@@ -125,7 +125,6 @@ orchestrate; they decide nothing.
 | Command | Decides |
 | --- | --- |
 | `lake build` | the libraries elaborate; the elaboration-time axiom gate in `WhatwgTest.lean` passes over every declaration |
-| `lake exe sha256 --self-test` | the in-tree SHA-256 matches the FIPS 180-4 vectors |
 | `lake exe vendorseal` | `vendor/` and `generated/vendor-manifest.tsv` agree in both directions; every path is valid on Windows |
 | `lake exe citations` | no line-numbered citation into a protected authored document |
 | `lake exe trustselftest` | the declared red set is exact; planted violations are rejected for their stated reasons |

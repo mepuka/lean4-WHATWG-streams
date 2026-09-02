@@ -33,7 +33,7 @@ structure Context where
 
 def copiedFiles : List String :=
   ["lakefile.toml", "lake-manifest.json", "lean-toolchain",
-   "Whatwg.lean", "Gates.lean", "WhatwgTest.lean", "Sha256.lean"]
+   "Whatwg.lean", "Gates.lean", "WhatwgTest.lean"]
 
 /-- `census` and `generated` join the copied trees because
 `WhatwgTest/Audit/SpecCoverage.lean` reads the census projection and
@@ -41,7 +41,7 @@ its authored disposition inputs at elaboration time: without them the probe's
 build fails for a missing file rather than for a planted violation. `vendor`
 stays out: the probe only builds the census generator, never runs it. -/
 def copiedTrees : List String :=
-  ["Whatwg", "WhatwgTest", "Gates", "Sha256", "bin", "census", "generated"]
+  ["Whatwg", "WhatwgTest", "Gates", "bin", "census", "generated"]
 
 def fixture (root : System.FilePath) (name : String) : System.FilePath :=
   root / "test" / "fixtures" / "trust-gate" / name

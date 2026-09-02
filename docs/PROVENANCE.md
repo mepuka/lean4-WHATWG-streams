@@ -4,11 +4,14 @@ Every pin this repository relies on, with its digest, how it was fetched, the
 cross-check performed, and its license. `SPEC-MANIFEST.md` owns what each pin
 is for; this file owns that the bytes are what they are claimed to be.
 
-Digest cross-check protocol at P0: every digest is computed by the in-tree
-`lake exe sha256` and independently by PowerShell `Get-FileHash -Algorithm
-SHA256`; both spellings must agree. The in-tree implementation is executable
-evidence until `docs/SHA256-DAG.md` closes; the second implementation is the
-reason a wrong in-tree digest could not have entered this file silently.
+Digest cross-check protocol: every digest is computed by `lake exe vendorseal`
+through the required `hash` package (`Hash.Sha256.sha256`, proved against
+FIPS 180-4 in lean4-hash) and independently by PowerShell `Get-FileHash
+-Algorithm SHA256`; both spellings must agree. At P0 the first computation was
+the in-tree `lake exe sha256`, executable evidence until the lane's proof
+graph closed; at the swap to the package (step 6 of
+`docs/HASH-PACKAGE-PLAN.md`) `generated/vendor-manifest.tsv` regenerated
+byte-identically, so every digest below is unchanged.
 
 ## Vendored, sealed
 
