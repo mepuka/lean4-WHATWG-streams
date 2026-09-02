@@ -21,8 +21,13 @@ row is unclaimed.
 | --- | --- | --- |
 | `Sha256/**`, `Sha256.lean`, `test/contracts/sha256.contract.md`, `vendor/nist-cavp-sha256/**`, `vendor/nist-fips-180-4/**`, `generated/vendor-manifest.tsv`, `LICENSE`, `lakefile.toml`, `WhatwgStreamsTest.lean`, `WhatwgStreamsTest/Audit/AxiomGate.lean` (Sha256 tree rows only), `Gates/TrustSelfTest.lean` (copied-tree list only), `.github/workflows/ci.yml` (Sha256 steps only), `docs/PROVENANCE.md` (S1.0 rows only), `workshop/**` | S1.0 seat (Opus subagent, dispatched by the coordinator) | in progress; coordinator commits |
 
-The P0 bootstrap claim on the whole tree was released at the P0 commit. The
-R0 research writer under `docs/research/` is unclaimed.
+| `docs/research/2026-09-01-lean-stdlib-strategy-and-performance.md` | R0-A seat (Opus subagent) | in progress; benchmarks run in a scratchpad package, never in this tree |
+| `docs/research/2026-09-01-lean4-nlp-learnings.md` | R0-B seat (Opus subagent) | in progress; reads a scratchpad clone of `mepuka/lean4-nlp` |
+| `docs/research/2026-09-01-web-reification-targets-survey.md` | R0-C seat (Opus subagent) | in progress; web research only |
+
+The P0 bootstrap claim on the whole tree was released at the P0 commit. No
+seat runs `lake` in this tree while the S1.0 seat holds its build; the R0
+seats measure elsewhere.
 
 ## Collision record
 

@@ -103,11 +103,15 @@ and the elaboration-time axiom gate are green. Every pin has a digest recorded
 in `docs/PROVENANCE.md`, cross-checked between the in-tree SHA-256 and a
 second implementation.
 
-Next: R0. The operator directed a hold after P0 to study implementation
-strategy and performance for the Lean standard library, and to consume the
-text-processing benchmarks accumulated in `mepuka/lean4-nlp`, before the P1
-census generator over `index.bs` is designed. P1 does not open until R0's
-notes are landed and cited.
+Next: R0, released by the operator 2026-09-01 and executing. Three
+deliverables under `docs/research/`: implementation strategy and measured
+performance for the Lean 4.33.1 standard library as it bears on this
+repository; the text-processing learnings of `mepuka/lean4-nlp`; and a
+survey ranking Lean reification targets by expressivity and compatibility
+with web programming in general, which is not specific to this repository
+and informs what follows P12. P1 does not open until the first two are
+landed and cited by the census generator's representation decisions. Lane
+S1 runs beside R0.
 
 ## Near-term proof burden
 
