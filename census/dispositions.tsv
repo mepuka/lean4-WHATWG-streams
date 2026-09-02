@@ -1,0 +1,81 @@
+# Section dispositions: authored input to the P1 census generator.
+#
+# Three tab-separated fields: <section id> <kind or *> <disposition>.
+#
+# The section id is the id of an <h2>, <h3> or <h4> of the pinned index.bs.
+# The kind is one of idl, op, requirement, rule, slot, or * for every kind.
+# The disposition is one of the SPEC-MANIFEST.md vocabulary: owned,
+# requirement, foreignBoundary, hostOnly, refused, evidenceOnly, targetOnly.
+#
+# A row's disposition is resolved by walking its heading ancestry from the
+# innermost <h4> outward to the <h2>, preferring a kind-specific line to the
+# section's wildcard line at each level. A per-row override in overrides.tsv
+# beats every line here. A row that no line reaches fails generation, and a
+# line that no row uses also fails generation.
+#
+# Seeded from the section table of SPEC-MANIFEST.md. census/README.md records
+# where each line departs from a literal reading of that table and why.
+
+# --- Readable streams -------------------------------------------------------
+# SPEC-MANIFEST.md: rs-class is owned, its IDL members hostOnly at the boundary.
+rs-class	idl	hostOnly
+rs-class	*	owned
+# The underlying source API is the UnderlyingSource dictionary and its
+# callbacks, which SPEC-MANIFEST.md names foreignBoundary by dictionary.
+underlying-source-api	*	foreignBoundary
+# Transfer via postMessage() is the transferable-streams protocol, which
+# SPEC-MANIFEST.md refuses.
+rs-transfer	*	refused
+generic-reader-mixin	idl	hostOnly
+generic-reader-mixin	*	owned
+default-reader-class	idl	hostOnly
+default-reader-class	*	owned
+byob-reader-class	idl	hostOnly
+byob-reader-class	*	owned
+rs-default-controller-class	idl	hostOnly
+rs-default-controller-class	*	owned
+rbs-controller-class	idl	hostOnly
+rbs-controller-class	*	owned
+rs-byob-request-class	idl	hostOnly
+rs-byob-request-class	*	owned
+rs-all-abstract-ops	*	owned
+# The piping requirements are stated inside the ReadableStreamPipeTo block,
+# which lives under rs-abstract-ops. SPEC-MANIFEST.md dispositions them
+# requirement, realized by that reference algorithm.
+rs-abstract-ops	requirement	requirement
+
+# --- Writable streams -------------------------------------------------------
+ws-class	idl	hostOnly
+ws-class	*	owned
+underlying-sink-api	*	foreignBoundary
+ws-transfer	*	refused
+default-writer-class	idl	hostOnly
+default-writer-class	*	owned
+ws-default-controller-class	idl	hostOnly
+ws-default-controller-class	*	owned
+ws-all-abstract-ops	*	owned
+
+# --- Transform streams ------------------------------------------------------
+ts-class	idl	hostOnly
+ts-class	*	owned
+transformer-api	*	foreignBoundary
+ts-transfer	*	refused
+ts-default-controller-class	idl	hostOnly
+ts-default-controller-class	*	owned
+ts-all-abstract-ops	*	owned
+
+# --- Queuing strategies -----------------------------------------------------
+qs-api	idl	hostOnly
+blqs-class	idl	hostOnly
+blqs-class	*	owned
+cqs-class	idl	hostOnly
+cqs-class	*	owned
+qs-abstract-ops	*	owned
+
+# --- Supporting abstract operations -----------------------------------------
+queue-with-sizes	*	owned
+transferrable-streams	*	refused
+misc-abstract-ops	*	owned
+
+# --- Using streams in other specifications ----------------------------------
+other-specs	*	evidenceOnly

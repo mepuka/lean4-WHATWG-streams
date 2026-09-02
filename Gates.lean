@@ -2,6 +2,7 @@ import Gates.Common
 import Gates.Sha256
 import Gates.VendorSeal
 import Gates.Citations
+import Gates.Census
 import Gates.TrustSelfTest
 
 /-!

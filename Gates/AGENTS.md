@@ -56,3 +56,6 @@ they decide nothing.
 | `lake exe vendorseal --write` | Windows path validity | `generated/vendor-manifest.tsv` |
 | `lake exe citations` | no line-numbered citation into a protected authored document | nothing |
 | `lake exe trustselftest` | the declared red set; then planted `partial`, `unsafe`, `Classical.choice`, `sorry`, `native_decide`, malformed literals, and an unreachable module are each rejected for the stated reason | a throwaway copy outside the tree, removed afterwards |
+| `lake exe census` | the pinned `index.bs` digest; every census anchor occurs exactly once at its span start; every span digest recomputes; every row has exactly one disposition from the authored inputs under `census/`, with no unused entry; and both projections are byte-identical to a fresh regeneration | nothing |
+| `lake exe census --write` | the same, before writing | `generated/spec-algorithm-census.tsv` and `WhatwgStreamsTest/Audit/SpecCoverageRows.lean` |
+| `lake exe census --report` | nothing; prints the coverage block of `docs/SPEC-COVERAGE.md` | nothing |

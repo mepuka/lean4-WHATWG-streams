@@ -1,10 +1,16 @@
 # SHA-256 proof graph and implementation spec (lane S1)
 
-Status: pre-grade, 2026-09-01. Proof graph `SHA256-PG-IMPL-EQ-SPEC` opened at
-P0 with every edge `required-open`. **R-1 APPROVED by the operator
-2026-09-01 with the §9 defaults for R-2–R-9; §4 A1.S1–A1.S4 are therefore
-FROZEN. S1.0 dispatched 2026-09-01 to one seat; later stages wait on its
-review.** Author: coordinator, from a first-hand read of
+Status: **S1.1–S1.4 LANDED 2026-09-02 (commit `a8f08d0`)** under ruling
+R-10, reviewed first-hand and re-gated on a clean build by the coordinator.
+`Sha256.Bridge.sha256_bridge` (`Impl.sha256 msg = Spec.sha256_bytes msg`)
+and `Sha256.Fast.sha256_eq_impl` are proved at `[propext, Quot.sound]`; 280
+declarations audited with 0 offenders and an empty R-3 list; the kernel KAT
+for the empty message closes by `decide +kernel` in about 1 s; the vendor
+manifest regenerates byte-identically through the proved library;
+`leanchecker --fresh Sha256.Verified` exits 0. The edge ledger in §10 records
+what is closed and what remains (S1.5 streaming, S1.6 SHA-224, S1.7 assurance
+record, dual-host). Earlier history: R-1 approved 2026-09-01 with the §9
+defaults; §4 frozen; S1.0 landed 2026-09-02. Author: coordinator, from a first-hand read of
 foldlab's `formal/fips202` at commit `8d36195970b83a1439ec705b9a504617554b8062`,
 its library specification `.staging/fips202-library/SPEC.md` (decision 45,
 R-1 approved 2026-09-01), the prior art at
@@ -738,16 +744,36 @@ seat.
 
 | Edge | State | Evidence or remaining work |
 | --- | --- | --- |
-| identity | `required-open` | FIPS 180-4 PDF pinned by digest; CAVP `.rsp` digest recorded here, vendoring at S1.0 |
-| construction | `required-open` | A1.S1–A1.S4 declarations frozen on R-1; battery ascriptions at each stage |
-| semantics | `required-open` | `Bridge.sha256_bridge` (S1.2) and `Fast.sha256_eq_impl` (S1.4) |
-| laws | `required-open` | the bridge decomposition of A1.S2; the `Fast` pointwise lemmas of A1.S4 |
-| representation | `required-open` | `Vector`/`Nat.fold`/`byteAt` shape replaces `Id.run do` and `!`; `Gates/Sha256.lean` retired to a wrapper at S1.4 |
-| counterexamples | `required-open` | the SHA-224 initial-value negative; a padding mutant that omits the length field; a little-endian word-loading mutant; an MSB/LSB bit-order mutant in `bitsOfBytes` (the FIPS 202 versus FIPS 180-4 trap); each registered as `WS-SHA-CE-nnn` |
+| identity | `required-closed` | FIPS 180-4 PDF and CAVP `.rsp` vendored from git objects and sealed at S1.0 (`docs/PROVENANCE.md`) |
+| construction | `required-closed` | A1.S1–A1.S4 landed under their frozen names; the seven deviations are recorded in the S1 landing note below and none changes a meaning |
+| semantics | `required-closed` | `Bridge.sha256_bridge` and `Fast.sha256_eq_impl`, both `[propext, Quot.sound]`; the API theorems `sha256_impl`, `sha256_spec`, `sha256_ofList` compose them |
+| laws | `required-closed` | the A1.S2 decomposition (`padBytes_bridge`, `blocks_bridge`, `schedule_bridge`, `compress_bridge`, `hash_bridge`, `output_bridge`) and the A1.S4 pointwise lemmas, all landed |
+| representation | `required-closed` | `Vector`/`Nat.fold`/`byteAt` throughout; the P0 `Id.run do` tooling deleted; `Gates/Sha256.lean` is a wrapper over `Sha256.sha256` |
+| counterexamples | `required-closed` | `WS-SHA-CE-001`..`004` closed with `decide +kernel` witnesses in `WhatwgStreamsTest/Counterexamples/Sha/Mutants.lean`; the contract's claim that W1 detects a missing length field is refuted by `ce002_padBytes_eq_on_empty` and corrected |
 | bridges | `not-applicable` | no host target |
 | targets | `not-applicable` | no generated code |
-| trust | `required-open` | the S1.0 audit line pinned by `#guard_msgs`; receipts inside `propext`/`Quot.sound` except the R-3 list; `leanchecker --fresh`; dual-host; lean4lean at S1.7 |
-| coverage | `required-open` | every FIPS 180-4 section the transcription cites verified against the pinned PDF in the Pass A contract |
+| trust | `required-open` | audit line pinned (`280 declarations across 10 modules; 0 admitted string declarations; 0 offenders`); `leanchecker --fresh` exit 0 on this host; **open:** dual-host build and lean4lean replay (S1.7) |
+| coverage | `required-closed` | every FIPS 180-4 section cited was verified against the pinned PDF in the Pass A contract; all 65 CAVP records reproduced by the runtime self-test |
+
+### S1 landing note (2026-09-02)
+
+Deviations from the frozen text, each recorded by the builder and accepted
+at review because none changes a meaning: `Σ0`/`Σ1` are spelled `«Σ0»`/`«Σ1»`
+because U+03A3 is not letter-like to Lean; `output_bridge` and `squeeze_eq`
+index with `List.finRange 8` and `i : Fin 8` because `List.range 8` gives no
+bound in scope; the `String`-typed hex theorems are stated on the `List
+Char` form (`length_encodeChars`, `decodeChars?_encodeChars`,
+`encodeChars_lower`, `length_toHexChars`, `ofHexChars?_toHexChars`) because
+`String.length` and `String.toList` reach `Classical.choice` from the
+statement itself; `Sha256/Vec.lean` re-proves `Vector.ofFn` access because
+`Vector.getElem_ofFn`, `Array.toList_ofFn`, `List.drop_take`, and
+`Nat.mod_mul_right_div_self` reach `Classical.choice` in v4.33.1 core;
+`Spec.schedule`/`compress` are factored into named steps so `Fast`'s
+`Nat.fold` transport matches syntactically. The cost stated plainly: no
+theorem relates `Hex.decode? (Hex.encode bs)` to `bs` at the `String` layer;
+`decodeChars?_encodeChars` carries the round trip one layer down.
+Throughput: 0.058 s per MiB and 0.680 s per 16 MiB, within the 2x targets,
+the 1.87x on 16 MiB coming from a fresh 8-word `Vector` per round.
 
 ## 11. Trust statement until closure
 

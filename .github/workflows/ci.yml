@@ -25,5 +25,9 @@ jobs:
         run: lake exe vendorseal
       - name: Internal-citation gate
         run: lake exe citations
+      - name: Specification-algorithm census against the pinned index.bs
+        run: lake exe census
+      - name: Specification coverage block
+        run: lake exe census --report
       - name: Trust self-test with planted violations
         run: lake exe trustselftest

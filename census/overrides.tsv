@@ -1,0 +1,35 @@
+# Per-row disposition overrides: authored input to the P1 census generator.
+#
+# Three tab-separated fields: <row id> <disposition> <reason>.
+#
+# An override is for a row whose enclosing section's disposition does not
+# describe it. It beats every line in dispositions.tsv. An override that no
+# row matches fails generation, so an entry cannot outlive its row.
+
+# The reference algorithm that realizes the piping requirements. Its enclosing
+# section rs-all-abstract-ops is owned; SPEC-MANIFEST.md dispositions
+# ReadableStreamPipeTo itself as requirement.
+op.readable-stream-pipe-to	requirement	SPEC-MANIFEST.md dispositions ReadableStreamPipeTo as the reference algorithm realizing the piping requirements
+
+# ECMAScript ArrayBuffer and ArrayBufferView internal slots. These are read
+# and written by the byte-stream algorithms but are not streams state.
+# SPEC-MANIFEST.md names ArrayBuffer detachment foreignBoundary, and the root
+# AGENTS.md representation rules make host runtime objects a foreign boundary
+# whose answers are typed decisions rather than modelled bodies.
+slot.array-buffer	foreignBoundary	ECMAScript ArrayBuffer internal slot; ArrayBuffer detachment is foreignBoundary in SPEC-MANIFEST.md
+slot.array-buffer-data	foreignBoundary	ECMAScript ArrayBuffer internal slot; ArrayBuffer detachment is foreignBoundary in SPEC-MANIFEST.md
+slot.array-buffer-byte-length	foreignBoundary	ECMAScript ArrayBuffer internal slot; ArrayBuffer detachment is foreignBoundary in SPEC-MANIFEST.md
+slot.array-buffer-detach-key	foreignBoundary	ECMAScript ArrayBuffer internal slot; ArrayBuffer detachment is foreignBoundary in SPEC-MANIFEST.md
+slot.array-length	foreignBoundary	ECMAScript TypedArray internal slot on a host view object
+slot.byte-length	foreignBoundary	ECMAScript ArrayBufferView internal slot on a host view object
+slot.byte-offset	foreignBoundary	ECMAScript ArrayBufferView internal slot on a host view object
+slot.typed-array-name	foreignBoundary	ECMAScript TypedArray internal slot on a host view object
+slot.viewed-array-buffer	foreignBoundary	ECMAScript ArrayBufferView internal slot on a host view object
+
+# ECMAScript promise and completion-record internals. The root AGENTS.md
+# representation rules name promises among the runtime objects that are not
+# stored content, so they enter as typed decisions rather than as model state.
+# Weakest of the overrides here; it wants ratification.
+slot.promise-state	foreignBoundary	ECMAScript promise internal slot; AGENTS.md rules promises are not stored content
+slot.promise-is-handled	foreignBoundary	ECMAScript promise internal slot; AGENTS.md rules promises are not stored content
+slot.value	foreignBoundary	ECMAScript completion-record field read off a host abrupt completion

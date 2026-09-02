@@ -48,6 +48,7 @@ so that a file dropped into the audit tree cannot silently acquire the wider
 ceiling. Each entry is checked for staleness below. -/
 private def auditImplementationModules : List Name :=
   [ `WhatwgStreamsTest.Audit.AxiomGate,
+    `WhatwgStreamsTest.Audit.SpecCoverage,
     `Sha256.Audit ]
 
 /-- Exact public declarations admitted to the implementation ceiling outside
