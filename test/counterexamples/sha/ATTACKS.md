@@ -75,3 +75,21 @@ This is the shape that experience makes *more* likely rather than less: foldlab'
 rather than imported.
 
 Discriminated by W1.
+
+### The SHA-224 truncation (`WS-SHA-CE-005`)
+
+FIPS 180-4 §6.3 says SHA-224 is SHA-256 with two exceptions: the §5.3.2 initial
+value, and truncation of the final hash value "to its left-most 224 bits",
+spelled out on the same page as `H₀ ‖ H₁ ‖ H₂ ‖ H₃ ‖ H₄ ‖ H₅ ‖ H₆` — the first
+seven of eight words. Keeping the last seven instead produces 28 bytes, keeps
+`Sha256.Impl.length_sha224` true, and keeps every bridge theorem above it true,
+because both truncations are `take 28` of the same 32 bytes in a different
+order.
+
+The initial value is already covered by `WS-SHA-CE-001`; this row covers the
+second exception on its own, against the SHA-224 `Len = 0` vector of
+`vendor/nist-cavp-sha224/SHA224ShortMsg.rsp`. The control
+`ce005_control` shows the shipped left-most truncation reproduces that vector,
+so the inequality is about the byte range and nothing else.
+
+Discriminated by the SHA-224 `Len = 0` vector.

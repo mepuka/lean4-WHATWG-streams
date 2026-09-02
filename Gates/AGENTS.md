@@ -39,9 +39,10 @@ they decide nothing.
   `docs/SHA256-DAG.md` §3.3 forbids for theorem-bearing code, is gone.
 - `lake exe sha256 --self-test` remains finite executable evidence and carries
   no theorem, but it no longer contains a literal: it reads
-  `vendor/nist-cavp-sha256/SHA256ShortMsg.rsp` at run time and reproduces every
-  record in it, so it cannot drift from the pin. Each record's `Len` field, not
-  its `Msg` text, is the authority for the message length. Digests this gate
+  `vendor/nist-cavp-sha256/SHA256ShortMsg.rsp` and, since stage S1.6,
+  `vendor/nist-cavp-sha224/SHA224ShortMsg.rsp` at run time and reproduces every
+  record in both, so it cannot drift from the pins. Each record's `Len` field,
+  not its `Msg` text, is the authority for the message length. Digests this gate
   produces are cross-checked against a second implementation at pin time and
   recorded in `docs/PROVENANCE.md`.
 - Every gate resolves the repository root by searching upward for
@@ -51,7 +52,7 @@ they decide nothing.
 
 | Command | Checks | Writes |
 | --- | --- | --- |
-| `lake exe sha256 --self-test` | the proved SHA-256 library against every record of the pinned NIST CAVP short-message file | nothing |
+| `lake exe sha256 --self-test` | the proved SHA-256 and SHA-224 library against every record of both pinned NIST CAVP short-message files | nothing |
 | `lake exe vendorseal` | `vendor/` against `generated/vendor-manifest.tsv` in both directions; Windows path validity | nothing |
 | `lake exe vendorseal --write` | Windows path validity | `generated/vendor-manifest.tsv` |
 | `lake exe citations` | no line-numbered citation into a protected authored document | nothing |

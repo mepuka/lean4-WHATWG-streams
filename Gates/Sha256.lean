@@ -17,11 +17,12 @@ exactly why it carried no theorem. Its seven self-test vectors were typed from
 memory and had no pinned provenance. Both are gone.
 
 **The self-test no longer contains a literal.** It reads
-`vendor/nist-cavp-sha256/SHA256ShortMsg.rsp` — NIST CAVP, CAVS 11.0, generated
-2011-03-15, sealed by `generated/vendor-manifest.tsv` — at run time and
-reproduces every record in it. It therefore cannot drift from the pin: if the
-vendored bytes change, the seal fails; if the implementation changes, this
-fails.
+`vendor/nist-cavp-sha256/SHA256ShortMsg.rsp` and, since stage S1.6,
+`vendor/nist-cavp-sha224/SHA224ShortMsg.rsp` — NIST CAVP, CAVS 11.0, generated
+2011-03-15, both sealed by `generated/vendor-manifest.tsv` — at run time and
+reproduces every record in both. It therefore cannot drift from the pins: if
+the vendored bytes change, the seal fails; if either implementation changes,
+this fails.
 
 Each record's `Len` field, not the length of its `Msg` text, is the authority
 for how many message bytes there are. The `Len = 0` record writes `Msg = 00`,
@@ -36,6 +37,11 @@ namespace Gates.Sha256
 
 /-- Hexadecimal SHA-256 of a byte array, through the proved library. -/
 def hexDigest (message : ByteArray) : String := (_root_.Sha256.sha256 message).toHex
+
+/-- Hexadecimal SHA-224 of a byte array, through the proved library. Meaning:
+`Sha256.sha224_spec`. Used by the self-test only; the vendor seal and the
+census compute SHA-256. -/
+def hexDigest224 (message : ByteArray) : String := (_root_.Sha256.sha224 message).toHex
 
 /-- Hexadecimal SHA-256 of the UTF-8 encoding of a string. -/
 def hexDigestOfString (text : String) : String := hexDigest text.toUTF8
@@ -53,6 +59,11 @@ structure Record where
 
 def vectorsPath (root : System.FilePath) : System.FilePath :=
   root / "vendor" / "nist-cavp-sha256" / "SHA256ShortMsg.rsp"
+
+/-- The SHA-224 response file, pinned at stage S1.6 out of the same prior-art
+git object the SHA-256 file came from. -/
+def vectorsPath224 (root : System.FilePath) : System.FilePath :=
+  root / "vendor" / "nist-cavp-sha224" / "SHA224ShortMsg.rsp"
 
 /-- The five contract witnesses, by `Len` in bits: W1, W2, E1, E2, E3
 (`test/contracts/sha256.contract.md`). The self-test refuses to pass if the
@@ -101,31 +112,43 @@ def parseRecords (text : String) : Except String (Array Record) := do
       | _, _ => throw s!"line {lineNumber}: MD without a preceding Len and Msg"
   return out
 
-/-- Reproduce every pinned CAVP record. Returns `true` when all match. -/
-def selfTest : IO Bool := do
-  let root ← Gates.Common.projectRoot
-  let path := vectorsPath root
+/-- Reproduce every record of one pinned response file through `hex`. Returns
+the failures, which is empty on success, and the number of records checked.
+Every failure names the file it came from, because the self-test now reads more
+than one. -/
+def checkVectors (root path : System.FilePath) (hex : ByteArray → String) :
+    IO (Array String × Nat) := do
   let relative ← Gates.Common.relativeTo root path
   unless ← path.pathExists do
-    IO.eprintln s!"FAIL sha256 self-test: missing pinned vectors {relative}"
-    return false
+    return (#[s!"missing pinned vectors {relative}"], 0)
   let records ←
     match parseRecords (← IO.FS.readFile path) with
     | .ok records => pure records
-    | .error message =>
-      IO.eprintln s!"FAIL sha256 self-test: {message}"
-      return false
+    | .error message => return (#[s!"{relative}: {message}"], 0)
   let mut failures : Array String := #[]
   for record in records do
-    let actual := hexDigest record.msg
+    let actual := hex record.msg
     if actual != record.md then
       failures := failures.push
-        s!"Len = {record.len}: expected {record.md}, computed {actual}"
+        s!"{relative} Len = {record.len}: expected {record.md}, computed {actual}"
   for required in requiredLens do
     if (records.find? fun record => record.len == required).isNone then
-      failures := failures.push s!"the pinned file has no record with Len = {required}"
+      failures := failures.push s!"{relative} has no record with Len = {required}"
+  return (failures, records.size)
+
+/-- Reproduce every pinned CAVP record of both response files. Returns `true`
+when all match. -/
+def selfTest : IO Bool := do
+  let root ← Gates.Common.projectRoot
+  let path256 := vectorsPath root
+  let path224 := vectorsPath224 root
+  let relative256 ← Gates.Common.relativeTo root path256
+  let relative224 ← Gates.Common.relativeTo root path224
+  let (failures256, count256) ← checkVectors root path256 hexDigest
+  let (failures224, count224) ← checkVectors root path224 hexDigest224
+  let failures := failures256 ++ failures224
   if failures.isEmpty then
-    IO.println s!"PASS sha256 self-test: {records.size} CAVP records from {relative} reproduced, including Len = 0, 24, 440, 448 and 512"
+    IO.println s!"PASS sha256 self-test: {count256} CAVP records from {relative256} and {count224} from {relative224} reproduced, including Len = 0, 24, 440, 448 and 512 in each"
     return true
   IO.eprintln s!"FAIL sha256 self-test: {failures.size} problem(s)"
   for failure in failures do IO.eprintln s!"  {failure}"

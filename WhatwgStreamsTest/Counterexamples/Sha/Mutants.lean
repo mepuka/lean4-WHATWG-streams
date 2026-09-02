@@ -135,4 +135,36 @@ padding byte it produces is `0x01`, the least-significant-bit-first spelling of
 a `1` bit followed by seven zeros, where FIPS 180-4 §5.1.1 writes `0x80`. -/
 theorem ce004_padMarker : revBits 0x80 = 0x01 := by decide
 
+/-! ## WS-SHA-CE-005 — the SHA-224 truncation
+
+FIPS 180-4 §6.3, exception 2: the 224-bit message digest is the final hash
+value truncated to its **left-most** 224 bits, written there as
+`H₀ ‖ H₁ ‖ H₂ ‖ H₃ ‖ H₄ ‖ H₅ ‖ H₆` — the first seven of the eight words. The
+plausible mistake is keeping the wrong end: the last seven words instead of the
+first. That mutant produces 28 bytes, satisfies `Sha256.Impl.length_sha224` and
+every bridge theorem above it, and differs from the standard on every input.
+
+Nothing structural separates the two truncations, because both are `take 28` of
+a permutation of the same 32 bytes. A vector is what fixes the choice, exactly
+as for the four shapes above. -/
+
+/-- The shipped truncation, stated against the untruncated output: SHA-224 is
+the first 28 bytes of the digest bytes of the run from the §5.3.2 initial
+value. This is the statement `ce005_rightmostTruncation` attacks. -/
+theorem ce005_truncation_is_leftmost (msg : List UInt8) :
+    Impl.sha224 msg = (Impl.hashBytes (Impl.hashWith Spec.H0_224 msg)).take 28 := rfl
+
+/-- The mutant: the right-most 28 bytes, that is, dropping word `H₀`'s four
+bytes where FIPS 180-4 drops word `H₇`'s. -/
+def sha224Rightmost (msg : List UInt8) : List UInt8 :=
+  (Impl.hashBytes (Impl.hashWith Spec.H0_224 msg)).drop 4
+
+theorem ce005_rightmostTruncation : sha224Rightmost [] ≠ Kats.sha224W1Digest := by
+  decide +kernel
+
+/-- Control: the shipped left-most truncation reproduces the pinned SHA-224
+vector on the same input, so `ce005_rightmostTruncation` is about the byte
+range and nothing else. -/
+theorem ce005_control : Impl.sha224 [] = Kats.sha224W1Digest := by decide +kernel
+
 end WhatwgStreamsTest.Counterexamples.Sha
