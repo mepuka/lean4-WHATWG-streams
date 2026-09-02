@@ -106,7 +106,17 @@ second implementation.
 R0 is complete: all three documents are landed under `docs/research/` with
 their decision-bearing findings in `docs/research/README.md`.
 
-**P1 opened 2026-09-02 by the operator on the R0 evidence**, delegated to
+**P1 landed on branch `p1/census` 2026-09-02** (commit `f25ef05`, pushed),
+reviewed and re-gated by the coordinator: 444 rows (248 `op`, 127 `idl`,
+62 `slot`, 7 `requirement`), denominator 405, every gate green including
+the mutation reactions. It merges into `main` when the S1 builder releases
+the tree. P1.1 follow-ups, small and already ruled in `SPEC-MANIFEST.md`:
+`idl` rows for `typedef`, `enum`, and `includes`; `[[Detached]]` moved to a
+`refused` override. The RS-D1 algebra package is planned in
+`docs/ALGEBRA-PACKAGE-PLAN.md` and held until the operator's incoming
+lean4-effect4 work lands.
+
+P1 was opened by the operator on the R0 evidence, delegated to
 one seat in the worktree branch `p1/census` while lane S1's builder holds
 the main tree. The census generator's representation decisions are fixed
 by that evidence: `ByteArray` and `Nat` offsets, never `String` positions;

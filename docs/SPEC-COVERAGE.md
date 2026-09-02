@@ -64,11 +64,35 @@ green <G>, partial <P>, absent <A>; census <total> rows, <E> excluded
 partial: <ids>
 ```
 
+The block is three lines, broken exactly as shown: after
+`owned-with-green <O>/<D>;` and after `<E> excluded`. When no row is
+`partial` the third line is `partial:` with nothing after it.
+
 Quote that block verbatim, with the commit it was produced at. Do not compute
 a percentage by hand, do not round, and do not describe a row as covered in
 prose unless it is `green` in the module. A handoff, plan row, or pull
 request that mentions coverage links the gate run and pastes the block. It
 never restates numbers from memory or from an earlier session.
+
+## Ownership of the three facts (ruled at P1 landing, 2026-09-02)
+
+- The generated census owns row ids, order, anchors, spans, digests, and
+  counts. Its row format carries no disposition column.
+- The authored files under `census/` own dispositions: a section map and
+  per-row overrides. A row that no entry reaches fails generation; an entry
+  that reaches no row also fails generation.
+- `WhatwgStreamsTest/Audit/SpecCoverage.lean` owns coverage states and
+  witnesses, and checks ids and order against the census in both directions
+  and that every authored override reached its row. Its frozen row list is
+  generated into `SpecCoverageRows.lean` by the same `--write` and covered
+  by the same drift gate; the authored freeze is the pair of expected totals
+  and the checks.
+- At P1 the report is computed from the census with green and partial equal
+  to zero, which is sound only because the numerator module gates every row
+  `absent` with no witness. The first witness (P3) moves the printer onto
+  the Lean emit; that change lands with the witness, not before.
+
+`typedef`, `enum`, and `includes` statements are `idl` rows (P1.1).
 
 ## How the number moves
 

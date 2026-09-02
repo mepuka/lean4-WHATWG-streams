@@ -54,12 +54,17 @@ Every census row receives exactly one disposition.
 ## Section dispositions (P0 survey of `index.bs`)
 
 The survey counted 248 algorithm-block openers beginning `<div algorithm`,
-of which 229 are the bare `<div algorithm>` and 19 carry attributes, 66
-distinct internal slot names, and about 8,400 lines (the earlier figure of
-7,041 was a non-blank line count). The P1 census generator must key on the
-`<div algorithm` prefix, not the closing bracket, or it silently drops those
-19 blocks. It replaces these counts with generated rows; do not quote them
-as coverage.
+of which 229 are the bare `<div algorithm>` and 19 carry attributes, and
+about 8,400 lines (the earlier figure of 7,041 was a non-blank line count).
+The survey's "66 distinct internal slot names" was an overcount of four:
+`[[FETCH]]`, `[[COMPRESSION]]`, `[[ENCODING]]`, and `[[WEBSOCKETS]]` are
+Bikeshed bibliography citations that never occur in the escaped or
+autolinked slot spelling (verified by the coordinator at P1 landing); the
+census carries 62 `slot` rows. The P1 census keys on the `<div algorithm`
+prefix, not the closing bracket, which is what keeps those 19 blocks. From
+P1 the generated census owns every count: 248 `op`, 127 `idl` across 20 IDL
+blocks, 62 `slot`, 7 `requirement`, denominator 405 with 39 excluded. Do not
+quote these as coverage.
 
 | Section id | Title | Disposition | Phase |
 | --- | --- | --- | --- |
@@ -94,10 +99,29 @@ foreign-boundary answers with their settlement timing, and abort signals. This
 is a P0 ruling recorded in `docs/DESIGN-BASIS.md`; P8 tests it against WPT
 ordering cases under mask M2.
 
+## Rulings made at P1 landing (2026-09-02)
+
+- ECMAScript promise and completion-record internals (`[[PromiseState]]`,
+  `[[PromiseIsHandled]]`, `[[Value]]`) are `foreignBoundary`: they are host
+  runtime objects the representation rules exclude from stored content; the
+  job queue that settles them is state (DB-03).
+- ArrayBuffer and ArrayBufferView internals read by the byte-stream
+  algorithms are `foreignBoundary`, consistent with ArrayBuffer detachment.
+- The `*-transfer` subsections of the three stream classes are `refused`
+  with their two slots; `[[Detached]]` on `ReadableStream`, which exists
+  only for that protocol, is `refused` too (P1.1 follow-up: move it from the
+  section default to an authored override).
+- The three underlying-source, underlying-sink, and transformer dictionaries
+  and their members are `foreignBoundary`; every other IDL member is
+  `hostOnly` at the boundary.
+- `ReadableStreamPipeTo` itself carries disposition `requirement` as the
+  reference realizer of the seven piping requirements.
+- `typedef`, `enum`, and `includes` statements in the IDL blocks (six at the
+  pin) receive `idl` rows with disposition `hostOnly` (P1.1 follow-up; the
+  P1 generator counts them but emits no row).
+
 ## Open rows
 
-- The exact IDL member list per class enters at P1 from the census, not from
-  this table.
 - `ReadableStreamTee` and the async-iteration protocol are `owned` but are
   scheduled after the P4 representative closes.
 - `AbortSignal` interaction in piping is `foreignBoundary` with a profile
