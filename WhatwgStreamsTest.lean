@@ -1,6 +1,9 @@
 import Gates
 import Sha256.Verified
 import WhatwgStreamsTest.Counterexamples.Sha.Mutants
+import WhatwgStreamsTest.Counterexamples.Data.Queue
+import WhatwgStreamsTest.Data.QueueContract
+import WhatwgStreamsTest.Data.QueueAxiomReport
 import WhatwgStreamsTest.Audit.SpecCoverage
 import WhatwgStreamsTest.Audit.AxiomGate
 

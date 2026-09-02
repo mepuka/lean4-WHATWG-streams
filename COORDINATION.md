@@ -11,6 +11,7 @@ Last updated: 2026-09-02 (S1 landed as `a8f08d0`; P1 merged as `72b1bfd`).
 | Agent | Working on |
 | --- | --- |
 | Claude (coordinator) | reviews, commits, rulings, routers, PLAN, SPEC-MANIFEST, docs/*.md |
+| P3 breaker seat | the P3 queue-with-sizes contract packet, red battery, and counterexample witnesses, in the worktree `C:\Users\kokok\Dev\lean4-WHATWG-streams-p3` on branch `p3/queue-breaker`, base `c07cdba`. Leaves the branch dirty and uncommitted. Does not touch `WhatwgStreams/`, `Sha256/`, `Gates/`, `vendor/`, or the routers |
 
 ## Current claims
 
@@ -19,8 +20,17 @@ row is unclaimed.
 
 | File or tree | Claimed by | State |
 | --- | --- | --- |
+| `test/contracts/queue-with-sizes.contract.md` | P3 breaker seat | frozen 2026-09-02; the builder may not edit it |
+| `WhatwgStreamsTest/Data/QueueContract.lean` | P3 breaker seat | frozen and red; declared in `test/fixtures/trust-gate/known-red.txt` |
+| `WhatwgStreamsTest/Data/QueueAxiomReport.lean` | P3 breaker seat | frozen and red; declared in the same file |
+| `WhatwgStreamsTest/Counterexamples/Data/Queue.lean` | P3 breaker seat | green; breaker-owned, retained after the repair |
+| `test/counterexamples/data/ATTACKS.md`, and the `WS-DATA-*` rows of `test/counterexamples/REGISTER.md` | P3 breaker seat | frozen 2026-09-02 |
+| `docs/DATA-DAG.md` | P3 breaker seat | new; carries `DATA-PG-QUEUE` and ruling request `P3-R1` |
+| `WhatwgStreams/Data/Queue.lean`, `WhatwgStreams/Data/Strategy.lean` | **unclaimed; the P3 builder's fence** | do not create them from the breaker seat. The P2 breadth stubs land on `main` |
 
-No claims. The tree is free.
+The P3 breaker seat holds no claim on `WhatwgStreams/`. Ruling `P3-R1` in
+`docs/DATA-DAG.md` must be answered before the builder starts, because the
+`SizeClass` instance depends on it and none of the frozen statements do.
 
 Released: the P0 bootstrap claim (P0 commit); the S1.0 seat's claim (landed
 2026-09-02); the three R0 seats' claims (documents landed 2026-09-01/02);

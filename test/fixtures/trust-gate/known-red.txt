@@ -12,4 +12,13 @@
 #
 # Removing the last entry restores the original all-green control.
 #
-# P0: no entries. No packet is frozen yet.
+# P0: no entries. No packet was frozen yet.
+#
+# P3 queue-with-sizes and queuing strategies, frozen 2026-09-02 by the P3
+# breaker seat. Packet: test/contracts/queue-with-sizes.contract.md.
+# Implementation fence: WhatwgStreams/Data/Queue.lean and
+# WhatwgStreams/Data/Strategy.lean. Both modules below are red because the
+# names they ascribe do not exist yet; the builder removes these two lines
+# when the surface lands, and not before.
+WhatwgStreamsTest.Data.QueueContract
+WhatwgStreamsTest.Data.QueueAxiomReport
