@@ -48,6 +48,12 @@ Every gate is Lean. Shell files, where they exist, only orchestrate.
   digest, fetch command, and cross-check.
 - [`docs/SHA256-DAG.md`](docs/SHA256-DAG.md) is the proof plan for the SHA-256
   the gates depend on.
+- [`docs/REIFICATION-STRATEGY.md`](docs/REIFICATION-STRATEGY.md) is the
+  draft cross-standard design: three strata of one effects algebra, the
+  specification dependency graph as a handler tower, two realizers per
+  signature. A living document under refinement.
+- [`docs/research/README.md`](docs/research/README.md) indexes the research
+  passes and the findings decisions rest on.
 
 ## Process
 
