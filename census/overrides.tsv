@@ -33,3 +33,17 @@ slot.viewed-array-buffer	foreignBoundary	ECMAScript ArrayBufferView internal slo
 slot.promise-state	foreignBoundary	ECMAScript promise internal slot; AGENTS.md rules promises are not stored content
 slot.promise-is-handled	foreignBoundary	ECMAScript promise internal slot; AGENTS.md rules promises are not stored content
 slot.value	foreignBoundary	ECMAScript completion-record field read off a host abrupt completion
+
+# ReadableStream's [[Detached]] exists only for the transferable-streams
+# protocol. Its enclosing section rs-internal-slots is owned, but the three
+# *-transfer sub-sections that read and write this slot are refused, and
+# SPEC-MANIFEST.md refuses the slot with them.
+slot.detached	refused	transfer-only slot of the refused transferable-streams protocol; SPEC-MANIFEST.md refuses it with the three *-transfer sub-sections
+
+# Two Web IDL type declarations that sit in the underlying-source-api IDL
+# block without belonging to the UnderlyingSource dictionary or its
+# callbacks. That section is foreignBoundary because the manifest names the
+# dictionary and its members so; a union typedef and an enum are neither.
+# SPEC-MANIFEST.md rules typedef, enum and includes statements hostOnly.
+idl.readable-stream-controller	hostOnly	Web IDL union typedef naming the controller an underlying source is handed; an IDL type conversion, not a dictionary member with a foreign body
+idl.readable-stream-type	hostOnly	Web IDL enum of the values the UnderlyingSource type member admits; enforced by the host IDL layer, not a foreign-boundary answer

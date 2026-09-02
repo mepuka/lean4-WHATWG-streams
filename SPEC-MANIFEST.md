@@ -62,9 +62,10 @@ Bikeshed bibliography citations that never occur in the escaped or
 autolinked slot spelling (verified by the coordinator at P1 landing); the
 census carries 62 `slot` rows. The P1 census keys on the `<div algorithm`
 prefix, not the closing bracket, which is what keeps those 19 blocks. From
-P1 the generated census owns every count: 248 `op`, 127 `idl` across 20 IDL
-blocks, 62 `slot`, 7 `requirement`, denominator 405 with 39 excluded. Do not
-quote these as coverage.
+P1 the generated census owns every count. After P1.1: 248 `op`, 133 `idl`
+across 20 IDL blocks (including six `typedef`, `enum`, and `includes`
+statements), 62 `slot`, 7 `requirement`, denominator 410 with 40 excluded.
+Do not quote these as coverage.
 
 | Section id | Title | Disposition | Phase |
 | --- | --- | --- | --- |
@@ -109,16 +110,21 @@ ordering cases under mask M2.
   algorithms are `foreignBoundary`, consistent with ArrayBuffer detachment.
 - The `*-transfer` subsections of the three stream classes are `refused`
   with their two slots; `[[Detached]]` on `ReadableStream`, which exists
-  only for that protocol, is `refused` too (P1.1 follow-up: move it from the
-  section default to an authored override).
+  only for that protocol, is `refused` too, by authored override (landed at
+  P1.1).
 - The three underlying-source, underlying-sink, and transformer dictionaries
   and their members are `foreignBoundary`; every other IDL member is
   `hostOnly` at the boundary.
 - `ReadableStreamPipeTo` itself carries disposition `requirement` as the
   reference realizer of the seven piping requirements.
 - `typedef`, `enum`, and `includes` statements in the IDL blocks (six at the
-  pin) receive `idl` rows with disposition `hostOnly` (P1.1 follow-up; the
-  P1 generator counts them but emits no row).
+  pin) receive `idl` rows with disposition `hostOnly` (landed at P1.1). Two
+  of them, the `ReadableStreamController` union typedef and the
+  `ReadableStreamType` enum, sit inside the `underlying-source-api` IDL
+  block whose section is `foreignBoundary`; they are Web IDL type
+  declarations, not dictionary members with host-supplied bodies, so they
+  are `hostOnly` by authored override. Ratified by the coordinator at the
+  P2 landing, 2026-09-02.
 
 ## Open rows
 

@@ -40,14 +40,20 @@ def rows : Array CoverageRow := #[
   ⟨"idl.readable-byte-stream-controller", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-byob-reader", .hostOnly, .absent, []⟩,
+  ⟨"idl.readable-stream-byob-reader-includes-readable-stream-generic-reader", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-byob-reader-read-options", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-byob-request", .hostOnly, .absent, []⟩,
+  ⟨"idl.readable-stream-controller", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-default-controller", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-default-reader", .hostOnly, .absent, []⟩,
+  ⟨"idl.readable-stream-default-reader-includes-readable-stream-generic-reader", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-generic-reader", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-get-reader-options", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-iterator-options", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-stream-read-result", .hostOnly, .absent, []⟩,
+  ⟨"idl.readable-stream-reader", .hostOnly, .absent, []⟩,
+  ⟨"idl.readable-stream-reader-mode", .hostOnly, .absent, []⟩,
+  ⟨"idl.readable-stream-type", .hostOnly, .absent, []⟩,
   ⟨"idl.readable-writable-pair", .hostOnly, .absent, []⟩,
   ⟨"idl.readablebytestreamcontroller-byob-request", .hostOnly, .absent, []⟩,
   ⟨"idl.readablebytestreamcontroller-close", .hostOnly, .absent, []⟩,
@@ -424,7 +430,7 @@ def rows : Array CoverageRow := #[
   ⟨"slot.closed-promise", .owned, .absent, []⟩,
   ⟨"slot.controller", .owned, .absent, []⟩,
   ⟨"slot.deserialized", .refused, .absent, []⟩,
-  ⟨"slot.detached", .owned, .absent, []⟩,
+  ⟨"slot.detached", .refused, .absent, []⟩,
   ⟨"slot.disturbed", .owned, .absent, []⟩,
   ⟨"slot.error-steps", .owned, .absent, []⟩,
   ⟨"slot.finish-promise", .owned, .absent, []⟩,
@@ -467,9 +473,9 @@ def rows : Array CoverageRow := #[
 ]
 
 /-- Total census rows. -/
-def rowTotal : Nat := 444
+def rowTotal : Nat := 450
 
 /-- Rows inside the coverage denominator. -/
-def denominator : Nat := 405
+def denominator : Nat := 410
 
 end WhatwgStreamsTest.Audit.SpecCoverageRows

@@ -106,23 +106,24 @@ second implementation.
 R0 is complete: all three documents are landed under `docs/research/` with
 their decision-bearing findings in `docs/research/README.md`.
 
-**P1 merged into `main` 2026-09-02** (`72b1bfd`; branch commit `f25ef05`),
-reviewed and re-gated by the coordinator before and after the merge: 444
-rows (248 `op`, 127 `idl`, 62 `slot`, 7 `requirement`), denominator 405,
-every gate green including the mutation reactions. The coverage block at
-this commit reads `denominator 405; owned-with-green 0/405; green 0, partial
-0, absent 405; census 444 rows, 39 excluded`. P1.1 follow-ups, small and
-already ruled in `SPEC-MANIFEST.md`: `idl` rows for `typedef`, `enum`, and
-`includes`; `[[Detached]]` moved to a `refused` override. Lane S1 landed the
-same day (`a8f08d0`): every digest the repository pins is now computed by
-the proved SHA-256. The RS-D1 algebra package is planned in
+**P1 merged into `main` 2026-09-02** (`72b1bfd`), and **P1.1 and P2 landed
+2026-09-02**, all reviewed and re-gated by the coordinator. The census
+stands at 450 rows (248 `op`, 133 `idl`, 62 `slot`, 7 `requirement`),
+denominator 410; the coverage block reads `denominator 410;
+owned-with-green 0/410; green 0, partial 0, absent 410; census 450 rows, 40
+excluded`. P2 placed 52 declaration-free breadth stubs under
+`WhatwgStreams/`, one per area and named sub-area of the architecture
+table, every one reachable from the root and audited (78 modules). Lane S1
+landed the same day (`a8f08d0`): every digest the repository pins is
+computed by the proved SHA-256. The RS-D1 algebra package is planned in
 `docs/ALGEBRA-PACKAGE-PLAN.md` and held until the operator's incoming
 lean4-effect4 work lands.
 
-Next: P2, the breadth scaffold (empty modules for every category under
-`WhatwgStreams/`, no declarations), then P3, the queue-with-sizes
-representative, which is the first breaker-then-builder packet of the
-streams calculi and the first consumer of the algebra package decision.
+In flight: the S1.5–S1.7 seat (streaming, SHA-224, assurance) on branch
+`s1/streaming`, and the P3 breaker on branch `p3/queue-breaker` freezing
+the queue-with-sizes contract and red battery. Next after those land: the
+P3 builder against the frozen packet, and the P3-R1 size-carrier ruling the
+breaker surfaces.
 
 P1 was opened by the operator on the R0 evidence, delegated to
 one seat in the worktree branch `p1/census` while lane S1's builder holds

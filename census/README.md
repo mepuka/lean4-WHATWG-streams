@@ -37,7 +37,7 @@ outlive the rows it was written for.
 
 ## Where these files depart from a literal reading of the manifest table
 
-The manifest table is keyed by `<h2>` and `<h3>` section. Four groups of rows
+The manifest table is keyed by `<h2>` and `<h3>` section. Five groups of rows
 need a finer key, and each departure is derived from a rule the manifest or the
 root `AGENTS.md` already states rather than from a new policy.
 
@@ -49,8 +49,12 @@ root `AGENTS.md` already states rather than from a new policy.
 - **The underlying source, sink and transformer APIs.** The manifest names the
   `UnderlyingSource`, `UnderlyingSink` and `Transformer` dictionaries and their
   members `foreignBoundary` in its own prose, below the table. Those
-  dictionaries are exactly the content of the `underlying-source-api`,
-  `underlying-sink-api` and `transformer-api` sections.
+  dictionaries and their callbacks are the whole content of the
+  `underlying-sink-api` and `transformer-api` sections. The
+  `underlying-source-api` section also carries two Web IDL type declarations
+  that belong to no dictionary — the `ReadableStreamController` union typedef
+  and the `ReadableStreamType` enum — and `overrides.tsv` returns those two to
+  the `hostOnly` the manifest rules for a `typedef` or an `enum`.
 - **The piping requirements.** The requirement bullets are stated inside the
   `ReadableStreamPipeTo` algorithm block, which sits under the `owned`
   `rs-all-abstract-ops`. The manifest dispositions the piping requirements and
@@ -64,6 +68,10 @@ root `AGENTS.md` already states rather than from a new policy.
   runtime objects and promises outside stored content, so these rows are
   `foreignBoundary`. The three promise and completion-record rows are the
   weakest of the twelve and are flagged for ratification in `overrides.tsv`.
+- **The transfer-only slot.** `ReadableStream`'s `[[Detached]]` is defined in
+  the `rs-internal-slots` section, which is `owned`, but nothing outside the
+  refused `*-transfer` sub-sections reads or writes it. The manifest refuses
+  it with them, so it is an override rather than a section default.
 
 ## Counting note
 

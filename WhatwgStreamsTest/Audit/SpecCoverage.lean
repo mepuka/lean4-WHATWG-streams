@@ -8,7 +8,7 @@ import WhatwgStreamsTest.Audit.SpecCoverageRows
 `docs/SPEC-COVERAGE.md` owns the metric; this module is its numerator side.
 The frozen row list is `WhatwgStreamsTest/Audit/SpecCoverageRows.lean`, which
 `lake exe census --write` generates alongside
-`generated/spec-algorithm-census.tsv` so that a 444-row table is never
+`generated/spec-algorithm-census.tsv` so that a table of several hundred rows (450 at P1.1) is never
 transcribed by hand. Both projections are covered by the census gate's
 byte-for-byte drift check, so neither can be edited without failing
 `lake exe census`.
@@ -46,11 +46,11 @@ namespace WhatwgStreamsTest.Audit.SpecCoverage
 open Gates.Census
 
 /-- Census rows frozen for this commit. A change here is deliberate. -/
-def expectedRowTotal : Nat := 444
+def expectedRowTotal : Nat := 450
 
 /-- Rows inside the coverage denominator, that is, rows whose disposition is
 not `evidenceOnly`, `refused` or `targetOnly`. -/
-def expectedDenominator : Nat := 405
+def expectedDenominator : Nat := 410
 
 /-- The frozen numerator rows. -/
 def rows : Array CoverageRow := SpecCoverageRows.rows

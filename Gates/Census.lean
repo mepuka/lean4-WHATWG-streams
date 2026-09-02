@@ -693,10 +693,18 @@ row spanning the header itself; `};` closes it; a `callback` statement emits a
 declaration row; and every statement inside a body emits a constructor,
 attribute, method or dictionary-member row.
 
-`typedef`, `enum` and `includes` statements carry no row: `docs/SPEC-COVERAGE.md`
-names attributes, methods, constructors, dictionary members and
-interface/mixin/dictionary/callback declarations, and none of the three is one
-of those. The generator counts them and the count is reported. -/
+A `typedef`, `enum` or `includes` statement also emits an `idl` row, as
+`SPEC-MANIFEST.md` rules under "Rulings made at P1 landing" and
+`docs/SPEC-COVERAGE.md` records. A `typedef` and an `enum` each declare a
+name, so each is identified the way an interface or dictionary declaration is,
+by the kebab-cased name it declares. An `includes` statement declares no name
+of its own: it relates two names that are themselves declaration rows, so it
+is identified by both, as `<includer>-includes-<mixin>`. Every one of the
+three is `hostOnly` at the boundary, which it reaches through its enclosing
+section rather than through an override.
+
+Any other top-level statement is counted rather than dropped silently, and the
+count is reported. It is zero at the pin. -/
 
 structure IdlStatement where
   text : String
@@ -786,7 +794,31 @@ def scanIdl (bs : ByteArray) : Except String (Array Row × Nat) := Id.run do
           out := out.push { kind := .idl, id := "idl." ++ kebab name,
                             anchorB := accB, anchorE := accB, spanB := accB, spanE := accE }
         else
-          skipped := skipped + 1
+          let body := Gates.Common.trimmed (withoutSuffix statement ";")
+          if body.startsWith "typedef " then
+            let name := trailingIdent body
+            if name.isEmpty then
+              return .error s!"census: typedef at byte {accB} declares no name: {statement}"
+            out := out.push { kind := .idl, id := "idl." ++ kebab name,
+                              anchorB := accB, anchorE := accB, spanB := accB, spanE := accE }
+          else if body.startsWith "enum " then
+            let name := leadingIdent (Gates.Common.trimmed (withoutPrefix body "enum "))
+            if name.isEmpty then
+              return .error s!"census: enum at byte {accB} declares no name: {statement}"
+            out := out.push { kind := .idl, id := "idl." ++ kebab name,
+                              anchorB := accB, anchorE := accB, spanB := accB, spanE := accE }
+          else
+            match body.splitOn " includes " with
+            | [includer, included] =>
+              let target := trailingIdent includer
+              let mixinName := leadingIdent included
+              if target.isEmpty || mixinName.isEmpty then
+                return .error s!"census: includes statement at byte {accB} names no pair: {statement}"
+              out := out.push
+                { kind := .idl,
+                  id := "idl." ++ kebab target ++ "-includes-" ++ kebab mixinName,
+                  anchorB := accB, anchorE := accB, spanB := accB, spanE := accE }
+            | _ => skipped := skipped + 1
       else if statement == "};" then
         owner := ""
         ownerIsDictionary := false

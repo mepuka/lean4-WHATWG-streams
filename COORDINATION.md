@@ -19,7 +19,6 @@ row is unclaimed.
 
 | File or tree | Claimed by | State |
 | --- | --- | --- |
-| main checkout: `WhatwgStreams/**` (breadth stubs), `WhatwgStreams.lean`, `Gates/Census.lean`, `census/**`, `generated/spec-algorithm-census.tsv`, `WhatwgStreamsTest/Audit/SpecCoverage*.lean` (row totals only) | P2 + P1.1 seat (Opus subagent) | in progress; the only seat running `lake` in this checkout |
 | worktree `..\lean4-WHATWG-streams-s1` on `s1/streaming`: `Sha256/**`, `Sha256.lean`, `vendor/nist-cavp-sha224/**`, `generated/vendor-manifest.tsv`, `Gates/Sha256.lean` (self-test over both files), `test/counterexamples/REGISTER.md` and `sha/ATTACKS.md` (`WS-SHA-CE-005` onward), `WhatwgStreamsTest/Counterexamples/Sha/**`, `docs/PROVENANCE.md` (S1.6 rows), `.github/workflows/ci.yml` (Sha256 steps only) | S1.5–S1.7 seat (Opus subagent) | in progress on its own branch |
 | worktree `..\lean4-WHATWG-streams-p3` on `p3/queue-breaker`: `test/contracts/queue-with-sizes.contract.md`, `docs/DATA-DAG.md`, `WhatwgStreamsTest/Data/**`, `WhatwgStreamsTest/Counterexamples/Data/**`, `test/counterexamples/data/ATTACKS.md`, `test/counterexamples/REGISTER.md` (`WS-DATA-CE-*` rows only), `test/fixtures/trust-gate/known-red.txt`, `WhatwgStreamsTest.lean` (import lines only) | P3 breaker seat (Opus subagent) | in progress on its own branch; the builder is a later, separate seat |
 

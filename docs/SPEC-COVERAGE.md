@@ -92,7 +92,9 @@ never restates numbers from memory or from an earlier session.
   `absent` with no witness. The first witness (P3) moves the printer onto
   the Lean emit; that change lands with the witness, not before.
 
-`typedef`, `enum`, and `includes` statements are `idl` rows (P1.1).
+`typedef`, `enum`, and `includes` statements are `idl` rows; an `includes`
+statement, which declares no name, is identified by the pair it relates
+(landed at P1.1).
 
 ## How the number moves
 
