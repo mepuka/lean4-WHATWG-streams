@@ -79,7 +79,8 @@ Steps 1–5 touch only the new repository. Step 6 is this repository's first
 ## 4. What must not change
 
 - No `Spec`, `Impl`, or `Bridge` definition body and no bridge or API theorem
-  statement changes in either family during the move; namespace and the
+  statement changes in either family during the move (steps 1–8; step 9 may
+  change `Impl`/`Fast` bodies under ruling P-3 of `docs/HASH-PARITY-PLAN.md`); namespace and the
   `Digest`/`Hex` unification are the only edits, and the S2 review's exact
   refinement `sha3_512_eq_impl` and this repository's `sha256_eq_impl` are
   re-checked byte-for-byte against their landed forms.
