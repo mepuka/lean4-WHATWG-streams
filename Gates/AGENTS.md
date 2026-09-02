@@ -33,6 +33,11 @@ they decide nothing.
   checked by `lake exe sha256 --self-test`. It carries no theorem. Digests it
   produces are cross-checked against a second implementation at pin time and
   recorded in `docs/PROVENANCE.md`.
+- `Gates/Sha256.lean` is written in the style `docs/SHA256-DAG.md` §3.3
+  forbids for theorem-bearing code (`Id.run do` loops, `xs[i]!` indexing).
+  That is deliberate for P0 tooling and is exactly why it carries no theorem.
+  It is not extended; lane S1 replaces it with `Sha256.Fast`, after which
+  this module becomes a thin command-line wrapper over `Sha256.sha256`.
 - Every gate resolves the repository root by searching upward for
   `WhatwgStreams.lean`; none reads an environment variable for that.
 

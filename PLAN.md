@@ -60,12 +60,15 @@ checked TypeScript. Host conformance is measured, never assumed.
 | P10 — logic | `wlp`, totality, the `wp` decomposition theorem, EffHOL modality instance | decomposition theorem proved for the chosen semantics |
 | P11 — targets | closed combinator alphabet, typed TypeScript IR, lowering, render, host harness | typing and simulation proofs; deterministic bytes; exact coverage |
 | P12 — bridges | Node legacy streams calculus, Effect Channel embedding (cross-repository) | each bridge names its loss and its mask |
-| S1 — SHA-256 proof lane | `Spec`/`Impl` split and the `Impl = Spec` refinement for the SHA-256 the gates depend on, per `docs/SHA256-DAG.md` | every edge of `SHA256-PG-IMPL-EQ-SPEC` closed; dual-host and external-checker receipts recorded |
+| S1 — SHA-256 proof lane | the three-layer `Spec`/`Impl`/`Fast` SHA-256 with the `Impl = Spec` refinement and the pointwise `Fast = Impl` bridge, a `Digest`/`Hex` API, root split so consumers never pay for kernel known-answer tests, a typed audit line, streaming, and SHA-224, in stages S1.0–S1.7 per `docs/SHA256-DAG.md` | every edge of `SHA256-PG-IMPL-EQ-SPEC` closed; `Gates` consumes `Sha256.sha256` and regenerates `generated/vendor-manifest.tsv` byte-identically; `leanchecker --fresh`, dual-host, and lean4lean receipts recorded |
 
-S1 is independent of P1 through P12 and may run beside any of them. Until it
-closes, the vendor seal's digests are executable evidence cross-checked
-against a second implementation at pin time, and `docs/PROVENANCE.md` says
-so.
+S1 is independent of P1 through P12 and may run beside any of them. Its
+staging, built-ins ledger, do-not-use list, stop conditions, report shape,
+budgets, and rulings follow foldlab's fips202 library specification
+(`.staging/fips202-library/SPEC.md`, decision 45), adapted to 32-bit words
+and to this repository's stricter semantic ceiling. Until S1 closes, the
+vendor seal's digests are executable evidence cross-checked against a second
+implementation at pin time, and `docs/PROVENANCE.md` says so.
 
 ## Broad-before-deep representatives
 
@@ -114,4 +117,4 @@ notes are landed and cited.
 | 1 | P1 census generator | generated projection with drift gate | one row per algorithm, slot, IDL member, requirement; anchors occur exactly once; span digests computed by the in-tree SHA-256 |
 | 2 | P2 scaffold | none (no declarations) | every category module exists and is reached by the default build |
 | 3 | P3 queue-with-sizes | proof graph `DATA-PG-QUEUE` | breaker packet frozen red; builder closes construction, laws, counterexamples, trust |
-| S1 | SHA-256 | proof graph `SHA256-PG-IMPL-EQ-SPEC` | see `docs/SHA256-DAG.md` |
+| S1 | SHA-256 | proof graph `SHA256-PG-IMPL-EQ-SPEC` | see `docs/SHA256-DAG.md`; opens on ruling R-1 there; S1.0 is a Pass A/Pass B act, not code |

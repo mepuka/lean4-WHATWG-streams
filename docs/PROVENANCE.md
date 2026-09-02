@@ -74,7 +74,9 @@ pinned npm dependencies outside `vendor/` (P8).
 
 | Row | Needed by | State |
 | --- | --- | --- |
-| NIST CAVP SHA-256 byte-oriented test vectors (`shabytetestvectors.zip`, `SHA256ShortMsg.rsp`, `SHA256LongMsg.rsp`) | S1 | not fetched; the S1 Pass A fetches, digests, and pins them |
+| NIST CAVP `SHA256ShortMsg.rsp` (CAVS 11.0, generated 2011-03-15), SHA-256 `294ecec26959357405a621121bbfb01db4d45b9e834624b2d71aedd94ffde019`, 10,031 bytes, read from the lean-crypto-hash clone at `54e6068abd4658fd91203cae1c2316188ffa0e89` under foldlab `.reference/clones/` | S1.0 | digest recorded; vendored into this repository and sealed at S1.0 (`docs/SHA256-DAG.md` §3.4); `SHA224ShortMsg.rsp` from the same clone at S1.6 |
+| kim-em/lean-crypto-hash prior art, commit `54e6068abd4658fd91203cae1c2316188ffa0e89`, Apache-2.0, toolchain v4.33.0 | S1 | read first-hand 2026-09-01; no code imported; API shapes and the streaming technique are credited in `docs/SHA256-DAG.md` §3.5 |
+| foldlab `.staging/fips202-library/SPEC.md` (decision 45, R-1 approved 2026-09-01) | S1 | the staging discipline `docs/SHA256-DAG.md` adapts; at foldlab commit `8d36195970b83a1439ec705b9a504617554b8062` plus the uncommitted working-tree file read 2026-09-01 |
 | wpt.fyi run identifiers for Chromium, Gecko, WebKit at the WPT pin | P8 | not recorded |
 | reference implementation npm dependency lock at the pin | P8 | not installed |
 | `mepuka/lean4-nlp` benchmark corpus commit | R0 | not yet read |
