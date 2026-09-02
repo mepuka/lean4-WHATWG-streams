@@ -14,16 +14,34 @@ reason a wrong in-tree digest could not have entered this file silently.
 
 | Pin | Fetched | Command | Cross-check |
 | --- | --- | --- | --- |
-| `whatwg/streams` @ `b9ba9f49d95b4280be0dc2372377a006c3a91c18` (2026-08-18T11:17:34Z, "Review Draft Publication: August 2026") | 2026-09-01 | `git clone --filter=blob:none https://github.com/whatwg/streams` then `git checkout b9ba9f49…`; copied `index.bs`, `LICENSE`, `README.md`, and `reference-implementation/{lib/**, package.json, README.md, LICENSE.md, COPYING.txt, run-web-platform-tests.js, compile-idl.js}` | `index.bs` `34ba0cd16bddc2a8eb172740b3372f1b9cde2846e690bc8d6ad3c35246ac6a87` agrees between both implementations; every file's digest is in `generated/vendor-manifest.tsv` |
-| `web-platform-tests/wpt` @ `480fdfcd85d043c23875665f464c35c0043dff52` (committer date 2026-09-02T02:49:23Z) | 2026-09-01 | sparse clone: `git sparse-checkout set streams`, `git fetch --depth 1 --filter=blob:none origin 480fdfcd…`, `git checkout FETCH_HEAD`; copied `streams/**` and `LICENSE.md` | per-file digests in `generated/vendor-manifest.tsv`; `LICENSE.md` `5fac07febb0e2a97fb0d7b0def149ec08b642e1ba4b9c345283ab1cbd2af6570` |
+| `whatwg/streams` @ `b9ba9f49d95b4280be0dc2372377a006c3a91c18` (2026-08-18T11:17:34Z, "Review Draft Publication: August 2026") | 2026-09-01 | `git clone --filter=blob:none https://github.com/whatwg/streams` then `git checkout b9ba9f49…`; copied `index.bs`, `LICENSE`, `README.md`, and `reference-implementation/{lib/**, package.json, README.md, LICENSE.md, COPYING.txt, run-web-platform-tests.js, compile-idl.js}` | every one of the 54 files matches the upstream git blob object hash from `git ls-tree -r b9ba9f49…` (checked with `git hash-object --no-filters`); `index.bs` `24360b4f8446e6c80e185c5021fcca9b67a7e0bb62490a00109080ebc04c6440`, 417,076 bytes, agrees between both SHA-256 implementations and with `raw.githubusercontent.com` at the commit; every file's digest is in `generated/vendor-manifest.tsv` |
+| `web-platform-tests/wpt` @ `480fdfcd85d043c23875665f464c35c0043dff52` (committer date 2026-09-02T02:49:23Z) | 2026-09-01 | sparse clone: `git sparse-checkout set streams`, `git fetch --depth 1 --filter=blob:none origin 480fdfcd…`, `git checkout FETCH_HEAD`; copied `streams/**` and `LICENSE.md` | every one of the 123 files matches the upstream git blob object hash from `git ls-tree -r 480fdfcd…`; per-file digests in `generated/vendor-manifest.tsv`; `LICENSE.md` `5fac07febb0e2a97fb0d7b0def149ec08b642e1ba4b9c345283ab1cbd2af6570`; `streams/piping/general.any.js` also agrees with `raw.githubusercontent.com` at the commit |
 
 Vendored licenses: WHATWG Streams Standard, CC-BY 4.0 with BSD-3-Clause for
 portions incorporated into source code (`vendor/whatwg-streams-b9ba9f49/LICENSE`,
-`6e58e12504d2c5c932620deb3e16d1b36ab94fb309908717dc7cf0a3929f2e38`); reference
+`85dc6f5ccb57a6fe8c33d158f9fc8fc7ee5655a5d3db2cdd131c6a3d0f48a864`); reference
 implementation, dual CC0 / MIT (`reference-implementation/LICENSE.md`,
-`85f92bd369be5ffd4d252cd83edb30f6d0363d45cdf678642127f7d4f2ff448f`); WPT,
+`2d301992ca987e748f1b9d6eb2d591acf074fff828883887228eee3732fc0f79`); WPT,
 BSD-3-Clause. All three permit retention with attribution; the upstream
 license files are retained in place.
+
+`.gitattributes` disables end-of-line conversion for the whole repository
+(`* -text`), so a checkout on any host reproduces the committed bytes and the
+seal holds without a host-specific `core.autocrlf` setting.
+
+**Why the blob-hash check exists.** The first P0 vendoring copied the
+whatwg/streams files out of a Windows working tree, where that repository's
+own `text` attributes had converted every text file to CRLF on checkout;
+`git archive` applied the same conversion. The in-tree SHA-256 and
+`Get-FileHash` agreed with each other on those bytes, and the seal passed,
+because both were measuring the converted file. Only a comparison against
+GitHub's raw content exposed the 8,401-byte difference in `index.bs`. The
+vendored files were then rewritten directly from the upstream blob objects
+(`git cat-file blob <sha>`), and every file in both trees is now verified
+against `git ls-tree` object hashes, which cannot be affected by any
+attribute or host setting. Two agreeing digests of the same wrong bytes are
+not provenance; the reference point has to be upstream's own identity of the
+object.
 
 The reference implementation's `node_modules` and its own test runner
 dependencies are not vendored. Running it as a host profile installs its

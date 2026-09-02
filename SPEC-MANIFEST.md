@@ -14,7 +14,7 @@ authored input.
 
 | Authority | Exact pin | Role |
 | --- | --- | --- |
-| WHATWG Streams Standard source | `whatwg/streams` commit `b9ba9f49d95b4280be0dc2372377a006c3a91c18`, 2026-08-18, "Review Draft Publication: August 2026"; `index.bs` SHA-256 `34ba0cd16bddc2a8eb172740b3372f1b9cde2846e690bc8d6ad3c35246ac6a87`, 425,477 bytes | **semantic owner** |
+| WHATWG Streams Standard source | `whatwg/streams` commit `b9ba9f49d95b4280be0dc2372377a006c3a91c18`, 2026-08-18, "Review Draft Publication: August 2026"; `index.bs` SHA-256 `24360b4f8446e6c80e185c5021fcca9b67a7e0bb62490a00109080ebc04c6440`, 417,076 bytes | **semantic owner** |
 | Streams reference implementation | same commit, `reference-implementation/`; dual CC0 / MIT | second-tier evidence: candidate realizer and reading aid |
 | Web Platform Tests `streams/` | `web-platform-tests/wpt` commit `480fdfcd85d043c23875665f464c35c0043dff52`, 2026-09-02; BSD-3-Clause | host conformance corpus |
 | Node | v22.23.2 on Windows 11 x86-64 | local host profile via `node:stream/web` |

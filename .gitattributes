@@ -1,0 +1,4 @@
+# No end-of-line conversion anywhere. The vendor seal digests the bytes in
+# the working tree, so a checkout must reproduce the committed bytes exactly
+# on every host, Windows included. Authored files are LF.
+* -text
