@@ -199,6 +199,7 @@ only after the NIST example file is pinned (S1.7).
 | --- | --- | --- | --- |
 | foldlab `formal/fips202` (SHA3-512, fully proved `Impl = Spec`, dual-host, leanchecker) | the Pass A / Pass B contract shape; B2a–B2f decomposition; kernel-KAT cost data (59 s / 6 GB for two SHA3-512 digests); the `Spec`/`Impl`/`Fast` split and every rule in §3.2–§3.3 | 64-bit lanes and a sponge; tolerates `Classical.choice`; FIPS 202 B.1 is LSB-first within a byte, FIPS 180-4 §3.1 is MSB-first, so `bitsOfBytes` is **not** reusable and E3-style bit-order errors are the discriminating risk here too | process precedent |
 | kim-em/lean-crypto-hash `Crypto/SHA2/*` | SHA-256/224/384/512 over `UInt32`/`UInt64` with `Vector` and proof-indexed `for h : i in` loops; `ByteVector n` with a size proof; `Context.update_append` streaming law; strict hex; CAVP vectors; conformance against OpenSSL and coreutils | its README states the theorems "are not a formal end-to-end proof of each compression function"; `validation/CryptoValidation/Proofs.lean` imports `Std.Tactic.BVDecide` (`Lean.ofReduceBool`, forbidden here); `Id.run do` bodies are outside §3.3; Lean `module` system; toolchain v4.33.0 | reference for API shape, streaming technique (credited at S1.5), and vectors; no code imported |
+| fips202 S0.2 Route A, operator-supplied 2026-09-01 | a `Classical.choice`-free byte round trip: `lowBits n k := (List.range k).foldl (fun acc j => acc + if n.testBit j then 2^j else 0) 0`; `lowBits_spec` by induction on `k` with `Nat.or_two_pow_eq_add_of_lt`, `Nat.testBit_or`, `Nat.testBit_two_pow`; `lowBits_eq_mod : lowBits n k = n % 2^k` by `Nat.eq_of_testBit_eq` and `Nat.testBit_mod_two_pow`; `byte_roundtrip_fin` by `UInt8.toNat_inj` and `simpa` with `List.range 8` unfolded by `rfl` | FIPS 202 B.1 is LSB-first; SHA-256's `bitsOfByte` is MSB-first, so the fold index is `7 - j` and the `testBit` argument follows | the technique for `Spec.bytesOfBits_bitsOfBytes`; reproduced, not imported |
 
 ## 4. Statement addendum A1 (FROZEN 2026-09-01, ruling R-1)
 
@@ -359,8 +360,21 @@ end Sha256
 `Digest` and `Hex` are the same shapes as fips202 A1.S1, copied rather than
 imported (zero dependencies), with the file header crediting the source.
 Whether `Digest.toHex`, `Digest.ofHex?`, `Hex.encode`, and `Hex.decode?` may
-reach `Classical.choice` through `String` lemmas is ruling R-3; the S1.3
-seat measures it and reports the receipt before any admission is written.
+reach `Classical.choice` through `String` lemmas is ruling R-3; the seat
+measures it and reports the receipt before any admission is written.
+
+**Measured 2026-09-01 (coordinator, `#print axioms` under v4.33.1):**
+`String.toUTF8`, `String.ofList`, `List.toByteArray`, `ByteArray.extract`,
+`ByteArray.get!`, and `Nat.toDigits` are axiom-free; `String.length`,
+`String.splitOn`, `String.extract`, `String.Pos.next`, `String.Pos.get`,
+`Substring.toString`, and `String.fromUTF8!` reach `Classical.choice`. So:
+implement `Hex.encode` as a `List Char` producer wrapped by `String.ofList`,
+implement `Hex.decode?` over `s.toList` only if `String.toList` is measured
+axiom-free (else over a `List Char` input with a `String` wrapper), and state
+`length_encode` on the `List Char` form, because a theorem whose statement
+mentions `String.length` inherits `Classical.choice` from the statement
+itself. The R-3 exact list is then expected to be empty; if a `String`-typed
+convenience wrapper still reaches choice, it alone is admitted.
 
 ### A1.S4 — the native layer
 
@@ -682,6 +696,7 @@ seat.
 | R-7 | Repository license. **This repository currently has no `LICENSE` file.** | Apache-2.0, matching fips202 R-7 and the prior art, at S1.0 |
 | R-8 | Vendor the FIPS 180-4 PDF (US Government work) beside the `.rsp`, or keep digest-only | vendor it at S1.0, sealed |
 | R-9 | Toolchain policy for consumers | exact pin, stated in `README.md` |
+| R-10 | **One-shot mode (operator, 2026-09-01: "jump the gun and one shot this thing").** S1.1–S1.4 are built by one seat in one pass against the frozen §4 statements, without a separate breaker freezing a red battery first; S1.5 and S1.6 are stretch in the same pass. The coordinator's first-hand review of the delivery is the check the breaker would have supplied. Any statement the seat cannot close is left out of the green build and parked in a module declared in `known-red.txt`, never closed with `sorry`. | ruled; applies to lane S1 only and sets no precedent for the streams calculi |
 
 ## 10. Edge ledger
 
