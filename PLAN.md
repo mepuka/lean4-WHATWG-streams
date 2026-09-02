@@ -117,4 +117,4 @@ notes are landed and cited.
 | 1 | P1 census generator | generated projection with drift gate | one row per algorithm, slot, IDL member, requirement; anchors occur exactly once; span digests computed by the in-tree SHA-256 |
 | 2 | P2 scaffold | none (no declarations) | every category module exists and is reached by the default build |
 | 3 | P3 queue-with-sizes | proof graph `DATA-PG-QUEUE` | breaker packet frozen red; builder closes construction, laws, counterexamples, trust |
-| S1 | SHA-256 | proof graph `SHA256-PG-IMPL-EQ-SPEC` | see `docs/SHA256-DAG.md`; opens on ruling R-1 there; S1.0 is a Pass A/Pass B act, not code |
+| S1 | SHA-256 | proof graph `SHA256-PG-IMPL-EQ-SPEC` | see `docs/SHA256-DAG.md`; R-1 ruled 2026-09-01 and S1.0 dispatched; S1.0 is a Pass A act plus scaffolding, not proofs |

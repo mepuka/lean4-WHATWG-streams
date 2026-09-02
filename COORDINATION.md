@@ -19,9 +19,10 @@ row is unclaimed.
 
 | File or tree | Claimed by | State |
 | --- | --- | --- |
+| `Sha256/**`, `Sha256.lean`, `test/contracts/sha256.contract.md`, `vendor/nist-cavp-sha256/**`, `vendor/nist-fips-180-4/**`, `generated/vendor-manifest.tsv`, `LICENSE`, `lakefile.toml`, `WhatwgStreamsTest.lean`, `WhatwgStreamsTest/Audit/AxiomGate.lean` (Sha256 tree rows only), `Gates/TrustSelfTest.lean` (copied-tree list only), `.github/workflows/ci.yml` (Sha256 steps only), `docs/PROVENANCE.md` (S1.0 rows only), `workshop/**` | S1.0 seat (Opus subagent, dispatched by the coordinator) | in progress; coordinator commits |
 
-No claims. The P0 bootstrap claim on the whole tree was released at the P0
-commit. The next claim is the R0 research writer under `docs/research/`.
+The P0 bootstrap claim on the whole tree was released at the P0 commit. The
+R0 research writer under `docs/research/` is unclaimed.
 
 ## Collision record
 

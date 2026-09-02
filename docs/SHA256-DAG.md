@@ -1,8 +1,10 @@
 # SHA-256 proof graph and implementation spec (lane S1)
 
 Status: pre-grade, 2026-09-01. Proof graph `SHA256-PG-IMPL-EQ-SPEC` opened at
-P0 with every edge `required-open`. **HOLD: no stage is dispatched until the
-operator rules R-1 in §9.** Author: coordinator, from a first-hand read of
+P0 with every edge `required-open`. **R-1 APPROVED by the operator
+2026-09-01 with the §9 defaults for R-2–R-9; §4 A1.S1–A1.S4 are therefore
+FROZEN. S1.0 dispatched 2026-09-01 to one seat; later stages wait on its
+review.** Author: coordinator, from a first-hand read of
 foldlab's `formal/fips202` at commit `8d36195970b83a1439ec705b9a504617554b8062`,
 its library specification `.staging/fips202-library/SPEC.md` (decision 45,
 R-1 approved 2026-09-01), the prior art at
@@ -198,7 +200,7 @@ only after the NIST example file is pinned (S1.7).
 | foldlab `formal/fips202` (SHA3-512, fully proved `Impl = Spec`, dual-host, leanchecker) | the Pass A / Pass B contract shape; B2a–B2f decomposition; kernel-KAT cost data (59 s / 6 GB for two SHA3-512 digests); the `Spec`/`Impl`/`Fast` split and every rule in §3.2–§3.3 | 64-bit lanes and a sponge; tolerates `Classical.choice`; FIPS 202 B.1 is LSB-first within a byte, FIPS 180-4 §3.1 is MSB-first, so `bitsOfBytes` is **not** reusable and E3-style bit-order errors are the discriminating risk here too | process precedent |
 | kim-em/lean-crypto-hash `Crypto/SHA2/*` | SHA-256/224/384/512 over `UInt32`/`UInt64` with `Vector` and proof-indexed `for h : i in` loops; `ByteVector n` with a size proof; `Context.update_append` streaming law; strict hex; CAVP vectors; conformance against OpenSSL and coreutils | its README states the theorems "are not a formal end-to-end proof of each compression function"; `validation/CryptoValidation/Proofs.lean` imports `Std.Tactic.BVDecide` (`Lean.ofReduceBool`, forbidden here); `Id.run do` bodies are outside §3.3; Lean `module` system; toolchain v4.33.0 | reference for API shape, streaming technique (credited at S1.5), and vectors; no code imported |
 
-## 4. Statement addendum A1 (PROPOSED; frozen on ruling R-1)
+## 4. Statement addendum A1 (FROZEN 2026-09-01, ruling R-1)
 
 Names are final once frozen; a seat that needs a different shape stops.
 `Spec` means `Sha256.Spec`, `Impl` means `Sha256.Impl`, `Bridge` means
@@ -667,9 +669,9 @@ seat.
 - The P1 census generator, when it lands, computes span digests through the
   API from the start.
 
-## 9. Rulings (all open; defaults apply if silent)
+## 9. Rulings (R-1 approved 2026-09-01; R-2–R-9 ratified at their defaults the same day)
 
-| Id | Question | Default if silent |
+| Id | Question | Ruling (was: default if silent) |
 | --- | --- | --- |
 | R-1 | Approve §4 A1.S1–A1.S4 as the frozen statement addendum and open S1.0 | approve |
 | R-2 | Route B (`decide +kernel`) acceptable as a landing for a bridge lemma if the structural route exceeds its budget | acceptable as a finding, not a completion |
