@@ -1,6 +1,6 @@
 # Pass A — domain contract for queue-with-sizes and the queuing strategies (P3)
 
-Status: **FROZEN / RED, breaker-authored 2026-09-02.** The P3 breaker seat
+Status: **FROZEN / GREEN — builder landed 2026-09-02** (all 99 theorems proved with zero battery edits; the `P3-R1` instance `WhatwgStreams.Data.DyadicSize` allocated by the coordinator; earlier: FROZEN / RED, breaker-authored 2026-09-02)
 authored it. No statement below may be weakened by the builder.
 
 Implementation fence (the builder's only writable Lean surface for this

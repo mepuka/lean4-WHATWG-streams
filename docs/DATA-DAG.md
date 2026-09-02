@@ -193,3 +193,28 @@ observable.
 The P3 builder may start against these rulings. The frozen statements do not
 change; the rulings select the `SizeClass` instance and the disposition of the
 four WPT files.
+## Landing (coordinator, 2026-09-02)
+
+The P3 builder landed the frozen surface with all 99 theorems proved and
+zero edits to the battery: 447 declarations compiled from the two fenced
+modules, 375 axiom-free, 70 at `[propext]`, 2 at `[propext, Quot.sound]`
+(`sizeSum_append_singleton`, `enqueueValueWithSize_wf`, through core's
+`List.foldl_append`). The trust self-test reports an empty declared red set.
+
+Module allocation for the `P3-R1` instance: `WhatwgStreams/Data/DyadicSize.lean`,
+imported from the root. Twelfth existing-type row: `WhatwgStreams.Data.DyadicSize`,
+canonical carrier for `Size` at this pin, the dyadic rationals with the
+exponent fixed at 1074 (`finite u` denotes `u · 2^(-1074)`; every finite
+binary64 is representable; `nan`, `posInfinity`, `negInfinity` are
+constructors), with `DyadicSize.classified`, `ordered`, `exact`, and
+`admissible_iff`; disposition `owned`; assurance route: this graph's
+representation edge. Two frozen statements carry a hypothesis their proofs do
+not use (`dequeueValue_clamp_unreachable_of_exact` needs no `Classified`);
+the statements are unweakened.
+
+Edge states after landing: identity, construction, semantics, laws,
+representation, counterexamples, trust, and coverage are `required-closed`
+by the receipts above and the closed `WS-DATA-CE-001`..`010` rows; bridges
+and targets remain `not-applicable` at this stratum. The census rows this
+packet turns `green` (12) and `partial` (6) are the builder's proposal in §6
+and land through the coverage numerator in a separate packet.

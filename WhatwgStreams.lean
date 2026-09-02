@@ -1,6 +1,7 @@
 import WhatwgStreams.Data.Queue
 import WhatwgStreams.Data.Chunk
 import WhatwgStreams.Data.Strategy
+import WhatwgStreams.Data.DyadicSize
 import WhatwgStreams.Strategy.CountQueuing
 import WhatwgStreams.Strategy.ByteLengthQueuing
 import WhatwgStreams.Strategy.Ops

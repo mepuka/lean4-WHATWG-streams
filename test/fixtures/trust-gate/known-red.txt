@@ -17,8 +17,7 @@
 # P3 queue-with-sizes and queuing strategies, frozen 2026-09-02 by the P3
 # breaker seat. Packet: test/contracts/queue-with-sizes.contract.md.
 # Implementation fence: WhatwgStreams/Data/Queue.lean and
-# WhatwgStreams/Data/Strategy.lean. Both modules below are red because the
-# names they ascribe do not exist yet; the builder removes these two lines
-# when the surface lands, and not before.
-WhatwgStreamsTest.Data.QueueContract
-WhatwgStreamsTest.Data.QueueAxiomReport
+# WhatwgStreams/Data/Strategy.lean. WhatwgStreamsTest.Data.QueueContract and
+# WhatwgStreamsTest.Data.QueueAxiomReport were red here while the names they
+# ascribe did not exist. The P3 builder seat landed that surface and removed
+# the two entries; no entry remains.

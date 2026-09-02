@@ -21,7 +21,7 @@ imports both.
 | Area | Public responsibility |
 | --- | --- |
 | `WhatwgStreams/Data` | queue-with-sizes, chunk universe, size functions, high-water marks, desired size |
-| `WhatwgStreams/Strategy` | `CountQueuingStrategy`, `ByteLengthQueuingStrategy`, the strategy abstract operations |
+| `WhatwgStreams/Strategy` | the IDL class surface that reads the strategy slots; the two strategy records, their size functions, and the extraction operations live in `WhatwgStreams/Data/Strategy.lean` under `DATA-PG-QUEUE` (ownership repaired at the P3 landing, 2026-09-02) |
 | `WhatwgStreams/Readable` | `ReadableStream` state, default controller, default reader, generic reader mixin, tee, async iteration |
 | `WhatwgStreams/Readable/Byte` | byte controller, BYOB reader and request, pull-into descriptors (P9) |
 | `WhatwgStreams/Writable` | `WritableStream` state, default controller, default writer, backpressure |

@@ -23,7 +23,6 @@ row is unclaimed.
 | `WhatwgStreamsTest/Data/QueueContract.lean`, `WhatwgStreamsTest/Data/QueueAxiomReport.lean` | P3 breaker (landed) | frozen and RED; declared in `test/fixtures/trust-gate/known-red.txt`; the builder may repair elaboration only, never a statement |
 | `WhatwgStreamsTest/Counterexamples/Data/Queue.lean`, `test/counterexamples/data/ATTACKS.md`, the `WS-DATA-*` rows of `test/counterexamples/REGISTER.md` | P3 breaker (landed) | green; breaker-owned, retained after the repair |
 | `docs/DATA-DAG.md` | P3 breaker (landed) | carries `DATA-PG-QUEUE` and ruling request `P3-R1`; the coordinator answers `P3-R1` there |
-| `WhatwgStreams/Data/Queue.lean`, `WhatwgStreams/Data/Strategy.lean`, `WhatwgStreams/Strategy/**` (only if the contract's fence names them), `test/fixtures/trust-gate/known-red.txt` (remove the two entries when green), `WhatwgStreamsTest/Data/QueueContract.lean` and `QueueAxiomReport.lean` (elaboration repairs only, never a statement) | P3 builder seat (Opus subagent, dispatched 2026-09-02 after `P3-R1`) | in progress; the only seat running `lake` in this checkout |
 
 Released: the P0 bootstrap claim; the S1.0 seat; the three R0 seats; the S1
 one-shot builder (`a8f08d0`); the P1 census seat (`72b1bfd`); the P2 + P1.1
