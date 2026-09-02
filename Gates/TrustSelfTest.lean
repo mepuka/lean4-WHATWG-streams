@@ -35,8 +35,13 @@ def copiedFiles : List String :=
   ["lakefile.toml", "lake-manifest.json", "lean-toolchain",
    "WhatwgStreams.lean", "Gates.lean", "WhatwgStreamsTest.lean", "Sha256.lean"]
 
+/-- `census` and `generated` join the copied trees because
+`WhatwgStreamsTest/Audit/SpecCoverage.lean` reads the census projection and
+its authored disposition inputs at elaboration time: without them the probe's
+build fails for a missing file rather than for a planted violation. `vendor`
+stays out: the probe only builds the census generator, never runs it. -/
 def copiedTrees : List String :=
-  ["WhatwgStreams", "WhatwgStreamsTest", "Gates", "Sha256", "bin"]
+  ["WhatwgStreams", "WhatwgStreamsTest", "Gates", "Sha256", "bin", "census", "generated"]
 
 def fixture (root : System.FilePath) (name : String) : System.FilePath :=
   root / "test" / "fixtures" / "trust-gate" / name

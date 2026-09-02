@@ -6,7 +6,7 @@ license = "Apache-2.0"
 readmeFile = "README.md"
 defaultTargets = ["WhatwgStreams", "Gates", "WhatwgStreamsTest",
                   "Sha256", "Sha256Verified",
-                  "sha256", "vendorseal", "citations", "trustselftest"]
+                  "sha256", "vendorseal", "citations", "trustselftest", "census"]
 # `lake test` builds the audited SHA-256 root: its `#guard_msgs` pin on the
 # axiom audit line is the test. The P1 census gate takes this over later.
 testDriver = "Sha256Verified"
@@ -74,3 +74,11 @@ root = "Citations"
 name = "trustselftest"
 srcDir = "bin"
 root = "TrustSelfTest"
+
+# The P1 specification-algorithm census. `root = "bin.Census"` under the
+# default `srcDir` resolves to `bin/Census.lean`, matching the `sha256`
+# entry point above; there is no `Census` library root to collide with today,
+# and the spelling keeps the two entry-point conventions from diverging.
+[[lean_exe]]
+name = "census"
+root = "bin.Census"

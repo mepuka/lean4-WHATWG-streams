@@ -1,0 +1,12 @@
+# Cross-cutting rule rows: authored input to the P1 census generator.
+#
+# Two tab-separated fields: <kebab name> <locator>.
+#
+# A rule row is a cross-cutting requirement the specification states as prose
+# rather than as an algorithm or a bullet of the piping-requirements list. The
+# locator is a byte string that must occur exactly once in the pinned
+# index.bs; the row's span runs from the locator to the next blank line, and
+# its id is rule.<kebab name>.
+#
+# Empty at P1. docs/SPEC-COVERAGE.md admits the kind; no rule has been
+# authored and ratified yet, and the generator invents none.
