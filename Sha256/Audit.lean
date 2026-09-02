@@ -19,12 +19,12 @@ exact string-facing declarations of `Sha256.Digest` and `Sha256.Hex`;
 justifies an entry.
 
 This audit is the library's own typed verdict. It is not the repository's
-trust boundary: `WhatwgStreamsTest/Audit/AxiomGate.lean` is, and it audits
+trust boundary: `WhatwgTest/Audit/AxiomGate.lean` is, and it audits
 every declaration of this tree, including the private and compiler-generated
 ones that `Name.isInternal` filters out here.
 
 Shape adapted from foldlab `.staging/fips202-library/SPEC.md` §6 item S0.4 and
-from the repository's own `WhatwgStreamsTest/Audit/AxiomGate.lean`.
+from the repository's own `WhatwgTest/Audit/AxiomGate.lean`.
 -/
 
 open Lean
@@ -56,7 +56,7 @@ private def treePrefix : Name := `Sha256
 
 /-- This module is excluded from its own audit: it is the audit
 implementation, it runs in `MetaM`, and it therefore reaches
-`Classical.choice`. `WhatwgStreamsTest/Audit/AxiomGate.lean` names it exactly
+`Classical.choice`. `WhatwgTest/Audit/AxiomGate.lean` names it exactly
 in `auditImplementationModules` for that reason. -/
 private def auditModule : Name := `Sha256.Audit
 
@@ -66,7 +66,7 @@ private def moduleOf? (environment : Environment) (declaration : Name) : Option 
 
 /-- Lean compiles a safe definition into an auxiliary unsafe recursor. The
 companion of a safe definition is not an authored `unsafe` declaration and is
-not audit material. Same test as `WhatwgStreamsTest/Audit/AxiomGate.lean`. -/
+not audit material. Same test as `WhatwgTest/Audit/AxiomGate.lean`. -/
 private def isGeneratedSafeRecursor (environment : Environment) (name : Name) : Bool :=
   match Lean.Compiler.isUnsafeRecName? name with
   | none => false

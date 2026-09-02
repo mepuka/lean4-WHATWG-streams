@@ -1,4 +1,4 @@
-# WhatwgStreams source routing
+# Whatwg source routing
 
 This boundary contains the Lean library's semantic declarations and proofs.
 The repository root rules remain in force; `docs/AGENT-ROUTING.md` defines how
@@ -66,7 +66,7 @@ leaf theorem receipt.
 
 A theorem written to witness a specification algorithm names the census row
 id from `generated/spec-algorithm-census.tsv` in its docstring and is joined
-test-side in `WhatwgStreamsTest/Audit/SpecCoverage.lean`; the theorem alone
+test-side in `WhatwgTest/Audit/SpecCoverage.lean`; the theorem alone
 moves no coverage number. `docs/SPEC-COVERAGE.md` owns the rules.
 
 The narrow test, default Lake build, axiom inspection, and relevant generated
@@ -78,5 +78,5 @@ receipts without rounding them up to category completion.
 Every declaration in this tree is bound by the ceiling `propext`,
 `Quot.sound`, `Classical.choice` (ruling R-11). `sorry`, `native_decide`,
 `bv_decide`, `partial`, `unsafe`, and new axioms are rejected by
-`WhatwgStreamsTest/Audit/AxiomGate.lean`. There is no per-module exemption
+`WhatwgTest/Audit/AxiomGate.lean`. There is no per-module exemption
 in this tree because none is needed.

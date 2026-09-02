@@ -29,7 +29,7 @@ implements the stage: definitions, proofs, gates, the report. A seat never
 changes a frozen statement, never mints a ruling, never commits, never pushes.
 
 **Reading order for a seat.** `AGENTS.md` at the repository root whole;
-`Gates/AGENTS.md` and `WhatwgStreams/AGENTS.md`; then this document §1–§5,
+`Gates/AGENTS.md` and `Whatwg/AGENTS.md`; then this document §1–§5,
 the seat's stage in §6, and §7–§8. Then the files named in the stage's edit
 region and nothing else.
 
@@ -162,7 +162,7 @@ were read on 2026-09-01.
 | Hex | own two-char table over `Fin 16` | | `Nat.toDigits 16` has no padding and no lemmas; `BitVec.toHex` uses `String.Internal` and says not to prove about it |
 | UTF-8 convenience | `String.toUTF8` | | wrapper only; no theorem is stated about it |
 | Kernel-side decision | `decide +kernel` | `Init/Tactics.lean:1416` | kernel reduction, no new axiom; allowed where a finite check is wanted and `rfl` is awkward |
-| Axiom audit | `Lean.collectAxioms` | `Lean/Util/CollectAxioms.lean` | already what `WhatwgStreamsTest/Audit/AxiomGate.lean` calls; the S1.0 per-library audit reuses it |
+| Axiom audit | `Lean.collectAxioms` | `Lean/Util/CollectAxioms.lean` | already what `WhatwgTest/Audit/AxiomGate.lean` calls; the S1.0 per-library audit reuses it |
 | Lake metadata | `description`, `keywords`, `license`, `readmeFile`, `version`, `testDriver`, `leanOptions` | `lake/Lake/Config/PackageConfig.lean`, `LeanConfig.lean` | see §5.2 |
 
 ### 3.3 Built-ins and idioms NOT to use, with the reason
@@ -575,7 +575,7 @@ root (observed as an `undefined symbol: WinMain` link failure). The file
 `bin/Sha256.lean` is unchanged.
 
 `Sha256/` is a fourth library at the semantic ceiling. The repository axiom
-gate audits it with the `WhatwgStreams` prefix rule extended to `Sha256`,
+gate audits it with the `Whatwg` prefix rule extended to `Sha256`,
 and the module-closure gate requires every `Sha256/*.lean` to be reachable
 from the test root, which imports `Sha256.Verified`.
 
@@ -641,7 +641,7 @@ table); `docs/SHA256-DAG.md` §4 promoted from PROPOSED to FROZEN on R-1;
 `vendor/nist-cavp-sha256/SHA256ShortMsg.rsp` and, on R-4, the FIPS 180-4
 PDF, sealed by `lake exe vendorseal --write`; `docs/PROVENANCE.md` rows;
 `Sha256/Audit.lean`; `Sha256/Verified.lean` (audit only); `lakefile.toml`
-§5.2; `WhatwgStreamsTest/Audit/AxiomGate.lean` prefix list; CI.
+§5.2; `WhatwgTest/Audit/AxiomGate.lean` prefix list; CI.
 
 **Work.** S1.0.1 Vendor and seal the `.rsp` (and PDF); record the fetch
 commands and blob-hash verification. S1.0.2 Write the Pass A contract in the
@@ -817,7 +817,7 @@ seat.
 | R-3 | `Classical.choice` admission for `Digest.toHex`, `Digest.ofHex?`, `Hex.encode`, `Hex.decode?` if and only if their receipts reach it | admit by exact declaration on the trust edge; never a module-wide exemption; none if the receipts are clean |
 | R-4 | Kernel KAT policy for `Impl`: W1 only, budget 30 s and the memory figure recorded | W1 only if within budget; otherwise compiled guards only, as fips202 R-8 |
 | R-5 | Hex decoding: lowercase-only or case-insensitive | lowercase-only (fips202 R-5; the manifest and every pin already use lowercase) |
-| R-6 | Adopt `leanOptions = { autoImplicit = false, relaxedAutoImplicit = false, warningAsError = true }` for the whole package, not only `Sha256` | adopt package-wide at S1.0, as a separate commit, after confirming `Gates/` and `WhatwgStreamsTest/` build warning-free |
+| R-6 | Adopt `leanOptions = { autoImplicit = false, relaxedAutoImplicit = false, warningAsError = true }` for the whole package, not only `Sha256` | adopt package-wide at S1.0, as a separate commit, after confirming `Gates/` and `WhatwgTest/Streams/` build warning-free |
 | R-7 | Repository license. **This repository currently has no `LICENSE` file.** | Apache-2.0, matching fips202 R-7 and the prior art, at S1.0 |
 | R-8 | Vendor the FIPS 180-4 PDF (US Government work) beside the `.rsp`, or keep digest-only | vendor it at S1.0, sealed |
 | R-9 | Toolchain policy for consumers | exact pin, stated in `README.md` |
@@ -832,7 +832,7 @@ seat.
 | semantics | `required-closed` | `Bridge.sha256_bridge` and `Fast.sha256_eq_impl`, both `[propext, Quot.sound]`; the API theorems `sha256_impl`, `sha256_spec`, `sha256_ofList` compose them |
 | laws | `required-closed` | the A1.S2 decomposition (`padBytes_bridge`, `blocks_bridge`, `schedule_bridge`, `compress_bridge`, `hash_bridge`, `output_bridge`) and the A1.S4 pointwise lemmas, all landed |
 | representation | `required-closed` | `Vector`/`Nat.fold`/`byteAt` throughout; the P0 `Id.run do` tooling deleted; `Gates/Sha256.lean` is a wrapper over `Sha256.sha256` |
-| counterexamples | `required-closed` | `WS-SHA-CE-001`..`004` closed with `decide +kernel` witnesses in `WhatwgStreamsTest/Counterexamples/Sha/Mutants.lean`; the contract's claim that W1 detects a missing length field is refuted by `ce002_padBytes_eq_on_empty` and corrected |
+| counterexamples | `required-closed` | `WS-SHA-CE-001`..`004` closed with `decide +kernel` witnesses in `WhatwgTest/Streams/Counterexamples/Sha/Mutants.lean`; the contract's claim that W1 detects a missing length field is refuted by `ce002_padBytes_eq_on_empty` and corrected |
 | bridges | `not-applicable` | no host target |
 | targets | `not-applicable` | no generated code |
 | trust | `required-open` | audit line pinned (`422 declarations across 12 modules; 0 admitted string declarations; 0 offenders` after S1.5/S1.6); `leanchecker --fresh` exit 0 on Windows x86-64 (this host) and on Ubuntu x86-64 (CI); **open:** the macOS arm64 leg, and lean4lean, which S1.7 stopped at its toolchain gate: no commit on any lean4lean ref targets v4.33.1 (nearest `v4.33.0-rc2` at `5518bf83`, 2026-08-04); no mismatched checker was run |

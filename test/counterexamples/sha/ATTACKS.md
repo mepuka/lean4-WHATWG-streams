@@ -7,7 +7,7 @@ cryptanalysis. Nothing in this area is a security claim
 Each shape below is a complete, plausible reading of FIPS 180-4 that a careful
 person could arrive at, that satisfies every structural theorem of
 `docs/SHA256-DAG.md` §4 A1.S1, and that produces a wrong digest. The witnesses
-are in `WhatwgStreamsTest/Counterexamples/Sha/Mutants.lean`; each is a Lean
+are in `WhatwgTest/Streams/Counterexamples/Sha/Mutants.lean`; each is a Lean
 theorem closed by `decide +kernel`, so the evidence is kernel reduction with no
 compiler in the trust path.
 

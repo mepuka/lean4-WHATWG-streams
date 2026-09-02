@@ -26,7 +26,7 @@ shipped transcription is right; that is `Sha256.Bridge.sha256_bridge` for the
 `test/contracts/sha256.contract.md` C2 for `Spec` = FIPS 180-4.
 -/
 
-namespace WhatwgStreamsTest.Counterexamples.Sha
+namespace WhatwgTest.Streams.Counterexamples.Sha
 
 open Sha256
 
@@ -167,4 +167,4 @@ vector on the same input, so `ce005_rightmostTruncation` is about the byte
 range and nothing else. -/
 theorem ce005_control : Impl.sha224 [] = Kats.sha224W1Digest := by decide +kernel
 
-end WhatwgStreamsTest.Counterexamples.Sha
+end WhatwgTest.Streams.Counterexamples.Sha

@@ -1,14 +1,14 @@
 import Lean
 import Lean.Util.CollectAxioms
 import Gates
-import WhatwgStreams
-import WhatwgStreamsTest.Audit.SpecCoverageRows
+import Whatwg.Streams
+import WhatwgTest.Audit.SpecCoverageRows
 
 /-!
 # Specification-coverage numerator
 
 `docs/SPEC-COVERAGE.md` owns the metric; this module is its numerator side.
-The frozen row list is `WhatwgStreamsTest/Audit/SpecCoverageRows.lean`, which
+The frozen row list is `WhatwgTest/Audit/SpecCoverageRows.lean`, which
 `lake exe census --write` generates alongside
 `generated/spec-algorithm-census.tsv` so that a table of several hundred rows (450 at P1.1) is never
 transcribed by hand. Both projections are covered by the census gate's
@@ -73,7 +73,7 @@ those assertion steps as well would move `op.enqueue-value-with-size`,
 
 Reading files at elaboration puts this module in `MetaM`, which reaches
 `Classical.choice`, so its exact name is listed in
-`WhatwgStreamsTest/Audit/AxiomGate.lean`'s `auditImplementationModules`. The
+`WhatwgTest/Audit/AxiomGate.lean`'s `auditImplementationModules`. The
 section-to-disposition join itself is not recomputed here: it needs the pinned
 `index.bs`, and `lake exe census` is the gate that owns it.
 -/
@@ -82,7 +82,7 @@ open Lean
 
 universe u
 
-namespace WhatwgStreamsTest.Audit.SpecCoverage
+namespace WhatwgTest.Audit.SpecCoverage
 
 open Gates.Census
 
@@ -194,22 +194,22 @@ def claims : Array RowClaim := #[
       { label := "step 2"
         text := "If ! IsNonNegativeNumber(|size|) is false, throw a RangeError exception."
         justifications := [
-          thm "WhatwgStreams.Data.enqueueValueWithSize_error_iff",
-          thm "WhatwgStreams.Data.enqueueValueWithSize_error_iff_not_admissible",
-          thm "WhatwgStreams.Data.enqueueValueWithSize_refuses_nan",
-          thm "WhatwgStreams.Data.enqueueValueWithSize_refuses_negative",
-          thm "WhatwgStreams.Data.enqueueValueWithSize_refuses_negInfinity"] },
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_error_iff",
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_error_iff_not_admissible",
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_refuses_nan",
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_refuses_negative",
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_refuses_negInfinity"] },
       { label := "step 3"
         text := "If |size| is +infinity, throw a RangeError exception."
         justifications := [
-          thm "WhatwgStreams.Data.enqueueValueWithSize_error_iff",
-          thm "WhatwgStreams.Data.enqueueValueWithSize_refuses_posInfinity"] },
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_error_iff",
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_refuses_posInfinity"] },
       { label := "step 4"
         text := "Append a new value-with-size with value |value| and size |size| to |container|.[[queue]]."
-        justifications := [thm "WhatwgStreams.Data.enqueueValueWithSize_entries"] },
+        justifications := [thm "Whatwg.Streams.Data.enqueueValueWithSize_entries"] },
       { label := "step 5"
         text := "Set |container|.[[queueTotalSize]] to |container|.[[queueTotalSize]] + |size|."
-        justifications := [thm "WhatwgStreams.Data.enqueueValueWithSize_totalSize"] }] },
+        justifications := [thm "Whatwg.Streams.Data.enqueueValueWithSize_totalSize"] }] },
   { id := "op.dequeue-value"
     state := .green
     mask := queueMask
@@ -221,25 +221,25 @@ def claims : Array RowClaim := #[
         justifications := [.byTyping "Queue carries entries and totalSize as fields; no well-typed call can violate the assertion"] },
       { label := "step 2"
         text := "Assert: |container|.[[queue]] is not empty."
-        justifications := [thm "WhatwgStreams.Data.dequeueValue_isNone_iff"] },
+        justifications := [thm "Whatwg.Streams.Data.dequeueValue_isNone_iff"] },
       { label := "step 3"
         text := "Let |valueWithSize| be |container|.[[queue]][0]."
-        justifications := [thm "WhatwgStreams.Data.dequeueValue_value_eq_head"] },
+        justifications := [thm "Whatwg.Streams.Data.dequeueValue_value_eq_head"] },
       { label := "step 4"
         text := "Remove |valueWithSize| from |container|.[[queue]]."
-        justifications := [thm "WhatwgStreams.Data.dequeueValue_entries"] },
+        justifications := [thm "Whatwg.Streams.Data.dequeueValue_entries"] },
       { label := "step 5"
         text := "Set |container|.[[queueTotalSize]] to |container|.[[queueTotalSize]] minus |valueWithSize|'s size."
-        justifications := [thm "WhatwgStreams.Data.dequeueValue_totalSize"] },
+        justifications := [thm "Whatwg.Streams.Data.dequeueValue_totalSize"] },
       { label := "step 6"
         text := "If |container|.[[queueTotalSize]] < 0, set |container|.[[queueTotalSize]] to 0. (This can occur due to rounding errors.)"
         justifications := [
-          thm "WhatwgStreams.Data.dequeueValue_totalSize",
-          thm "WhatwgStreams.Data.dequeueValue_totalSize_not_negative",
-          thm "WhatwgStreams.Data.dequeueValue_clamp_unreachable_of_exact"] },
+          thm "Whatwg.Streams.Data.dequeueValue_totalSize",
+          thm "Whatwg.Streams.Data.dequeueValue_totalSize_not_negative",
+          thm "Whatwg.Streams.Data.dequeueValue_clamp_unreachable_of_exact"] },
       { label := "step 7"
         text := "Return |valueWithSize|'s value."
-        justifications := [thm "WhatwgStreams.Data.dequeueValue_value_eq_head"] }] },
+        justifications := [thm "Whatwg.Streams.Data.dequeueValue_value_eq_head"] }] },
   { id := "op.peek-queue-value"
     state := .green
     mask := queueMask
@@ -251,15 +251,15 @@ def claims : Array RowClaim := #[
         justifications := [.byTyping "Queue carries entries and totalSize as fields; no well-typed call can violate the assertion"] },
       { label := "step 2"
         text := "Assert: |container|.[[queue]] is not empty."
-        justifications := [thm "WhatwgStreams.Data.peekQueueValue_isSome_iff"] },
+        justifications := [thm "Whatwg.Streams.Data.peekQueueValue_isSome_iff"] },
       { label := "step 3"
         text := "Let |valueWithSize| be |container|.[[queue]][0]."
-        justifications := [thm "WhatwgStreams.Data.peekQueueValue_eq_head"] },
+        justifications := [thm "Whatwg.Streams.Data.peekQueueValue_eq_head"] },
       { label := "step 4"
         text := "Return |valueWithSize|'s value."
         justifications := [
-          thm "WhatwgStreams.Data.peekQueueValue_eq_head",
-          thm "WhatwgStreams.Data.peekQueueValue_agrees_dequeueValue"] }] },
+          thm "Whatwg.Streams.Data.peekQueueValue_eq_head",
+          thm "Whatwg.Streams.Data.peekQueueValue_agrees_dequeueValue"] }] },
   { id := "op.reset-queue"
     state := .green
     mask := queueMask
@@ -272,13 +272,13 @@ def claims : Array RowClaim := #[
       { label := "step 2"
         text := "Set |container|.[[queue]] to a new empty list."
         justifications := [
-          thm "WhatwgStreams.Data.resetQueue_entries",
-          thm "WhatwgStreams.Data.resetQueue_eq"] },
+          thm "Whatwg.Streams.Data.resetQueue_entries",
+          thm "Whatwg.Streams.Data.resetQueue_eq"] },
       { label := "step 3"
         text := "Set |container|.[[queueTotalSize]] to 0."
         justifications := [
-          thm "WhatwgStreams.Data.resetQueue_totalSize",
-          thm "WhatwgStreams.Data.resetQueue_eq"] }] },
+          thm "Whatwg.Streams.Data.resetQueue_totalSize",
+          thm "Whatwg.Streams.Data.resetQueue_eq"] }] },
   { id := "op.is-non-negative-number"
     state := .partialCoverage
     mask := queueMask
@@ -291,18 +291,18 @@ def claims : Array RowClaim := #[
       { label := "step 2"
         text := "If |v| is NaN, return false."
         justifications := [
-          thm "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_eq",
-          thm "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_nan"] },
+          thm "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_eq",
+          thm "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_nan"] },
       { label := "step 3"
         text := "If |v| < 0, return false."
         justifications := [
-          thm "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_eq",
-          thm "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_negInfinity"] },
+          thm "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_eq",
+          thm "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_negInfinity"] },
       { label := "step 4"
         text := "Return true."
         justifications := [
-          thm "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_eq",
-          thm "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_posInfinity"] }] },
+          thm "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_eq",
+          thm "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_posInfinity"] }] },
   { id := "op.validate-and-normalize-high-water-mark"
     state := .green
     mask := queueMask
@@ -311,23 +311,23 @@ def claims : Array RowClaim := #[
     steps := [
       { label := "step 1"
         text := "If |strategy|[highWaterMark] does not exist, return |defaultHWM|."
-        justifications := [thm "WhatwgStreams.Data.extractHighWaterMark_absent"] },
+        justifications := [thm "Whatwg.Streams.Data.extractHighWaterMark_absent"] },
       { label := "step 2"
         text := "Let |highWaterMark| be |strategy|[highWaterMark]."
-        justifications := [thm "WhatwgStreams.Data.extractHighWaterMark_id_on_accepted"] },
+        justifications := [thm "Whatwg.Streams.Data.extractHighWaterMark_id_on_accepted"] },
       { label := "step 3"
         text := "If |highWaterMark| is NaN or |highWaterMark| < 0, throw a RangeError exception."
         justifications := [
-          thm "WhatwgStreams.Data.extractHighWaterMark_error_iff",
-          thm "WhatwgStreams.Data.extractHighWaterMark_refuses_nan",
-          thm "WhatwgStreams.Data.extractHighWaterMark_refuses_negative",
-          thm "WhatwgStreams.Data.extractHighWaterMark_refuses_negInfinity"] },
+          thm "Whatwg.Streams.Data.extractHighWaterMark_error_iff",
+          thm "Whatwg.Streams.Data.extractHighWaterMark_refuses_nan",
+          thm "Whatwg.Streams.Data.extractHighWaterMark_refuses_negative",
+          thm "Whatwg.Streams.Data.extractHighWaterMark_refuses_negInfinity"] },
       { label := "step 4"
         text := "Return |highWaterMark|."
-        justifications := [thm "WhatwgStreams.Data.extractHighWaterMark_id_on_accepted"] },
+        justifications := [thm "Whatwg.Streams.Data.extractHighWaterMark_id_on_accepted"] },
       { label := "note"
         text := "+infinity is explicitly allowed as a valid high water mark. It causes backpressure to never be applied."
-        justifications := [thm "WhatwgStreams.Data.extractHighWaterMark_allows_posInfinity"] }] },
+        justifications := [thm "Whatwg.Streams.Data.extractHighWaterMark_allows_posInfinity"] }] },
   { id := "op.make-size-algorithm-from-size-function"
     state := .green
     mask := queueMask
@@ -337,15 +337,15 @@ def claims : Array RowClaim := #[
       { label := "step 1"
         text := "If |strategy|[size] does not exist, return an algorithm that returns 1."
         justifications := [
-          thm "WhatwgStreams.Data.extractSizeAlgorithm_absent",
-          thm "WhatwgStreams.Data.extractSizeAlgorithm_absent_invoke",
-          thm "WhatwgStreams.Data.SizeAlgorithm.invoke_one"] },
+          thm "Whatwg.Streams.Data.extractSizeAlgorithm_absent",
+          thm "Whatwg.Streams.Data.extractSizeAlgorithm_absent_invoke",
+          thm "Whatwg.Streams.Data.SizeAlgorithm.invoke_one"] },
       { label := "step 2"
         text := "Return an algorithm that performs the following steps, taking a |chunk| argument."
-        justifications := [thm "WhatwgStreams.Data.extractSizeAlgorithm_present"] },
+        justifications := [thm "Whatwg.Streams.Data.extractSizeAlgorithm_present"] },
       { label := "step 2.1"
         text := "Return the result of invoking |strategy|[size] with argument list of |chunk|."
-        justifications := [thm "WhatwgStreams.Data.SizeAlgorithm.invoke_foreign"] }] },
+        justifications := [thm "Whatwg.Streams.Data.SizeAlgorithm.invoke_foreign"] }] },
   { id := "op.cqs-constructor"
     state := .green
     mask := queueMask
@@ -355,8 +355,8 @@ def claims : Array RowClaim := #[
       { label := "step 1"
         text := "Set this.[[highWaterMark]] to |init|[highWaterMark]."
         justifications := [
-          thm "WhatwgStreams.Data.CountQueuingStrategy.make_highWaterMark",
-          thm "WhatwgStreams.Data.CountQueuingStrategy.make_accepts_nan"] }] },
+          thm "Whatwg.Streams.Data.CountQueuingStrategy.make_highWaterMark",
+          thm "Whatwg.Streams.Data.CountQueuingStrategy.make_accepts_nan"] }] },
   { id := "op.cqs-high-water-mark"
     state := .green
     mask := queueMask
@@ -365,7 +365,7 @@ def claims : Array RowClaim := #[
     steps := [
       { label := "step 1"
         text := "Return this.[[highWaterMark]]."
-        justifications := [thm "WhatwgStreams.Data.CountQueuingStrategy.make_highWaterMark"] }] },
+        justifications := [thm "Whatwg.Streams.Data.CountQueuingStrategy.make_highWaterMark"] }] },
   { id := "op.cqs-size"
     state := .partialCoverage
     mask := queueMask
@@ -376,8 +376,8 @@ def claims : Array RowClaim := #[
         text := "Return this's relevant global object's count queuing strategy size function."
         justifications := [
           .atBoundary "DATA-FB-REALM" "relevant-global lookup and per-realm function identity are not modelled; the name is an argument",
-          thm "WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm_eq",
-          thm "WhatwgStreams.Data.CountQueuingStrategy.toQueuingStrategy_size"] }] },
+          thm "Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm_eq",
+          thm "Whatwg.Streams.Data.CountQueuingStrategy.toQueuingStrategy_size"] }] },
   { id := "op.count-queuing-strategy-size-function"
     state := .partialCoverage
     mask := queueMask
@@ -387,9 +387,9 @@ def claims : Array RowClaim := #[
       { label := "step 1"
         text := "Let |steps| be the following steps: Return 1."
         justifications := [
-          thm "WhatwgStreams.Data.CountQueuingStrategy.size_answers_one",
-          thm "WhatwgStreams.Data.CountQueuingStrategy.size_ignores_chunk",
-          thm "WhatwgStreams.Data.CountQueuingStrategy.size_never_throws"] },
+          thm "Whatwg.Streams.Data.CountQueuingStrategy.size_answers_one",
+          thm "Whatwg.Streams.Data.CountQueuingStrategy.size_ignores_chunk",
+          thm "Whatwg.Streams.Data.CountQueuingStrategy.size_never_throws"] },
       { label := "step 2"
         text := "Let |F| be ! CreateBuiltinFunction(|steps|, 0, size, empty list, |globalObject|'s relevant Realm)."
         justifications := [.atBoundary "DATA-FB-REALM" "host function construction, its length and name, and the realm are not modelled"] },
@@ -405,8 +405,8 @@ def claims : Array RowClaim := #[
       { label := "step 1"
         text := "Set this.[[highWaterMark]] to |init|[highWaterMark]."
         justifications := [
-          thm "WhatwgStreams.Data.ByteLengthQueuingStrategy.make_highWaterMark",
-          thm "WhatwgStreams.Data.ByteLengthQueuingStrategy.make_accepts_nan"] }] },
+          thm "Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_highWaterMark",
+          thm "Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_accepts_nan"] }] },
   { id := "op.blqs-high-water-mark"
     state := .green
     mask := queueMask
@@ -415,7 +415,7 @@ def claims : Array RowClaim := #[
     steps := [
       { label := "step 1"
         text := "Return this.[[highWaterMark]]."
-        justifications := [thm "WhatwgStreams.Data.ByteLengthQueuingStrategy.make_highWaterMark"] }] },
+        justifications := [thm "Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_highWaterMark"] }] },
   { id := "op.blqs-size"
     state := .partialCoverage
     mask := queueMask
@@ -426,8 +426,8 @@ def claims : Array RowClaim := #[
         text := "Return this's relevant global object's byte length queuing strategy size function."
         justifications := [
           .atBoundary "DATA-FB-REALM" "relevant-global lookup and per-realm function identity are not modelled; the name is an argument",
-          thm "WhatwgStreams.Data.ByteLengthQueuingStrategy.sizeAlgorithm_eq",
-          thm "WhatwgStreams.Data.ByteLengthQueuingStrategy.toQueuingStrategy_size"] }] },
+          thm "Whatwg.Streams.Data.ByteLengthQueuingStrategy.sizeAlgorithm_eq",
+          thm "Whatwg.Streams.Data.ByteLengthQueuingStrategy.toQueuingStrategy_size"] }] },
   { id := "op.byte-length-queuing-strategy-size-function"
     state := .partialCoverage
     mask := queueMask
@@ -438,11 +438,11 @@ def claims : Array RowClaim := #[
         text := "Let |steps| be the following steps, given |chunk|: Return ? GetV(|chunk|, byteLength)."
         justifications := [
           .atBoundary "DATA-FB-CALLBACK" "the GetV call itself is not modelled; its three answers enter as typed decisions",
-          thm "WhatwgStreams.Data.byteLengthSize_number",
-          thm "WhatwgStreams.Data.byteLengthSize_undefined",
-          thm "WhatwgStreams.Data.byteLengthSize_thrown",
-          thm "WhatwgStreams.Data.ByteLengthQueuingStrategy.size_eq_byteLength",
-          thm "WhatwgStreams.Data.ByteLengthQueuingStrategy.undefined_byteLength_refused"] },
+          thm "Whatwg.Streams.Data.byteLengthSize_number",
+          thm "Whatwg.Streams.Data.byteLengthSize_undefined",
+          thm "Whatwg.Streams.Data.byteLengthSize_thrown",
+          thm "Whatwg.Streams.Data.ByteLengthQueuingStrategy.size_eq_byteLength",
+          thm "Whatwg.Streams.Data.ByteLengthQueuingStrategy.undefined_byteLength_refused"] },
       { label := "step 2"
         text := "Let |F| be ! CreateBuiltinFunction(|steps|, 1, size, empty list, |globalObject|'s relevant Realm)."
         justifications := [.atBoundary "DATA-FB-REALM" "host function construction, its length and name, and the realm are not modelled"] },
@@ -461,10 +461,10 @@ def claims : Array RowClaim := #[
       { label := "clause 2"
         text := "Various specification objects contain a queue-with-sizes, represented by the object having two paired internal slots, always named [[queue]] and [[queueTotalSize]]; the following abstract operations ensure that the two internal slots stay synchronized."
         justifications := [
-          thm "WhatwgStreams.Data.Queue.empty_entries",
-          thm "WhatwgStreams.Data.enqueueValueWithSize_entries",
-          thm "WhatwgStreams.Data.dequeueValue_entries",
-          thm "WhatwgStreams.Data.resetQueue_entries"] }] },
+          thm "Whatwg.Streams.Data.Queue.empty_entries",
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_entries",
+          thm "Whatwg.Streams.Data.dequeueValue_entries",
+          thm "Whatwg.Streams.Data.resetQueue_entries"] }] },
   { id := "slot.queue-total-size"
     state := .partialCoverage
     mask := queueMask
@@ -477,11 +477,11 @@ def claims : Array RowClaim := #[
       { label := "clause 2"
         text := "The total size of all the chunks stored in [[queue]], kept synchronized with it by the four abstract operations."
         justifications := [
-          thm "WhatwgStreams.Data.Queue.WF_iff",
-          thm "WhatwgStreams.Data.Queue.empty_totalSize",
-          thm "WhatwgStreams.Data.enqueueValueWithSize_totalSize",
-          thm "WhatwgStreams.Data.dequeueValue_totalSize",
-          thm "WhatwgStreams.Data.resetQueue_totalSize"] }] },
+          thm "Whatwg.Streams.Data.Queue.WF_iff",
+          thm "Whatwg.Streams.Data.Queue.empty_totalSize",
+          thm "Whatwg.Streams.Data.enqueueValueWithSize_totalSize",
+          thm "Whatwg.Streams.Data.dequeueValue_totalSize",
+          thm "Whatwg.Streams.Data.resetQueue_totalSize"] }] },
   { id := "slot.high-water-mark"
     state := .green
     mask := queueMask
@@ -493,7 +493,7 @@ def claims : Array RowClaim := #[
         justifications := [.byTyping "ByteLengthQueuingStrategy carries highWaterMark as its one field"] },
       { label := "clause 2"
         text := "storing the value given in the constructor."
-        justifications := [thm "WhatwgStreams.Data.ByteLengthQueuingStrategy.make_highWaterMark"] }] }]
+        justifications := [thm "Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_highWaterMark"] }] }]
 
 /-! ## Receipts
 
@@ -503,61 +503,61 @@ ceiling is `propext`, `Quot.sound` and `Classical.choice` (ruling R-11). -/
 
 /-- Each witness with the axiom set `#print axioms` reports for it. -/
 def witnessReceipts : List (String × String) := [
-  ("WhatwgStreams.Data.enqueueValueWithSize_error_iff", "propext"),
-  ("WhatwgStreams.Data.enqueueValueWithSize_error_iff_not_admissible", "propext"),
-  ("WhatwgStreams.Data.enqueueValueWithSize_refuses_nan", "propext"),
-  ("WhatwgStreams.Data.enqueueValueWithSize_refuses_negative", "propext"),
-  ("WhatwgStreams.Data.enqueueValueWithSize_refuses_negInfinity", "propext"),
-  ("WhatwgStreams.Data.enqueueValueWithSize_refuses_posInfinity", "propext"),
-  ("WhatwgStreams.Data.enqueueValueWithSize_entries", "propext"),
-  ("WhatwgStreams.Data.enqueueValueWithSize_totalSize", "propext"),
-  ("WhatwgStreams.Data.dequeueValue_isNone_iff", "propext"),
-  ("WhatwgStreams.Data.dequeueValue_value_eq_head", "propext"),
-  ("WhatwgStreams.Data.dequeueValue_entries", "propext"),
-  ("WhatwgStreams.Data.dequeueValue_totalSize", "propext"),
-  ("WhatwgStreams.Data.dequeueValue_totalSize_not_negative", "propext"),
-  ("WhatwgStreams.Data.dequeueValue_clamp_unreachable_of_exact", "propext"),
-  ("WhatwgStreams.Data.peekQueueValue_isSome_iff", "propext"),
-  ("WhatwgStreams.Data.peekQueueValue_eq_head", "propext"),
-  ("WhatwgStreams.Data.peekQueueValue_agrees_dequeueValue", "propext"),
-  ("WhatwgStreams.Data.resetQueue_entries", "none"),
-  ("WhatwgStreams.Data.resetQueue_eq", "none"),
-  ("WhatwgStreams.Data.resetQueue_totalSize", "none"),
-  ("WhatwgStreams.Data.SizeClass.isNonNegativeNumber_eq", "none"),
-  ("WhatwgStreams.Data.SizeClass.isNonNegativeNumber_nan", "propext"),
-  ("WhatwgStreams.Data.SizeClass.isNonNegativeNumber_negInfinity", "propext"),
-  ("WhatwgStreams.Data.SizeClass.isNonNegativeNumber_posInfinity", "propext"),
-  ("WhatwgStreams.Data.extractHighWaterMark_absent", "none"),
-  ("WhatwgStreams.Data.extractHighWaterMark_id_on_accepted", "propext"),
-  ("WhatwgStreams.Data.extractHighWaterMark_error_iff", "propext"),
-  ("WhatwgStreams.Data.extractHighWaterMark_refuses_nan", "propext"),
-  ("WhatwgStreams.Data.extractHighWaterMark_refuses_negative", "propext"),
-  ("WhatwgStreams.Data.extractHighWaterMark_refuses_negInfinity", "propext"),
-  ("WhatwgStreams.Data.extractHighWaterMark_allows_posInfinity", "propext"),
-  ("WhatwgStreams.Data.extractSizeAlgorithm_absent", "none"),
-  ("WhatwgStreams.Data.extractSizeAlgorithm_absent_invoke", "none"),
-  ("WhatwgStreams.Data.SizeAlgorithm.invoke_one", "none"),
-  ("WhatwgStreams.Data.extractSizeAlgorithm_present", "none"),
-  ("WhatwgStreams.Data.SizeAlgorithm.invoke_foreign", "none"),
-  ("WhatwgStreams.Data.CountQueuingStrategy.make_highWaterMark", "none"),
-  ("WhatwgStreams.Data.CountQueuingStrategy.make_accepts_nan", "none"),
-  ("WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm_eq", "none"),
-  ("WhatwgStreams.Data.CountQueuingStrategy.toQueuingStrategy_size", "none"),
-  ("WhatwgStreams.Data.CountQueuingStrategy.size_answers_one", "none"),
-  ("WhatwgStreams.Data.CountQueuingStrategy.size_ignores_chunk", "none"),
-  ("WhatwgStreams.Data.CountQueuingStrategy.size_never_throws", "propext"),
-  ("WhatwgStreams.Data.ByteLengthQueuingStrategy.make_highWaterMark", "none"),
-  ("WhatwgStreams.Data.ByteLengthQueuingStrategy.make_accepts_nan", "none"),
-  ("WhatwgStreams.Data.ByteLengthQueuingStrategy.sizeAlgorithm_eq", "none"),
-  ("WhatwgStreams.Data.ByteLengthQueuingStrategy.toQueuingStrategy_size", "none"),
-  ("WhatwgStreams.Data.byteLengthSize_number", "none"),
-  ("WhatwgStreams.Data.byteLengthSize_undefined", "none"),
-  ("WhatwgStreams.Data.byteLengthSize_thrown", "none"),
-  ("WhatwgStreams.Data.ByteLengthQueuingStrategy.size_eq_byteLength", "none"),
-  ("WhatwgStreams.Data.ByteLengthQueuingStrategy.undefined_byteLength_refused", "propext"),
-  ("WhatwgStreams.Data.Queue.empty_entries", "none"),
-  ("WhatwgStreams.Data.Queue.WF_iff", "none"),
-  ("WhatwgStreams.Data.Queue.empty_totalSize", "none")
+  ("Whatwg.Streams.Data.enqueueValueWithSize_error_iff", "propext"),
+  ("Whatwg.Streams.Data.enqueueValueWithSize_error_iff_not_admissible", "propext"),
+  ("Whatwg.Streams.Data.enqueueValueWithSize_refuses_nan", "propext"),
+  ("Whatwg.Streams.Data.enqueueValueWithSize_refuses_negative", "propext"),
+  ("Whatwg.Streams.Data.enqueueValueWithSize_refuses_negInfinity", "propext"),
+  ("Whatwg.Streams.Data.enqueueValueWithSize_refuses_posInfinity", "propext"),
+  ("Whatwg.Streams.Data.enqueueValueWithSize_entries", "propext"),
+  ("Whatwg.Streams.Data.enqueueValueWithSize_totalSize", "propext"),
+  ("Whatwg.Streams.Data.dequeueValue_isNone_iff", "propext"),
+  ("Whatwg.Streams.Data.dequeueValue_value_eq_head", "propext"),
+  ("Whatwg.Streams.Data.dequeueValue_entries", "propext"),
+  ("Whatwg.Streams.Data.dequeueValue_totalSize", "propext"),
+  ("Whatwg.Streams.Data.dequeueValue_totalSize_not_negative", "propext"),
+  ("Whatwg.Streams.Data.dequeueValue_clamp_unreachable_of_exact", "propext"),
+  ("Whatwg.Streams.Data.peekQueueValue_isSome_iff", "propext"),
+  ("Whatwg.Streams.Data.peekQueueValue_eq_head", "propext"),
+  ("Whatwg.Streams.Data.peekQueueValue_agrees_dequeueValue", "propext"),
+  ("Whatwg.Streams.Data.resetQueue_entries", "none"),
+  ("Whatwg.Streams.Data.resetQueue_eq", "none"),
+  ("Whatwg.Streams.Data.resetQueue_totalSize", "none"),
+  ("Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_eq", "none"),
+  ("Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_nan", "propext"),
+  ("Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_negInfinity", "propext"),
+  ("Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_posInfinity", "propext"),
+  ("Whatwg.Streams.Data.extractHighWaterMark_absent", "none"),
+  ("Whatwg.Streams.Data.extractHighWaterMark_id_on_accepted", "propext"),
+  ("Whatwg.Streams.Data.extractHighWaterMark_error_iff", "propext"),
+  ("Whatwg.Streams.Data.extractHighWaterMark_refuses_nan", "propext"),
+  ("Whatwg.Streams.Data.extractHighWaterMark_refuses_negative", "propext"),
+  ("Whatwg.Streams.Data.extractHighWaterMark_refuses_negInfinity", "propext"),
+  ("Whatwg.Streams.Data.extractHighWaterMark_allows_posInfinity", "propext"),
+  ("Whatwg.Streams.Data.extractSizeAlgorithm_absent", "none"),
+  ("Whatwg.Streams.Data.extractSizeAlgorithm_absent_invoke", "none"),
+  ("Whatwg.Streams.Data.SizeAlgorithm.invoke_one", "none"),
+  ("Whatwg.Streams.Data.extractSizeAlgorithm_present", "none"),
+  ("Whatwg.Streams.Data.SizeAlgorithm.invoke_foreign", "none"),
+  ("Whatwg.Streams.Data.CountQueuingStrategy.make_highWaterMark", "none"),
+  ("Whatwg.Streams.Data.CountQueuingStrategy.make_accepts_nan", "none"),
+  ("Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm_eq", "none"),
+  ("Whatwg.Streams.Data.CountQueuingStrategy.toQueuingStrategy_size", "none"),
+  ("Whatwg.Streams.Data.CountQueuingStrategy.size_answers_one", "none"),
+  ("Whatwg.Streams.Data.CountQueuingStrategy.size_ignores_chunk", "none"),
+  ("Whatwg.Streams.Data.CountQueuingStrategy.size_never_throws", "propext"),
+  ("Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_highWaterMark", "none"),
+  ("Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_accepts_nan", "none"),
+  ("Whatwg.Streams.Data.ByteLengthQueuingStrategy.sizeAlgorithm_eq", "none"),
+  ("Whatwg.Streams.Data.ByteLengthQueuingStrategy.toQueuingStrategy_size", "none"),
+  ("Whatwg.Streams.Data.byteLengthSize_number", "none"),
+  ("Whatwg.Streams.Data.byteLengthSize_undefined", "none"),
+  ("Whatwg.Streams.Data.byteLengthSize_thrown", "none"),
+  ("Whatwg.Streams.Data.ByteLengthQueuingStrategy.size_eq_byteLength", "none"),
+  ("Whatwg.Streams.Data.ByteLengthQueuingStrategy.undefined_byteLength_refused", "propext"),
+  ("Whatwg.Streams.Data.Queue.empty_entries", "none"),
+  ("Whatwg.Streams.Data.Queue.WF_iff", "none"),
+  ("Whatwg.Streams.Data.Queue.empty_totalSize", "none")
 ]
 
 /-! ## StatementSnapshot
@@ -568,61 +568,61 @@ file. The gate checks the three orders against each other. -/
 
 /-- Every witness name, in claim order. -/
 def statementSnapshot : List String := [
-  "WhatwgStreams.Data.enqueueValueWithSize_error_iff",
-  "WhatwgStreams.Data.enqueueValueWithSize_error_iff_not_admissible",
-  "WhatwgStreams.Data.enqueueValueWithSize_refuses_nan",
-  "WhatwgStreams.Data.enqueueValueWithSize_refuses_negative",
-  "WhatwgStreams.Data.enqueueValueWithSize_refuses_negInfinity",
-  "WhatwgStreams.Data.enqueueValueWithSize_refuses_posInfinity",
-  "WhatwgStreams.Data.enqueueValueWithSize_entries",
-  "WhatwgStreams.Data.enqueueValueWithSize_totalSize",
-  "WhatwgStreams.Data.dequeueValue_isNone_iff",
-  "WhatwgStreams.Data.dequeueValue_value_eq_head",
-  "WhatwgStreams.Data.dequeueValue_entries",
-  "WhatwgStreams.Data.dequeueValue_totalSize",
-  "WhatwgStreams.Data.dequeueValue_totalSize_not_negative",
-  "WhatwgStreams.Data.dequeueValue_clamp_unreachable_of_exact",
-  "WhatwgStreams.Data.peekQueueValue_isSome_iff",
-  "WhatwgStreams.Data.peekQueueValue_eq_head",
-  "WhatwgStreams.Data.peekQueueValue_agrees_dequeueValue",
-  "WhatwgStreams.Data.resetQueue_entries",
-  "WhatwgStreams.Data.resetQueue_eq",
-  "WhatwgStreams.Data.resetQueue_totalSize",
-  "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_eq",
-  "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_nan",
-  "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_negInfinity",
-  "WhatwgStreams.Data.SizeClass.isNonNegativeNumber_posInfinity",
-  "WhatwgStreams.Data.extractHighWaterMark_absent",
-  "WhatwgStreams.Data.extractHighWaterMark_id_on_accepted",
-  "WhatwgStreams.Data.extractHighWaterMark_error_iff",
-  "WhatwgStreams.Data.extractHighWaterMark_refuses_nan",
-  "WhatwgStreams.Data.extractHighWaterMark_refuses_negative",
-  "WhatwgStreams.Data.extractHighWaterMark_refuses_negInfinity",
-  "WhatwgStreams.Data.extractHighWaterMark_allows_posInfinity",
-  "WhatwgStreams.Data.extractSizeAlgorithm_absent",
-  "WhatwgStreams.Data.extractSizeAlgorithm_absent_invoke",
-  "WhatwgStreams.Data.SizeAlgorithm.invoke_one",
-  "WhatwgStreams.Data.extractSizeAlgorithm_present",
-  "WhatwgStreams.Data.SizeAlgorithm.invoke_foreign",
-  "WhatwgStreams.Data.CountQueuingStrategy.make_highWaterMark",
-  "WhatwgStreams.Data.CountQueuingStrategy.make_accepts_nan",
-  "WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm_eq",
-  "WhatwgStreams.Data.CountQueuingStrategy.toQueuingStrategy_size",
-  "WhatwgStreams.Data.CountQueuingStrategy.size_answers_one",
-  "WhatwgStreams.Data.CountQueuingStrategy.size_ignores_chunk",
-  "WhatwgStreams.Data.CountQueuingStrategy.size_never_throws",
-  "WhatwgStreams.Data.ByteLengthQueuingStrategy.make_highWaterMark",
-  "WhatwgStreams.Data.ByteLengthQueuingStrategy.make_accepts_nan",
-  "WhatwgStreams.Data.ByteLengthQueuingStrategy.sizeAlgorithm_eq",
-  "WhatwgStreams.Data.ByteLengthQueuingStrategy.toQueuingStrategy_size",
-  "WhatwgStreams.Data.byteLengthSize_number",
-  "WhatwgStreams.Data.byteLengthSize_undefined",
-  "WhatwgStreams.Data.byteLengthSize_thrown",
-  "WhatwgStreams.Data.ByteLengthQueuingStrategy.size_eq_byteLength",
-  "WhatwgStreams.Data.ByteLengthQueuingStrategy.undefined_byteLength_refused",
-  "WhatwgStreams.Data.Queue.empty_entries",
-  "WhatwgStreams.Data.Queue.WF_iff",
-  "WhatwgStreams.Data.Queue.empty_totalSize"
+  "Whatwg.Streams.Data.enqueueValueWithSize_error_iff",
+  "Whatwg.Streams.Data.enqueueValueWithSize_error_iff_not_admissible",
+  "Whatwg.Streams.Data.enqueueValueWithSize_refuses_nan",
+  "Whatwg.Streams.Data.enqueueValueWithSize_refuses_negative",
+  "Whatwg.Streams.Data.enqueueValueWithSize_refuses_negInfinity",
+  "Whatwg.Streams.Data.enqueueValueWithSize_refuses_posInfinity",
+  "Whatwg.Streams.Data.enqueueValueWithSize_entries",
+  "Whatwg.Streams.Data.enqueueValueWithSize_totalSize",
+  "Whatwg.Streams.Data.dequeueValue_isNone_iff",
+  "Whatwg.Streams.Data.dequeueValue_value_eq_head",
+  "Whatwg.Streams.Data.dequeueValue_entries",
+  "Whatwg.Streams.Data.dequeueValue_totalSize",
+  "Whatwg.Streams.Data.dequeueValue_totalSize_not_negative",
+  "Whatwg.Streams.Data.dequeueValue_clamp_unreachable_of_exact",
+  "Whatwg.Streams.Data.peekQueueValue_isSome_iff",
+  "Whatwg.Streams.Data.peekQueueValue_eq_head",
+  "Whatwg.Streams.Data.peekQueueValue_agrees_dequeueValue",
+  "Whatwg.Streams.Data.resetQueue_entries",
+  "Whatwg.Streams.Data.resetQueue_eq",
+  "Whatwg.Streams.Data.resetQueue_totalSize",
+  "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_eq",
+  "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_nan",
+  "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_negInfinity",
+  "Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_posInfinity",
+  "Whatwg.Streams.Data.extractHighWaterMark_absent",
+  "Whatwg.Streams.Data.extractHighWaterMark_id_on_accepted",
+  "Whatwg.Streams.Data.extractHighWaterMark_error_iff",
+  "Whatwg.Streams.Data.extractHighWaterMark_refuses_nan",
+  "Whatwg.Streams.Data.extractHighWaterMark_refuses_negative",
+  "Whatwg.Streams.Data.extractHighWaterMark_refuses_negInfinity",
+  "Whatwg.Streams.Data.extractHighWaterMark_allows_posInfinity",
+  "Whatwg.Streams.Data.extractSizeAlgorithm_absent",
+  "Whatwg.Streams.Data.extractSizeAlgorithm_absent_invoke",
+  "Whatwg.Streams.Data.SizeAlgorithm.invoke_one",
+  "Whatwg.Streams.Data.extractSizeAlgorithm_present",
+  "Whatwg.Streams.Data.SizeAlgorithm.invoke_foreign",
+  "Whatwg.Streams.Data.CountQueuingStrategy.make_highWaterMark",
+  "Whatwg.Streams.Data.CountQueuingStrategy.make_accepts_nan",
+  "Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm_eq",
+  "Whatwg.Streams.Data.CountQueuingStrategy.toQueuingStrategy_size",
+  "Whatwg.Streams.Data.CountQueuingStrategy.size_answers_one",
+  "Whatwg.Streams.Data.CountQueuingStrategy.size_ignores_chunk",
+  "Whatwg.Streams.Data.CountQueuingStrategy.size_never_throws",
+  "Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_highWaterMark",
+  "Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_accepts_nan",
+  "Whatwg.Streams.Data.ByteLengthQueuingStrategy.sizeAlgorithm_eq",
+  "Whatwg.Streams.Data.ByteLengthQueuingStrategy.toQueuingStrategy_size",
+  "Whatwg.Streams.Data.byteLengthSize_number",
+  "Whatwg.Streams.Data.byteLengthSize_undefined",
+  "Whatwg.Streams.Data.byteLengthSize_thrown",
+  "Whatwg.Streams.Data.ByteLengthQueuingStrategy.size_eq_byteLength",
+  "Whatwg.Streams.Data.ByteLengthQueuingStrategy.undefined_byteLength_refused",
+  "Whatwg.Streams.Data.Queue.empty_entries",
+  "Whatwg.Streams.Data.Queue.WF_iff",
+  "Whatwg.Streams.Data.Queue.empty_totalSize"
 ]
 
 /-! ## The emit
@@ -643,7 +643,7 @@ def emit : Array CoverageRow :=
 private def findProjectRoot (directory : System.FilePath) : IO System.FilePath := do
   let mut current := directory
   for _ in [0:64] do
-    if ← (current / "WhatwgStreams.lean").pathExists then
+    if ← (current / "Whatwg.lean").pathExists then
       return current
     match current.parent with
     | some parent => current := parent
@@ -869,11 +869,11 @@ elab "#spec_coverage_gate" : command => do
 
   let excluded := expectedRowTotal - expectedDenominator
   logInfo
-    m!"WhatwgStreams spec coverage gate: {expectedRowTotal} frozen rows agree with {censusRelativePath} in both directions; denominator {expectedDenominator}, {excluded} excluded; {overrides.size} authored override(s) applied; {claims.size} claimed row(s) carrying {witnessOrder.length} witness theorem(s) with frozen statements and receipts; {expectedGreen} green, {expectedPartialCount} partial, {expectedAbsentInDenominator} absent inside the denominator"
+    m!"Whatwg spec coverage gate: {expectedRowTotal} frozen rows agree with {censusRelativePath} in both directions; denominator {expectedDenominator}, {excluded} excluded; {overrides.size} authored override(s) applied; {claims.size} claimed row(s) carrying {witnessOrder.length} witness theorem(s) with frozen statements and receipts; {expectedGreen} green, {expectedPartialCount} partial, {expectedAbsentInDenominator} absent inside the denominator"
 
-end WhatwgStreamsTest.Audit.SpecCoverage
+end WhatwgTest.Audit.SpecCoverage
 
-open WhatwgStreamsTest.Audit.SpecCoverage in
+open WhatwgTest.Audit.SpecCoverage in
 #spec_coverage_gate
 
 /-! ## Statement ascriptions
@@ -892,115 +892,115 @@ everywhere else in this file. -/
 section StatementSnapshot
 set_option linter.unusedVariables false
 
-#check (@WhatwgStreams.Data.enqueueValueWithSize_error_iff :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size) (value : α) (size : Size), WhatwgStreams.Data.enqueueValueWithSize sizes q value size = Except.error WhatwgStreams.Data.RangeError.rangeError ↔ sizes.isNonNegativeNumber size = false ∨ sizes.isPositiveInfinity size = true)
-#check (@WhatwgStreams.Data.enqueueValueWithSize_error_iff_not_admissible :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size) (value : α) (size : Size), WhatwgStreams.Data.enqueueValueWithSize sizes q value size = Except.error WhatwgStreams.Data.RangeError.rangeError ↔ ¬sizes.Admissible size)
-#check (@WhatwgStreams.Data.enqueueValueWithSize_refuses_nan :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size) (value : α), sizes.Classified → WhatwgStreams.Data.enqueueValueWithSize sizes q value sizes.nan = Except.error WhatwgStreams.Data.RangeError.rangeError)
-#check (@WhatwgStreams.Data.enqueueValueWithSize_refuses_negative :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size) (value : α) (size : Size), sizes.isNegative size = true → WhatwgStreams.Data.enqueueValueWithSize sizes q value size = Except.error WhatwgStreams.Data.RangeError.rangeError)
-#check (@WhatwgStreams.Data.enqueueValueWithSize_refuses_negInfinity :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size) (value : α), sizes.Classified → WhatwgStreams.Data.enqueueValueWithSize sizes q value sizes.negInfinity = Except.error WhatwgStreams.Data.RangeError.rangeError)
-#check (@WhatwgStreams.Data.enqueueValueWithSize_refuses_posInfinity :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size) (value : α), sizes.Classified → WhatwgStreams.Data.enqueueValueWithSize sizes q value sizes.posInfinity = Except.error WhatwgStreams.Data.RangeError.rangeError)
-#check (@WhatwgStreams.Data.enqueueValueWithSize_entries :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q q' : WhatwgStreams.Data.Queue α Size) (value : α) (size : Size), WhatwgStreams.Data.enqueueValueWithSize sizes q value size = Except.ok q' → q'.entries = q.entries ++ [{ value := value, size := size }])
-#check (@WhatwgStreams.Data.enqueueValueWithSize_totalSize :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q q' : WhatwgStreams.Data.Queue α Size) (value : α) (size : Size), WhatwgStreams.Data.enqueueValueWithSize sizes q value size = Except.ok q' → q'.totalSize = sizes.add q.totalSize size)
-#check (@WhatwgStreams.Data.dequeueValue_isNone_iff :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size), WhatwgStreams.Data.dequeueValue sizes q = none ↔ q.entries = [])
-#check (@WhatwgStreams.Data.dequeueValue_value_eq_head :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size), Option.map Prod.fst (WhatwgStreams.Data.dequeueValue sizes q) = Option.map WhatwgStreams.Data.QueueEntry.value q.entries.head?)
-#check (@WhatwgStreams.Data.dequeueValue_entries :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q q' : WhatwgStreams.Data.Queue α Size) (value : α), WhatwgStreams.Data.dequeueValue sizes q = some (value, q') → q'.entries = q.entries.tail)
-#check (@WhatwgStreams.Data.dequeueValue_totalSize :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q q' : WhatwgStreams.Data.Queue α Size) (value : α) (entry : WhatwgStreams.Data.QueueEntry α Size) (rest : List (WhatwgStreams.Data.QueueEntry α Size)), q.entries = entry :: rest → WhatwgStreams.Data.dequeueValue sizes q = some (value, q') → q'.totalSize = sizes.clampNonNegative (sizes.sub q.totalSize entry.size))
-#check (@WhatwgStreams.Data.dequeueValue_totalSize_not_negative :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q q' : WhatwgStreams.Data.Queue α Size) (value : α), sizes.Ordered → WhatwgStreams.Data.dequeueValue sizes q = some (value, q') → sizes.isNegative q'.totalSize = false)
-#check (@WhatwgStreams.Data.dequeueValue_clamp_unreachable_of_exact :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size) (entry : WhatwgStreams.Data.QueueEntry α Size) (rest : List (WhatwgStreams.Data.QueueEntry α Size)), sizes.Classified → sizes.Ordered → sizes.Exact → WhatwgStreams.Data.Queue.WF sizes q → WhatwgStreams.Data.Queue.SizesAdmissible sizes q → q.entries = entry :: rest → sizes.isNegative (sizes.sub q.totalSize entry.size) = false)
-#check (@WhatwgStreams.Data.peekQueueValue_isSome_iff :
-  ∀ {α Size : Type u} (q : WhatwgStreams.Data.Queue α Size), (WhatwgStreams.Data.peekQueueValue q).isSome = true ↔ q.entries ≠ [])
-#check (@WhatwgStreams.Data.peekQueueValue_eq_head :
-  ∀ {α Size : Type u} (q : WhatwgStreams.Data.Queue α Size), WhatwgStreams.Data.peekQueueValue q = Option.map WhatwgStreams.Data.QueueEntry.value q.entries.head?)
-#check (@WhatwgStreams.Data.peekQueueValue_agrees_dequeueValue :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size), WhatwgStreams.Data.peekQueueValue q = Option.map Prod.fst (WhatwgStreams.Data.dequeueValue sizes q))
-#check (@WhatwgStreams.Data.resetQueue_entries :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size), (WhatwgStreams.Data.resetQueue sizes q).entries = [])
-#check (@WhatwgStreams.Data.resetQueue_eq :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size), WhatwgStreams.Data.resetQueue sizes q = { entries := [], totalSize := sizes.zero })
-#check (@WhatwgStreams.Data.resetQueue_totalSize :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size), (WhatwgStreams.Data.resetQueue sizes q).totalSize = sizes.zero)
-#check (@WhatwgStreams.Data.SizeClass.isNonNegativeNumber_eq :
-  ∀ {Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (v : Size), sizes.isNonNegativeNumber v = (!sizes.isNaN v && !sizes.isNegative v))
-#check (@WhatwgStreams.Data.SizeClass.isNonNegativeNumber_nan :
-  ∀ {Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size), sizes.Classified → sizes.isNonNegativeNumber sizes.nan = false)
-#check (@WhatwgStreams.Data.SizeClass.isNonNegativeNumber_negInfinity :
-  ∀ {Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size), sizes.Classified → sizes.isNonNegativeNumber sizes.negInfinity = false)
-#check (@WhatwgStreams.Data.SizeClass.isNonNegativeNumber_posInfinity :
-  ∀ {Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size), sizes.Classified → sizes.isNonNegativeNumber sizes.posInfinity = true)
-#check (@WhatwgStreams.Data.extractHighWaterMark_absent :
-  ∀ {σ Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (defaultHWM : Size), strategy.highWaterMark = none → WhatwgStreams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.ok defaultHWM)
-#check (@WhatwgStreams.Data.extractHighWaterMark_id_on_accepted :
-  ∀ {σ Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (defaultHWM highWaterMark highWaterMark' : Size), strategy.highWaterMark = some highWaterMark → WhatwgStreams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.ok highWaterMark' → highWaterMark' = highWaterMark)
-#check (@WhatwgStreams.Data.extractHighWaterMark_error_iff :
-  ∀ {σ Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (defaultHWM : Size), WhatwgStreams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.error WhatwgStreams.Data.RangeError.rangeError ↔ ∃ highWaterMark, strategy.highWaterMark = some highWaterMark ∧ (sizes.isNaN highWaterMark = true ∨ sizes.isNegative highWaterMark = true))
-#check (@WhatwgStreams.Data.extractHighWaterMark_refuses_nan :
-  ∀ {σ Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (defaultHWM : Size), sizes.Classified → strategy.highWaterMark = some sizes.nan → WhatwgStreams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.error WhatwgStreams.Data.RangeError.rangeError)
-#check (@WhatwgStreams.Data.extractHighWaterMark_refuses_negative :
-  ∀ {σ Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (defaultHWM highWaterMark : Size), strategy.highWaterMark = some highWaterMark → sizes.isNegative highWaterMark = true → WhatwgStreams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.error WhatwgStreams.Data.RangeError.rangeError)
-#check (@WhatwgStreams.Data.extractHighWaterMark_refuses_negInfinity :
-  ∀ {σ Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (defaultHWM : Size), sizes.Classified → strategy.highWaterMark = some sizes.negInfinity → WhatwgStreams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.error WhatwgStreams.Data.RangeError.rangeError)
-#check (@WhatwgStreams.Data.extractHighWaterMark_allows_posInfinity :
-  ∀ {σ Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (defaultHWM : Size), sizes.Classified → strategy.highWaterMark = some sizes.posInfinity → WhatwgStreams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.ok sizes.posInfinity)
-#check (@WhatwgStreams.Data.extractSizeAlgorithm_absent :
-  ∀ {σ Size : Type u} (strategy : WhatwgStreams.Data.QueuingStrategy σ Size), strategy.size = none → WhatwgStreams.Data.extractSizeAlgorithm strategy = WhatwgStreams.Data.SizeAlgorithm.one)
-#check (@WhatwgStreams.Data.extractSizeAlgorithm_absent_invoke :
-  ∀ {α σ ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (oracle : σ → α → WhatwgStreams.Data.SizeAnswer Size ε) (chunk : α), strategy.size = none → WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle (WhatwgStreams.Data.extractSizeAlgorithm strategy) chunk = WhatwgStreams.Data.SizeAnswer.value sizes.one)
-#check (@WhatwgStreams.Data.SizeAlgorithm.invoke_one :
-  ∀ {α σ ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (oracle : σ → α → WhatwgStreams.Data.SizeAnswer Size ε) (chunk : α), WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle WhatwgStreams.Data.SizeAlgorithm.one chunk = WhatwgStreams.Data.SizeAnswer.value sizes.one)
-#check (@WhatwgStreams.Data.extractSizeAlgorithm_present :
-  ∀ {σ Size : Type u} (strategy : WhatwgStreams.Data.QueuingStrategy σ Size) (name : σ), strategy.size = some name → WhatwgStreams.Data.extractSizeAlgorithm strategy = WhatwgStreams.Data.SizeAlgorithm.foreign name)
-#check (@WhatwgStreams.Data.SizeAlgorithm.invoke_foreign :
-  ∀ {α σ ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (oracle : σ → α → WhatwgStreams.Data.SizeAnswer Size ε) (name : σ) (chunk : α), WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle (WhatwgStreams.Data.SizeAlgorithm.foreign name) chunk = oracle name chunk)
-#check (@WhatwgStreams.Data.CountQueuingStrategy.make_highWaterMark :
-  ∀ {Size : Type u} (highWaterMark : Size), (WhatwgStreams.Data.CountQueuingStrategy.make highWaterMark).highWaterMark = highWaterMark)
-#check (@WhatwgStreams.Data.CountQueuingStrategy.make_accepts_nan :
-  ∀ {Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size), (WhatwgStreams.Data.CountQueuingStrategy.make sizes.nan).highWaterMark = sizes.nan)
-#check (@WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm_eq :
-  ∀ {σ : Type u} (countName : σ), WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm countName = WhatwgStreams.Data.SizeAlgorithm.foreign countName)
-#check (@WhatwgStreams.Data.CountQueuingStrategy.toQueuingStrategy_size :
-  ∀ {σ Size : Type u} (countName : σ) (self : WhatwgStreams.Data.CountQueuingStrategy Size), (WhatwgStreams.Data.CountQueuingStrategy.toQueuingStrategy countName self).size = some countName)
-#check (@WhatwgStreams.Data.CountQueuingStrategy.size_answers_one :
-  ∀ {α σ ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (countName : σ) (oracle : σ → α → WhatwgStreams.Data.SizeAnswer Size ε), WhatwgStreams.Data.CountSizeProfile sizes countName oracle → ∀ (chunk : α), WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle (WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm countName) chunk = WhatwgStreams.Data.SizeAnswer.value sizes.one)
-#check (@WhatwgStreams.Data.CountQueuingStrategy.size_ignores_chunk :
-  ∀ {α σ ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (countName : σ) (oracle : σ → α → WhatwgStreams.Data.SizeAnswer Size ε), WhatwgStreams.Data.CountSizeProfile sizes countName oracle → ∀ (left right : α), WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle (WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm countName) left = WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle (WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm countName) right)
-#check (@WhatwgStreams.Data.CountQueuingStrategy.size_never_throws :
-  ∀ {α σ ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (countName : σ) (oracle : σ → α → WhatwgStreams.Data.SizeAnswer Size ε), WhatwgStreams.Data.CountSizeProfile sizes countName oracle → ∀ (chunk : α) (reason : ε), WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle (WhatwgStreams.Data.CountQueuingStrategy.sizeAlgorithm countName) chunk ≠ WhatwgStreams.Data.SizeAnswer.thrown reason)
-#check (@WhatwgStreams.Data.ByteLengthQueuingStrategy.make_highWaterMark :
-  ∀ {Size : Type u} (highWaterMark : Size), (WhatwgStreams.Data.ByteLengthQueuingStrategy.make highWaterMark).highWaterMark = highWaterMark)
-#check (@WhatwgStreams.Data.ByteLengthQueuingStrategy.make_accepts_nan :
-  ∀ {Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size), (WhatwgStreams.Data.ByteLengthQueuingStrategy.make sizes.nan).highWaterMark = sizes.nan)
-#check (@WhatwgStreams.Data.ByteLengthQueuingStrategy.sizeAlgorithm_eq :
-  ∀ {σ : Type u} (byteLengthName : σ), WhatwgStreams.Data.ByteLengthQueuingStrategy.sizeAlgorithm byteLengthName = WhatwgStreams.Data.SizeAlgorithm.foreign byteLengthName)
-#check (@WhatwgStreams.Data.ByteLengthQueuingStrategy.toQueuingStrategy_size :
-  ∀ {σ Size : Type u} (byteLengthName : σ) (self : WhatwgStreams.Data.ByteLengthQueuingStrategy Size), (WhatwgStreams.Data.ByteLengthQueuingStrategy.toQueuingStrategy byteLengthName self).size = some byteLengthName)
-#check (@WhatwgStreams.Data.byteLengthSize_number :
-  ∀ {ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (n : Size), WhatwgStreams.Data.byteLengthSize sizes (WhatwgStreams.Data.ByteLengthAnswer.number n) = WhatwgStreams.Data.SizeAnswer.value n)
-#check (@WhatwgStreams.Data.byteLengthSize_undefined :
-  ∀ {ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size), WhatwgStreams.Data.byteLengthSize sizes WhatwgStreams.Data.ByteLengthAnswer.undefined = WhatwgStreams.Data.SizeAnswer.value sizes.nan)
-#check (@WhatwgStreams.Data.byteLengthSize_thrown :
-  ∀ {ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (reason : ε), WhatwgStreams.Data.byteLengthSize sizes (WhatwgStreams.Data.ByteLengthAnswer.thrown reason) = WhatwgStreams.Data.SizeAnswer.thrown reason)
-#check (@WhatwgStreams.Data.ByteLengthQueuingStrategy.size_eq_byteLength :
-  ∀ {α σ ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (byteLengthName : σ) (byteLength : α → WhatwgStreams.Data.ByteLengthAnswer Size ε) (oracle : σ → α → WhatwgStreams.Data.SizeAnswer Size ε), WhatwgStreams.Data.ByteLengthSizeProfile sizes byteLengthName byteLength oracle → ∀ (chunk : α), WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle (WhatwgStreams.Data.ByteLengthQueuingStrategy.sizeAlgorithm byteLengthName) chunk = WhatwgStreams.Data.byteLengthSize sizes (byteLength chunk))
-#check (@WhatwgStreams.Data.ByteLengthQueuingStrategy.undefined_byteLength_refused :
-  ∀ {α σ ε Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (byteLengthName : σ) (byteLength : α → WhatwgStreams.Data.ByteLengthAnswer Size ε) (oracle : σ → α → WhatwgStreams.Data.SizeAnswer Size ε) (chunk : α) (q : WhatwgStreams.Data.Queue α Size) (value : α), WhatwgStreams.Data.ByteLengthSizeProfile sizes byteLengthName byteLength oracle → sizes.Classified → byteLength chunk = WhatwgStreams.Data.ByteLengthAnswer.undefined → WhatwgStreams.Data.SizeAlgorithm.invoke sizes oracle (WhatwgStreams.Data.ByteLengthQueuingStrategy.sizeAlgorithm byteLengthName) chunk = WhatwgStreams.Data.SizeAnswer.value sizes.nan ∧ WhatwgStreams.Data.enqueueValueWithSize sizes q value sizes.nan = Except.error WhatwgStreams.Data.RangeError.rangeError)
-#check (@WhatwgStreams.Data.Queue.empty_entries :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size), (WhatwgStreams.Data.Queue.empty sizes).entries = [])
-#check (@WhatwgStreams.Data.Queue.WF_iff :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size) (q : WhatwgStreams.Data.Queue α Size), WhatwgStreams.Data.Queue.WF sizes q ↔ q.totalSize = WhatwgStreams.Data.sizeSum sizes q.entries)
-#check (@WhatwgStreams.Data.Queue.empty_totalSize :
-  ∀ {α Size : Type u} (sizes : WhatwgStreams.Data.SizeClass Size), (WhatwgStreams.Data.Queue.empty sizes).totalSize = sizes.zero)
+#check (@Whatwg.Streams.Data.enqueueValueWithSize_error_iff :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size) (value : α) (size : Size), Whatwg.Streams.Data.enqueueValueWithSize sizes q value size = Except.error Whatwg.Streams.Data.RangeError.rangeError ↔ sizes.isNonNegativeNumber size = false ∨ sizes.isPositiveInfinity size = true)
+#check (@Whatwg.Streams.Data.enqueueValueWithSize_error_iff_not_admissible :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size) (value : α) (size : Size), Whatwg.Streams.Data.enqueueValueWithSize sizes q value size = Except.error Whatwg.Streams.Data.RangeError.rangeError ↔ ¬sizes.Admissible size)
+#check (@Whatwg.Streams.Data.enqueueValueWithSize_refuses_nan :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size) (value : α), sizes.Classified → Whatwg.Streams.Data.enqueueValueWithSize sizes q value sizes.nan = Except.error Whatwg.Streams.Data.RangeError.rangeError)
+#check (@Whatwg.Streams.Data.enqueueValueWithSize_refuses_negative :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size) (value : α) (size : Size), sizes.isNegative size = true → Whatwg.Streams.Data.enqueueValueWithSize sizes q value size = Except.error Whatwg.Streams.Data.RangeError.rangeError)
+#check (@Whatwg.Streams.Data.enqueueValueWithSize_refuses_negInfinity :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size) (value : α), sizes.Classified → Whatwg.Streams.Data.enqueueValueWithSize sizes q value sizes.negInfinity = Except.error Whatwg.Streams.Data.RangeError.rangeError)
+#check (@Whatwg.Streams.Data.enqueueValueWithSize_refuses_posInfinity :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size) (value : α), sizes.Classified → Whatwg.Streams.Data.enqueueValueWithSize sizes q value sizes.posInfinity = Except.error Whatwg.Streams.Data.RangeError.rangeError)
+#check (@Whatwg.Streams.Data.enqueueValueWithSize_entries :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q q' : Whatwg.Streams.Data.Queue α Size) (value : α) (size : Size), Whatwg.Streams.Data.enqueueValueWithSize sizes q value size = Except.ok q' → q'.entries = q.entries ++ [{ value := value, size := size }])
+#check (@Whatwg.Streams.Data.enqueueValueWithSize_totalSize :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q q' : Whatwg.Streams.Data.Queue α Size) (value : α) (size : Size), Whatwg.Streams.Data.enqueueValueWithSize sizes q value size = Except.ok q' → q'.totalSize = sizes.add q.totalSize size)
+#check (@Whatwg.Streams.Data.dequeueValue_isNone_iff :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size), Whatwg.Streams.Data.dequeueValue sizes q = none ↔ q.entries = [])
+#check (@Whatwg.Streams.Data.dequeueValue_value_eq_head :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size), Option.map Prod.fst (Whatwg.Streams.Data.dequeueValue sizes q) = Option.map Whatwg.Streams.Data.QueueEntry.value q.entries.head?)
+#check (@Whatwg.Streams.Data.dequeueValue_entries :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q q' : Whatwg.Streams.Data.Queue α Size) (value : α), Whatwg.Streams.Data.dequeueValue sizes q = some (value, q') → q'.entries = q.entries.tail)
+#check (@Whatwg.Streams.Data.dequeueValue_totalSize :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q q' : Whatwg.Streams.Data.Queue α Size) (value : α) (entry : Whatwg.Streams.Data.QueueEntry α Size) (rest : List (Whatwg.Streams.Data.QueueEntry α Size)), q.entries = entry :: rest → Whatwg.Streams.Data.dequeueValue sizes q = some (value, q') → q'.totalSize = sizes.clampNonNegative (sizes.sub q.totalSize entry.size))
+#check (@Whatwg.Streams.Data.dequeueValue_totalSize_not_negative :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q q' : Whatwg.Streams.Data.Queue α Size) (value : α), sizes.Ordered → Whatwg.Streams.Data.dequeueValue sizes q = some (value, q') → sizes.isNegative q'.totalSize = false)
+#check (@Whatwg.Streams.Data.dequeueValue_clamp_unreachable_of_exact :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size) (entry : Whatwg.Streams.Data.QueueEntry α Size) (rest : List (Whatwg.Streams.Data.QueueEntry α Size)), sizes.Classified → sizes.Ordered → sizes.Exact → Whatwg.Streams.Data.Queue.WF sizes q → Whatwg.Streams.Data.Queue.SizesAdmissible sizes q → q.entries = entry :: rest → sizes.isNegative (sizes.sub q.totalSize entry.size) = false)
+#check (@Whatwg.Streams.Data.peekQueueValue_isSome_iff :
+  ∀ {α Size : Type u} (q : Whatwg.Streams.Data.Queue α Size), (Whatwg.Streams.Data.peekQueueValue q).isSome = true ↔ q.entries ≠ [])
+#check (@Whatwg.Streams.Data.peekQueueValue_eq_head :
+  ∀ {α Size : Type u} (q : Whatwg.Streams.Data.Queue α Size), Whatwg.Streams.Data.peekQueueValue q = Option.map Whatwg.Streams.Data.QueueEntry.value q.entries.head?)
+#check (@Whatwg.Streams.Data.peekQueueValue_agrees_dequeueValue :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size), Whatwg.Streams.Data.peekQueueValue q = Option.map Prod.fst (Whatwg.Streams.Data.dequeueValue sizes q))
+#check (@Whatwg.Streams.Data.resetQueue_entries :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size), (Whatwg.Streams.Data.resetQueue sizes q).entries = [])
+#check (@Whatwg.Streams.Data.resetQueue_eq :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size), Whatwg.Streams.Data.resetQueue sizes q = { entries := [], totalSize := sizes.zero })
+#check (@Whatwg.Streams.Data.resetQueue_totalSize :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size), (Whatwg.Streams.Data.resetQueue sizes q).totalSize = sizes.zero)
+#check (@Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_eq :
+  ∀ {Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (v : Size), sizes.isNonNegativeNumber v = (!sizes.isNaN v && !sizes.isNegative v))
+#check (@Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_nan :
+  ∀ {Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size), sizes.Classified → sizes.isNonNegativeNumber sizes.nan = false)
+#check (@Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_negInfinity :
+  ∀ {Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size), sizes.Classified → sizes.isNonNegativeNumber sizes.negInfinity = false)
+#check (@Whatwg.Streams.Data.SizeClass.isNonNegativeNumber_posInfinity :
+  ∀ {Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size), sizes.Classified → sizes.isNonNegativeNumber sizes.posInfinity = true)
+#check (@Whatwg.Streams.Data.extractHighWaterMark_absent :
+  ∀ {σ Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (defaultHWM : Size), strategy.highWaterMark = none → Whatwg.Streams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.ok defaultHWM)
+#check (@Whatwg.Streams.Data.extractHighWaterMark_id_on_accepted :
+  ∀ {σ Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (defaultHWM highWaterMark highWaterMark' : Size), strategy.highWaterMark = some highWaterMark → Whatwg.Streams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.ok highWaterMark' → highWaterMark' = highWaterMark)
+#check (@Whatwg.Streams.Data.extractHighWaterMark_error_iff :
+  ∀ {σ Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (defaultHWM : Size), Whatwg.Streams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.error Whatwg.Streams.Data.RangeError.rangeError ↔ ∃ highWaterMark, strategy.highWaterMark = some highWaterMark ∧ (sizes.isNaN highWaterMark = true ∨ sizes.isNegative highWaterMark = true))
+#check (@Whatwg.Streams.Data.extractHighWaterMark_refuses_nan :
+  ∀ {σ Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (defaultHWM : Size), sizes.Classified → strategy.highWaterMark = some sizes.nan → Whatwg.Streams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.error Whatwg.Streams.Data.RangeError.rangeError)
+#check (@Whatwg.Streams.Data.extractHighWaterMark_refuses_negative :
+  ∀ {σ Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (defaultHWM highWaterMark : Size), strategy.highWaterMark = some highWaterMark → sizes.isNegative highWaterMark = true → Whatwg.Streams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.error Whatwg.Streams.Data.RangeError.rangeError)
+#check (@Whatwg.Streams.Data.extractHighWaterMark_refuses_negInfinity :
+  ∀ {σ Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (defaultHWM : Size), sizes.Classified → strategy.highWaterMark = some sizes.negInfinity → Whatwg.Streams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.error Whatwg.Streams.Data.RangeError.rangeError)
+#check (@Whatwg.Streams.Data.extractHighWaterMark_allows_posInfinity :
+  ∀ {σ Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (defaultHWM : Size), sizes.Classified → strategy.highWaterMark = some sizes.posInfinity → Whatwg.Streams.Data.extractHighWaterMark sizes strategy defaultHWM = Except.ok sizes.posInfinity)
+#check (@Whatwg.Streams.Data.extractSizeAlgorithm_absent :
+  ∀ {σ Size : Type u} (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size), strategy.size = none → Whatwg.Streams.Data.extractSizeAlgorithm strategy = Whatwg.Streams.Data.SizeAlgorithm.one)
+#check (@Whatwg.Streams.Data.extractSizeAlgorithm_absent_invoke :
+  ∀ {α σ ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (oracle : σ → α → Whatwg.Streams.Data.SizeAnswer Size ε) (chunk : α), strategy.size = none → Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle (Whatwg.Streams.Data.extractSizeAlgorithm strategy) chunk = Whatwg.Streams.Data.SizeAnswer.value sizes.one)
+#check (@Whatwg.Streams.Data.SizeAlgorithm.invoke_one :
+  ∀ {α σ ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (oracle : σ → α → Whatwg.Streams.Data.SizeAnswer Size ε) (chunk : α), Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle Whatwg.Streams.Data.SizeAlgorithm.one chunk = Whatwg.Streams.Data.SizeAnswer.value sizes.one)
+#check (@Whatwg.Streams.Data.extractSizeAlgorithm_present :
+  ∀ {σ Size : Type u} (strategy : Whatwg.Streams.Data.QueuingStrategy σ Size) (name : σ), strategy.size = some name → Whatwg.Streams.Data.extractSizeAlgorithm strategy = Whatwg.Streams.Data.SizeAlgorithm.foreign name)
+#check (@Whatwg.Streams.Data.SizeAlgorithm.invoke_foreign :
+  ∀ {α σ ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (oracle : σ → α → Whatwg.Streams.Data.SizeAnswer Size ε) (name : σ) (chunk : α), Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle (Whatwg.Streams.Data.SizeAlgorithm.foreign name) chunk = oracle name chunk)
+#check (@Whatwg.Streams.Data.CountQueuingStrategy.make_highWaterMark :
+  ∀ {Size : Type u} (highWaterMark : Size), (Whatwg.Streams.Data.CountQueuingStrategy.make highWaterMark).highWaterMark = highWaterMark)
+#check (@Whatwg.Streams.Data.CountQueuingStrategy.make_accepts_nan :
+  ∀ {Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size), (Whatwg.Streams.Data.CountQueuingStrategy.make sizes.nan).highWaterMark = sizes.nan)
+#check (@Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm_eq :
+  ∀ {σ : Type u} (countName : σ), Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm countName = Whatwg.Streams.Data.SizeAlgorithm.foreign countName)
+#check (@Whatwg.Streams.Data.CountQueuingStrategy.toQueuingStrategy_size :
+  ∀ {σ Size : Type u} (countName : σ) (self : Whatwg.Streams.Data.CountQueuingStrategy Size), (Whatwg.Streams.Data.CountQueuingStrategy.toQueuingStrategy countName self).size = some countName)
+#check (@Whatwg.Streams.Data.CountQueuingStrategy.size_answers_one :
+  ∀ {α σ ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (countName : σ) (oracle : σ → α → Whatwg.Streams.Data.SizeAnswer Size ε), Whatwg.Streams.Data.CountSizeProfile sizes countName oracle → ∀ (chunk : α), Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle (Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm countName) chunk = Whatwg.Streams.Data.SizeAnswer.value sizes.one)
+#check (@Whatwg.Streams.Data.CountQueuingStrategy.size_ignores_chunk :
+  ∀ {α σ ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (countName : σ) (oracle : σ → α → Whatwg.Streams.Data.SizeAnswer Size ε), Whatwg.Streams.Data.CountSizeProfile sizes countName oracle → ∀ (left right : α), Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle (Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm countName) left = Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle (Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm countName) right)
+#check (@Whatwg.Streams.Data.CountQueuingStrategy.size_never_throws :
+  ∀ {α σ ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (countName : σ) (oracle : σ → α → Whatwg.Streams.Data.SizeAnswer Size ε), Whatwg.Streams.Data.CountSizeProfile sizes countName oracle → ∀ (chunk : α) (reason : ε), Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle (Whatwg.Streams.Data.CountQueuingStrategy.sizeAlgorithm countName) chunk ≠ Whatwg.Streams.Data.SizeAnswer.thrown reason)
+#check (@Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_highWaterMark :
+  ∀ {Size : Type u} (highWaterMark : Size), (Whatwg.Streams.Data.ByteLengthQueuingStrategy.make highWaterMark).highWaterMark = highWaterMark)
+#check (@Whatwg.Streams.Data.ByteLengthQueuingStrategy.make_accepts_nan :
+  ∀ {Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size), (Whatwg.Streams.Data.ByteLengthQueuingStrategy.make sizes.nan).highWaterMark = sizes.nan)
+#check (@Whatwg.Streams.Data.ByteLengthQueuingStrategy.sizeAlgorithm_eq :
+  ∀ {σ : Type u} (byteLengthName : σ), Whatwg.Streams.Data.ByteLengthQueuingStrategy.sizeAlgorithm byteLengthName = Whatwg.Streams.Data.SizeAlgorithm.foreign byteLengthName)
+#check (@Whatwg.Streams.Data.ByteLengthQueuingStrategy.toQueuingStrategy_size :
+  ∀ {σ Size : Type u} (byteLengthName : σ) (self : Whatwg.Streams.Data.ByteLengthQueuingStrategy Size), (Whatwg.Streams.Data.ByteLengthQueuingStrategy.toQueuingStrategy byteLengthName self).size = some byteLengthName)
+#check (@Whatwg.Streams.Data.byteLengthSize_number :
+  ∀ {ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (n : Size), Whatwg.Streams.Data.byteLengthSize sizes (Whatwg.Streams.Data.ByteLengthAnswer.number n) = Whatwg.Streams.Data.SizeAnswer.value n)
+#check (@Whatwg.Streams.Data.byteLengthSize_undefined :
+  ∀ {ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size), Whatwg.Streams.Data.byteLengthSize sizes Whatwg.Streams.Data.ByteLengthAnswer.undefined = Whatwg.Streams.Data.SizeAnswer.value sizes.nan)
+#check (@Whatwg.Streams.Data.byteLengthSize_thrown :
+  ∀ {ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (reason : ε), Whatwg.Streams.Data.byteLengthSize sizes (Whatwg.Streams.Data.ByteLengthAnswer.thrown reason) = Whatwg.Streams.Data.SizeAnswer.thrown reason)
+#check (@Whatwg.Streams.Data.ByteLengthQueuingStrategy.size_eq_byteLength :
+  ∀ {α σ ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (byteLengthName : σ) (byteLength : α → Whatwg.Streams.Data.ByteLengthAnswer Size ε) (oracle : σ → α → Whatwg.Streams.Data.SizeAnswer Size ε), Whatwg.Streams.Data.ByteLengthSizeProfile sizes byteLengthName byteLength oracle → ∀ (chunk : α), Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle (Whatwg.Streams.Data.ByteLengthQueuingStrategy.sizeAlgorithm byteLengthName) chunk = Whatwg.Streams.Data.byteLengthSize sizes (byteLength chunk))
+#check (@Whatwg.Streams.Data.ByteLengthQueuingStrategy.undefined_byteLength_refused :
+  ∀ {α σ ε Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (byteLengthName : σ) (byteLength : α → Whatwg.Streams.Data.ByteLengthAnswer Size ε) (oracle : σ → α → Whatwg.Streams.Data.SizeAnswer Size ε) (chunk : α) (q : Whatwg.Streams.Data.Queue α Size) (value : α), Whatwg.Streams.Data.ByteLengthSizeProfile sizes byteLengthName byteLength oracle → sizes.Classified → byteLength chunk = Whatwg.Streams.Data.ByteLengthAnswer.undefined → Whatwg.Streams.Data.SizeAlgorithm.invoke sizes oracle (Whatwg.Streams.Data.ByteLengthQueuingStrategy.sizeAlgorithm byteLengthName) chunk = Whatwg.Streams.Data.SizeAnswer.value sizes.nan ∧ Whatwg.Streams.Data.enqueueValueWithSize sizes q value sizes.nan = Except.error Whatwg.Streams.Data.RangeError.rangeError)
+#check (@Whatwg.Streams.Data.Queue.empty_entries :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size), (Whatwg.Streams.Data.Queue.empty sizes).entries = [])
+#check (@Whatwg.Streams.Data.Queue.WF_iff :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size) (q : Whatwg.Streams.Data.Queue α Size), Whatwg.Streams.Data.Queue.WF sizes q ↔ q.totalSize = Whatwg.Streams.Data.sizeSum sizes q.entries)
+#check (@Whatwg.Streams.Data.Queue.empty_totalSize :
+  ∀ {α Size : Type u} (sizes : Whatwg.Streams.Data.SizeClass Size), (Whatwg.Streams.Data.Queue.empty sizes).totalSize = sizes.zero)
 
 end StatementSnapshot

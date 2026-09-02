@@ -19,7 +19,7 @@ jobs:
       # self-test below verifies the declared red set, excises it, and runs
       # the axiom gate on the green remainder, so it is the deciding gate.
       - name: Build production libraries and gate executables
-        run: lake --wfail build WhatwgStreams Gates Sha256 sha256 vendorseal citations trustselftest census
+        run: lake --wfail build Whatwg Gates Sha256 sha256 vendorseal citations trustselftest census
       - name: Build the audited SHA-256 root with warnings as errors
         run: lake --wfail build Sha256Verified
       - name: Recheck the SHA-256 audit root with an independent kernel
@@ -32,7 +32,7 @@ jobs:
         run: lake exe citations
       # Both census steps link the coverage numerator: since the first P3
       # witnesses landed, bin/Census.lean imports
-      # WhatwgStreamsTest/Audit/SpecCoverage.lean so that the block below is
+      # WhatwgTest/Audit/SpecCoverage.lean so that the block below is
       # printed from that module's checked emit instead of from assumed zeros.
       # Building the census executable therefore elaborates the numerator's
       # gate, and a red numerator fails here rather than printing a number.
@@ -42,3 +42,5 @@ jobs:
         run: lake exe census --report
       - name: Trust self-test with planted violations
         run: lake exe trustselftest
+      - name: Rename parity receipt (WP-7) against the pre-rename source receipt
+        run: ./scripts/check-whatwg-parity.sh

@@ -10,7 +10,7 @@ Spec anchors: `qs-api`, `qs-abstract-ops`.
 Opens in P3.
 
 The data these operations produce is owned by
-`WhatwgStreams/Data/Strategy.lean`.
+`Whatwg/Streams/Data/Strategy.lean`.
 
 This breadth stub intentionally declares no semantic object. Its public
 surface is frozen only after the owning contract and counterexample packet.

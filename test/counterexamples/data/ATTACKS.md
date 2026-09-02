@@ -6,7 +6,7 @@ arrive at, that satisfy most of the laws the packet freezes, and that
 contradict either the specification text or the pinned Web Platform Tests.
 Nothing here is a claim about a host.
 
-The witnesses are in `WhatwgStreamsTest/Counterexamples/Data/Queue.lean`. Each
+The witnesses are in `WhatwgTest/Streams/Counterexamples/Data/Queue.lean`. Each
 is a Lean theorem closed by `decide`, so the evidence is kernel reduction with
 no compiler in the trust path. They live in a `Breaker` namespace and share no
 name with the frozen surface, so they prove the attacks and not the production

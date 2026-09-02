@@ -11,7 +11,7 @@ Opens in P3.
 
 The public surface below is the one frozen by
 `test/contracts/queue-with-sizes.contract.md` (D0 through D4) and ascribed by
-`WhatwgStreamsTest/Data/QueueContract.lean`. Every definition is a
+`WhatwgTest/Streams/Data/QueueContract.lean`. Every definition is a
 transcription of the census row named in its docstring, read from the pinned
 bytes of `vendor/whatwg-streams-b9ba9f49/index.bs` at the span that
 `generated/spec-algorithm-census.tsv` records for that row.
@@ -28,7 +28,7 @@ set_option autoImplicit false
 
 universe u
 
-namespace WhatwgStreams.Data
+namespace Whatwg.Streams.Data
 
 /-! ## D0 — the refusal tag -/
 
@@ -936,4 +936,4 @@ theorem resetQueue_eq_empty (sizes : SizeClass Size) (q : Queue α Size) :
 theorem resetQueue_dequeueValue (sizes : SizeClass Size) (q : Queue α Size) :
     dequeueValue sizes (resetQueue sizes q) = none := rfl
 
-end WhatwgStreams.Data
+end Whatwg.Streams.Data

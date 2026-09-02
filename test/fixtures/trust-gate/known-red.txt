@@ -16,8 +16,8 @@
 #
 # P3 queue-with-sizes and queuing strategies, frozen 2026-09-02 by the P3
 # breaker seat. Packet: test/contracts/queue-with-sizes.contract.md.
-# Implementation fence: WhatwgStreams/Data/Queue.lean and
-# WhatwgStreams/Data/Strategy.lean. WhatwgStreamsTest.Data.QueueContract and
-# WhatwgStreamsTest.Data.QueueAxiomReport were red here while the names they
+# Implementation fence: Whatwg/Streams/Data/Queue.lean and
+# Whatwg/Streams/Data/Strategy.lean. WhatwgTest.Streams.Data.QueueContract and
+# WhatwgTest.Streams.Data.QueueAxiomReport were red here while the names they
 # ascribe did not exist. The P3 builder seat landed that surface and removed
 # the two entries; no entry remains.

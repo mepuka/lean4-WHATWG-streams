@@ -18,7 +18,7 @@ they decide nothing.
 ## Rules
 
 - No semantic declaration lives here. A definition that models the
-  specification belongs under `WhatwgStreams/` behind a contract.
+  specification belongs under `Whatwg/Streams/` behind a contract.
 - Totality holds: no `partial`, no `unsafe`. Loops are bounded by fuel or by
   the structure they traverse.
 - The ceiling is `propext`, `Quot.sound`, and `Classical.choice`, the same
@@ -46,7 +46,7 @@ they decide nothing.
   produces are cross-checked against a second implementation at pin time and
   recorded in `docs/PROVENANCE.md`.
 - Every gate resolves the repository root by searching upward for
-  `WhatwgStreams.lean`; none reads an environment variable for that.
+  `Whatwg.Streams.lean`; none reads an environment variable for that.
 
 ## Gates
 
@@ -58,11 +58,11 @@ they decide nothing.
 | `lake exe citations` | no line-numbered citation into a protected authored document | nothing |
 | `lake exe trustselftest` | the declared red set; then planted `partial`, `unsafe`, `sorry`, `native_decide`, malformed literals, and an unreachable module are each rejected for the stated reason (the `Classical.choice` plant was retired by ruling R-11) | a throwaway copy outside the tree, removed afterwards |
 | `lake exe census` | the pinned `index.bs` digest; every census anchor occurs exactly once at its span start; every span digest recomputes; every row has exactly one disposition from the authored inputs under `census/`, with no unused entry; both projections are byte-identical to a fresh regeneration; and the numerator's coverage emit carries the same ids, order and dispositions as that regeneration, with no witness on an absent row and none on a row outside the denominator | nothing |
-| `lake exe census --write` | the same, apart from the emit, before writing | `generated/spec-algorithm-census.tsv` and `WhatwgStreamsTest/Audit/SpecCoverageRows.lean` |
+| `lake exe census --write` | the same, apart from the emit, before writing | `generated/spec-algorithm-census.tsv` and `WhatwgTest/Audit/SpecCoverageRows.lean` |
 | `lake exe census --report` | the emit against a fresh regeneration, as above; then prints the coverage block of `docs/SPEC-COVERAGE.md` from the emit's states | nothing |
 
 The census executable is the one entry point under `bin/` that is not a bare
-wrapper: its root imports `WhatwgStreamsTest/Audit/SpecCoverage.lean` and hands
+wrapper: its root imports `WhatwgTest/Audit/SpecCoverage.lean` and hands
 `emit` to `Gates.Census.cli`, because coverage states are test-side and `Gates/`
 may not import them. The coverage block is therefore printed from compiled Lean
 data that the numerator's elaboration-time gate has already checked, and there

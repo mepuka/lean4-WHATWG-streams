@@ -10,7 +10,7 @@ Spec anchors: `rs-abstract-ops`.
 Opens in P7.
 
 The requirements it realizes are owned by
-`WhatwgStreams/Piping/Requirements.lean`; realizability is a claim about the
+`Whatwg/Streams/Piping/Requirements.lean`; realizability is a claim about the
 pair, under a named observation mask.
 
 This breadth stub intentionally declares no semantic object. Its public

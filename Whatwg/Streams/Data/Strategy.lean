@@ -1,4 +1,4 @@
-import WhatwgStreams.Data.Queue
+import Whatwg.Streams.Data.Queue
 
 /-!
 # Data.Strategy.lean
@@ -12,7 +12,7 @@ Spec anchors: `queuing-strategies`, `queue-with-sizes`.
 Opens in P3.
 
 This is the carrier. The specification-facing classes and the abstract
-operations that build one live under `WhatwgStreams/Strategy`, which the
+operations that build one live under `Whatwg/Streams/Strategy`, which the
 architecture table keeps as its own area.
 
 The P3 packet amends that split for two carriers only. Rows 9 and 10 of the
@@ -21,13 +21,13 @@ The P3 packet amends that split for two carriers only. Rows 9 and 10 of the
 each is nothing but its one `[[highWaterMark]]` slot and the named conversion
 into `QueuingStrategy`; the class surface that reads those slots — the
 constructors, the getters, and the realm lookup they perform — stays with
-`WhatwgStreams/Strategy` and is not opened here. `docs/ARCHITECTURE.md` still
+`Whatwg/Streams/Strategy` and is not opened here. `docs/ARCHITECTURE.md` still
 records the older split and is a needed doc change, reported with this
 handoff.
 
 The public surface below is the one frozen by
 `test/contracts/queue-with-sizes.contract.md` (D5 through D8) and ascribed by
-`WhatwgStreamsTest/Data/QueueContract.lean`. Every definition is a
+`WhatwgTest/Streams/Data/QueueContract.lean`. Every definition is a
 transcription of the census row named in its docstring, read from the pinned
 bytes of `vendor/whatwg-streams-b9ba9f49/index.bs` at the span that
 `generated/spec-algorithm-census.tsv` records for that row.
@@ -43,7 +43,7 @@ set_option autoImplicit false
 
 universe u
 
-namespace WhatwgStreams.Data
+namespace Whatwg.Streams.Data
 
 /-! ## D5 — size algorithms and the foreign boundary -/
 
@@ -624,4 +624,4 @@ theorem realm_identity_refused {γ σ : Type u} (mint : γ → σ) (left right :
     (hrealms : left = right) : mint left = mint right :=
   congrArg mint hrealms
 
-end WhatwgStreams.Data
+end Whatwg.Streams.Data

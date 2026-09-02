@@ -18,8 +18,8 @@ full, then open only the authority documents named for the current task.
 | `docs/SHA256-DAG.md` | the proof graph for the SHA-256 the gates depend on |
 | `test/contracts/` | breaker-authored contracts and executable falsifiers |
 | `test/counterexamples/` | central counterexample register and durable witnesses |
-| `WhatwgStreams/` | library declarations and proofs |
-| `WhatwgStreamsTest/` | Lean tests, attacks, receipts, and the axiom gate |
+| `Whatwg/Streams/` | library declarations and proofs |
+| `WhatwgTest/Streams/` | Lean tests, attacks, receipts, and the axiom gate |
 | `Gates/` | repository gates implemented in Lean |
 | `harness/` | host conformance evidence |
 | `generated/` | deterministic projections only; never hand-edited |
@@ -124,7 +124,7 @@ orchestrate; they decide nothing.
 
 | Command | Decides |
 | --- | --- |
-| `lake build` | the libraries elaborate; the elaboration-time axiom gate in `WhatwgStreamsTest.lean` passes over every declaration |
+| `lake build` | the libraries elaborate; the elaboration-time axiom gate in `WhatwgTest.lean` passes over every declaration |
 | `lake exe sha256 --self-test` | the in-tree SHA-256 matches the FIPS 180-4 vectors |
 | `lake exe vendorseal` | `vendor/` and `generated/vendor-manifest.tsv` agree in both directions; every path is valid on Windows |
 | `lake exe citations` | no line-numbered citation into a protected authored document |

@@ -3,11 +3,11 @@ import Gates.Common
 /-!
 # Gates.TrustSelfTest
 
-Exercises the elaboration-time trust gate in `WhatwgStreamsTest/Audit/AxiomGate.lean`
+Exercises the elaboration-time trust gate in `WhatwgTest/Audit/AxiomGate.lean`
 by planting declarations it must reject and confirming it rejects them for
 the stated reason.
 
-The gate runs in the root aggregator `WhatwgStreamsTest.lean`, which Lake
+The gate runs in the root aggregator `WhatwgTest.lean`, which Lake
 builds last. Any earlier module that fails to build prevents the gate from
 running at all, so a red tree would make the planted checks meaningless. The
 breaker/builder discipline deliberately keeps frozen batteries red before
@@ -33,27 +33,27 @@ structure Context where
 
 def copiedFiles : List String :=
   ["lakefile.toml", "lake-manifest.json", "lean-toolchain",
-   "WhatwgStreams.lean", "Gates.lean", "WhatwgStreamsTest.lean", "Sha256.lean"]
+   "Whatwg.lean", "Gates.lean", "WhatwgTest.lean", "Sha256.lean"]
 
 /-- `census` and `generated` join the copied trees because
-`WhatwgStreamsTest/Audit/SpecCoverage.lean` reads the census projection and
+`WhatwgTest/Audit/SpecCoverage.lean` reads the census projection and
 its authored disposition inputs at elaboration time: without them the probe's
 build fails for a missing file rather than for a planted violation. `vendor`
 stays out: the probe only builds the census generator, never runs it. -/
 def copiedTrees : List String :=
-  ["WhatwgStreams", "WhatwgStreamsTest", "Gates", "Sha256", "bin", "census", "generated"]
+  ["Whatwg", "WhatwgTest", "Gates", "Sha256", "bin", "census", "generated"]
 
 def fixture (root : System.FilePath) (name : String) : System.FilePath :=
   root / "test" / "fixtures" / "trust-gate" / name
 
 def auditSource (probe : System.FilePath) : System.FilePath :=
-  probe / "WhatwgStreamsTest" / "Audit" / "AxiomGate.lean"
+  probe / "WhatwgTest" / "Audit" / "AxiomGate.lean"
 
 def productionRoot (probe : System.FilePath) : System.FilePath :=
-  probe / "WhatwgStreams.lean"
+  probe / "Whatwg.lean"
 
 def testRoot (probe : System.FilePath) : System.FilePath :=
-  probe / "WhatwgStreamsTest.lean"
+  probe / "WhatwgTest.lean"
 
 def copyTree (source destination : System.FilePath) : IO Unit := do
   for file in ← regularFilesBelow source do
@@ -214,7 +214,7 @@ def run (root : System.FilePath) (probe : System.FilePath) : IO Bool := do
   let declared ← knownRed root
   let (_, output) ← build probe
   let observed := (failingTargets output).filter fun target =>
-    !(declared.length > 0 && target == "WhatwgStreamsTest")
+    !(declared.length > 0 && target == "WhatwgTest")
   if observed != declared then
     IO.eprintln "FAIL the declared red set does not match the modules that actually fail"
     IO.eprintln "--- failing but not declared in test/fixtures/trust-gate/known-red.txt ---"
@@ -240,14 +240,14 @@ def run (root : System.FilePath) (probe : System.FilePath) : IO Bool := do
       (expectRejection probe plant.label plant.expected)
     allOk := allOk && ok
   -- 4. Module closure: a source file not reachable from the test root.
-  let unreachable := probe / "WhatwgStreamsTest" / "Planted" / "Unreachable.lean"
-  IO.FS.createDirAll (probe / "WhatwgStreamsTest" / "Planted")
+  let unreachable := probe / "WhatwgTest" / "Planted" / "Unreachable.lean"
+  IO.FS.createDirAll (probe / "WhatwgTest" / "Planted")
   IO.FS.writeFile unreachable (← IO.FS.readFile (fixture root "unreachable.lean.txt"))
   let ok ← try
       expectRejection probe "unreachable test module"
-        ["is not reachable from the WhatwgStreamsTest audit root"]
+        ["is not reachable from the WhatwgTest audit root"]
     finally
-      IO.FS.removeDirAll (probe / "WhatwgStreamsTest" / "Planted")
+      IO.FS.removeDirAll (probe / "WhatwgTest" / "Planted")
   allOk := allOk && ok
   -- 5. Final green control after every restoration.
   let ok ← expectAcceptance probe "the restored source tree"

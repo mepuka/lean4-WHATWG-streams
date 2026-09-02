@@ -25,6 +25,6 @@ never pays for them.
 
 The axiom ceiling of every `Sha256.*` module is the repository's semantic
 ceiling, `propext` and `Quot.sound`. `Sha256.Audit` is the one exception, named
-exactly in `WhatwgStreamsTest/Audit/AxiomGate.lean`, because `MetaM` reaches
+exactly in `WhatwgTest/Audit/AxiomGate.lean`, because `MetaM` reaches
 `Classical.choice`.
 -/

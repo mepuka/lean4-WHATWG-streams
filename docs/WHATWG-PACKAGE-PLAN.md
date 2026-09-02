@@ -64,4 +64,6 @@ regenerations are the proof.
 
 | Slice | Commit | Result |
 | --- | --- | --- |
-| W0 | this commit | plan landed |
+| W0 | `f5dbad8` | plan landed; HOLD replaced by the pointer |
+| W1 | GitHub rename, no commit | `mepuka/lean4-whatwg` resolves; `mepuka/lean4-WHATWG-streams` redirects to it; Mac remote repointed |
+| W2 | this commit | 42 files rewritten by one ordered rule set plus the tree moves; `lake --wfail build` of every library and executable green; gate: 85 modules, 2404 declarations, ceiling unchanged; `trustselftest`, `census`, `census --report` (coverage block unchanged: denominator 410, green 12, partial 6), `vendorseal`, `citations`, `sha256 --self-test` all PASS; `generated/spec-algorithm-census.tsv` and `generated/vendor-manifest.tsv` byte-identical; parity receipt PASS over 963 constants against `f5dbad8` (`generated/whatwg-parity*.tsv`, `scripts/check-whatwg-parity.sh`, now a CI step). Excluded from the receipt by design: the gate module `WhatwgTest.Audit.AxiomGate`, whose message strings name the tree. Not edited: the frozen packets under `test/contracts/` (their `WhatwgStreams…` paths are the packets' original text), `docs/research/`, and the copied plans |

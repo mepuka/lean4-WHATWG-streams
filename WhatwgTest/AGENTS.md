@@ -1,4 +1,4 @@
-# WhatwgStreams Lean-test routing
+# Whatwg Lean-test routing
 
 This boundary contains executable Lean attacks, examples, conformance
 checks, and proof receipts. The repository root rules remain in force;
@@ -14,7 +14,7 @@ delete a breaker-owned test.
 
 Every counterexample that can alter a declaration or cutover decision receives
 a stable ID in `test/counterexamples/REGISTER.md`. Put the executable Lean
-witness under `WhatwgStreamsTest/Counterexamples/<Area>/` and link it from
+witness under `WhatwgTest/Streams/Counterexamples/<Area>/` and link it from
 the registry and owning contract. Keep the witness after the implementation
 rejects it so the repair remains testable.
 
@@ -39,7 +39,7 @@ they acquire a semantic or cutover-bearing claim.
 
 ## Spec coverage witnesses
 
-`WhatwgStreamsTest/Audit/SpecCoverage.lean`, once P1 lands it, is the
+`WhatwgTest/Audit/SpecCoverage.lean`, once P1 lands it, is the
 numerator of the specification coverage metric: one frozen row per census
 algorithm, its disposition, coverage state, witnesses with axiom receipts, and
 every witness statement frozen by `#check (@name : proposition)` ascription. A
@@ -51,7 +51,7 @@ typing.
 
 ## Audit implementation
 
-`WhatwgStreamsTest/Audit/AxiomGate.lean` is the one module admitted to the
+`WhatwgTest/Audit/AxiomGate.lean` is the one module admitted to the
 implementation ceiling in this tree, by exact name, because `MetaM` reaches
 `Classical.choice`. Another audit module is admitted only by adding its exact
 name to the gate's list, where a stale entry fails the build.

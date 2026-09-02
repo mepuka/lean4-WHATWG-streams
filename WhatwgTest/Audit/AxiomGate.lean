@@ -1,13 +1,13 @@
 import Lean
 import Lean.Util.CollectAxioms
-import WhatwgStreams
+import Whatwg
 import Gates
 
 /-!
-# WhatwgStreams axiom allowlist gate
+# Whatwg axiom allowlist gate
 
-This command tokenizes every authored source under `WhatwgStreams/`,
-`WhatwgStreamsTest/`, and `Gates/` and inspects every declaration compiled
+This command tokenizes every authored source under `Whatwg/Streams/`,
+`WhatwgTest/Streams/`, and `Gates/` and inspects every declaration compiled
 from them, including definitions, instances, generated declarations, and
 private helpers. The build fails on an authored `unsafe` or `partial`
 declaration modifier, on any declaration that reaches a forbidden axiom, and
@@ -34,7 +34,7 @@ with the tree names, ceilings, and messages changed for this repository.
 
 open Lean
 
-namespace WhatwgStreamsTest.Audit
+namespace WhatwgTest.Audit
 
 private def allowedAxioms : List Name :=
   [``propext, ``Quot.sound, ``Classical.choice]
@@ -48,8 +48,8 @@ reaches `Classical.choice`, so these modules are bound by
 so that a file dropped into the audit tree cannot silently acquire the wider
 ceiling. Each entry is checked for staleness below. -/
 private def auditImplementationModules : List Name :=
-  [ `WhatwgStreamsTest.Audit.AxiomGate,
-    `WhatwgStreamsTest.Audit.SpecCoverage,
+  [ `WhatwgTest.Audit.AxiomGate,
+    `WhatwgTest.Audit.SpecCoverage,
     `Sha256.Audit ]
 
 /-- Exact public declarations admitted to the implementation ceiling outside
@@ -88,15 +88,15 @@ private def resolveImplementationDeclarations
         privateToUserName? declaration == some originalName
     match privateCandidates with
     | [declaration] => resolved := resolved ++ [declaration]
-    | _ => throw s!"WhatwgStreams axiom gate: private implementation exemption {owner}/{originalName} matched {privateCandidates.length} declarations; expected exactly one"
+    | _ => throw s!"Whatwg axiom gate: private implementation exemption {owner}/{originalName} matched {privateCandidates.length} declarations; expected exactly one"
   return resolved
 
 /-- `Sha256/` is the fourth audited tree (`docs/SHA256-DAG.md` §5.1). It is
-bound by the semantic ceiling like `WhatwgStreams/`, not by the tooling
+bound by the semantic ceiling like `Whatwg/Streams/`, not by the tooling
 ceiling: only `Sha256.Audit`, named exactly in `auditImplementationModules`
 above, may reach `Classical.choice`. -/
 private def semanticTreePrefixes : List Name :=
-  [`WhatwgStreams, `WhatwgStreamsTest, `Sha256]
+  [`Whatwg, `WhatwgTest, `Sha256]
 
 private def belongsToAuditedTree (moduleName : Name) : Bool :=
   semanticTreePrefixes.any (·.isPrefixOf moduleName) ||
@@ -133,7 +133,7 @@ private def forbiddenTrustToken?
     let skipped := Parser.whitespace.run inputContext parserContext tokenTable state
     if let some error := skipped.errorMsg then
       throw <| IO.userError
-        s!"WhatwgStreams source trust gate: tokenization failed in {source}: {error}"
+        s!"Whatwg source trust gate: tokenization failed in {source}: {error}"
     state := skipped
     if inputContext.atEnd state.pos then
       return none
@@ -164,7 +164,7 @@ private def forbiddenTrustToken?
     if let some error := next.errorMsg then
       let position := inputContext.fileMap.toPosition state.pos
       throw <| IO.userError
-        s!"WhatwgStreams source trust gate: tokenization failed in {source}:{position.line}:{position.column + 1}: {error}"
+        s!"Whatwg source trust gate: tokenization failed in {source}:{position.line}:{position.column + 1}: {error}"
     let token := next.stxStack.back
     if token.isToken "unsafe" then
       return some "unsafe"
@@ -181,31 +181,31 @@ private def auditSourceTrustModifiers
   for source in sources do
     if let some modifier ← forbiddenTrustToken? environment source then
       throw <| IO.userError
-        s!"WhatwgStreams source trust gate: {source} contains an authored `{modifier}` declaration modifier"
+        s!"Whatwg source trust gate: {source} contains an authored `{modifier}` declaration modifier"
 
 private def findProjectRoot (directory : System.FilePath) : IO System.FilePath := do
   let mut current := directory
   for _ in [0:64] do
-    if ← (current / "WhatwgStreams.lean").pathExists then
+    if ← (current / "Whatwg.lean").pathExists then
       return current
     match current.parent with
     | some parent => current := parent
-    | none => throw <| IO.userError "WhatwgStreams axiom gate: could not locate the project root"
-  throw <| IO.userError "WhatwgStreams axiom gate: project-root search exceeded 64 parents"
+    | none => throw <| IO.userError "Whatwg axiom gate: could not locate the project root"
+  throw <| IO.userError "Whatwg axiom gate: project-root search exceeded 64 parents"
 
 private def leanFilesBelow (directory : System.FilePath) : IO (Array System.FilePath) := do
   let entries ← directory.walkDir
   return entries.filter fun path => path.extension == some "lean"
 
 private def auditedSources (projectRoot : System.FilePath) : IO (Array System.FilePath) := do
-  let production ← leanFilesBelow (projectRoot / "WhatwgStreams")
-  let tests ← leanFilesBelow (projectRoot / "WhatwgStreamsTest")
+  let production ← leanFilesBelow (projectRoot / "Whatwg")
+  let tests ← leanFilesBelow (projectRoot / "WhatwgTest")
   let tooling ← leanFilesBelow (projectRoot / "Gates")
   let sha256 ← leanFilesBelow (projectRoot / "Sha256")
   return production ++ tests ++ tooling ++ sha256
-    |>.push (projectRoot / "WhatwgStreams.lean")
+    |>.push (projectRoot / "Whatwg.lean")
     |>.push (projectRoot / "Gates.lean")
-    |>.push (projectRoot / "WhatwgStreamsTest.lean")
+    |>.push (projectRoot / "WhatwgTest.lean")
     |>.push (projectRoot / "Sha256.lean")
 
 open Lean Elab Command in
@@ -213,7 +213,7 @@ elab "#whatwg_streams_axiom_gate" : command => do
   let environment ← getEnv
   let sourceFile := System.FilePath.mk (← getFileName)
   let some sourceDirectory := sourceFile.parent
-    | throwError "WhatwgStreams axiom gate: source file has no parent directory"
+    | throwError "Whatwg axiom gate: source file has no parent directory"
   let projectRoot ← liftIO <| findProjectRoot sourceDirectory
   let sources ← liftIO <| auditedSources projectRoot
   let importedPaths := environment.header.moduleNames.map fun moduleName =>
@@ -221,7 +221,7 @@ elab "#whatwg_streams_axiom_gate" : command => do
   for source in sources do
     if source.normalize != sourceFile.normalize && !importedPaths.contains source.normalize then
       throwError
-        "WhatwgStreams module-closure gate: {source} is not reachable from the WhatwgStreamsTest audit root"
+        "Whatwg module-closure gate: {source} is not reachable from the WhatwgTest audit root"
 
   liftIO <| auditSourceTrustModifiers environment sources
 
@@ -231,9 +231,9 @@ elab "#whatwg_streams_axiom_gate" : command => do
       if belongsToAuditedTree moduleName then
         if !isGeneratedSafeRecursor environment name then
           if info.isUnsafe then
-            throwError "WhatwgStreams trust gate: declaration {name} is unsafe"
+            throwError "Whatwg trust gate: declaration {name} is unsafe"
           if info.isPartial then
-            throwError "WhatwgStreams trust gate: declaration {name} is partial"
+            throwError "Whatwg trust gate: declaration {name} is partial"
         declarations := declarations.push name
 
   let exactImplementationDeclarations ←
@@ -256,13 +256,13 @@ elab "#whatwg_streams_axiom_gate" : command => do
     for axiomName in axioms do
       if isNativeAuxiliaryAxiom axiomName then
         throwError
-          "WhatwgStreams axiom gate: declaration {declaration} reaches forbidden axiom {axiomName} (native_decide auxiliary)"
+          "Whatwg axiom gate: declaration {declaration} reaches forbidden axiom {axiomName} (native_decide auxiliary)"
       if forbiddenAxioms.contains axiomName then
         throwError
-          "WhatwgStreams axiom gate: declaration {declaration} reaches forbidden axiom {axiomName}"
+          "Whatwg axiom gate: declaration {declaration} reaches forbidden axiom {axiomName}"
       if !bound.contains axiomName then
         throwError
-          "WhatwgStreams axiom gate: declaration {declaration} reaches unexpected axiom {axiomName}; allowed axioms are {bound}"
+          "Whatwg axiom gate: declaration {declaration} reaches unexpected axiom {axiomName}; allowed axioms are {bound}"
 
   -- An exemption must not outlive its reason. A named implementation module
   -- that no longer reaches `Classical.choice` widens the trust boundary for
@@ -275,17 +275,17 @@ elab "#whatwg_streams_axiom_gate" : command => do
           used := true
     if !used then
       throwError
-        "WhatwgStreams axiom gate: stale implementation exemption for {exempted}; no declaration in it reaches Classical.choice, so remove it from auditImplementationModules"
+        "Whatwg axiom gate: stale implementation exemption for {exempted}; no declaration in it reaches Classical.choice, so remove it from auditImplementationModules"
 
   for exempted in exactImplementationDeclarations do
     if !(declarations.contains exempted) then
       throwError
-        "WhatwgStreams axiom gate: exact implementation exemption names missing declaration {exempted}"
+        "Whatwg axiom gate: exact implementation exemption names missing declaration {exempted}"
     if !(← collectAxioms exempted).contains ``Classical.choice then
       throwError
-        "WhatwgStreams axiom gate: stale exact implementation exemption for {exempted}; it no longer reaches Classical.choice"
+        "Whatwg axiom gate: stale exact implementation exemption for {exempted}; it no longer reaches Classical.choice"
 
   logInfo
-    m!"WhatwgStreams module and axiom gate: checked {sources.size} modules and {declarations.size} declarations ({toolingCount} in the Gates tooling tree); semantic/test ceiling is {allowedAxioms}; implementation ceiling ({auditImplementationModules.length} audit module(s), {exactImplementationDeclarations.length} exact declaration(s), plus the Gates tree) additionally allows Classical.choice"
+    m!"Whatwg module and axiom gate: checked {sources.size} modules and {declarations.size} declarations ({toolingCount} in the Gates tooling tree); semantic/test ceiling is {allowedAxioms}; implementation ceiling ({auditImplementationModules.length} audit module(s), {exactImplementationDeclarations.length} exact declaration(s), plus the Gates tree) additionally allows Classical.choice"
 
-end WhatwgStreamsTest.Audit
+end WhatwgTest.Audit

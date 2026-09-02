@@ -8,13 +8,13 @@ Format version 1. `lake exe census` fails on any byte of drift.
 
 This is the frozen row list of the specification-coverage numerator:
 one entry per census row, carrying the row id, the joined disposition, the
-coverage state, and the witness list. `WhatwgStreamsTest/Audit/SpecCoverage.lean`
+coverage state, and the witness list. `WhatwgTest/Audit/SpecCoverage.lean`
 owns the checks over it and `docs/SPEC-COVERAGE.md` owns the rules.
 -/
 
 import Gates
 
-namespace WhatwgStreamsTest.Audit.SpecCoverageRows
+namespace WhatwgTest.Audit.SpecCoverageRows
 
 open Gates.Census
 
@@ -478,4 +478,4 @@ def rowTotal : Nat := 450
 /-- Rows inside the coverage denominator. -/
 def denominator : Nat := 410
 
-end WhatwgStreamsTest.Audit.SpecCoverageRows
+end WhatwgTest.Audit.SpecCoverageRows

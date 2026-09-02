@@ -13,7 +13,7 @@ that occurs exactly once and by the SHA-256 of its span.
 `lake exe census --write` writes two projections:
 
 - `generated/spec-algorithm-census.tsv`, the census itself; and
-- `WhatwgStreamsTest/Audit/SpecCoverageRows.lean`, the frozen Lean row list
+- `WhatwgTest/Audit/SpecCoverageRows.lean`, the frozen Lean row list
   the test-side numerator checks itself against.
 
 `lake exe census` checks the input digest, anchor uniqueness, every span
@@ -22,7 +22,7 @@ fresh regeneration, and the numerator's coverage emit against that same
 regeneration. `lake exe census --report` prints the coverage block from the
 emit.
 
-The emit is not a file. `WhatwgStreamsTest/Audit/SpecCoverage.lean` owns the
+The emit is not a file. `WhatwgTest/Audit/SpecCoverage.lean` owns the
 coverage states and witnesses and exports them as `emit`; `bin/Census.lean`
 imports that module and hands the array to `cli` below, because `Gates/` may
 not import a test-side module. Every number this executable prints therefore
@@ -360,7 +360,7 @@ def CoverageState.name : CoverageState → String
   | .partialCoverage => "partial"
   | .green => "green"
 
-/-- One frozen numerator row. `WhatwgStreamsTest/Audit/SpecCoverage.lean` owns
+/-- One frozen numerator row. `WhatwgTest/Audit/SpecCoverage.lean` owns
 the rules; this type is here so the generated row list and the census gate
 share one spelling. -/
 structure CoverageRow where
@@ -396,7 +396,7 @@ def inputDigest : String :=
 
 def censusRelativePath : String := "generated/spec-algorithm-census.tsv"
 
-def rowsRelativePath : String := "WhatwgStreamsTest/Audit/SpecCoverageRows.lean"
+def rowsRelativePath : String := "WhatwgTest/Audit/SpecCoverageRows.lean"
 
 def dispositionsRelativePath : String := "census/dispositions.tsv"
 
@@ -1096,10 +1096,10 @@ def renderRowsModule (entries : Array CoverageRow) (denominator : Nat) : String 
     "Format version " ++ formatVersion ++ ". `lake exe census` fails on any byte of drift.\n\n" ++
     "This is the frozen row list of the specification-coverage numerator:\n" ++
     "one entry per census row, carrying the row id, the joined disposition, the\n" ++
-    "coverage state, and the witness list. `WhatwgStreamsTest/Audit/SpecCoverage.lean`\n" ++
+    "coverage state, and the witness list. `WhatwgTest/Audit/SpecCoverage.lean`\n" ++
     "owns the checks over it and `docs/SPEC-COVERAGE.md` owns the rules.\n-/\n\n" ++
     "import Gates\n\n" ++
-    "namespace WhatwgStreamsTest.Audit.SpecCoverageRows\n\n" ++
+    "namespace WhatwgTest.Audit.SpecCoverageRows\n\n" ++
     "open Gates.Census\n\n" ++
     "/-- One entry per census row, sorted by kind then id, as the census is. -/\n" ++
     "def rows : Array CoverageRow := #[\n"
@@ -1113,7 +1113,7 @@ def renderRowsModule (entries : Array CoverageRow) (denominator : Nat) : String 
   out := out ++ "]\n\n" ++
     s!"/-- Total census rows. -/\ndef rowTotal : Nat := {entries.size}\n\n" ++
     s!"/-- Rows inside the coverage denominator. -/\ndef denominator : Nat := {denominator}\n\n" ++
-    "end WhatwgStreamsTest.Audit.SpecCoverageRows\n"
+    "end WhatwgTest.Audit.SpecCoverageRows\n"
   return out
 
 /-! ## Building the census -/

@@ -112,7 +112,7 @@ stands at 450 rows (248 `op`, 133 `idl`, 62 `slot`, 7 `requirement`),
 denominator 410; the coverage block reads `denominator 410;
 owned-with-green 0/410; green 0, partial 0, absent 410; census 450 rows, 40
 excluded`. P2 placed 52 declaration-free breadth stubs under
-`WhatwgStreams/`, one per area and named sub-area of the architecture
+`Whatwg/Streams/`, one per area and named sub-area of the architecture
 table, every one reachable from the root and audited (78 modules). Lane S1
 landed the same day (`a8f08d0`): every digest the repository pins is
 computed by the proved SHA-256. The RS-D1 algebra package is planned in
@@ -137,7 +137,7 @@ therefore superseded. This repository takes `[[require]] effects` when the
 first Stratum S packet (P4) opens; P3 is Stratum V data and needs nothing
 from it.
 
-**P3 landed 2026-09-02:** the builder proved all 99 frozen theorems with zero battery edits (447 declarations from the two fenced modules, 375 axiom-free, 2 at `[propext, Quot.sound]`), the coordinator allocated the ruled `P3-R1` instance to `WhatwgStreams/Data/DyadicSize.lean`, the known-red set is empty again, and every gate is green. The first breaker-then-builder packet of the streams calculi is closed; `DATA-PG-QUEUE` has every applicable edge closed. The coverage numerator packet landed 2026-09-02: the block reads `denominator 410; owned-with-green 12/410; green 12, partial 6, absent 392; census 450 rows, 40 excluded`, printed from the Lean emit and refused on any disagreement. **Reorganization (operator, 2026-09-02):** `lean4-hash` finished at `0168306`. This repository becomes the single `whatwg` package, one library per standard, per `docs/WHATWG-PACKAGE-PLAN.md`; hash step 6 is its slice W3 and the effects require its slice W4. P4 and foldlab step 7 wait for W5.
+**P3 landed 2026-09-02:** the builder proved all 99 frozen theorems with zero battery edits (447 declarations from the two fenced modules, 375 axiom-free, 2 at `[propext, Quot.sound]`), the coordinator allocated the ruled `P3-R1` instance to `Whatwg/Streams/Data/DyadicSize.lean`, the known-red set is empty again, and every gate is green. The first breaker-then-builder packet of the streams calculi is closed; `DATA-PG-QUEUE` has every applicable edge closed. The coverage numerator packet landed 2026-09-02: the block reads `denominator 410; owned-with-green 12/410; green 12, partial 6, absent 392; census 450 rows, 40 excluded`, printed from the Lean emit and refused on any disagreement. **Reorganization (operator, 2026-09-02):** `lean4-hash` finished at `0168306`. This repository becomes the single `whatwg` package, one library per standard, per `docs/WHATWG-PACKAGE-PLAN.md`; hash step 6 is its slice W3 and the effects require its slice W4. P4 and foldlab step 7 wait for W5.
 
 **Operator direction 2026-09-02: the SHA-256 lane and foldlab's accepted
 SHA3-512 library are extracted into one shared hash package that this

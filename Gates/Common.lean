@@ -6,7 +6,7 @@ discovery, path spelling, file walking, small string utilities, and the
 Windows path-validity rule.
 
 Every gate resolves the repository root by searching upward for
-`WhatwgStreams.lean`, so it can be run from any working directory inside the
+`Whatwg.Streams.lean`, so it can be run from any working directory inside the
 checkout, and it never trusts an environment variable for that location.
 
 String utilities here operate on `List Char` rather than the slice API so
@@ -17,15 +17,15 @@ byte-position arithmetic.
 namespace Gates.Common
 
 /-- Search upward from `directory` for the repository root, identified by the
-production root module `WhatwgStreams.lean`. -/
+production root module `Whatwg.Streams.lean`. -/
 def findProjectRoot (directory : System.FilePath) : IO System.FilePath := do
   let mut current := directory
   for _ in [0:64] do
-    if ← (current / "WhatwgStreams.lean").pathExists then
+    if ← (current / "Whatwg.lean").pathExists then
       return current
     match current.parent with
     | some parent => current := parent
-    | none => throw <| IO.userError "gate: could not locate the repository root (no WhatwgStreams.lean above the working directory)"
+    | none => throw <| IO.userError "gate: could not locate the repository root (no Whatwg.Streams.lean above the working directory)"
   throw <| IO.userError "gate: repository-root search exceeded 64 parents"
 
 /-- The repository root for the current working directory. -/

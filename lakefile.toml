@@ -1,10 +1,10 @@
-name = "whatwgstreams"
+name = "whatwg"
 version = "0.1.0"
-description = "The WHATWG Streams Standard reified in Lean 4: spec-authoritative first-order model, relational semantics, EffHOL logic layer, checked TypeScript lowering; with a proved SHA-256 the gates depend on"
-keywords = ["whatwg", "streams", "verified", "sha-256", "fips-180-4", "lean4"]
+description = "WHATWG standards reified in Lean 4, one library per standard; Streams first: spec-authoritative first-order model, relational semantics, EffHOL logic layer, checked TypeScript lowering; with a proved SHA-256 the gates depend on"
+keywords = ["whatwg", "streams", "infra", "verified", "sha-256", "fips-180-4", "lean4"]
 license = "MIT"
 readmeFile = "README.md"
-defaultTargets = ["WhatwgStreams", "Gates", "WhatwgStreamsTest",
+defaultTargets = ["Whatwg", "Gates", "WhatwgTest",
                   "Sha256", "Sha256Verified",
                   "sha256", "vendorseal", "citations", "trustselftest", "census"]
 # `lake test` builds the audited SHA-256 root: its `#guard_msgs` pin on the
@@ -16,10 +16,11 @@ testDriver = "Sha256Verified"
 # so that `lake --wfail build` and a plain `lake build` decide the same thing.
 leanOptions = { autoImplicit = false, relaxedAutoImplicit = false, warningAsError = true }
 
-# The production library. Semantic declarations and proofs only.
+# The production library: one root per standard under Whatwg/, all
+# reached from Whatwg.lean. Semantic declarations and proofs only.
 [[lean_lib]]
-name = "WhatwgStreams"
-globs = ["WhatwgStreams.*"]
+name = "Whatwg"
+globs = ["Whatwg.*"]
 
 # Repository gates implemented in Lean. Tooling, not semantics; audited for
 # totality and forbidden axioms under the implementation ceiling.
@@ -29,8 +30,8 @@ globs = ["Gates.*"]
 
 # Contracts, attacks, receipts, and the elaboration-time axiom gate.
 [[lean_lib]]
-name = "WhatwgStreamsTest"
-globs = ["WhatwgStreamsTest.*"]
+name = "WhatwgTest"
+globs = ["WhatwgTest.*"]
 
 # SHA-256 from FIPS 180-4 (lane S1). The public library a consumer imports;
 # the semantic ceiling applies to every module in it.

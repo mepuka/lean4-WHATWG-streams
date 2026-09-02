@@ -1,14 +1,14 @@
 import Gates
 import Sha256.Verified
-import WhatwgStreamsTest.Counterexamples.Sha.Mutants
-import WhatwgStreamsTest.Counterexamples.Data.Queue
-import WhatwgStreamsTest.Data.QueueContract
-import WhatwgStreamsTest.Data.QueueAxiomReport
-import WhatwgStreamsTest.Audit.SpecCoverage
-import WhatwgStreamsTest.Audit.AxiomGate
+import WhatwgTest.Streams.Counterexamples.Sha.Mutants
+import WhatwgTest.Streams.Counterexamples.Data.Queue
+import WhatwgTest.Streams.Data.QueueContract
+import WhatwgTest.Streams.Data.QueueAxiomReport
+import WhatwgTest.Audit.SpecCoverage
+import WhatwgTest.Audit.AxiomGate
 
 /-!
-# WhatwgStreams test battery
+# Whatwg test battery
 
 The default Lake build imports every admitted contract, attack, and kernel
 dependency report through this root. A test file not reachable here is not a

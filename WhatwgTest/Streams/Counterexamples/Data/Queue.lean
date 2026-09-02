@@ -10,13 +10,13 @@ Register rows:   `WS-DATA-CE-001` .. `WS-DATA-CE-010` in
 
 This module is GREEN now and stays green after the builder lands. It is a
 breaker-owned, self-contained model in the `Breaker` namespace: it shares no
-name with the frozen surface, imports nothing from `WhatwgStreams`, and
+name with the frozen surface, imports nothing from `Whatwg`, and
 proves the attacks rather than the production laws. Its witnesses remain
 executable after the repair so the repair stays testable.
 
 Every proposition below is closed by `decide`, so the Lean kernel checks it
 with no compiler in the trust path. The receipts are inside the semantic
-ceiling; `WhatwgStreamsTest/Data/QueueAxiomReport.lean` records the frozen
+ceiling; `WhatwgTest/Streams/Data/QueueAxiomReport.lean` records the frozen
 surface's receipts once that surface exists.
 -/
 
@@ -30,7 +30,7 @@ set_option autoImplicit false
 -- kernel reduction alone.
 set_option maxRecDepth 8000
 
-namespace WhatwgStreamsTest.Counterexamples.Data.Breaker
+namespace WhatwgTest.Streams.Counterexamples.Data.Breaker
 
 /-! ## The grid
 
@@ -478,4 +478,4 @@ theorem ce010_peek_dequeue_agree_reference :
     ((enqueue Q.empty 1 3).bind fun q => enqueue q 2 5).bind (fun q => peek q) =
       some 1 := by decide
 
-end WhatwgStreamsTest.Counterexamples.Data.Breaker
+end WhatwgTest.Streams.Counterexamples.Data.Breaker

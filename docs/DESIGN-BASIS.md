@@ -90,7 +90,7 @@ LICS 2025) parameterizes effectful realizability by a monad and a program
 modality, and separates kinds, types, programs, logical indices, expressions,
 and specifications. This repository follows that organization: the stream
 semantics precede the logic, and `wlp`, totality, and realizability live in
-`WhatwgStreams/Logic`, never in the state machines.
+`Whatwg/Streams/Logic`, never in the state machines.
 
 The angle modality `<x <- p> φ` is classified as a weakest liberal
 precondition, `wlp`, not a total `wp`, because the paper permits

@@ -12,33 +12,33 @@ first-order data (queue-with-sizes, chunks, strategies)
   -> host conformance harnesses
 ```
 
-Nothing in `WhatwgStreams/` depends on `Gates/`, `WhatwgStreamsTest/`, or
-`harness/`. `Gates/` depends on nothing in `WhatwgStreams/`. The test tree
+Nothing in `Whatwg/Streams/` depends on `Gates/`, `WhatwgTest/Streams/`, or
+`harness/`. `Gates/` depends on nothing in `Whatwg/Streams/`. The test tree
 imports both.
 
 ## Planned source tree
 
 | Area | Public responsibility |
 | --- | --- |
-| `WhatwgStreams/Data` | queue-with-sizes, chunk universe, size functions, high-water marks, desired size |
-| `WhatwgStreams/Strategy` | the IDL class surface that reads the strategy slots; the two strategy records, their size functions, and the extraction operations live in `WhatwgStreams/Data/Strategy.lean` under `DATA-PG-QUEUE` (ownership repaired at the P3 landing, 2026-09-02) |
-| `WhatwgStreams/Readable` | `ReadableStream` state, default controller, default reader, generic reader mixin, tee, async iteration |
-| `WhatwgStreams/Readable/Byte` | byte controller, BYOB reader and request, pull-into descriptors (P9) |
-| `WhatwgStreams/Writable` | `WritableStream` state, default controller, default writer, backpressure |
-| `WhatwgStreams/Transform` | `TransformStream`, its controller, backpressure coupling |
-| `WhatwgStreams/Piping` | the piping requirements as a specification; the reference `pipeTo` algorithm as a realizer; `pipeThrough` |
-| `WhatwgStreams/Boundary` | foreign-boundary profiles: underlying source, sink, and transformer answers; abort signals; ArrayBuffer detachment |
-| `WhatwgStreams/Semantics` | configuration with the promise-job queue, labeled step relation, runs, frontiers, observation masks, equivalence |
-| `WhatwgStreams/Logic` | `wlp`, totality, the `wp` decomposition, the EffHOL modality instance |
-| `WhatwgStreams/Alphabet` | the closed combinator alphabet as first-order data |
-| `WhatwgStreams/Target/TypeScript` | typed target IR, lowering, rendering, decoding, simulation |
-| `WhatwgStreams/Bridge` | Node legacy streams calculus and Effect Channel embedding (P12) |
-| `WhatwgStreams/Meta` | declaration introspection and deterministic emitters |
-| `WhatwgStreams/Audit` | per-packet axiom receipts and closure snapshots |
+| `Whatwg/Streams/Data` | queue-with-sizes, chunk universe, size functions, high-water marks, desired size |
+| `Whatwg/Streams/Strategy` | the IDL class surface that reads the strategy slots; the two strategy records, their size functions, and the extraction operations live in `Whatwg/Streams/Data/Strategy.lean` under `DATA-PG-QUEUE` (ownership repaired at the P3 landing, 2026-09-02) |
+| `Whatwg/Streams/Readable` | `ReadableStream` state, default controller, default reader, generic reader mixin, tee, async iteration |
+| `Whatwg/Streams/Readable/Byte` | byte controller, BYOB reader and request, pull-into descriptors (P9) |
+| `Whatwg/Streams/Writable` | `WritableStream` state, default controller, default writer, backpressure |
+| `Whatwg/Streams/Transform` | `TransformStream`, its controller, backpressure coupling |
+| `Whatwg/Streams/Piping` | the piping requirements as a specification; the reference `pipeTo` algorithm as a realizer; `pipeThrough` |
+| `Whatwg/Streams/Boundary` | foreign-boundary profiles: underlying source, sink, and transformer answers; abort signals; ArrayBuffer detachment |
+| `Whatwg/Streams/Semantics` | configuration with the promise-job queue, labeled step relation, runs, frontiers, observation masks, equivalence |
+| `Whatwg/Streams/Logic` | `wlp`, totality, the `wp` decomposition, the EffHOL modality instance |
+| `Whatwg/Streams/Alphabet` | the closed combinator alphabet as first-order data |
+| `Whatwg/Streams/Target/TypeScript` | typed target IR, lowering, rendering, decoding, simulation |
+| `Whatwg/Streams/Bridge` | Node legacy streams calculus and Effect Channel embedding (P12) |
+| `Whatwg/Streams/Meta` | declaration introspection and deterministic emitters |
+| `Whatwg/Streams/Audit` | per-packet axiom receipts and closure snapshots |
 | `Sha256` | the S1 proven SHA-256: `Spec`, `Impl`, bridge (separate library at the semantic ceiling; `Gates` consumes `Impl`) |
 
-Tests mirror these areas under `WhatwgStreamsTest/`. Durable attacks live
-under `WhatwgStreamsTest/Counterexamples/`, while their stable registry and
+Tests mirror these areas under `WhatwgTest/Streams/`. Durable attacks live
+under `WhatwgTest/Streams/Counterexamples/`, while their stable registry and
 contracts live under `test/`.
 
 ## Public API principles

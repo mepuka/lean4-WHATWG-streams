@@ -16,7 +16,7 @@ Three artefacts carry it once P1 lands:
 | Artefact | Role | Owner |
 | --- | --- | --- |
 | `generated/spec-algorithm-census.tsv` | the denominator: one row per specification row, anchored to the pinned bytes with a span digest | the P1 census generator under `Gates/` |
-| `WhatwgStreamsTest/Audit/SpecCoverage.lean` | the numerator: the frozen row list with disposition, coverage state, witnesses, receipts, and exact witness statements | authored, test-side |
+| `WhatwgTest/Audit/SpecCoverage.lean` | the numerator: the frozen row list with disposition, coverage state, witnesses, receipts, and exact witness statements | authored, test-side |
 | a Lean census gate | byte drift of the census and the join between census and Lean rows | CI step |
 
 The pinned source is `vendor/whatwg-streams-b9ba9f49/index.bs`; the
@@ -92,7 +92,7 @@ never restates numbers from memory or from an earlier session.
 - The authored files under `census/` own dispositions: a section map and
   per-row overrides. A row that no entry reaches fails generation; an entry
   that reaches no row also fails generation.
-- `WhatwgStreamsTest/Audit/SpecCoverage.lean` owns coverage states and
+- `WhatwgTest/Audit/SpecCoverage.lean` owns coverage states and
   witnesses, and checks ids and order against the census in both directions
   and that every authored override reached its row. Its frozen row list is
   generated into `SpecCoverageRows.lean` by the same `--write` and covered
@@ -100,7 +100,7 @@ never restates numbers from memory or from an earlier session.
   and the checks.
 - Since the P3 coverage landing (2026-09-02) the report is printed from the
   numerator's checked emit: `bin/Census.lean` imports
-  `WhatwgStreamsTest/Audit/SpecCoverage.lean`, so building the census
+  `WhatwgTest/Audit/SpecCoverage.lean`, so building the census
   executable elaborates the numerator's gate, and `Gates.Census.verifyEmit`
   re-derives every census-owned column from a fresh regeneration and enforces
   the witness rules before `lake exe census --report` prints. There is no

@@ -9,8 +9,8 @@ work without repeating the same rule in several directories.
 | File | Applies to | Additional authority |
 | --- | --- | --- |
 | `AGENTS.md` | the whole repository | development order, authority order, representation rules, claims, gates, handoffs |
-| `WhatwgStreams/AGENTS.md` | Lean library declarations and proofs | source ownership, spec anchors, assurance routes, proof-graph obligations, the semantic ceiling |
-| `WhatwgStreamsTest/AGENTS.md` | Lean tests and proof receipts | attacks, counterexample witnesses, known-red declaration, coverage witnesses, audit admissions |
+| `Whatwg/AGENTS.md` | Lean library declarations and proofs | source ownership, spec anchors, assurance routes, proof-graph obligations, the semantic ceiling |
+| `WhatwgTest/AGENTS.md` | Lean tests and proof receipts | attacks, counterexample witnesses, known-red declaration, coverage witnesses, audit admissions |
 | `Gates/AGENTS.md` | Lean-implemented gates | totality, the implementation ceiling, the PASS/FAIL reporting rule, projection writes |
 | `harness/AGENTS.md` | host evidence | exact host profiles, WPT replay, refusal rows |
 | `generated/AGENTS.md` | deterministic machine projections | regeneration and drift rules |
@@ -164,7 +164,7 @@ from this repository's P0 skeleton must therefore rename its tooling tree
 and executable roots and executable names with its own prefix before any
 consumer can `[[require]]` it: `Gates.*` becomes `<Name>Gates.*`, `bin.*`
 becomes `<name>bin.*`, and `sha256`, `vendorseal`, `citations`,
-`trustselftest` become `<name>_…`. Library roots (`WhatwgStreams`, `Hash`,
+`trustselftest` become `<name>_…`. Library roots (`Whatwg`, `Hash`,
 `Effects`) are already unique by construction. The first collision cost one
 seat-run: `lean4-hash` at `92cb0cf` could not be required by this repository
 until its S6 rename.

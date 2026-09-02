@@ -4,7 +4,7 @@ This boundary will contain host conformance evidence: Web Platform Tests
 replayed against the pinned reference implementation, Node's
 `node:stream/web`, and Bun, plus decision-tape replay of the bounded Lean
 runner against those hosts. Host evidence tests an exact host profile; it does
-not own WhatwgStreams semantics.
+not own Whatwg semantics.
 
 ## Exact profiles
 

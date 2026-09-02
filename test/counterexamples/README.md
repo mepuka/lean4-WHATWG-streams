@@ -6,7 +6,7 @@ decision.
 
 `REGISTER.md` assigns stable IDs and records the exact attacked statement,
 witness, evidence command, proof assumptions, forced repair, and current
-status. Lean witnesses live under `WhatwgStreamsTest/Counterexamples/<Area>/`
+status. Lean witnesses live under `WhatwgTest/Streams/Counterexamples/<Area>/`
 and are linked from the register; each area also keeps an `ATTACKS.md`
 describing the attack shapes in prose. Negative fixtures and implementation
 mutants are recorded separately because they attack gates rather than

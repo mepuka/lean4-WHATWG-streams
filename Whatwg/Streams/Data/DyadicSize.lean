@@ -1,4 +1,4 @@
-import WhatwgStreams.Data.Queue
+import Whatwg.Streams.Data.Queue
 
 /-!
 # Data.DyadicSize.lean — the `P3-R1` instance (landed by the coordinator, 2026-09-02)
@@ -7,10 +7,10 @@ The `P3-R1` instance. Written by the P3 builder outside its fence and allocated 
 item 7 of `test/contracts/queue-with-sizes.contract.md` says the packet
 "declares no arithmetic instance ... the instance arrives with the `P3-R1`
 ruling, in a module this contract does not fence", and the builder's fence is
-exactly `WhatwgStreams/Data/Queue.lean` and `WhatwgStreams/Data/Strategy.lean`.
+exactly `Whatwg/Streams/Data/Queue.lean` and `Whatwg/Streams/Data/Strategy.lean`.
 It is written here, compiled against the landed surface, and handed to the
-coordinator with a module allocation request: a new `WhatwgStreams/Data/`
-module, an `import` line in `WhatwgStreams.lean`, and a twelfth existing-type
+coordinator with a module allocation request: a new `Whatwg/Streams/Data/`
+module, an `import` line in `Whatwg.Streams.lean`, and a twelfth existing-type
 row in `docs/DATA-DAG.md`, none of which the builder may write.
 
 ## The carrier, and why this one
@@ -29,7 +29,7 @@ rationals. Three reasons, in order of weight:
    `[[queueTotalSize]]` before rounding is always representable here, and the
    subgroup is closed under `+` and `−`, so every exact sum of such values
    stays in it. A carrier on the breaker's `2 ^ (-106)` grid
-   (`WhatwgStreamsTest/Counterexamples/Data/Queue.lean`) reproduces the pinned
+   (`WhatwgTest/Streams/Counterexamples/Data/Queue.lean`) reproduces the pinned
    WPT case and nothing smaller; this one reproduces every double.
 2. **A per-value exponent would make the `Exact` equations unprovable as
    stated.** `SizeClass.Exact` is four equations *in the carrier*, i.e. Lean
@@ -55,7 +55,7 @@ disagreement.
 
 set_option autoImplicit false
 
-namespace WhatwgStreams.Data
+namespace Whatwg.Streams.Data
 
 /-- A size on the fixed dyadic grid `2 ^ (-1074)`, extended with the three
 special points an ECMAScript Number has. `finite u` denotes
@@ -239,4 +239,4 @@ theorem exact : sizes.Exact where
 
 end DyadicSize
 
-end WhatwgStreams.Data
+end Whatwg.Streams.Data
