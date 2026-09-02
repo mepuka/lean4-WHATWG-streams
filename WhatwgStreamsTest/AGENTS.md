@@ -43,8 +43,10 @@ they acquire a semantic or cutover-bearing claim.
 numerator of the specification coverage metric: one frozen row per census
 algorithm, its disposition, coverage state, witnesses with axiom receipts, and
 every witness statement frozen by `#check (@name : proposition)` ascription. A
-witness is a `theorem` whose receipt stays inside `propext`/`Quot.sound`; a
-row is `green` only when every step of its algorithm is a named theorem.
+witness is a `theorem` whose receipt stays inside the ceiling (`propext`,
+`Quot.sound`, `Classical.choice`, ruling R-11); a row is `green` only when
+every step of its algorithm is a named theorem or an assertion discharged by
+typing.
 `docs/SPEC-COVERAGE.md` owns the rules.
 
 ## Audit implementation

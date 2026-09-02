@@ -42,7 +42,7 @@ leave `absent`.
 | --- | --- | --- |
 | `absent` | no witness | the only state allowed with an empty witness list |
 | `partial` | at least one witness, but some step or clause of the row has no theorem | must list what is missing in the row's comment |
-| `green` | every step or clause of the row is a named theorem over the Lean model, with an axiom receipt inside `propext`/`Quot.sound`, under a named observation mask | never declared to make a number move |
+| `green` | every step or clause of the row is a named theorem over the Lean model, with an axiom receipt inside the ceiling (`propext`, `Quot.sound`, `Classical.choice` since ruling R-11), under a named observation mask where the family has one (an equational family whose contract states no mask records that instead, per row) | never declared to make a number move |
 
 The green criterion is step-by-step against the algorithm text. A finite
 probe, a compile, a WPT pass, or a theorem about the Lean model's own
@@ -51,7 +51,18 @@ invariants does not turn a step green. When in doubt the state is `partial`.
 **Witness**: a Lean `theorem` (never a `def`, never a Prop-typed def) whose
 exact statement is frozen in the module's `StatementSnapshot` section by
 `#check (@name : proposition)` ascription, and whose kernel receipt is
-`none`, `propext`, `Quot.sound`, or `propext,Quot.sound`.
+inside the ceiling: any subset of `propext`, `Quot.sound`, `Classical.choice`
+(ruling R-11).
+
+**Assertion steps discharged by typing (ruled at the P3 coverage landing,
+2026-09-02).** A step of the form "Assert: X has internal slots A and B"
+whose negation the carrier cannot represent (the argument type carries the
+fields) has no theorem to witness it and counts as discharged. The numerator
+records this mechanically (`Justification.byTyping`) so the rule can be
+overturned in one place; overturning it would move four queue-operation rows
+from `green` to `partial` and nothing else. Every other step is judged
+strictly: a step left to a foreign-boundary row forces `partial`, and the
+module fails the build on a `green` row with such a step.
 
 ## The report format
 
@@ -87,10 +98,14 @@ never restates numbers from memory or from an earlier session.
   generated into `SpecCoverageRows.lean` by the same `--write` and covered
   by the same drift gate; the authored freeze is the pair of expected totals
   and the checks.
-- At P1 the report is computed from the census with green and partial equal
-  to zero, which is sound only because the numerator module gates every row
-  `absent` with no witness. The first witness (P3) moves the printer onto
-  the Lean emit; that change lands with the witness, not before.
+- Since the P3 coverage landing (2026-09-02) the report is printed from the
+  numerator's checked emit: `bin/Census.lean` imports
+  `WhatwgStreamsTest/Audit/SpecCoverage.lean`, so building the census
+  executable elaborates the numerator's gate, and `Gates.Census.verifyEmit`
+  re-derives every census-owned column from a fresh regeneration and enforces
+  the witness rules before `lake exe census --report` prints. There is no
+  generated coverage file; a red numerator fails the build instead of
+  printing a number.
 
 `typedef`, `enum`, and `includes` statements are `idl` rows; an `includes`
 statement, which declares no name, is identified by the pair it relates

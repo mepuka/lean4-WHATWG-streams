@@ -30,9 +30,15 @@ jobs:
         run: lake exe vendorseal
       - name: Internal-citation gate
         run: lake exe citations
-      - name: Specification-algorithm census against the pinned index.bs
+      # Both census steps link the coverage numerator: since the first P3
+      # witnesses landed, bin/Census.lean imports
+      # WhatwgStreamsTest/Audit/SpecCoverage.lean so that the block below is
+      # printed from that module's checked emit instead of from assumed zeros.
+      # Building the census executable therefore elaborates the numerator's
+      # gate, and a red numerator fails here rather than printing a number.
+      - name: Specification-algorithm census, and the coverage emit against it
         run: lake exe census
-      - name: Specification coverage block
+      - name: Specification coverage block from the Lean emit
         run: lake exe census --report
       - name: Trust self-test with planted violations
         run: lake exe trustselftest

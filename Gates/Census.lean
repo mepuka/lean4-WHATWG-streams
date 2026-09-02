@@ -17,8 +17,18 @@ that occurs exactly once and by the SHA-256 of its span.
   the test-side numerator checks itself against.
 
 `lake exe census` checks the input digest, anchor uniqueness, every span
-digest, the disposition join, and byte-identity of both projections against a
-fresh regeneration. `lake exe census --report` prints the coverage block.
+digest, the disposition join, byte-identity of both projections against a
+fresh regeneration, and the numerator's coverage emit against that same
+regeneration. `lake exe census --report` prints the coverage block from the
+emit.
+
+The emit is not a file. `WhatwgStreamsTest/Audit/SpecCoverage.lean` owns the
+coverage states and witnesses and exports them as `emit`; `bin/Census.lean`
+imports that module and hands the array to `cli` below, because `Gates/` may
+not import a test-side module. Every number this executable prints therefore
+comes from Lean data that the numerator's own elaboration-time gate has
+already checked, and the two functions below re-check it against the census
+they regenerate.
 
 ## Representation, and the R0 evidence each choice rests on
 
@@ -1291,7 +1301,42 @@ def verifyLine (bs : ByteArray) (line : String) (lineNumber : Nat) : Except Stri
     .error s!"census line {lineNumber} ({rowId}): span digest {observed} does not match the recorded {recorded}"
   .ok ()
 
-def check (root : System.FilePath) : IO UInt32 := do
+/-- The numerator's emit against a fresh census regeneration. The census owns
+row ids, their order, and dispositions; the numerator owns coverage states and
+witnesses. This checks the first three in both directions and the two rules
+`docs/SPEC-COVERAGE.md` states about the last two: an empty witness list is
+allowed only with `absent`, and a row outside the denominator carries no
+witness. -/
+def verifyEmit (built : Built) (emit : Array CoverageRow) : Array String := Id.run do
+  let mut failures : Array String := #[]
+  if emit.size != built.rows.size then
+    failures := failures.push
+      s!"the coverage emit holds {emit.size} rows; a fresh regeneration of {censusRelativePath} holds {built.rows.size}"
+    return failures
+  for i in [0:built.rows.size] do
+    let row := built.rows.getD i default
+    let entry := emit.getD i default
+    let disposition := built.dispositions.getD i default
+    if entry.id != row.id then
+      failures := failures.push
+        s!"coverage emit row {i} is {entry.id}; the regenerated census row is {row.id}"
+    else if entry.disposition != disposition then
+      failures := failures.push
+        s!"coverage emit row {entry.id} carries disposition {entry.disposition.name}; the regenerated disposition join gives {disposition.name}"
+    else if entry.state == CoverageState.absent then
+      unless entry.witnesses.isEmpty do
+        failures := failures.push
+          s!"coverage emit row {entry.id} is absent yet carries witnesses {entry.witnesses}"
+    else
+      if entry.witnesses.isEmpty then
+        failures := failures.push
+          s!"coverage emit row {entry.id} is {entry.state.name} with no witness"
+      if disposition.excluded then
+        failures := failures.push
+          s!"coverage emit row {entry.id} is {entry.state.name}, but its disposition {disposition.name} is outside the denominator"
+  return failures
+
+def check (root : System.FilePath) (emit : Array CoverageRow) : IO UInt32 := do
   match ← buildFromRoot root with
   | .error message =>
     IO.eprintln s!"FAIL {message}"
@@ -1332,10 +1377,12 @@ def check (root : System.FilePath) : IO UInt32 := do
       if dataLines.length != built.rows.size then
         failures := failures.push
           s!"{censusRelativePath} carries {dataLines.length} rows; the generator produced {built.rows.size}"
+    for failure in verifyEmit built emit do
+      failures := failures.push failure
     if failures.isEmpty then
       IO.println (summaryLine built)
       IO.println
-        s!"PASS census: input digest is the pin, every anchor occurs exactly once at its span start, every span digest recomputes, every row has exactly one disposition, and both projections are byte-identical to a fresh regeneration"
+        s!"PASS census: input digest is the pin, every anchor occurs exactly once at its span start, every span digest recomputes, every row has exactly one disposition, both projections are byte-identical to a fresh regeneration, and the coverage emit agrees with that regeneration row for row"
       return 0
     IO.eprintln s!"FAIL census: {failures.size} problem(s)"
     for failure in failures do IO.eprintln s!"  {failure}"
@@ -1343,29 +1390,48 @@ def check (root : System.FilePath) : IO UInt32 := do
 
 /-- The coverage block of `docs/SPEC-COVERAGE.md`.
 
-At P1 the numerator is empty, so `green` and `partial` are zero for every row
-and the block is determined by the census and its dispositions.
-`WhatwgStreamsTest/Audit/SpecCoverage.lean` fails the build if any row leaves
-`absent` or acquires a witness, so that emptiness is gated rather than
-assumed. The first witness moves this printer onto a Lean emit. -/
-def report (root : System.FilePath) : IO UInt32 := do
+The denominator, the row total and the exclusions come from a fresh census
+regeneration; every coverage state and witness comes from the numerator's
+`emit`, which `verifyEmit` first checks against that regeneration. Nothing
+here assumes a state: with the P3 witnesses landed, `green` and `partial` are
+counted, and a disagreement between the two sides is a failure rather than a
+printed number. -/
+def report (root : System.FilePath) (emit : Array CoverageRow) : IO UInt32 := do
   match ← buildFromRoot root with
   | .error message =>
     IO.eprintln s!"FAIL {message}"
     return 1
   | .ok (_, built) =>
+    let failures := verifyEmit built emit
+    unless failures.isEmpty do
+      IO.eprintln s!"FAIL census report: {failures.size} problem(s) between the coverage emit and the census"
+      for failure in failures do IO.eprintln s!"  {failure}"
+      return 1
     let total := built.rows.size
     let denominator := built.denominator
     let excluded := total - denominator
-    let green := 0
-    let partialCount := 0
+    let green :=
+      emit.foldl (fun acc row => if row.state == CoverageState.green then acc + 1 else acc) 0
+    let partialCount :=
+      emit.foldl (fun acc row => if row.state == CoverageState.partialCoverage then acc + 1 else acc) 0
     let absent := denominator - green - partialCount
-    let ownedWithGreen := 0
+    let ownedWithGreen :=
+      emit.foldl
+        (fun acc row =>
+          if row.disposition == Disposition.owned && row.state == CoverageState.green then acc + 1
+          else acc)
+        0
+    let partialIds :=
+      (emit.filter (fun row => row.state == CoverageState.partialCoverage)).map (fun row => row.id)
+    let sortedIds := partialIds.qsort (fun a b => a < b)
     IO.println
       s!"WHATWG Streams (b9ba9f49) coverage: denominator {denominator}; owned-with-green {ownedWithGreen}/{denominator};"
     IO.println
       s!"green {green}, partial {partialCount}, absent {absent}; census {total} rows, {excluded} excluded"
-    IO.println "partial:"
+    if sortedIds.isEmpty then
+      IO.println "partial:"
+    else
+      IO.println s!"partial: {String.intercalate " " sortedIds.toList}"
     return 0
 
 def usage : String :=
@@ -1373,13 +1439,15 @@ def usage : String :=
   "       lake exe census --write   regenerate the census and the frozen coverage row list\n" ++
   "       lake exe census --report  print the coverage block of docs/SPEC-COVERAGE.md"
 
-/-- Command-line entry, invoked by `bin/Census.lean`. -/
-def cli (args : List String) : IO UInt32 := do
+/-- Command-line entry, invoked by `bin/Census.lean`, which supplies the
+numerator's coverage emit. `--write` does not take it: regenerating the census
+must stay possible while the numerator is red. -/
+def cli (emit : Array CoverageRow) (args : List String) : IO UInt32 := do
   let root ← Gates.Common.projectRoot
   match args with
-  | [] => check root
+  | [] => check root emit
   | ["--write"] => write root
-  | ["--report"] => report root
+  | ["--report"] => report root emit
   | _ =>
     IO.eprintln usage
     return 2

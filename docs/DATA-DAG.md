@@ -218,3 +218,19 @@ by the receipts above and the closed `WS-DATA-CE-001`..`010` rows; bridges
 and targets remain `not-applicable` at this stratum. The census rows this
 packet turns `green` (12) and `partial` (6) are the builder's proposal in §6
 and land through the coverage numerator in a separate packet.
+
+## Coverage landed (coordinator, 2026-09-02)
+
+The §6 proposal landed as 12 `green` and 6 `partial`, reached step by step
+from the pinned bytes by the coverage seat, with 55 witness theorems (27
+axiom-free, 28 at `[propext]`). Two proposed witnesses were rejected:
+`CountQueuingStrategy.make_does_not_validate` (statement identical to
+`make_highWaterMark`; `make_accepts_nan` carries the content) and
+`realm_identity_refused` (its statement is `congrArg` and witnesses no step;
+`DATA-FB-REALM` alone carries those steps). The §3 row for `slot.queue`
+attributed the value-with-size sentence to the slot span; that span is the
+`[[queue]]` definition in the default controller's slot table, and the
+sentence lives in the queue-with-sizes section; the state is unaffected.
+The coverage edge closes. The block at this landing:
+`denominator 410; owned-with-green 12/410; green 12, partial 6, absent 392;
+census 450 rows, 40 excluded`.
