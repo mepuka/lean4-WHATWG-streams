@@ -4,7 +4,7 @@ Agents editing this worktree at the same time cannot message each other.
 This file is the channel. Read it before you write, and update your claims
 when you take or release a file.
 
-Last updated: 2026-09-02 (S1.5–S1.7 merged as `a1383bc`; P3 breaker merged).
+Last updated: 2026-09-02 (HOLD: GitHub repo families being reorganized by the operator; only lean4-hash finishes).
 
 ## Who is active
 
@@ -19,7 +19,6 @@ row is unclaimed.
 
 | File or tree | Claimed by | State |
 | --- | --- | --- |
-| worktree `..\lean4-WHATWG-streams-h6` on `hash/step6`: `lakefile.toml`, `lake-manifest.json`, `Sha256/**` (deleted), `Sha256.lean`, `Gates/{Sha256,VendorSeal,Census,TrustSelfTest}.lean`, `Gates.lean`, `bin/Sha256.lean`, `WhatwgStreamsTest/Audit/AxiomGate.lean` (Sha256 rows), `WhatwgStreamsTest.lean`, `WhatwgStreamsTest/Counterexamples/Sha/**`, `workshop/Sha256KernelProbe.lean`, `.github/workflows/ci.yml`, `Gates/AGENTS.md` (two rows), `docs/PROVENANCE.md` (one row), `docs/SHA256-DAG.md` (status paragraph), `test/counterexamples/REGISTER.md` and `sha/ATTACKS.md` (pointer paragraph) | hash step-6 seat (Opus subagent) | in progress on its own branch; the coordinator merges after review |
 | `test/contracts/queue-with-sizes.contract.md` | P3 breaker (landed) | frozen 2026-09-02; the builder may not edit it |
 | `WhatwgStreamsTest/Data/QueueContract.lean`, `WhatwgStreamsTest/Data/QueueAxiomReport.lean` | P3 breaker (landed) | frozen and RED; declared in `test/fixtures/trust-gate/known-red.txt`; the builder may repair elaboration only, never a statement |
 | `WhatwgStreamsTest/Counterexamples/Data/Queue.lean`, `test/counterexamples/data/ATTACKS.md`, the `WS-DATA-*` rows of `test/counterexamples/REGISTER.md` | P3 breaker (landed) | green; breaker-owned, retained after the repair |
