@@ -48,6 +48,9 @@ Every gate is Lean. Shell files, where they exist, only orchestrate.
   digest, fetch command, and cross-check.
 - [`docs/SHA256-DAG.md`](docs/SHA256-DAG.md) is the proof plan for the SHA-256
   the gates depend on.
+- [`docs/HASH-PACKAGE-PLAN.md`](docs/HASH-PACKAGE-PLAN.md) plans the
+  extraction of the SHA-256 lane and foldlab's SHA3-512 into one shared,
+  proved hash library that this repository will depend on.
 - [`docs/REIFICATION-STRATEGY.md`](docs/REIFICATION-STRATEGY.md) is the
   draft cross-standard design: three strata of one effects algebra, the
   specification dependency graph as a handler tower, two realizers per

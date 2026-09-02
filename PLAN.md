@@ -125,6 +125,13 @@ the queue-with-sizes contract and red battery. Next after those land: the
 P3 builder against the frozen packet, and the P3-R1 size-carrier ruling the
 breaker surfaces.
 
+**Operator direction 2026-09-02: the SHA-256 lane and foldlab's accepted
+SHA3-512 library are extracted into one shared hash package that this
+repository depends on.** `docs/HASH-PACKAGE-PLAN.md` owns the steps; it
+runs after the S1.5–S1.7 seat lands (step 0) and lands here as the first
+`[[require]]` (step 6), with byte-identical regeneration of both generated
+projections as the cutover proof.
+
 P1 was opened by the operator on the R0 evidence, delegated to
 one seat in the worktree branch `p1/census` while lane S1's builder holds
 the main tree. The census generator's representation decisions are fixed
