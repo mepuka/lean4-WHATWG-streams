@@ -53,9 +53,13 @@ Every census row receives exactly one disposition.
 
 ## Section dispositions (P0 survey of `index.bs`)
 
-The survey counted 248 `<div algorithm>` blocks, 66 distinct internal slot
-names, and 7,041 lines. The P1 census generator replaces these counts with
-generated rows; do not quote them as coverage.
+The survey counted 248 algorithm-block openers beginning `<div algorithm`,
+of which 229 are the bare `<div algorithm>` and 19 carry attributes, 66
+distinct internal slot names, and about 8,400 lines (the earlier figure of
+7,041 was a non-blank line count). The P1 census generator must key on the
+`<div algorithm` prefix, not the closing bracket, or it silently drops those
+19 blocks. It replaces these counts with generated rows; do not quote them
+as coverage.
 
 | Section id | Title | Disposition | Phase |
 | --- | --- | --- | --- |

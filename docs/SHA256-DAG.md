@@ -88,12 +88,24 @@ message schedule built by `push`.
 
 Contrast with fips202's baseline: 20.7 s per MiB, because `BitVec 64` is a
 `Nat` at runtime and lanes with the top bit set are bignums. SHA-256 words
-are 32 bits, so even a `BitVec 32` implementation stays inside Lean's scalar
-`Nat` range; the native gap here is the `%`-based arithmetic and boxing of
-`BitVec`, not bignums. **Prediction, to be measured at S1.1:** `Impl` over
-`BitVec 32` runs within one order of magnitude of `Fast`, and a kernel
-`decide +kernel` known-answer test for the empty message fits the 30 s
-budget. Neither number exists yet; §6 S1.1 records them.
+are 32 bits, so a `BitVec 32` implementation stays inside Lean's scalar
+`Nat` range. The coordinator's P0 prediction that `Impl` over `BitVec 32`
+would therefore run "within one order of magnitude of `Fast`" is
+**REFUTED** by R0-A (`docs/research/2026-09-01-lean-stdlib-strategy-and-performance.md`,
+section 4): identical rotate/xor/shift/add over 10^7 iterations measured
+6572.78 ms on `BitVec 32` against 8.90 ms on `UInt32`, a factor of 738. The
+gap is allocation and `%`-wrapping through `Fin`, not bignums, and it is two
+orders larger than predicted. The prohibition in §3.3 stands; the three-layer
+split is not optional.
+
+The same document inverts the picture in the kernel: a 64-round `BitVec 32`
+loop reduces in about 3 ms above baseline where the `UInt32` form costs
+about 35 ms, and under the default `maxRecDepth` every plain `decide` and
+`rfl` in its battery failed with "maximum recursion depth has been reached"
+while `decide +kernel` passed. So `Impl` stays on `BitVec 32` for the
+kernel's sake, every known-answer test on `Impl` uses `decide +kernel`, and
+R-4's 30 s budget is expected to hold comfortably. S1.1 records the actual
+numbers.
 
 The performance question that fips202 had to solve is therefore not this
 lane's problem. This lane's problem is that the P0 tooling is written in
