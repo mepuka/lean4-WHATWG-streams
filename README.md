@@ -35,6 +35,13 @@ lake exe trustselftest           # planted partial/unsafe/choice/sorry/native_de
 
 Every gate is Lean. Shell files, where they exist, only orchestrate.
 
+While a frozen breaker battery waits for its builder, the modules listed in
+`test/fixtures/trust-gate/known-red.txt` are red by design and a plain
+`lake build` fails on exactly them. In that phase `lake exe trustselftest`
+is the deciding gate: it checks the declared set against the observed set in
+both directions, excises it, and runs the axiom gate on the green remainder.
+CI builds the production libraries and gate executables and then runs it.
+
 ## Where to start
 
 - [`AGENTS.md`](AGENTS.md) routes all work in this repository.

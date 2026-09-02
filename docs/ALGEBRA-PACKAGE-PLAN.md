@@ -1,6 +1,15 @@
 # Plan: extracting `Effect4.Algebra` into a standalone package (RS-D1)
 
-Status: **PLAN ONLY, 2026-09-02. Nothing is executed.** The operator holds
+Status: **SUPERSEDED 2026-09-02.** The operator executed the extraction on
+the Mac as `mepuka/lean4-effects` (v0.1.0, commit `5611c3a`, namespace
+`Effects`, history preserved by `git filter-repo`, parity receipt
+`generated/algebra-parity.tsv` over 215 constants, sixty theorem receipts
+inside `propext`/`Quot.sound`), consumed by lean4-effect4 at that commit.
+This document is kept as the record of the plan; the executed shape matches
+its steps 1–5 and AP-1 through AP-3 at their defaults. Step 6 (this
+repository's dependency) opens with P4.
+
+Original status: **PLAN ONLY, 2026-09-02. Nothing is executed.** The operator holds
 this until incoming lean4-effect4 work on the Mac lands; the module facts
 below were read from the local clone at commit `f4f55fa` and must be
 re-read against whatever lands before any step runs.

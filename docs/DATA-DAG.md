@@ -181,3 +181,15 @@ observable.
 | `P3-R3` | whether `sizeSum` is public; recommendation: keep it public | coordinator |
 | P1.1 follow-up | the census carries `slot.high-water-mark` for `ByteLengthQueuingStrategy` only, though `cqs-internal-slots` defines the same slot for `CountQueuingStrategy`. Either a second slot row is missing or the two `<dfn for=…>` forms are being collapsed by the generator | the P1 census seat |
 | finding B1 | there is no `ValidateAndNormalizeHighWaterMark` algorithm at this pin, only `ExtractHighWaterMark` behind a stale anchor id. Any later document or brief that names the former is describing an older revision | recorded here; no action beyond not declaring it |
+
+## Rulings (coordinator, 2026-09-02)
+
+| Id | Ruling |
+| --- | --- |
+| `P3-R1` | **Option (i): an exact carrier.** Sizes are exact numbers extended with `nan`, `posInfinity`, and `negInfinity` as `SizeClass` constants; the builder supplies a concrete instance built from `Int`/`Nat` (a dyadic rational or a rational pair; the builder chooses and states why) satisfying `SizeClass.Classified`, `Ordered`, and `Exact`. The host's binary64 rounding is a foreign boundary (`DATA-FB-ROUNDING`): the four floating-point WPT cases are host-only under mask M1, and `WS-DATA-CE-001` stays the registered disagreement. `DequeueValue` step 6's clamp is modelled and proved unreachable under `Exact`, which is the honest statement of what the specification's rounding note means once rounding is outside the model. |
+| `P3-R2` | One exception carrier per calculus is not minted; the queue packet's `RangeError` is embedded into the shared exception type when the readable and writable packets introduce it (P4/P5), by an explicit injection with a proved retraction. No widening of the frozen signatures. |
+| `P3-R3` | `sizeSum` stays public; it is the statement of `WF` and the readable/writable controllers' desired-size laws cite it. |
+
+The P3 builder may start against these rulings. The frozen statements do not
+change; the rulings select the `SizeClass` instance and the disposition of the
+four WPT files.

@@ -119,11 +119,25 @@ computed by the proved SHA-256. The RS-D1 algebra package is planned in
 `docs/ALGEBRA-PACKAGE-PLAN.md` and held until the operator's incoming
 lean4-effect4 work lands.
 
-In flight: the S1.5–S1.7 seat (streaming, SHA-224, assurance) on branch
-`s1/streaming`, and the P3 breaker on branch `p3/queue-breaker` freezing
-the queue-with-sizes contract and red battery. Next after those land: the
-P3 builder against the frozen packet, and the P3-R1 size-carrier ruling the
-breaker surfaces.
+**Landed 2026-09-02:** S1.5–S1.7 (merge `a1383bc`: streaming `Context`
+with the buffered-update law, SHA-224 proved end to end, lean4lean stopped
+at its own toolchain gate) and the P3 breaker (merge of `p3/queue-breaker`:
+72 frozen ascriptions, 99 theorems red, 44 green witnesses, `DATA-PG-QUEUE`).
+`P3-R1` is ruled in `docs/DATA-DAG.md`: an exact size carrier with binary64
+rounding as a foreign boundary. Main is deliberately red on the two declared
+battery modules until the P3 builder lands; the trust self-test is the
+deciding gate meanwhile and CI builds the production targets.
+
+**The algebra dependency is settled by the operator on the Mac:**
+`mepuka/lean4-effects` v0.1.0 (commit `5611c3a`) is the standalone
+`Effects.Algebra` package, already required by lean4-effect4 at that
+commit; its README names WHATWG Streams as the first web-standard
+reification built against it. RS-D1 and `docs/ALGEBRA-PACKAGE-PLAN.md` are
+therefore superseded. This repository takes `[[require]] effects` when the
+first Stratum S packet (P4) opens; P3 is Stratum V data and needs nothing
+from it.
+
+Next: the P3 builder against the frozen packet.
 
 **Operator direction 2026-09-02: the SHA-256 lane and foldlab's accepted
 SHA3-512 library are extracted into one shared hash package that this

@@ -836,8 +836,23 @@ seat.
 | counterexamples | `required-closed` | `WS-SHA-CE-001`..`004` closed with `decide +kernel` witnesses in `WhatwgStreamsTest/Counterexamples/Sha/Mutants.lean`; the contract's claim that W1 detects a missing length field is refuted by `ce002_padBytes_eq_on_empty` and corrected |
 | bridges | `not-applicable` | no host target |
 | targets | `not-applicable` | no generated code |
-| trust | `required-open` | audit line pinned (`280 declarations across 10 modules; 0 admitted string declarations; 0 offenders`); `leanchecker --fresh` exit 0 on Windows x86-64 (this host) and on Ubuntu x86-64 (CI run for `72b1bfd`, 2026-09-02, every step green); **open:** the macOS arm64 leg and lean4lean replay (S1.7) |
+| trust | `required-open` | audit line pinned (`422 declarations across 12 modules; 0 admitted string declarations; 0 offenders` after S1.5/S1.6); `leanchecker --fresh` exit 0 on Windows x86-64 (this host) and on Ubuntu x86-64 (CI); **open:** the macOS arm64 leg, and lean4lean, which S1.7 stopped at its toolchain gate: no commit on any lean4lean ref targets v4.33.1 (nearest `v4.33.0-rc2` at `5518bf83`, 2026-08-04); no mismatched checker was run |
 | coverage | `required-closed` | every FIPS 180-4 section cited was verified against the pinned PDF in the Pass A contract; all 65 CAVP records reproduced by the runtime self-test |
+
+### S1.5–S1.6 landing note (2026-09-02, merge `a1383bc`)
+
+Streaming (`Sha256/Context.lean`) and SHA-224 (`Sha256/Sha224.lean`) landed
+fully proved; the audit line moved to 422 declarations, 0 offenders, R-3
+list still empty. Accepted deviations: `Context.absorbed` is not a function
+(a context cannot recover its input; the `Absorbs` relation carries the
+notion as the frozen prose directed); `Absorbs` constructors are `.empty`
+and `.feed` with `absorbs_init`/`absorbs_update` as theorems; `Impl.sha224`
+is `take 28` of all eight words' bytes, equal by `rfl` to the seven-word
+form (`WS-SHA-CE-005` attacks the byte range); `hashWith_bridge` sits beside
+`hash_bridge` because the layout puts A1.S6 above `Bridge.lean`;
+`Bridge.sha224IV` and `Spec.H0_224` coexist pinned equal by
+`sha224IV_eq`; helper declarations beyond the frozen lists are listed in the
+seat's report. Throughput unregressed: 0.0598 s per MiB, 0.6888 s per 16 MiB.
 
 ### S1 landing note (2026-09-02)
 
