@@ -128,6 +128,8 @@ rounding as a foreign boundary. Main is deliberately red on the two declared
 battery modules until the P3 builder lands; the trust self-test is the
 deciding gate meanwhile and CI builds the production targets.
 
+**`[[require]] effects` taken 2026-09-02 (slice W4 of `docs/WHATWG-PACKAGE-PLAN.md`, ruling WP-5), acceptance probe under the dependency policy below:** exact pin `5611c3a3cd4cd4b830c76d6c25c7dba6034c973a` (tag `v0.1.0`); license at that commit Apache-2.0 (MIT on the package's `main` since the same day); transitive cost zero (its manifest lists no packages); toolchain identical (`leanprover/lean4:v4.33.1`); `lake build effects/Effects` elaborates under this toolchain; the algebra is a materially deeper public abstraction by the family ruling (every standard builds against it) and fixes no result universe or first-order representation here, since nothing imports it until P4. Its parity receipt against lean4-effect4 `217d3e4` is in that package.
+
 **The algebra dependency is settled by the operator on the Mac:**
 `mepuka/lean4-effects` v0.1.0 (commit `5611c3a`) is the standalone
 `Effects.Algebra` package, already required by lean4-effect4 at that

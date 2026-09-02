@@ -19,9 +19,11 @@ modelled or proved.
 ## Build and gates
 
 The toolchain is pinned by `lean-toolchain` to exactly
-`leanprover/lean4:v4.33.1`. The one Lake dependency is `hash`
-([lean4-hash](https://github.com/mepuka/lean4-hash)) at an exact commit: the
-proved SHA-256 every gate computes digests with. Every proof receipt in this
+`leanprover/lean4:v4.33.1`. Two Lake dependencies, each at an exact commit:
+`hash` ([lean4-hash](https://github.com/mepuka/lean4-hash)), the proved
+SHA-256 every gate computes digests with, and `effects`
+([lean4-effects](https://github.com/mepuka/lean4-effects)), the generic
+effect algebra the Stratum S packets build against from P4. Every proof receipt in this
 repository is stated against that kernel. Everything below runs from any directory inside the
 checkout.
 

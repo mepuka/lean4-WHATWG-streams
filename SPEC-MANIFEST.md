@@ -20,7 +20,7 @@ authored input.
 | Node | v22.23.2 on Windows 11 x86-64 | local host profile via `node:stream/web` |
 | Bun | 1.4.0 on Windows 11 x86-64 | local host profile |
 | reference implementation under Node | the pinned tree above | local host profile, closest to the text |
-| Lean | `leanprover/lean4:v4.33.1`; `lean-toolchain` SHA-256 `3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71`; one dependency, `hash` (lean4-hash) at commit `0168306b7068b97758e3f2d4307eeb97aa31a104` | kernel, elaborator, compiler, standard library |
+| Lean | `leanprover/lean4:v4.33.1`; `lean-toolchain` SHA-256 `3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71`; two dependencies by exact commit: `hash` (lean4-hash) at `0168306b7068b97758e3f2d4307eeb97aa31a104` and `effects` (lean4-effects, tag `v0.1.0`) at `5611c3a3cd4cd4b830c76d6c25c7dba6034c973a` | kernel, elaborator, compiler, standard library |
 | EffHOL | arXiv:2506.09458v1, 2025-06-11; PDF SHA-256 `a493e698895878136a71e9ffdaaf9ece786cdd30864f853149cd69cec774ad0c` | logic-layer design basis |
 | FIPS 180-4 | NIST, August 2015; PDF SHA-256 `0455b406d89648d20cbde375561e19c245b9815e894164c2670772e3d54deb82` | transcription source for the SHA-256 specification, owned by lean4-hash since the swap; pin moved to lean4-hash in slice W3b of `docs/WHATWG-PACKAGE-PLAN.md`; formerly the S1 SHA-256 specification |
 | Process precedent | `mepuka/lean4-effect4` commit `e9075e192bb3065e3900ccabe7c0c2a6df1ddffc`; `mepuka/foldlab` commit `8d36195970b83a1439ec705b9a504617554b8062` (`formal/fips202`) | breaker/builder discipline and the SHA3 refinement precedent; not semantic pins |

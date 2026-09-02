@@ -64,3 +64,12 @@ root = "bin.Census"
 name = "hash"
 git = "https://github.com/mepuka/lean4-hash"
 rev = "0168306b7068b97758e3f2d4307eeb97aa31a104"
+
+# The generic effect algebra every standard here builds against (RS-D1 as
+# ruled in lean4-effect4 docs/EFFECTS-SPLIT-PLAN.md, EP-9). Exact commit of
+# tag v0.1.0 of mepuka/lean4-effects; acceptance probe recorded in PLAN.md.
+# Nothing imports it until the first Stratum S packet (P4).
+[[require]]
+name = "effects"
+git = "https://github.com/mepuka/lean4-effects"
+rev = "5611c3a3cd4cd4b830c76d6c25c7dba6034c973a"
