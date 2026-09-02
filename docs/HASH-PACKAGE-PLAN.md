@@ -1,6 +1,6 @@
 # Plan: one shared, proved hash library (`lean4-hash`)
 
-Status: **PLAN, 2026-09-02, ready to execute on the operator's go.** The
+Status: **steps 1–5 EXECUTED 2026-09-02** — `mepuka/lean4-hash` is public at commit `92cb0cf` (S1 skeleton; S2 `Sha256` from streams `a1383bc`; S3 `Sha3` from foldlab `64be4b2c`, both history-preserving; S4 `Hash` API aliases and the combined self-test; S5 assurance record), one ceiling under R-11, every gate rerun green by the coordinator including `leanchecker --fresh Hash.Verified`. Steps 6 (this repository's `[[require]]`) and 7 (foldlab's consumer) are next; step 9 is optional backlog. Original status: PLAN, ready to execute on the operator's go. The
 operator's direction: extract the SHA-256 work into a shared library that
 this repository, and foldlab's consumers, depend on; the same library is the
 home of the FIPS 202 SHA3-512 work whose S0–S2 cutover was accepted
