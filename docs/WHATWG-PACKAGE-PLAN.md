@@ -1,6 +1,6 @@
 # Plan: `lean4-whatwg`, one package for the WHATWG standards
 
-Status: **RULED AND EXECUTING, 2026-09-02.** This is the reorganization the
+Status: **EXECUTED W0–W5, 2026-09-02.** This is the reorganization the
 HOLD in `COORDINATION.md` was placed for. It follows the family ruling in
 lean4-effect4 `docs/EFFECTS-SPLIT-PLAN.md` §7: one repository per package
 that Reservoir lists, so this repository becomes the single `whatwg`
@@ -70,3 +70,4 @@ regenerations are the proof.
 | W3a | this commit | `[[require]] hash` at `0168306b7068b97758e3f2d4307eeb97aa31a104` (one package in the manifest); `Sha256/`, `Sha256.lean`, `bin/Sha256.lean`, the `Sha256`/`Sha256Verified` libraries, the `sha256` executable, and the Sha mutants counterexample removed; `Gates/Sha256.lean` and `Gates/VendorSeal.lean` compute through `Hash.Sha256`; the gate audits two semantic trees; `lake --wfail build` green, gate 69 modules / 1636 declarations; **`lake exe vendorseal` PASS with `generated/vendor-manifest.tsv` byte-identical, the cutover proof**; census PASS; trust self-test PASS; parity PASS over 936 constants (the 27 Sha-mutant rows left the source receipt with the lane, noted in `generated/whatwg-parity.source.txt`). The three NIST vendor pins stay for W3b |
 | W3b | this commit | `vendor/nist-fips-180-4`, `vendor/nist-cavp-sha256`, `vendor/nist-cavp-sha224` removed; `generated/vendor-manifest.tsv` regenerated with only their rows gone; `lake exe vendorseal` and `lake exe census` PASS; PROVENANCE and SPEC-MANIFEST rows point to lean4-hash |
 | W4 | this commit | `[[require]] effects` at `5611c3a` (tag `v0.1.0`); manifest has exactly two packages; probe recorded in `PLAN.md` (exact pin, Apache-2.0 at the tag, zero transitive packages, same toolchain, `lake build effects/Effects` green); own build, trust self-test, vendor seal green |
+| W5 | this commit | `vendor/whatwg-infra-3f984adc/{infra.bs,LICENSE}` at `whatwg/infra` `3f984adc` sealed; `vendorseal` digests equal an independent `shasum -a 256`; `Whatwg/Infra.lean` declaration-free and reached from `Whatwg.lean`; SPEC-MANIFEST, PROVENANCE, ARCHITECTURE, SPEC-COVERAGE scope notes; build, gates, and the parity receipt unchanged (no declarations added) |

@@ -20,6 +20,7 @@ imports both.
 
 | Area | Public responsibility |
 | --- | --- |
+| `Whatwg/Infra` | the Infra Standard: the value universe every other standard is indexed by (Stratum V); pinned and empty at W5, its own census and packets to follow |
 | `Whatwg/Streams/Data` | queue-with-sizes, chunk universe, size functions, high-water marks, desired size |
 | `Whatwg/Streams/Strategy` | the IDL class surface that reads the strategy slots; the two strategy records, their size functions, and the extraction operations live in `Whatwg/Streams/Data/Strategy.lean` under `DATA-PG-QUEUE` (ownership repaired at the P3 landing, 2026-09-02) |
 | `Whatwg/Streams/Readable` | `ReadableStream` state, default controller, default reader, generic reader mixin, tee, async iteration |

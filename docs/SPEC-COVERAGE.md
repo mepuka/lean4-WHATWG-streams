@@ -1,5 +1,7 @@
 # Specification coverage
 
+> Scope: the Streams Standard. `Whatwg.Infra` is pinned (W5 of `docs/WHATWG-PACKAGE-PLAN.md`) but has no census yet; its coverage gets its own denominator when its P1 lands.
+
 This document owns the definition, vocabulary, and reporting format of the
 specification coverage metric. Numbers live in generated and emitted facts,
 never here. Read this before quoting, changing, or extending coverage.

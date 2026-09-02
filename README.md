@@ -1,6 +1,6 @@
-# lean4-WHATWG-streams
+# lean4-whatwg
 
-A Lean 4 reification of the WHATWG Streams Standard: the specification's
+WHATWG standards reified in Lean 4, one library per standard: `Whatwg.Streams`, the Streams Standard, and `Whatwg.Infra`, the Infra Standard (pinned, empty). The Streams library: the specification's
 algorithms and internal state as first-order Lean data with proved laws, a
 relational semantics over explicit decisions, an EffHOL-style logic layer
 above it, and, later, a checked lowering of a closed combinator alphabet to

@@ -2,7 +2,9 @@
 
 This file owns the authority pins, the authority order, and the
 section-by-section dispositions of the WHATWG Streams Standard for this
-repository. `docs/PROVENANCE.md` owns the fetch record and cross-check of
+repository, and, since slice W5 of `docs/WHATWG-PACKAGE-PLAN.md`, the
+authority pin of the Infra Standard. The dispositions, the census, and
+`docs/SPEC-COVERAGE.md` are Streams-scoped until Infra has its own P1. `docs/PROVENANCE.md` owns the fetch record and cross-check of
 every digest quoted here; `generated/vendor-manifest.tsv` owns the per-file
 digests of the vendored bytes.
 
@@ -15,6 +17,7 @@ authored input.
 | Authority | Exact pin | Role |
 | --- | --- | --- |
 | WHATWG Streams Standard source | `whatwg/streams` commit `b9ba9f49d95b4280be0dc2372377a006c3a91c18`, 2026-08-18, "Review Draft Publication: August 2026"; `index.bs` SHA-256 `24360b4f8446e6c80e185c5021fcca9b67a7e0bb62490a00109080ebc04c6440`, 417,076 bytes | **semantic owner** |
+| WHATWG Infra Standard source | `whatwg/infra` commit `3f984adcd24a6d5c53cc26b3e737701808003f3e`, 2026-07-17, "Review Draft Publication: July 2026"; `infra.bs` SHA-256 `7c38e6e25ef21f536142cfc6d94954c41bc9889cd0b6fd67ab34571215acd8eb`; CC-BY 4.0 | semantic authority for `Whatwg.Infra`, the value universe (Stratum V); pinned at W5, no dispositions yet |
 | Streams reference implementation | same commit, `reference-implementation/`; dual CC0 / MIT | second-tier evidence: candidate realizer and reading aid |
 | Web Platform Tests `streams/` | `web-platform-tests/wpt` commit `480fdfcd85d043c23875665f464c35c0043dff52`, 2026-09-02; BSD-3-Clause | host conformance corpus |
 | Node | v22.23.2 on Windows 11 x86-64 | local host profile via `node:stream/web` |
