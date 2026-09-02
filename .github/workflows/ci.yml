@@ -13,8 +13,13 @@ jobs:
       - uses: leanprover/lean-action@v1
         with:
           auto-config: false
-      - name: Build libraries, axiom gate, and gate executables
-        run: lake build
+      # The test root is deliberately red while a frozen breaker battery
+      # waits for its builder (test/fixtures/trust-gate/known-red.txt). The
+      # production libraries and gate executables build here; the trust
+      # self-test below verifies the declared red set, excises it, and runs
+      # the axiom gate on the green remainder, so it is the deciding gate.
+      - name: Build production libraries and gate executables
+        run: lake --wfail build WhatwgStreams Gates Sha256 sha256 vendorseal citations trustselftest census
       - name: Build the audited SHA-256 root with warnings as errors
         run: lake --wfail build Sha256Verified
       - name: Recheck the SHA-256 audit root with an independent kernel
