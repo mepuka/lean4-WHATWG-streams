@@ -85,7 +85,7 @@ sealed, and its row is in "Vendored, sealed" above with the same digest.
 
 | Row | Needed by | State |
 | --- | --- | --- |
-| NIST CAVP `SHA224ShortMsg.rsp`, from the lean-crypto-hash clone at `54e6068abd4658fd91203cae1c2316188ffa0e89` under foldlab `.reference/clones/` | S1.6 | not yet read; pinned the same way `SHA256ShortMsg.rsp` was at S1.0, out of the git object rather than the working tree |
+| NIST CAVP `SHA224ShortMsg.rsp` | S1.6 | vendored and sealed at S1.6 from the git object (blob `ab3b099c73048c279c97f88c3a549e7545c3887b`); its row is in "Vendored, sealed" above |
 | NIST SHA-256 example values (`abc`, the two-block message) | S1.7 | not yet fetched; until it is, the seven memory-typed literals in `lake exe sha256 --self-test` have no pinned provenance (`docs/SHA256-DAG.md` §3.4) |
 | kim-em/lean-crypto-hash prior art, commit `54e6068abd4658fd91203cae1c2316188ffa0e89`, Apache-2.0, toolchain v4.33.0 | S1 | read first-hand 2026-09-01; no code imported; API shapes and the streaming technique are credited in `docs/SHA256-DAG.md` §3.5 |
 | foldlab `.staging/fips202-library/SPEC.md` (decision 45, R-1 approved 2026-09-01) | S1 | the staging discipline `docs/SHA256-DAG.md` adapts; at foldlab commit `8d36195970b83a1439ec705b9a504617554b8062` plus the uncommitted working-tree file read 2026-09-01 |
