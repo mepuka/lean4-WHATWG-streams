@@ -37,8 +37,8 @@ lean4-hash/                            mepuka/lean4-hash (name to be ruled, HP-1
   lean-toolchain                       leanprover/lean4:v4.33.1
   Hash.lean                            root: Digest, Hex, Sha256, Sha3, Algorithm
   Hash/
-    Digest.lean  Hex.lean              ONE copy each; the choice-free `List Char` forms are canonical,
-                                       the `String` wrappers are definitions with no theorem stated on `String.length`
+    Digest.lean  Hex.lean              one shared copy AFTER step 9; until then Hash/Sha256/{Digest,Hex} and
+                                       Hash/Sha3/{Digest,Hex} coexist under their own tree ceilings (HP-2)
     Algorithm.lean                     inductive Algorithm | sha256 | sha224 | sha3_512 (| sha3_256 … as S3 lands); outputBytes; digest
     Sha256/{Spec,Impl,Lengths,Bridge,Fast,Vec,Context,Sha224}.lean
     Sha3/{Spec,Impl,Lengths,Structural,Roundtrips,Bridge,BridgeEvidence,Fast}.lean
