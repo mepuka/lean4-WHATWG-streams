@@ -106,15 +106,23 @@ second implementation.
 R0 is complete: all three documents are landed under `docs/research/` with
 their decision-bearing findings in `docs/research/README.md`.
 
-**P1 landed on branch `p1/census` 2026-09-02** (commit `f25ef05`, pushed),
-reviewed and re-gated by the coordinator: 444 rows (248 `op`, 127 `idl`,
-62 `slot`, 7 `requirement`), denominator 405, every gate green including
-the mutation reactions. It merges into `main` when the S1 builder releases
-the tree. P1.1 follow-ups, small and already ruled in `SPEC-MANIFEST.md`:
-`idl` rows for `typedef`, `enum`, and `includes`; `[[Detached]]` moved to a
-`refused` override. The RS-D1 algebra package is planned in
+**P1 merged into `main` 2026-09-02** (`72b1bfd`; branch commit `f25ef05`),
+reviewed and re-gated by the coordinator before and after the merge: 444
+rows (248 `op`, 127 `idl`, 62 `slot`, 7 `requirement`), denominator 405,
+every gate green including the mutation reactions. The coverage block at
+this commit reads `denominator 405; owned-with-green 0/405; green 0, partial
+0, absent 405; census 444 rows, 39 excluded`. P1.1 follow-ups, small and
+already ruled in `SPEC-MANIFEST.md`: `idl` rows for `typedef`, `enum`, and
+`includes`; `[[Detached]]` moved to a `refused` override. Lane S1 landed the
+same day (`a8f08d0`): every digest the repository pins is now computed by
+the proved SHA-256. The RS-D1 algebra package is planned in
 `docs/ALGEBRA-PACKAGE-PLAN.md` and held until the operator's incoming
 lean4-effect4 work lands.
+
+Next: P2, the breadth scaffold (empty modules for every category under
+`WhatwgStreams/`, no declarations), then P3, the queue-with-sizes
+representative, which is the first breaker-then-builder packet of the
+streams calculi and the first consumer of the algebra package decision.
 
 P1 was opened by the operator on the R0 evidence, delegated to
 one seat in the worktree branch `p1/census` while lane S1's builder holds

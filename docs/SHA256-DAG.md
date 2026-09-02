@@ -752,7 +752,7 @@ seat.
 | counterexamples | `required-closed` | `WS-SHA-CE-001`..`004` closed with `decide +kernel` witnesses in `WhatwgStreamsTest/Counterexamples/Sha/Mutants.lean`; the contract's claim that W1 detects a missing length field is refuted by `ce002_padBytes_eq_on_empty` and corrected |
 | bridges | `not-applicable` | no host target |
 | targets | `not-applicable` | no generated code |
-| trust | `required-open` | audit line pinned (`280 declarations across 10 modules; 0 admitted string declarations; 0 offenders`); `leanchecker --fresh` exit 0 on this host; **open:** dual-host build and lean4lean replay (S1.7) |
+| trust | `required-open` | audit line pinned (`280 declarations across 10 modules; 0 admitted string declarations; 0 offenders`); `leanchecker --fresh` exit 0 on Windows x86-64 (this host) and on Ubuntu x86-64 (CI run for `72b1bfd`, 2026-09-02, every step green); **open:** the macOS arm64 leg and lean4lean replay (S1.7) |
 | coverage | `required-closed` | every FIPS 180-4 section cited was verified against the pinned PDF in the Pass A contract; all 65 CAVP records reproduced by the runtime self-test |
 
 ### S1 landing note (2026-09-02)
