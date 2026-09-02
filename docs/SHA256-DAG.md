@@ -444,23 +444,107 @@ On S1.4 landing, `Sha256.sha256` (A1.S3) is redefined to call
 `Fast.sha256`; the statements `sha256_impl`, `sha256_spec`, `sha256_ofList`
 do not change and are re-proved through `Fast.sha256_eq_impl`.
 
-### A1.S5 — streaming (after S1.4)
+### A1.S5 — streaming (FROZEN 2026-09-02, elaborated by the coordinator after S1.4)
 
-`Sha256.Context` with `init`, `update`, `finalize`; laws `update_empty`,
-`update_append` (`(c.update a).update b = c.update (a ++ b)`), and
-`finalize_init_update` (`(init.update m).finalize = sha256 m`). The technique
-is lean-crypto-hash's `updateBuffered_append` (`Crypto/Hash/Streaming.lean`),
-credited in the file header and reproved here. Statements elaborated after
-S1.4.
+```lean
+namespace Sha256
 
-### A1.S6 — SHA-224 (after S1.4)
+/-- An incremental SHA-256 computation: the chaining state after every
+complete 64-byte block absorbed so far, the pending partial block, and the
+total byte count. -/
+structure Context where
+  state : Fast.St
+  buffer : ByteArray
+  absorbedBlocks : Nat                       -- number of complete blocks folded into `state`
+  buffer_lt : buffer.size < 64
 
-`Impl.hashWith (iv : St) : List UInt8 → St`, `Impl.sha256_eq_hashWith`,
-`Spec.sha224` per FIPS 180-4 §6.3 with §5.3.2's initial value and 224-bit
-truncation, `Fast.sha224`, API `Algorithm`, `digest : Algorithm → ByteArray →
-Digest (outputBytes alg)`. Vectors from the pinned `SHA224ShortMsg.rsp` in the
-same prior-art clone, pinned at S1.6. Statements elaborated after S1.4.
-`Bridge.sha256_ne_sha224_iv` takes its final form here.
+namespace Context
+def init : Context
+def update (c : Context) (chunk : ByteArray) : Context
+def finalize (c : Context) : Digest 32
+/-- The bytes fed so far, as a model; not stored, derived. -/
+def absorbed (c : Context) : List UInt8       -- exists only through `Absorbs` below
+
+/-- `Absorbs c bs`: `c` is the context reached from `init` by feeding exactly `bs`. -/
+inductive Absorbs : Context → List UInt8 → Prop
+
+theorem absorbs_init : Absorbs init []
+theorem absorbs_update {c bs} (h : Absorbs c bs) (chunk : ByteArray) :
+    Absorbs (c.update chunk) (bs ++ chunk.data.toList)
+theorem update_empty (c : Context) : c.update ByteArray.empty = c
+theorem update_append (c : Context) (a b : ByteArray) :
+    (c.update a).update b = c.update (a ++ b)
+theorem finalize_absorbs {c bs} (h : Absorbs c bs) :
+    c.finalize.toList = Impl.sha256 bs
+theorem finalize_init_update (m : ByteArray) :
+    (init.update m).finalize = sha256 m
+theorem size_buffer (c : Context) : c.buffer.size < 64
+end Context
+
+end Sha256
+```
+
+The state invariant behind these: `state = Fast.hashAll (first
+`64 * absorbedBlocks` bytes of the absorbed input)` and `buffer` is the
+remainder; `update` absorbs whole blocks from `buffer ++ chunk` and keeps
+the tail. `update_append` is the buffered-update law; the technique is
+lean-crypto-hash's `updateBuffered_append`, credited in the file header and
+reproved here. `Absorbs` is stated as an inductive relation rather than a
+stored list so the context carries no unbounded data. Names are final.
+
+### A1.S6 — SHA-224 (FROZEN 2026-09-02, elaborated by the coordinator after S1.4)
+
+```lean
+namespace Sha256.Spec
+def H0_224 : Vector Word 8                    -- FIPS 180-4 §5.3.2
+def hashWith (iv : Vector Word 8) (M : List Bool) : Vector Word 8   -- §6.2.2 with a supplied initial value
+theorem hash_eq_hashWith (M : List Bool) : hash M = hashWith H0 M
+def sha224 (M : List Bool) : List Bool := (bitsOfWords (hashWith H0_224 M)).take 224   -- §6.3
+def sha224_bytes (msg : List UInt8) : List UInt8 := bytesOfBits (sha224 (bitsOfBytes msg))
+theorem length_sha224 (M : List Bool) : (sha224 M).length = 224
+end Sha256.Spec
+
+namespace Sha256.Impl
+def hashWith (iv : St) (msg : List UInt8) : St
+theorem hash_eq_hashWith (msg : List UInt8) : hash msg = hashWith Spec.H0 msg
+def sha224 (msg : List UInt8) : List UInt8     -- 28 bytes: first seven words big-endian
+theorem length_sha224 (msg : List UInt8) : (sha224 msg).length = 28
+end Sha256.Impl
+
+namespace Sha256.Bridge
+theorem hashWith_bridge (iv : Impl.St) (msg : List UInt8) :
+    Impl.hashWith iv msg = Spec.hashWith iv (Spec.bitsOfBytes msg)
+theorem sha224_bridge (msg : List UInt8) : Impl.sha224 msg = Spec.sha224_bytes msg
+/-- Final form of the discriminating negative: the untruncated digest under
+the SHA-224 initial value differs from SHA-256 on the empty message. -/
+theorem sha256_ne_hashWith_sha224IV :
+    Impl.sha256 [] ≠ (List.finRange 8).flatMap (fun i => Impl.bytesOfWord (Impl.hashWith Spec.H0_224 [])[i])
+end Sha256.Bridge
+
+namespace Sha256.Fast
+def hashWith (iv : St) (P : ByteArray) : St    -- over already-padded bytes, as hashAll
+def sha224 (msg : ByteArray) : ByteArray
+theorem sha224_eq_impl (msg : ByteArray) : (sha224 msg).data.toList = Impl.sha224 msg.data.toList
+theorem size_sha224 (msg : ByteArray) : (sha224 msg).size = 28
+end Sha256.Fast
+
+namespace Sha256
+inductive Algorithm | sha256 | sha224
+  deriving DecidableEq, Repr
+def Algorithm.outputBytes : Algorithm → Nat   -- 32, 28
+def digest (alg : Algorithm) (msg : ByteArray) : Digest alg.outputBytes
+def sha224 (msg : ByteArray) : Digest 28
+theorem digest_sha256 (msg : ByteArray) : digest .sha256 msg = sha256 msg
+theorem sha224_impl (msg : ByteArray) : (sha224 msg).toList = Impl.sha224 msg.data.toList
+theorem sha224_spec (msg : ByteArray) : (sha224 msg).toList = Spec.sha224_bytes msg.data.toList
+end Sha256
+```
+
+Vectors: `SHA224ShortMsg.rsp` from the same prior-art clone, extracted by
+git object and sealed at S1.6 with its digest recorded in
+`docs/PROVENANCE.md`; compiled `#guard`s for its `Len = 0`, `24`, and the
+padding-boundary lengths on `Impl.sha224`, restated on the API; the
+self-test reproduces every record of both files. Names are final.
 
 ## 5. Target layout
 
