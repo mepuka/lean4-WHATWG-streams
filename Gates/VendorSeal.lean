@@ -1,5 +1,6 @@
 import Gates.Common
 import Gates.Sha256
+import Sha256
 
 /-!
 # Gates.VendorSeal
@@ -50,7 +51,10 @@ def observe (root : System.FilePath) : IO (Array Row) := do
   for file in files do
     let relative ← relativeTo root file
     let bytes ← IO.FS.readBinFile file
-    rows := rows.push { path := relative, digest := Gates.Sha256.hexDigest bytes, size := bytes.size }
+    -- Stage S1.4: every digest this repository pins is computed by the proved
+    -- library, not by tooling arithmetic. Meaning: `Sha256.Bridge.sha256_bridge`.
+    rows := rows.push
+      { path := relative, digest := (_root_.Sha256.sha256 bytes).toHex, size := bytes.size }
   return rows.qsort fun a b => a.path < b.path
 
 def render (rows : Array Row) : String :=

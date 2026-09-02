@@ -1,4 +1,5 @@
 import Sha256
+import Sha256.Kats
 import Sha256.Audit
 
 /-!
@@ -10,15 +11,21 @@ drift in the declaration count, the module count, the ceiling, or the number
 of admitted string declarations is a build error that must be updated
 deliberately rather than noticed later.
 
-`docs/SHA256-DAG.md` §5.1 adds `Sha256.Kats` to this closure at S1.1. Nothing
-imported here is reachable from `Sha256`, so a consumer of the library does
-not build the known-answer tests or the audit.
+`docs/SHA256-DAG.md` §5.1 adds `Sha256.Kats` to this closure. Nothing imported
+here is reachable from `Sha256`, so a consumer of the library does not build
+the known-answer tests or the audit.
 
-The pinned counts are `0` and `0` at S1.0 because the library is empty by
-design at this stage: `Sha256.lean` states nothing, and `Sha256.Audit` is
-excluded from its own audit.
+The pinned counts after stages S1.1 to S1.4 are 280 declarations across ten
+modules: `Sha256.Vec`, `Spec`, `Impl`, `Lengths`, `Bridge`, `Hex`, `Digest`,
+`Api`, `Fast`, and `Kats`. `Sha256.Audit` is excluded from its own audit and
+`Sha256.Verified` states nothing, so neither is counted.
+
+The number of admitted string declarations is `0`. Ruling R-3 anticipated that
+`Hex.encode`, `Hex.decode?`, `Digest.toHex` and `Digest.ofHex?` might have to
+be admitted to `Classical.choice`; they did not. `Sha256.Hex` records how that
+was achieved and what it cost.
 -/
 
-/-- info: sha256 axiom audit: 0 declarations across 0 modules; ceiling [propext, Quot.sound]; 0 admitted string declarations; 0 offenders -/
+/-- info: sha256 axiom audit: 280 declarations across 10 modules; ceiling [propext, Quot.sound]; 0 admitted string declarations; 0 offenders -/
 #guard_msgs in
 #sha256_axiom_audit

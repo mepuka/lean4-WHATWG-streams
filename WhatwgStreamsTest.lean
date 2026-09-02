@@ -1,5 +1,6 @@
 import Gates
 import Sha256.Verified
+import WhatwgStreamsTest.Counterexamples.Sha.Mutants
 import WhatwgStreamsTest.Audit.AxiomGate
 
 /-!

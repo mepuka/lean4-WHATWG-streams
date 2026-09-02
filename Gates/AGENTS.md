@@ -29,15 +29,21 @@ they decide nothing.
   failure list.
 - A gate that writes a projection under `generated/` records that it did,
   names the file, and never writes an `AGENTS.md`.
-- SHA-256 here is finite executable evidence against the FIPS 180-4 vectors,
-  checked by `lake exe sha256 --self-test`. It carries no theorem. Digests it
+- SHA-256 here is a command-line wrapper and holds no hash arithmetic of its
+  own. Since stage S1.4 of `docs/SHA256-DAG.md`, `Gates/Sha256.lean` computes
+  every digest through `Sha256.sha256` and every hexadecimal spelling through
+  `Sha256.Hex.encode`, from the `Sha256/` tree, which is audited at the
+  semantic ceiling and whose meaning is `Sha256.Bridge.sha256_bridge`.
+  `Gates/VendorSeal.lean` computes its row digests through the same API.
+  The P0 implementation, written in the `Id.run do` / `xs[i]!` style that
+  `docs/SHA256-DAG.md` §3.3 forbids for theorem-bearing code, is gone.
+- `lake exe sha256 --self-test` remains finite executable evidence and carries
+  no theorem, but it no longer contains a literal: it reads
+  `vendor/nist-cavp-sha256/SHA256ShortMsg.rsp` at run time and reproduces every
+  record in it, so it cannot drift from the pin. Each record's `Len` field, not
+  its `Msg` text, is the authority for the message length. Digests this gate
   produces are cross-checked against a second implementation at pin time and
   recorded in `docs/PROVENANCE.md`.
-- `Gates/Sha256.lean` is written in the style `docs/SHA256-DAG.md` §3.3
-  forbids for theorem-bearing code (`Id.run do` loops, `xs[i]!` indexing).
-  That is deliberate for P0 tooling and is exactly why it carries no theorem.
-  It is not extended; lane S1 replaces it with `Sha256.Fast`, after which
-  this module becomes a thin command-line wrapper over `Sha256.sha256`.
 - Every gate resolves the repository root by searching upward for
   `WhatwgStreams.lean`; none reads an environment variable for that.
 
@@ -45,7 +51,7 @@ they decide nothing.
 
 | Command | Checks | Writes |
 | --- | --- | --- |
-| `lake exe sha256 --self-test` | the SHA-256 implementation against seven vectors | nothing |
+| `lake exe sha256 --self-test` | the proved SHA-256 library against every record of the pinned NIST CAVP short-message file | nothing |
 | `lake exe vendorseal` | `vendor/` against `generated/vendor-manifest.tsv` in both directions; Windows path validity | nothing |
 | `lake exe vendorseal --write` | Windows path validity | `generated/vendor-manifest.tsv` |
 | `lake exe citations` | no line-numbered citation into a protected authored document | nothing |

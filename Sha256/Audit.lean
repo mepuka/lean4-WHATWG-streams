@@ -43,11 +43,12 @@ it. -/
 private def admittedStringDeclarations : List Name := []
 
 /-- The audit must be shown to have scanned something before its verdict
-means anything. At S1.0 the tree is empty by design, so the threshold is `0`
-and the count is pinned instead by `#guard_msgs` in `Sha256.Verified`. Stage
-S1.1 raises this to the declaration count of `Sha256.Spec`, `Sha256.Impl`,
-and `Sha256.Lengths`. -/
-private def minimumDeclarations : Nat := 0
+means anything. Stages S1.1 to S1.4 landed 280 declarations across ten modules;
+this floor is a coarse tripwire well below that, so that an audit which
+silently stopped seeing the tree fails here rather than passing vacuously. The
+*exact* count is pinned separately by `#guard_msgs` in `Sha256.Verified`, which
+is what catches a single declaration appearing or disappearing. -/
+private def minimumDeclarations : Nat := 250
 
 /-- Every module under this prefix is audited. -/
 private def treePrefix : Name := `Sha256
