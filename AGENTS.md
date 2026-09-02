@@ -138,9 +138,7 @@ lemmas, not soundness). `sorryAx`, `Lean.ofReduceBool`, `Lean.ofReduceNat`,
 `Lean.trustCompiler`, and the `native_decide` auxiliary axioms are forbidden
 everywhere. This forbids `native_decide` and `bv_decide` in proofs. Audit
 lines report how many declarations reach `Classical.choice` as information.
-Until the gate code is updated (after the P3 builder releases the tree), the
-older two-ceiling gate still runs; it is stricter than the rule, never
-looser.
+The gate code carries the rule since commit `184d7fe`.
 
 ## Generated facts and long-run continuity
 
