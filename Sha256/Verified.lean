@@ -28,6 +28,6 @@ be admitted to `Classical.choice`; they did not. `Sha256.Hex` records how that
 was achieved and what it cost.
 -/
 
-/-- info: sha256 axiom audit: 422 declarations across 12 modules; ceiling [propext, Quot.sound]; 0 admitted string declarations; 0 offenders -/
+/-- info: sha256 axiom audit: 422 declarations across 12 modules; ceiling [propext, Quot.sound, Classical.choice]; 0 admitted string declarations; 0 offenders -/
 #guard_msgs in
 #sha256_axiom_audit

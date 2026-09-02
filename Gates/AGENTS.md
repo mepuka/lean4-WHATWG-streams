@@ -21,9 +21,9 @@ they decide nothing.
   specification belongs under `WhatwgStreams/` behind a contract.
 - Totality holds: no `partial`, no `unsafe`. Loops are bounded by fuel or by
   the structure they traverse.
-- The ceiling is the implementation ceiling: `propext`, `Quot.sound`, and
-  `Classical.choice`. `sorryAx`, `Lean.ofReduceBool`, `Lean.ofReduceNat`,
-  and `Lean.trustCompiler` remain forbidden.
+- The ceiling is `propext`, `Quot.sound`, and `Classical.choice`, the same
+  as every other tree since ruling R-11. `sorryAx`, `Lean.ofReduceBool`,
+  `Lean.ofReduceNat`, and `Lean.trustCompiler` remain forbidden.
 - A gate reports a stable `PASS` or `FAIL` line stating exactly what was
   checked and, on failure, every offending item. It never truncates the
   failure list.
@@ -56,7 +56,7 @@ they decide nothing.
 | `lake exe vendorseal` | `vendor/` against `generated/vendor-manifest.tsv` in both directions; Windows path validity | nothing |
 | `lake exe vendorseal --write` | Windows path validity | `generated/vendor-manifest.tsv` |
 | `lake exe citations` | no line-numbered citation into a protected authored document | nothing |
-| `lake exe trustselftest` | the declared red set; then planted `partial`, `unsafe`, `Classical.choice`, `sorry`, `native_decide`, malformed literals, and an unreachable module are each rejected for the stated reason | a throwaway copy outside the tree, removed afterwards |
+| `lake exe trustselftest` | the declared red set; then planted `partial`, `unsafe`, `sorry`, `native_decide`, malformed literals, and an unreachable module are each rejected for the stated reason (the `Classical.choice` plant was retired by ruling R-11) | a throwaway copy outside the tree, removed afterwards |
 | `lake exe census` | the pinned `index.bs` digest; every census anchor occurs exactly once at its span start; every span digest recomputes; every row has exactly one disposition from the authored inputs under `census/`, with no unused entry; and both projections are byte-identical to a fresh regeneration | nothing |
 | `lake exe census --write` | the same, before writing | `generated/spec-algorithm-census.tsv` and `WhatwgStreamsTest/Audit/SpecCoverageRows.lean` |
 | `lake exe census --report` | nothing; prints the coverage block of `docs/SPEC-COVERAGE.md` | nothing |

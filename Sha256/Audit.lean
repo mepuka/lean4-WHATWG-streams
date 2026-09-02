@@ -11,7 +11,7 @@ was scanned and against which ceiling. It replaces the `#print axioms` lines
 that would otherwise put one info line per declaration into every consumer's
 build log (`docs/SHA256-DAG.md` §3.3).
 
-The ceiling is the repository's semantic ceiling, `propext` and `Quot.sound`
+The ceiling is the repository's semantic ceiling, `propext`, `Quot.sound`, and `Classical.choice` (ruling R-11)
 (§3.1). It is stricter than foldlab's `formal/fips202` audit, which tolerates
 `Classical.choice`. Ruling R-3 may later admit `Classical.choice` for the
 exact string-facing declarations of `Sha256.Digest` and `Sha256.Hex`;
@@ -33,7 +33,7 @@ namespace Sha256.Audit
 
 /-- The semantic ceiling of `docs/SHA256-DAG.md` §3.1. -/
 private def allowedAxioms : List Name :=
-  [``propext, ``Quot.sound]
+  [``propext, ``Quot.sound, ``Classical.choice]
 
 /-- Exact declarations admitted to `Classical.choice` under ruling R-3, each
 recorded on the proof graph's trust edge with its receipt. Empty at S1.0: no

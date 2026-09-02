@@ -15,8 +15,9 @@ on any declaration that reaches an axiom outside its tree's ceiling.
 
 Two ceilings exist:
 
-- the semantic ceiling, `propext` and `Quot.sound`, for `WhatwgStreams/` and
-  `WhatwgStreamsTest/`; and
+- the semantic ceiling, Lean's standard base `propext`, `Quot.sound`, and
+  `Classical.choice` (operator ruling R-11, 2026-09-02; before it the
+  semantic trees excluded `Classical.choice`); and
 - the implementation ceiling, which additionally admits `Classical.choice`,
   for the `Gates/` tooling tree and for exact-module audit implementation
   such as this file, because `MetaM` and Lean's `String` traversals reach
@@ -36,7 +37,7 @@ open Lean
 namespace WhatwgStreamsTest.Audit
 
 private def allowedAxioms : List Name :=
-  [``propext, ``Quot.sound]
+  [``propext, ``Quot.sound, ``Classical.choice]
 
 private def implementationAxioms : List Name :=
   [``propext, ``Quot.sound, ``Classical.choice]
