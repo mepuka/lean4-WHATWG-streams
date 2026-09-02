@@ -16,6 +16,8 @@ reason a wrong in-tree digest could not have entered this file silently.
 | --- | --- | --- | --- |
 | `whatwg/streams` @ `b9ba9f49d95b4280be0dc2372377a006c3a91c18` (2026-08-18T11:17:34Z, "Review Draft Publication: August 2026") | 2026-09-01 | `git clone --filter=blob:none https://github.com/whatwg/streams` then `git checkout b9ba9f49…`; copied `index.bs`, `LICENSE`, `README.md`, and `reference-implementation/{lib/**, package.json, README.md, LICENSE.md, COPYING.txt, run-web-platform-tests.js, compile-idl.js}` | every one of the 54 files matches the upstream git blob object hash from `git ls-tree -r b9ba9f49…` (checked with `git hash-object --no-filters`); `index.bs` `24360b4f8446e6c80e185c5021fcca9b67a7e0bb62490a00109080ebc04c6440`, 417,076 bytes, agrees between both SHA-256 implementations and with `raw.githubusercontent.com` at the commit; every file's digest is in `generated/vendor-manifest.tsv` |
 | `web-platform-tests/wpt` @ `480fdfcd85d043c23875665f464c35c0043dff52` (committer date 2026-09-02T02:49:23Z) | 2026-09-01 | sparse clone: `git sparse-checkout set streams`, `git fetch --depth 1 --filter=blob:none origin 480fdfcd…`, `git checkout FETCH_HEAD`; copied `streams/**` and `LICENSE.md` | every one of the 123 files matches the upstream git blob object hash from `git ls-tree -r 480fdfcd…`; per-file digests in `generated/vendor-manifest.tsv`; `LICENSE.md` `5fac07febb0e2a97fb0d7b0def149ec08b642e1ba4b9c345283ab1cbd2af6570`; `streams/piping/general.any.js` also agrees with `raw.githubusercontent.com` at the commit |
+| NIST FIPS 180-4, *Secure Hash Standard (SHS)*, August 2015 (`vendor/nist-fips-180-4/NIST.FIPS.180-4.pdf`) | 2026-09-01, vendored at S1.0 under ruling R-8 | fetched with `Invoke-WebRequest https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf`, then copied into `vendor/` byte-for-byte with `[IO.File]::WriteAllBytes` on the result of `[IO.File]::ReadAllBytes` (no text mode, no EOL handling) | `0455b406d89648d20cbde375561e19c245b9815e894164c2670772e3d54deb82`, 833,315 bytes; both implementations agree on the vendored copy and on the fetched copy, and the two copies have the same digest; the digest is unchanged from the "digest only" row this replaces, so the bytes that were fetched are the bytes now sealed |
+| NIST CAVP `SHA256ShortMsg.rsp`, CAVS 11.0, generated 2011-03-15, 65 vectors (`vendor/nist-cavp-sha256/SHA256ShortMsg.rsp`) | 2026-09-01, vendored at S1.0 | read out of the **git object**, not a working tree: `git -C <clone> ls-tree -r 54e6068abd4658fd91203cae1c2316188ffa0e89 -- validation/vectors/nist/SHA256ShortMsg.rsp` gives blob `e14f5cbdb5d65468a0d8ada158bbcffcbf031742`, then `cmd /c "git -C <clone> cat-file blob e14f5cbd… > vendor/nist-cavp-sha256/SHA256ShortMsg.rsp"` (`cmd` redirection is binary-safe; PowerShell's is not). The clone is `kim-em/lean-crypto-hash` at `54e6068abd4658fd91203cae1c2316188ffa0e89` under foldlab `.reference/clones/` | `git hash-object --no-filters` on the vendored file returns `e14f5cbdb5d65468a0d8ada158bbcffcbf031742`, equal to the upstream `ls-tree` object hash, which no host setting or `text` attribute can affect; SHA-256 `294ecec26959357405a621121bbfb01db4d45b9e834624b2d71aedd94ffde019`, 10,031 bytes, agreed by both implementations |
 
 Vendored licenses: WHATWG Streams Standard, CC-BY 4.0 with BSD-3-Clause for
 portions incorporated into source code (`vendor/whatwg-streams-b9ba9f49/LICENSE`,
@@ -24,6 +26,12 @@ implementation, dual CC0 / MIT (`reference-implementation/LICENSE.md`,
 `2d301992ca987e748f1b9d6eb2d591acf074fff828883887228eee3732fc0f79`); WPT,
 BSD-3-Clause. All three permit retention with attribution; the upstream
 license files are retained in place.
+
+The two NIST pins carry no upstream license file. FIPS 180-4 and the CAVP
+response files are works of the US Government, not subject to copyright in
+the United States; they are retained unmodified and are cited by section and
+by record. The repository's own `LICENSE` (Apache-2.0, ruling R-7) does not
+apply to anything under `vendor/`.
 
 `.gitattributes` disables end-of-line conversion for the whole repository
 (`* -text`), so a checkout on any host reproduces the committed bytes and the
@@ -52,7 +60,9 @@ pinned npm dependencies outside `vendor/` (P8).
 | Pin | Fetched | Command | Digest | Cross-check | Why not vendored |
 | --- | --- | --- | --- | --- | --- |
 | EffHOL: Liron Cohen, Ariel Grunfeld, Dominik Kirst, Étienne Miquey, *Syntactic Effectful Realizability in Higher-Order Logic*, arXiv:2506.09458v1, published 2025-06-11T07:02:23Z, LICS 2025 | 2026-09-01 | `Invoke-WebRequest https://arxiv.org/pdf/2506.09458v1`; metadata from `http://export.arxiv.org/api/query?id_list=2506.09458` | `a493e698895878136a71e9ffdaaf9ece786cdd30864f853149cd69cec774ad0c`, 777,345 bytes | both implementations agree | arXiv redistribution terms not verified; the digest identifies the exact bytes any reader can fetch |
-| NIST FIPS 180-4, *Secure Hash Standard*, August 2015 | 2026-09-01 | `Invoke-WebRequest https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf` | `0455b406d89648d20cbde375561e19c245b9815e894164c2670772e3d54deb82`, 833,315 bytes | both implementations agree | US Government work; vendoring deferred to S1, where its Pass A transcription cites it section by section |
+
+FIPS 180-4 was a digest-only row until S1.0. Ruling R-8 vendored it; it is now
+sealed, and its row is in "Vendored, sealed" above with the same digest.
 
 ## Toolchain and hosts
 
@@ -74,7 +84,8 @@ pinned npm dependencies outside `vendor/` (P8).
 
 | Row | Needed by | State |
 | --- | --- | --- |
-| NIST CAVP `SHA256ShortMsg.rsp` (CAVS 11.0, generated 2011-03-15), SHA-256 `294ecec26959357405a621121bbfb01db4d45b9e834624b2d71aedd94ffde019`, 10,031 bytes, read from the lean-crypto-hash clone at `54e6068abd4658fd91203cae1c2316188ffa0e89` under foldlab `.reference/clones/` | S1.0 | digest recorded; vendored into this repository and sealed at S1.0 (`docs/SHA256-DAG.md` §3.4); `SHA224ShortMsg.rsp` from the same clone at S1.6 |
+| NIST CAVP `SHA224ShortMsg.rsp`, from the lean-crypto-hash clone at `54e6068abd4658fd91203cae1c2316188ffa0e89` under foldlab `.reference/clones/` | S1.6 | not yet read; pinned the same way `SHA256ShortMsg.rsp` was at S1.0, out of the git object rather than the working tree |
+| NIST SHA-256 example values (`abc`, the two-block message) | S1.7 | not yet fetched; until it is, the seven memory-typed literals in `lake exe sha256 --self-test` have no pinned provenance (`docs/SHA256-DAG.md` §3.4) |
 | kim-em/lean-crypto-hash prior art, commit `54e6068abd4658fd91203cae1c2316188ffa0e89`, Apache-2.0, toolchain v4.33.0 | S1 | read first-hand 2026-09-01; no code imported; API shapes and the streaming technique are credited in `docs/SHA256-DAG.md` §3.5 |
 | foldlab `.staging/fips202-library/SPEC.md` (decision 45, R-1 approved 2026-09-01) | S1 | the staging discipline `docs/SHA256-DAG.md` adapts; at foldlab commit `8d36195970b83a1439ec705b9a504617554b8062` plus the uncommitted working-tree file read 2026-09-01 |
 | wpt.fyi run identifiers for Chromium, Gecko, WebKit at the WPT pin | P8 | not recorded |

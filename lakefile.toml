@@ -1,7 +1,20 @@
 name = "whatwgstreams"
 version = "0.1.0"
+description = "The WHATWG Streams Standard reified in Lean 4: spec-authoritative first-order model, relational semantics, EffHOL logic layer, checked TypeScript lowering; with a proved SHA-256 the gates depend on"
+keywords = ["whatwg", "streams", "verified", "sha-256", "fips-180-4", "lean4"]
+license = "Apache-2.0"
+readmeFile = "README.md"
 defaultTargets = ["WhatwgStreams", "Gates", "WhatwgStreamsTest",
+                  "Sha256", "Sha256Verified",
                   "sha256", "vendorseal", "citations", "trustselftest"]
+# `lake test` builds the audited SHA-256 root: its `#guard_msgs` pin on the
+# axiom audit line is the test. The P1 census gate takes this over later.
+testDriver = "Sha256Verified"
+
+# Ruling R-6 (docs/SHA256-DAG.md §9), package-wide: no implicit binder is
+# invented from a free variable, and every warning is an error at elaboration
+# so that `lake --wfail build` and a plain `lake build` decide the same thing.
+leanOptions = { autoImplicit = false, relaxedAutoImplicit = false, warningAsError = true }
 
 # The production library. Semantic declarations and proofs only.
 [[lean_lib]]
@@ -19,12 +32,33 @@ globs = ["Gates.*"]
 name = "WhatwgStreamsTest"
 globs = ["WhatwgStreamsTest.*"]
 
+# SHA-256 from FIPS 180-4 (lane S1). The public library a consumer imports;
+# the semantic ceiling applies to every module in it.
+[[lean_lib]]
+name = "Sha256"
+globs = ["Sha256.*"]
+
+# The audited root: the known-answer tests and the axiom audit. Not reachable
+# from `Sha256`, so a consumer of the library never builds it.
+[[lean_lib]]
+name = "Sha256Verified"
+roots = ["Sha256.Verified"]
+
 # Executable entry points. Each is a one-line wrapper under bin/ that calls
 # the audited `cli` of its Gates module; bin/ itself holds no logic.
+# The root module name, not `srcDir`, disambiguates this entry point from the
+# `Sha256` library root `./Sha256.lean`. With `srcDir = "bin"` and
+# `root = "Sha256"` both files claim the module name `Sha256`: Lake keys
+# modules on the bare name (`Lake/Config/Module.lean` `BEq Module`,
+# `Lake/Build/Infos.lean` `Module.key`) and derives output paths from the
+# package-level `leanLibDir`, so the two would share one build key and one
+# `.olean`, and `lake build` fails to link this executable. Lake checks root
+# collisions between executables only, never between an executable and a
+# library. `root = "bin.Sha256"` under the default `srcDir` resolves to the
+# same unchanged file `bin/Sha256.lean`.
 [[lean_exe]]
 name = "sha256"
-srcDir = "bin"
-root = "Sha256"
+root = "bin.Sha256"
 
 [[lean_exe]]
 name = "vendorseal"

@@ -478,6 +478,13 @@ Sha256/Audit.lean         -- S1.0 axiom audit elaborator for the Sha256 namespac
 bin/Sha256.lean           -- unchanged entry point; after S1.4 it calls Sha256.sha256 through Gates.Sha256.cli
 ```
 
+Deviation accepted at S1.0: the executable's Lake root is `bin.Sha256` with
+the default source directory, not root `Sha256` under `srcDir = "bin"`,
+because Lake keys modules on the bare name and the library root `Sha256`
+would otherwise share one build key and one `.olean` with the executable
+root (observed as an `undefined symbol: WinMain` link failure). The file
+`bin/Sha256.lean` is unchanged.
+
 `Sha256/` is a fourth library at the semantic ceiling. The repository axiom
 gate audits it with the `WhatwgStreams` prefix rule extended to `Sha256`,
 and the module-closure gate requires every `Sha256/*.lean` to be reachable
@@ -516,6 +523,23 @@ sequential except where noted; a stage may start once the previous one is
 reviewed.
 
 ### S1.0 — Pass A contract, Pass B snapshot, pins, audit scaffold (no proofs)
+
+**Landed 2026-09-02 after coordinator review.** Both pins vendored from
+git objects and sealed; contract drafted with every FIPS citation verified
+against the vendored PDF (tables from page images); `Sha256/Audit.lean` and
+the `#guard_msgs`-pinned audit line; R-6 options package-wide with a
+warning-free clean build in 13.6 s; `leanchecker --fresh Sha256.Verified`
+exit 0 with evidence it ran. Measured: a full empty-message `decide +kernel`
+digest costs about 2.2 s and 450 MB net, so R-4's W1 kernel KAT is
+affordable; under the interpreter the `Impl` shape is 17.3x slower than the
+P0 `UInt32` tooling on 1 MiB, corroborating the §2 refutation end to end
+(compiled `Impl` versus compiled `Fast` remains for S1.1/S1.4). The seat's
+probe reproduced the CAVP `Len = 0` digest from the §4 A1.S1 shape. One
+gate interaction surfaced and was fixed by the coordinator: with R-6's
+`warningAsError`, a planted `sorry` is rejected at elaboration before the
+axiom gate can name `sorryAx`, so the trust self-test now accepts either
+diagnostic for that plant. Package metadata and `testDriver` were added by
+the coordinator at landing.
 
 **Purpose.** The question is frozen before any code: what is transcribed,
 from which bytes, with which witnesses and which negative; and the seat

@@ -47,7 +47,8 @@ reaches `Classical.choice`, so these modules are bound by
 so that a file dropped into the audit tree cannot silently acquire the wider
 ceiling. Each entry is checked for staleness below. -/
 private def auditImplementationModules : List Name :=
-  [ `WhatwgStreamsTest.Audit.AxiomGate ]
+  [ `WhatwgStreamsTest.Audit.AxiomGate,
+    `Sha256.Audit ]
 
 /-- Exact public declarations admitted to the implementation ceiling outside
 an implementation module. Empty at P0; a later target renderer names its
@@ -88,8 +89,15 @@ private def resolveImplementationDeclarations
     | _ => throw s!"WhatwgStreams axiom gate: private implementation exemption {owner}/{originalName} matched {privateCandidates.length} declarations; expected exactly one"
   return resolved
 
+/-- `Sha256/` is the fourth audited tree (`docs/SHA256-DAG.md` §5.1). It is
+bound by the semantic ceiling like `WhatwgStreams/`, not by the tooling
+ceiling: only `Sha256.Audit`, named exactly in `auditImplementationModules`
+above, may reach `Classical.choice`. -/
+private def semanticTreePrefixes : List Name :=
+  [`WhatwgStreams, `WhatwgStreamsTest, `Sha256]
+
 private def belongsToAuditedTree (moduleName : Name) : Bool :=
-  (`WhatwgStreams).isPrefixOf moduleName || (`WhatwgStreamsTest).isPrefixOf moduleName ||
+  semanticTreePrefixes.any (·.isPrefixOf moduleName) ||
     toolingTreePrefix.isPrefixOf moduleName
 
 private def isGeneratedSafeRecursor (environment : Environment) (name : Name) : Bool :=
@@ -191,10 +199,12 @@ private def auditedSources (projectRoot : System.FilePath) : IO (Array System.Fi
   let production ← leanFilesBelow (projectRoot / "WhatwgStreams")
   let tests ← leanFilesBelow (projectRoot / "WhatwgStreamsTest")
   let tooling ← leanFilesBelow (projectRoot / "Gates")
-  return production ++ tests ++ tooling
+  let sha256 ← leanFilesBelow (projectRoot / "Sha256")
+  return production ++ tests ++ tooling ++ sha256
     |>.push (projectRoot / "WhatwgStreams.lean")
     |>.push (projectRoot / "Gates.lean")
     |>.push (projectRoot / "WhatwgStreamsTest.lean")
+    |>.push (projectRoot / "Sha256.lean")
 
 open Lean Elab Command in
 elab "#whatwg_streams_axiom_gate" : command => do

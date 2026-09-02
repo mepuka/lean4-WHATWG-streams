@@ -33,10 +33,10 @@ structure Context where
 
 def copiedFiles : List String :=
   ["lakefile.toml", "lake-manifest.json", "lean-toolchain",
-   "WhatwgStreams.lean", "Gates.lean", "WhatwgStreamsTest.lean"]
+   "WhatwgStreams.lean", "Gates.lean", "WhatwgStreamsTest.lean", "Sha256.lean"]
 
 def copiedTrees : List String :=
-  ["WhatwgStreams", "WhatwgStreamsTest", "Gates", "bin"]
+  ["WhatwgStreams", "WhatwgStreamsTest", "Gates", "Sha256", "bin"]
 
 def fixture (root : System.FilePath) (name : String) : System.FilePath :=
   root / "test" / "fixtures" / "trust-gate" / name
@@ -142,55 +142,70 @@ def expectAcceptance (probe : System.FilePath) (label : String) : IO Bool := do
   IO.eprintln (tail output 60)
   return false
 
+/-- A rejection passes when the build fails and, if `expectedFragments` is
+nonempty, at least one of the fragments appears in the output. More than one
+fragment is listed only where two independent layers each reject the plant
+for its own stated reason and either may fire first. -/
 def expectRejection (probe : System.FilePath) (label : String)
-    (expectedFragment : Option String) : IO Bool := do
+    (expectedFragments : List String) : IO Bool := do
   let (ok, output) ← build probe
   if ok then
     IO.eprintln s!"FAIL trust gate unexpectedly accepted {label}"
     return false
-  match expectedFragment with
-  | some fragment =>
-    if (output.splitOn fragment).length > 1 then
-      IO.println s!"PASS planted {label} rejected with the expected diagnostic"
-      return true
-    IO.eprintln s!"FAIL trust gate rejected {label} for an unexpected reason; expected: {fragment}"
-    IO.eprintln (tail output 60)
-    return false
-  | none =>
+  match expectedFragments with
+  | [] =>
     IO.println s!"PASS planted {label} rejected"
     return true
+  | fragments =>
+    match fragments.find? (fun fragment => (output.splitOn fragment).length > 1) with
+    | some fragment =>
+      IO.println s!"PASS planted {label} rejected with the expected diagnostic: {fragment}"
+      return true
+    | none =>
+      IO.eprintln s!"FAIL trust gate rejected {label} for an unexpected reason; expected one of: {fragments}"
+      IO.eprintln (tail output 60)
+      return false
 
 structure Plant where
   label : String
   fixtureName : String
   /-- Which probe file receives the fixture. -/
   target : System.FilePath → System.FilePath
-  expected : Option String
+  /-- Diagnostics any one of which proves the rejection is for the stated
+  reason; empty means any rejection passes. -/
+  expected : List String
 
 def acceptancePlants : List Plant :=
   [{ label := "comments, strings, and numeric projections", fixtureName := "benign.lean.txt",
-     target := auditSource, expected := none }]
+     target := auditSource, expected := [] }]
 
+/-- Under the package-wide `warningAsError = true` (ruling R-6 in
+`docs/SHA256-DAG.md`), Lean's own "declaration uses `sorry`" warning is
+already an elaboration error, so a planted `sorry` never reaches the axiom
+gate and the gate's `sorryAx` line cannot appear. Both diagnostics are
+accepted for that plant: each is a rejection for the stated reason, and
+which layer fires first depends on the package options, not on the plant. -/
 def rejectionPlants : List Plant :=
   [{ label := "partial declaration", fixtureName := "partial.lean.txt", target := auditSource,
-     expected := some "contains an authored `partial` declaration modifier" },
+     expected := ["contains an authored `partial` declaration modifier"] },
    { label := "unsafe declaration", fixtureName := "unsafe.lean.txt", target := auditSource,
-     expected := some "contains an authored `unsafe` declaration modifier" },
+     expected := ["contains an authored `unsafe` declaration modifier"] },
    { label := "unadmitted Classical.choice in the production tree",
      fixtureName := "unadmitted-choice.lean.txt", target := productionRoot,
-     expected := some "reaches unexpected axiom Classical.choice" },
+     expected := ["reaches unexpected axiom Classical.choice"] },
    { label := "sorry in the production tree", fixtureName := "sorry.lean.txt",
-     target := productionRoot, expected := some "reaches forbidden axiom sorryAx" },
+     target := productionRoot,
+     expected := ["reaches forbidden axiom sorryAx", "declaration uses `sorry`"] },
    { label := "native_decide in the production tree", fixtureName := "native-decide.lean.txt",
-     target := productionRoot, expected := some "(native_decide auxiliary)" },
+     target := productionRoot, expected := ["(native_decide auxiliary)"] },
    { label := "malformed string literal", fixtureName := "malformed-string.lean.txt",
-     target := productionRoot, expected := none },
+     target := productionRoot, expected := [] },
    { label := "malformed raw string literal", fixtureName := "malformed-raw-string.lean.txt",
-     target := productionRoot, expected := none },
+     target := productionRoot, expected := [] },
    { label := "malformed decimal literal", fixtureName := "malformed-decimal.lean.txt",
-     target := productionRoot, expected := none },
+     target := productionRoot, expected := [] },
    { label := "unterminated comment", fixtureName := "malformed-comment.lean.txt",
-     target := productionRoot, expected := none }]
+     target := productionRoot, expected := [] }]
 
 def run (root : System.FilePath) (probe : System.FilePath) : IO Bool := do
   -- 0. The declared red set must be exactly the failing set.
@@ -228,7 +243,7 @@ def run (root : System.FilePath) (probe : System.FilePath) : IO Bool := do
   IO.FS.writeFile unreachable (← IO.FS.readFile (fixture root "unreachable.lean.txt"))
   let ok ← try
       expectRejection probe "unreachable test module"
-        (some "is not reachable from the WhatwgStreamsTest audit root")
+        ["is not reachable from the WhatwgStreamsTest audit root"]
     finally
       IO.FS.removeDirAll (probe / "WhatwgStreamsTest" / "Planted")
   allOk := allOk && ok

@@ -18,8 +18,12 @@ modelled or proved.
 
 ## Build and gates
 
-The toolchain is pinned by `lean-toolchain`. Everything below runs from any
-directory inside the checkout.
+The toolchain is pinned by `lean-toolchain` to exactly
+`leanprover/lean4:v4.33.1`, with no Lake dependencies. Consumers of the
+`Sha256` library take that exact pin, not a floor (ruling R-9 in
+docs/SHA256-DAG.md); every proof receipt in this repository is stated
+against that kernel. Everything below runs from any directory inside the
+checkout.
 
 ```text
 lake build                       # libraries, the elaboration-time axiom gate, the gate executables

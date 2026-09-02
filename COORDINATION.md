@@ -4,13 +4,14 @@ Agents editing this worktree at the same time cannot message each other.
 This file is the channel. Read it before you write, and update your claims
 when you take or release a file.
 
-Last updated: 2026-09-01 (P0 bootstrap).
+Last updated: 2026-09-02 (S1.0 landed; one-shot S1 builder dispatched).
 
 ## Who is active
 
 | Agent | Working on |
 | --- | --- |
-| Claude (coordinator, P0) | bootstrap: package, routers, gates, pins, documents |
+| Claude (coordinator) | reviews, commits, rulings, routers, PLAN, SPEC-MANIFEST, docs/*.md |
+| S1 one-shot builder (Opus subagent, ruling R-10) | lane S1 stages S1.1-S1.4, stretch S1.5-S1.6, in the `Sha256/` tree |
 
 ## Current claims
 
@@ -19,17 +20,18 @@ row is unclaimed.
 
 | File or tree | Claimed by | State |
 | --- | --- | --- |
-| `Sha256/**`, `Sha256.lean`, `test/contracts/sha256.contract.md`, `vendor/nist-cavp-sha256/**`, `vendor/nist-fips-180-4/**`, `generated/vendor-manifest.tsv`, `LICENSE`, `lakefile.toml`, `WhatwgStreamsTest.lean`, `WhatwgStreamsTest/Audit/AxiomGate.lean` (Sha256 tree rows only), `Gates/TrustSelfTest.lean` (copied-tree list only), `.github/workflows/ci.yml` (Sha256 steps only), `docs/PROVENANCE.md` (S1.0 rows only), `workshop/**` | S1.0 seat (Opus subagent, dispatched by the coordinator) | in progress; coordinator commits |
+| `Sha256/**` except `Sha256/Audit.lean` (only `minimumDeclarations` and the R-3 list may change there), `Sha256.lean`, `Sha256/Verified.lean` (imports and pin text), `test/fixtures/trust-gate/known-red.txt`, `test/counterexamples/REGISTER.md` and `test/counterexamples/sha/ATTACKS.md` (`WS-SHA-CE-*` rows only), `WhatwgStreamsTest/Counterexamples/Sha/**`, `Gates/Sha256.lean` and `Gates/VendorSeal.lean` (S1.4 cutover only), `Gates/AGENTS.md` (S1.4 wrapper note only), `.github/workflows/ci.yml` (Sha256 steps only), `docs/PROVENANCE.md` (S1 rows only), `workshop/**` | S1 one-shot builder | in progress; coordinator commits; no other seat runs `lake` in this tree meanwhile |
 
-| `docs/research/2026-09-01-lean-stdlib-strategy-and-performance.md` | R0-A seat (Opus subagent) | in progress; benchmarks run in a scratchpad package, never in this tree |
-| `docs/research/2026-09-01-lean4-nlp-learnings.md` | R0-B seat (Opus subagent) | in progress; reads a scratchpad clone of `mepuka/lean4-nlp` |
-| `docs/research/2026-09-01-web-reification-targets-survey.md` | R0-C seat (Opus subagent) | in progress; web research only |
-
-The P0 bootstrap claim on the whole tree was released at the P0 commit. No
-seat runs `lake` in this tree while the S1.0 seat holds its build; the R0
-seats measure elsewhere.
+Released: the P0 bootstrap claim (P0 commit); the S1.0 seat's claim (landed
+2026-09-02); the three R0 seats' claims (documents landed 2026-09-01/02).
 
 ## Collision record
 
 None yet. When one happens, record what it cost here so the rule that
 prevents it is not relaxed later.
+
+## Standing rule while a builder holds the tree
+
+Only the seat that holds the `Sha256/` claim runs `lake` in this checkout.
+Research seats measure in scratchpad packages. The coordinator runs the
+gates only at landing, after the seat has reported and stopped.
