@@ -156,3 +156,15 @@ Every proof graph carries the same ten edges, each `required-open`,
 `required-closed`, or `not-applicable` with a stated reason: identity,
 construction, semantics, laws, representation, counterexamples, bridges,
 targets, trust, coverage. `docs/SHA256-DAG.md` is the first instance.
+
+## Packages cloned from this skeleton (ruled 2026-09-02)
+
+Lake resolves module names globally across a workspace. A package created
+from this repository's P0 skeleton must therefore rename its tooling tree
+and executable roots and executable names with its own prefix before any
+consumer can `[[require]]` it: `Gates.*` becomes `<Name>Gates.*`, `bin.*`
+becomes `<name>bin.*`, and `sha256`, `vendorseal`, `citations`,
+`trustselftest` become `<name>_…`. Library roots (`WhatwgStreams`, `Hash`,
+`Effects`) are already unique by construction. The first collision cost one
+seat-run: `lean4-hash` at `92cb0cf` could not be required by this repository
+until its S6 rename.
