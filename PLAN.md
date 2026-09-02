@@ -103,15 +103,19 @@ and the elaboration-time axiom gate are green. Every pin has a digest recorded
 in `docs/PROVENANCE.md`, cross-checked between the in-tree SHA-256 and a
 second implementation.
 
-Next: R0, released by the operator 2026-09-01 and executing. Three
-deliverables under `docs/research/`: implementation strategy and measured
-performance for the Lean 4.33.1 standard library as it bears on this
-repository; the text-processing learnings of `mepuka/lean4-nlp`; and a
-survey ranking Lean reification targets by expressivity and compatibility
-with web programming in general, which is not specific to this repository
-and informs what follows P12. P1 does not open until the first two are
-landed and cited by the census generator's representation decisions. Lane
-S1 runs beside R0.
+R0 is complete: all three documents are landed under `docs/research/` with
+their decision-bearing findings in `docs/research/README.md`.
+
+**P1 opened 2026-09-02 by the operator on the R0 evidence**, delegated to
+one seat in the worktree branch `p1/census` while lane S1's builder holds
+the main tree. The census generator's representation decisions are fixed
+by that evidence: `ByteArray` and `Nat` offsets, never `String` positions;
+fuel-bounded scanning; rows keyed on the `<div algorithm` opener prefix (248
+openers, 19 with attributes); span digests through the in-tree SHA-256;
+`decide +kernel` for any kernel check; `Std.HashMap` allowed, `Std.TreeMap`
+and `Lean.Json` not. Exit gate unchanged: every row has one disposition, the
+census join gate is green in both directions, and a byte-for-byte drift gate
+regenerates the census into a clean tree. Lane S1 runs beside P1.
 
 ## Near-term proof burden
 
