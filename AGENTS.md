@@ -130,11 +130,17 @@ orchestrate; they decide nothing.
 | `lake exe citations` | no line-numbered citation into a protected authored document |
 | `lake exe trustselftest` | the declared red set is exact; planted violations are rejected for their stated reasons |
 
-The axiom ceilings are `propext` and `Quot.sound` for `WhatwgStreams/` and
-`WhatwgStreamsTest/`, plus `Classical.choice` for `Gates/` and for exactly
-named audit modules. `sorryAx`, `Lean.ofReduceBool`, `Lean.ofReduceNat`, and
-`Lean.trustCompiler` are forbidden everywhere. This forbids `native_decide`
-and `bv_decide` in proofs.
+The axiom ceiling is Lean's standard base, `propext`, `Quot.sound`, and
+`Classical.choice`, for every tree (operator ruling R-11, 2026-09-02;
+`Classical.choice` enters through library proofs about `String` and
+`Vector` and never through computation, and forbidding it bought re-proved
+lemmas, not soundness). `sorryAx`, `Lean.ofReduceBool`, `Lean.ofReduceNat`,
+`Lean.trustCompiler`, and the `native_decide` auxiliary axioms are forbidden
+everywhere. This forbids `native_decide` and `bv_decide` in proofs. Audit
+lines report how many declarations reach `Classical.choice` as information.
+Until the gate code is updated (after the P3 builder releases the tree), the
+older two-ceiling gate still runs; it is stricter than the rule, never
+looser.
 
 ## Generated facts and long-run continuity
 

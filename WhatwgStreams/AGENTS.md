@@ -75,7 +75,8 @@ receipts without rounding them up to category completion.
 
 ## Ceiling
 
-Every declaration in this tree is bound by the semantic ceiling: `propext`
-and `Quot.sound`. `Classical.choice`, `sorry`, `native_decide`, `partial`,
-`unsafe`, and new axioms are rejected by `WhatwgStreamsTest/Audit/AxiomGate.lean`.
-There is no per-module exemption in this tree.
+Every declaration in this tree is bound by the ceiling `propext`,
+`Quot.sound`, `Classical.choice` (ruling R-11). `sorry`, `native_decide`,
+`bv_decide`, `partial`, `unsafe`, and new axioms are rejected by
+`WhatwgStreamsTest/Audit/AxiomGate.lean`. There is no per-module exemption
+in this tree because none is needed.

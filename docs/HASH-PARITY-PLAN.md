@@ -556,7 +556,18 @@ this plan proposes, and those are the strongest evidence here. Everything else
 is measurement of the existing trees and inference from it. The runtime
 question in R1 is open and cannot be closed before the edit exists.
 
-## Rulings (coordinator, 2026-09-02, at the recommended defaults)
+## Status change (operator, 2026-09-02): optional backlog
+
+The operator ruled that `Classical.choice` inclusion is not a concern
+(R-11 in the streams `AGENTS.md`): the semantic ceiling is Lean's standard
+three axioms everywhere. The shared hash package therefore ships with one
+ceiling and no admission lists, and the parity work below is optional
+backlog that gates nothing. The measurements stand as the record of where
+`Classical.choice` enters; the rulings below are kept in case the work is
+ever picked up, and P-1's deletion of the `String`-typed forms no longer
+applies since those forms are within the ceiling.
+
+## Rulings (coordinator, 2026-09-02, at the recommended defaults; superseded in effect by R-11)
 
 | Id | Ruling |
 | --- | --- |

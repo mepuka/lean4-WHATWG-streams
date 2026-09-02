@@ -95,7 +95,7 @@ Steps 1–5 touch only the new repository. Step 6 is this repository's first
 | Id | Question | Default |
 | --- | --- | --- |
 | HP-1 | Repository name and namespace | `mepuka/lean4-hash`, namespace `Hash` |
-| HP-2 | Whose `Digest`/`Hex` survives, and when | **ruled 2026-09-02: parity later.** Both survive at extraction, each under its tree's ceiling; step 9 unifies on this repository's choice-free forms and restates fips202's `String`-length theorems on `List Char`, after which the package ceiling is `propext`/`Quot.sound` with an empty admission list |
+| HP-2 | Whose `Digest`/`Hex` survives, and when | **ruled 2026-09-02, then simplified by R-11 the same day: one ceiling (`propext`, `Quot.sound`, `Classical.choice`) for the whole package, no admission lists; both `Digest`/`Hex` copies coexist and their unification is optional backlog.** Earlier text: parity later. Both survive at extraction, each under its tree's ceiling; step 9 unifies on this repository's choice-free forms and restates fips202's `String`-length theorems on `List Char`, after which the package ceiling is `propext`/`Quot.sound` with an empty admission list |
 | HP-3 | History-preserving moves from both repositories, or fresh copies with provenance pins | history-preserving (`git filter-repo`), so blame and the fips202 breaker history survive |
 | HP-4 | Does foldlab's S2 tree get committed by the coordinator before extraction | yes, after the coordinator's own review of the acceptance report and a gate rerun; no push |
 | HP-5 | Order relative to the algebra package (RS-D1, held) | the hash package first: it has no dependency on the Mac work and unblocks step 6 here |

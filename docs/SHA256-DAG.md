@@ -125,12 +125,11 @@ must not fall below by more than 2×.
 
 - Toolchain `leanprover/lean4:v4.33.1` exactly. No change.
 - Zero Lake dependencies (`lake-manifest.json` packages stay `[]`).
-- Axiom ceiling for `Sha256/` is the repository's **semantic ceiling**:
-  `propext` and `Quot.sound`. This is stricter than fips202, which tolerates
-  `Classical.choice`. `Classical.choice` is admitted only for the exact
-  string-facing declarations ruling R-3 names, each recorded on the trust
-  edge with its receipt, exactly as the repository axiom gate's
-  exact-declaration list requires. `sorryAx`, `Lean.ofReduceBool`,
+- Axiom ceiling for `Sha256/`: originally `propext` and `Quot.sound` with
+  R-3 exact admissions; **relaxed by operator ruling R-11 (2026-09-02) to
+  Lean's standard three axioms, `Classical.choice` included**, matching
+  fips202. The lane landed choice-free anyway (0 admissions), which is
+  recorded as a fact, not a requirement. `sorryAx`, `Lean.ofReduceBool`,
   `Lean.ofReduceNat`, and `Lean.trustCompiler` are forbidden.
 - Every `Sha256.*` module is free of `unsafe`, `opaque`, `partial`,
   `implemented_by`, `extern`, and `IO`. The repository axiom gate scans the
