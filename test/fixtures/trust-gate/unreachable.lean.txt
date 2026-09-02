@@ -1,0 +1,2 @@
+/-- Planted by the trust self-test: a test module no root imports. -/
+def plantedUnreachable : Nat := 0

@@ -1,0 +1,6 @@
+namespace WhatwgStreams
+
+noncomputable def plantedUnadmittedChoice : Nat :=
+  Classical.choice (inferInstance : Nonempty Nat)
+
+end WhatwgStreams

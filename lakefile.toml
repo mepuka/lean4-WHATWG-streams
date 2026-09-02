@@ -1,0 +1,42 @@
+name = "whatwgstreams"
+version = "0.1.0"
+defaultTargets = ["WhatwgStreams", "Gates", "WhatwgStreamsTest",
+                  "sha256", "vendorseal", "citations", "trustselftest"]
+
+# The production library. Semantic declarations and proofs only.
+[[lean_lib]]
+name = "WhatwgStreams"
+globs = ["WhatwgStreams.*"]
+
+# Repository gates implemented in Lean. Tooling, not semantics; audited for
+# totality and forbidden axioms under the implementation ceiling.
+[[lean_lib]]
+name = "Gates"
+globs = ["Gates.*"]
+
+# Contracts, attacks, receipts, and the elaboration-time axiom gate.
+[[lean_lib]]
+name = "WhatwgStreamsTest"
+globs = ["WhatwgStreamsTest.*"]
+
+# Executable entry points. Each is a one-line wrapper under bin/ that calls
+# the audited `cli` of its Gates module; bin/ itself holds no logic.
+[[lean_exe]]
+name = "sha256"
+srcDir = "bin"
+root = "Sha256"
+
+[[lean_exe]]
+name = "vendorseal"
+srcDir = "bin"
+root = "VendorSeal"
+
+[[lean_exe]]
+name = "citations"
+srcDir = "bin"
+root = "Citations"
+
+[[lean_exe]]
+name = "trustselftest"
+srcDir = "bin"
+root = "TrustSelfTest"

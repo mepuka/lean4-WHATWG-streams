@@ -1,0 +1,5 @@
+namespace WhatwgStreams
+
+theorem plantedSorry : (1 : Nat) = 2 := sorry
+
+end WhatwgStreams

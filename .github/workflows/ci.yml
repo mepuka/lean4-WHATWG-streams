@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+      - name: Build libraries, axiom gate, and gate executables
+        run: lake build
+      - name: SHA-256 self-test against FIPS 180-4 vectors
+        run: lake exe sha256 --self-test
+      - name: Vendor seal in both directions
+        run: lake exe vendorseal
+      - name: Internal-citation gate
+        run: lake exe citations
+      - name: Trust self-test with planted violations
+        run: lake exe trustselftest
