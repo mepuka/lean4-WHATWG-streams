@@ -47,6 +47,10 @@ excluded from the receipt on both sides. -/
 def audited (side : String) (modName : Name) : Bool :=
   let roots : List Name := if side == "before" then [`WhatwgStreams, `WhatwgStreamsTest] else [`Whatwg, `WhatwgTest]
   roots.any (·.isPrefixOf modName) && !(modName.toString.endsWith "Audit.AxiomGate")
+    -- Libraries added after the W2 rename are outside the receipt's scope:
+    -- the receipt proves the rename changed nothing, and `Whatwg.Html`
+    -- (H2 of docs/HTML-PACKAGE-PLAN.md) did not exist at `f5dbad8`.
+    && !(`Whatwg.Html).isPrefixOf modName && !(`WhatwgTest.Html).isPrefixOf modName
 
 def kindOf : ConstantInfo → String
   | .axiomInfo _ => "axiom" | .defnInfo _ => "def" | .thmInfo _ => "theorem"

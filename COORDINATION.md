@@ -23,6 +23,7 @@ row is unclaimed.
 | `test/contracts/queue-with-sizes.contract.md` | P3 breaker (landed) | frozen 2026-09-02; the builder may not edit it |
 | `WhatwgTest/Streams/Data/QueueContract.lean`, `WhatwgTest/Streams/Data/QueueAxiomReport.lean` | P3 breaker (landed) | frozen and RED; declared in `test/fixtures/trust-gate/known-red.txt`; the builder may repair elaboration only, never a statement |
 | `WhatwgTest/Streams/Counterexamples/Data/Queue.lean`, `test/counterexamples/data/ATTACKS.md`, the `WS-DATA-*` rows of `test/counterexamples/REGISTER.md` | P3 breaker (landed) | green; breaker-owned, retained after the repair |
+| `Whatwg/Html.lean`, `Whatwg/Html/**`, `Gates/TyxmlSchema.lean`, `bin/TyxmlSchema.lean`, `generated/tyxml-html-schema.tsv`, `vendor/tyxml-d2916535/`, `vendor/whatwg-html-746f2ede/`, `docs/HTML-PACKAGE-PLAN.md` | Claude (HTML port seat, Mac, 2026-09-03) | H0–H2 landed in the working tree, uncommitted (H2: `Gates/TyxmlSchemaEmit.lean`, the generated `Whatwg/Html/Schema/*.lean`, `WhatwgTest/Html/DecideBenchmark.lean`, and the parity receipt scoped to exclude `Whatwg.Html`); released at commit |
 | `docs/DATA-DAG.md` | P3 breaker (landed) | carries `DATA-PG-QUEUE` and ruling request `P3-R1`; the coordinator answers `P3-R1` there |
 
 Released: the P0 bootstrap claim; the S1.0 seat; the three R0 seats; the S1

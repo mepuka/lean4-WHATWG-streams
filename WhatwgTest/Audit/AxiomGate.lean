@@ -6,8 +6,9 @@ import Gates
 /-!
 # Whatwg axiom allowlist gate
 
-This command tokenizes every authored source under `Whatwg/Streams/`,
-`WhatwgTest/Streams/`, and `Gates/` and inspects every declaration compiled
+This command tokenizes every authored source under `Whatwg/`, `WhatwgTest/`,
+and `Gates/` (every standard's library, `Whatwg.Html` included) and inspects
+every declaration compiled
 from them, including definitions, instances, generated declarations, and
 private helpers. The build fails on an authored `unsafe` or `partial`
 declaration modifier, on any declaration that reaches a forbidden axiom, and

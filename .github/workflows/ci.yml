@@ -19,11 +19,17 @@ jobs:
       # self-test below verifies the declared red set, excises it, and runs
       # the axiom gate on the green remainder, so it is the deciding gate.
       - name: Build production libraries and gate executables
-        run: lake --wfail build Whatwg Gates vendorseal citations trustselftest census
+        run: lake --wfail build Whatwg Gates vendorseal citations trustselftest census tyxmlschema
       - name: Vendor seal in both directions
         run: lake exe vendorseal
       - name: Internal-citation gate
         run: lake exe citations
+      # The TyXML schema projection (slice H1 of docs/HTML-PACKAGE-PLAN.md):
+      # generated/tyxml-html-schema.tsv against a fresh regeneration from the
+      # sealed vendor/tyxml-d2916535 sources, whose digests the gate refuses
+      # to deviate from.
+      - name: TyXML schema projection drift
+        run: lake exe tyxmlschema
       # Both census steps link the coverage numerator: since the first P3
       # witnesses landed, bin/Census.lean imports
       # WhatwgTest/Audit/SpecCoverage.lean so that the block below is

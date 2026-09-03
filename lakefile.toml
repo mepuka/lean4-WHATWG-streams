@@ -5,7 +5,8 @@ keywords = ["whatwg", "streams", "infra", "verified", "lean4"]
 license = "MIT"
 readmeFile = "README.md"
 defaultTargets = ["Whatwg", "Gates", "WhatwgTest",
-                  "vendorseal", "citations", "trustselftest", "census"]
+                  "vendorseal", "citations", "trustselftest", "census",
+                  "tyxmlschema"]
 
 # Ruling R-6 (docs/SHA256-DAG.md §9), package-wide: no implicit binder is
 # invented from a free variable, and every warning is an error at elaboration
@@ -47,6 +48,16 @@ root = "Citations"
 name = "trustselftest"
 srcDir = "bin"
 root = "TrustSelfTest"
+
+# The TyXML schema projection: `generated/tyxml-html-schema.tsv` regenerated
+# from the sealed `vendor/tyxml-d2916535/lib/{html_types.mli,html_sigs.mli,
+# html_f.ml}` and checked for byte drift (slice H1 of
+# docs/HTML-PACKAGE-PLAN.md). The generated `Whatwg.Html.Schema` modules of
+# H2 read this projection and nothing else.
+[[lean_exe]]
+name = "tyxmlschema"
+srcDir = "bin"
+root = "TyxmlSchema"
 
 # The P1 specification-algorithm census. `root = "bin.Census"` under the
 # default `srcDir` resolves to `bin/Census.lean`, matching the `sha256`
