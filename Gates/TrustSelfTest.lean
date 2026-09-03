@@ -21,6 +21,18 @@ their builder lands. This self-test therefore:
 
 Run `lake exe trustselftest` from anywhere inside the checkout. It invokes
 `lake build` in the throwaway copy through the same toolchain.
+
+## Cost
+
+The probe is seeded with the checkout's own `.lake/build` and
+`.lake/packages` when they exist. Lake's traces are content hashes, not
+paths, so the seeded probe replays every module that is unchanged and each
+planted variant costs one incremental build of the roots it touches (a few
+seconds), instead of a from-scratch build of the package and its
+dependencies for the first control and a cold cache for every plant after
+it. A checkout with no build directory still works; it just pays the cold
+build once. The first control build doubles as the green control when no
+red module is declared, so an all-green tree runs one fewer build.
 -/
 
 namespace Gates.TrustSelfTest
@@ -76,6 +88,13 @@ def makeProbe (root : System.FilePath) : IO System.FilePath := do
     IO.FS.writeBinFile (probe / file) (← IO.FS.readBinFile (root / file))
   for tree in copiedTrees do
     copyTree (root / tree) (probe / tree)
+  -- Seed the probe with the checkout's build artifacts and dependency
+  -- checkouts so that its builds replay instead of starting cold.
+  for cached in [".lake/build", ".lake/packages"] do
+    let source := root / cached
+    if ← source.isDir then
+      copyTree source (probe / cached)
+      IO.println s!"NOTE probe seeded from {cached}"
   return probe
 
 def lakeCommand : String :=
@@ -228,8 +247,14 @@ def run (root : System.FilePath) (probe : System.FilePath) : IO Bool := do
   IO.println s!"PASS declared red set matches the observed red set ({declared.length} module(s))"
   -- 1. Excise the declared red modules.
   excise probe declared
-  -- 2. Green control.
-  let mut allOk ← expectAcceptance probe "the unmodified source tree"
+  -- 2. Green control. With nothing declared red, the build in step 0 already
+  -- accepted the unmodified tree, so it is not repeated.
+  let mut allOk ←
+    if declared.isEmpty then
+      IO.println "PASS trust gate accepted the unmodified source tree (the step-0 build)"
+      pure true
+    else
+      expectAcceptance probe "the unmodified source tree"
   for plant in acceptancePlants do
     let ok ← withPlanted (plant.target probe) (fixture root plant.fixtureName)
       (expectAcceptance probe plant.label)
