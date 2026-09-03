@@ -127,7 +127,6 @@ orchestrate; they decide nothing.
 | `lake build` | the libraries elaborate; the elaboration-time axiom gate in `WhatwgTest.lean` passes over every declaration |
 | `lake exe vendorseal` | `vendor/` and `generated/vendor-manifest.tsv` agree in both directions; every path is valid on Windows |
 | `lake exe citations` | no line-numbered citation into a protected authored document |
-| `lake exe trustselftest` | the declared red set is exact; planted violations are rejected for their stated reasons |
 
 The axiom ceiling is Lean's standard base, `propext`, `Quot.sound`, and
 `Classical.choice`, for every tree (operator ruling R-11, 2026-09-02;

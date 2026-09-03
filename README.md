@@ -31,18 +31,15 @@ checkout.
 lake build                       # libraries, the elaboration-time axiom gate, the gate executables
 lake exe vendorseal              # vendor/ against generated/vendor-manifest.tsv, both directions
 lake exe citations               # no line-numbered citation into a protected authored document
-lake exe trustselftest           # planted partial/unsafe/choice/sorry/native_decide/malformed/unreachable are each rejected
 lake exe tyxmlschema             # generated/tyxml-html-schema.tsv against a regeneration from the sealed TyXML sources
 ```
 
 Every gate is Lean. Shell files, where they exist, only orchestrate.
 
-While a frozen breaker battery waits for its builder, the modules listed in
-`test/fixtures/trust-gate/known-red.txt` are red by design and a plain
-`lake build` fails on exactly them. In that phase `lake exe trustselftest`
-is the deciding gate: it checks the declared set against the observed set in
-both directions, excises it, and runs the axiom gate on the green remainder.
-CI builds the production libraries and gate executables and then runs it.
+`lake exe trustselftest` (not a default target, not in CI) plants known
+violations in a throwaway copy and checks that the axiom gate rejects each;
+run it after changing the gate itself. The WP-7 rename-parity receipt was
+retired on 2026-09-03: it had proved what it was written to prove.
 
 ## Where to start
 
