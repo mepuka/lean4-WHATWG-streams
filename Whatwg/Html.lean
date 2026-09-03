@@ -42,8 +42,10 @@ This root is the breadth scaffold of `docs/HTML-PACKAGE-PLAN.md` with H2 and
 H3 landed: `Whatwg.Html.Schema` holds the generated data (tags, attributes,
 content sets, element rows) behind the projection's drift gate,
 `Whatwg.Html.Content` holds the lattice, transparent coherence and the
-admission relation, and `Whatwg.Html.Node` holds the raw tree, the
-tag-indexed tree, its 111 element combinators and erasure. `Whatwg.Html.Print`,
+admission relation, `Whatwg.Html.Node` holds the raw tree, the tag-indexed
+tree, its 111 element combinators and erasure, and H4 adds
+`Whatwg.Html.Print` with the escaper, the serializer, and the decoder that
+inverts the serializer on the sublanguage its own output determines.
 `Whatwg.Html.Syntax`, `Whatwg.Html.Bridge`, `Whatwg.Html.Svg` and
 `Whatwg.Html.Audit` are still a docstring and nothing else. Every semantic
 declaration after this arrives behind a frozen contract packet.
