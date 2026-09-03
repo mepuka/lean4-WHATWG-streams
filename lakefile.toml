@@ -68,12 +68,12 @@ rev = "0168306b7068b97758e3f2d4307eeb97aa31a104"
 # The generic effect algebra every standard here builds against (RS-D1 as
 # ruled in lean4-effect4 docs/EFFECTS-SPLIT-PLAN.md, EP-9), now with signature
 # morphisms, handler transport, families, and the generic first-order Flow.
-# Exact commit of tag v0.4.0 of pure-algebra/lean4-effects. Nothing imports it
+# Exact commit of tag v0.5.0 of pure-algebra/lean4-effects. Nothing imports it
 # until the first Stratum S packet (P4).
 [[require]]
 name = "effects"
 git = "https://github.com/pure-algebra/lean4-effects"
-rev = "e86f1412361e30fe5d9ba930b478617611933fb8"
+rev = "c28833b3c14431ba2886a0fb66bcc688c86c2589"
 
 # TypeScript as a target: syntax, renderer, identifier profile, host pins.
 # Exact commit of tag v0.2.0 of pure-algebra/lean4-typescript. P11 lowers
