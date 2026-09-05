@@ -1,0 +1,22 @@
+# Section dispositions: authored input to the Infra census (definition-keyed).
+#
+# Three tab-separated fields: <section id> <kind or *> <disposition>, resolved
+# exactly as census/dispositions.tsv is for Streams (innermost heading first,
+# kind-specific line before the wildcard). Section ids are the <h2>/<h3>/<h4>
+# ids of vendor/whatwg-infra-3f984adc/infra.bs. docs/INFRA-PROOF-PLAN.md
+# sections 5 and 6 are the survey these lines are seeded from.
+
+# Conformance vocabulary (terminology, privacy, other-specs) has no carrier.
+conventions	*	evidenceOnly
+# Control-flow conventions (abort when, if aborted, while, continue, break,
+# Assert) are consumed by the transcription discipline, not modelled as
+# values (ruling INFRA-R13).
+algorithms	*	evidenceOnly
+# The value universe proper.
+primitive-data-types	*	owned
+data-structures	*	owned
+# JSON: the Infra-value forms and the two conversions are owned; the four
+# JavaScript-value forms are intrinsic calls and overridden to hostOnly.
+json	*	owned
+forgiving-base64	*	owned
+namespaces	*	owned

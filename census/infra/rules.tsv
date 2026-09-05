@@ -1,0 +1,5 @@
+# Cross-cutting rule rows: authored input to the Infra census.
+#
+# Two tab-separated fields: <kebab name> <locator>; the locator must occur
+# exactly once in the pinned infra.bs and the span runs to the next blank
+# line. Empty: the Infra text states its requirements as definitions.

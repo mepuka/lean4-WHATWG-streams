@@ -287,6 +287,9 @@ inductive Kind
   | requirement
   | rule
   | slot
+  /-- A carrier definition of a definition-keyed standard ("a byte sequence
+  is a sequence of bytes"); every other definition there is an `op`. -/
+  | type
   deriving BEq, DecidableEq, Inhabited
 
 def Kind.name : Kind → String
@@ -295,6 +298,7 @@ def Kind.name : Kind → String
   | .requirement => "requirement"
   | .rule => "rule"
   | .slot => "slot"
+  | .type => "type"
 
 def Kind.ofString? : String → Option Kind
   | "idl" => some .idl
@@ -302,9 +306,10 @@ def Kind.ofString? : String → Option Kind
   | "requirement" => some .requirement
   | "rule" => some .rule
   | "slot" => some .slot
+  | "type" => some .type
   | _ => none
 
-def Kind.all : List Kind := [.idl, .op, .requirement, .rule, .slot]
+def Kind.all : List Kind := [.idl, .op, .requirement, .rule, .slot, .type]
 
 /-- The disposition vocabulary owned by `SPEC-MANIFEST.md`. -/
 inductive Disposition
@@ -385,28 +390,88 @@ structure Row where
 
 def Row.sortKey (r : Row) : String := r.kind.name ++ "|" ++ r.id
 
-/-! ## The pinned input -/
+/-! ## Standards
 
-def inputRelativePath : String := "vendor/whatwg-streams-b9ba9f49/index.bs"
+One census per standard. `streams` is the P1 census of the Streams Standard,
+row-sourced from algorithm blocks, slot tables, IDL and the piping
+requirements. `infra` is the definition-keyed census of the Infra Standard,
+row-sourced from every `<dfn>` (`docs/INFRA-PROOF-PLAN.md` section 6), since
+that text states 178 definitions against 18 algorithm blocks at its pin. The
+constants after the two records keep their P1 names and denote the Streams
+census, so the Streams numerator reads it unchanged. -/
 
-/-- The pin recorded in `SPEC-MANIFEST.md`. The generator refuses any other
-bytes. -/
-def inputDigest : String :=
-  "24360b4f8446e6c80e185c5021fcca9b67a7e0bb62490a00109080ebc04c6440"
+structure Standard where
+  /-- The `--standard` key on the command line. -/
+  key : String
+  /-- The label the coverage block prints. -/
+  label : String
+  inputRelativePath : String
+  /-- The pin recorded in `SPEC-MANIFEST.md`. The generator refuses any other
+  bytes. -/
+  inputDigest : String
+  censusRelativePath : String
+  rowsRelativePath : String
+  rowsNamespace : String
+  /-- The directory of the authored inputs `dispositions.tsv`,
+  `overrides.tsv`, `rules.tsv` and, for a definition-keyed standard,
+  `types.tsv`. -/
+  authoredDir : String
+  /-- Rows come from `<dfn>` definitions rather than from algorithm blocks,
+  slot tables, IDL and requirement lists. -/
+  definitionKeyed : Bool
+  deriving Inhabited
 
-def censusRelativePath : String := "generated/spec-algorithm-census.tsv"
+def streams : Standard :=
+  { key := "streams", label := "WHATWG Streams (b9ba9f49)",
+    inputRelativePath := "vendor/whatwg-streams-b9ba9f49/index.bs",
+    inputDigest := "24360b4f8446e6c80e185c5021fcca9b67a7e0bb62490a00109080ebc04c6440",
+    censusRelativePath := "generated/spec-algorithm-census.tsv",
+    rowsRelativePath := "WhatwgTest/Audit/SpecCoverageRows.lean",
+    rowsNamespace := "WhatwgTest.Audit.SpecCoverageRows",
+    authoredDir := "census", definitionKeyed := false }
 
-def rowsRelativePath : String := "WhatwgTest/Audit/SpecCoverageRows.lean"
+def infra : Standard :=
+  { key := "infra", label := "WHATWG Infra (3f984adc)",
+    inputRelativePath := "vendor/whatwg-infra-3f984adc/infra.bs",
+    inputDigest := "7c38e6e25ef21f536142cfc6d94954c41bc9889cd0b6fd67ab34571215acd8eb",
+    censusRelativePath := "generated/infra-census.tsv",
+    rowsRelativePath := "WhatwgTest/Audit/Infra/SpecCoverageRows.lean",
+    rowsNamespace := "WhatwgTest.Audit.Infra.SpecCoverageRows",
+    authoredDir := "census/infra", definitionKeyed := true }
 
-def dispositionsRelativePath : String := "census/dispositions.tsv"
+def standards : List Standard := [streams, infra]
 
-def overridesRelativePath : String := "census/overrides.tsv"
+def Standard.ofKey? (key : String) : Option Standard := standards.find? (·.key == key)
 
-def rulesRelativePath : String := "census/rules.tsv"
+def Standard.dispositionsRelativePath (s : Standard) : String := s.authoredDir ++ "/dispositions.tsv"
+
+def Standard.overridesRelativePath (s : Standard) : String := s.authoredDir ++ "/overrides.tsv"
+
+def Standard.rulesRelativePath (s : Standard) : String := s.authoredDir ++ "/rules.tsv"
+
+def Standard.typesRelativePath (s : Standard) : String := s.authoredDir ++ "/types.tsv"
+
+def Standard.regenerateCommand (s : Standard) : String :=
+  if s.key == "streams" then "lake exe census --write"
+  else s!"lake exe census --standard {s.key} --write"
+
+def inputRelativePath : String := streams.inputRelativePath
+
+def inputDigest : String := streams.inputDigest
+
+def censusRelativePath : String := streams.censusRelativePath
+
+def rowsRelativePath : String := streams.rowsRelativePath
+
+def dispositionsRelativePath : String := streams.dispositionsRelativePath
+
+def overridesRelativePath : String := streams.overridesRelativePath
+
+def rulesRelativePath : String := streams.rulesRelativePath
 
 def formatVersion : String := "1"
 
-def regenerateCommand : String := "lake exe census --write"
+def regenerateCommand : String := streams.regenerateCommand
 
 /-! ## Section index -/
 
@@ -416,25 +481,54 @@ structure Heading where
   off : Nat
   deriving Inhabited
 
+/-- The value of attribute `name` inside the tag `[tagB, tagE)`, quoted or
+unquoted: the Streams source writes `id="..."` and the Infra source writes
+`id=...`. The attribute name must be preceded by whitespace, so `id=` is never
+read out of `oldids=`. An unquoted value runs to the next whitespace or `>`. -/
+def attrValue? (bs : ByteArray) (tagB tagE : Nat) (name : String) : Option String := Id.run do
+  let key := (name ++ "=").toUTF8
+  for i in [tagB:tagE] do
+    if matchesAt bs key i && i > 0 && isSpaceByte (byteAt bs (i - 1)) then
+      let vs := i + key.size
+      if byteAt bs vs == 0x22 then
+        match findFrom bs (ByteArray.mk #[0x22]) (vs + 1) with
+        | some ve => return sliceString? bs (vs + 1) ve
+        | none => return none
+      else
+        let mut ve := vs
+        for _ in [vs:tagE] do
+          let c := byteAt bs ve
+          if isSpaceByte c || c == 0x3e then break
+          ve := ve + 1
+        return sliceString? bs vs ve
+  return none
+
+/-- Whether `name` occurs as a bare, valueless attribute inside the tag
+`[tagB, tagE)`, as `ignore` does in `<dfn ignore>`. -/
+def hasBareAttr (bs : ByteArray) (tagB tagE : Nat) (name : String) : Bool := Id.run do
+  let key := name.toUTF8
+  for i in [tagB:tagE] do
+    if matchesAt bs key i && i > 0 && isSpaceByte (byteAt bs (i - 1)) then
+      let after := byteAt bs (i + key.size)
+      if isSpaceByte after || after == 0x3e then return true
+  return false
+
 /-- Every `<h2>`, `<h3>` and `<h4>` that opens a line and carries an `id`
 attribute, in document order. -/
 def scanHeadings (bs : ByteArray) : Except String (Array Heading) := Id.run do
   let openTag := "<h".toUTF8
-  let idKey := " id=\"".toUTF8
-  let quote := "\"".toUTF8
+  let gt := ">".toUTF8
   let mut out : Array Heading := #[]
   for i in occurrences bs openTag 4096 do
     if i != 0 && byteAt bs (i - 1) != 0x0a then continue
     let d := byteNat bs (i + 2)
     if d < 0x32 || d > 0x34 then continue
-    if !matchesAt bs idKey (i + 3) then continue
-    let vs := i + 3 + idKey.size
-    match findFrom bs quote vs with
-    | none => return .error s!"census: unterminated heading id at byte {i}"
-    | some ve =>
-      match sliceString? bs vs ve with
-      | none => return .error s!"census: heading id at byte {i} is not valid UTF-8"
-      | some name => out := out.push { level := d - 0x30, id := name, off := i }
+    if !isSpaceByte (byteAt bs (i + 3)) then continue
+    let some tagE := findFrom bs gt i
+      | return .error s!"census: unterminated heading tag at byte {i}"
+    match attrValue? bs i tagE "id" with
+    | none => continue
+    | some name => out := out.push { level := d - 0x30, id := name, off := i }
   return .ok out
 
 /-- The innermost enclosing `<h4>`, `<h3>` and `<h2>` ids at `off`, empty
@@ -522,7 +616,11 @@ cases prefixed by the flattened `for` class; and only then the opener's
 attribute is what keeps an exported wrapper distinct from the abstract
 operation it wraps. -/
 
-private def matchCloseAux (opens closes : Array Nat) (oi ci depth : Nat) : Nat → Option Nat
+/-- The end offset (just past the matching close tag of length `closeLen`)
+of the block whose opener precedes `opens[oi]` and `closes[ci]`, counting
+nested openers. -/
+private def matchCloseAux (opens closes : Array Nat) (closeLen : Nat) (oi ci depth : Nat) :
+    Nat → Option Nat
   | 0 => none
   | fuel + 1 =>
     match closes[ci]? with
@@ -530,12 +628,12 @@ private def matchCloseAux (opens closes : Array Nat) (oi ci depth : Nat) : Nat �
     | some cv =>
       match opens[oi]? with
       | some ov =>
-        if ov < cv then matchCloseAux opens closes (oi + 1) ci (depth + 1) fuel
-        else if depth == 0 then some (cv + 6)
-        else matchCloseAux opens closes oi (ci + 1) (depth - 1) fuel
+        if ov < cv then matchCloseAux opens closes closeLen (oi + 1) ci (depth + 1) fuel
+        else if depth == 0 then some (cv + closeLen)
+        else matchCloseAux opens closes closeLen oi (ci + 1) (depth - 1) fuel
       | none =>
-        if depth == 0 then some (cv + 6)
-        else matchCloseAux opens closes oi (ci + 1) (depth - 1) fuel
+        if depth == 0 then some (cv + closeLen)
+        else matchCloseAux opens closes closeLen oi (ci + 1) (depth - 1) fuel
 
 private def firstIndexAfter (xs : Array Nat) (bound : Nat) : Nat := Id.run do
   let mut i := 0
@@ -559,7 +657,7 @@ def scanOps (bs : ByteArray) : Except String (Array Row) := Id.run do
       | return .error s!"census: unterminated <div algorithm at byte {i}"
     let oi := firstIndexAfter opens i
     let ci := firstIndexAfter closes i
-    let some blockEnd := matchCloseAux opens closes oi ci 0 (opens.size + closes.size + 1)
+    let some blockEnd := matchCloseAux opens closes 6 oi ci 0 (opens.size + closes.size + 1)
       | return .error s!"census: unbalanced algorithm block at byte {i}"
     let mut name : Option String := none
     match attrText? bs i (tagE + 1) "id" with
@@ -937,7 +1035,8 @@ structure RuleInput where
   locator : String
   deriving Inhabited
 
-def parseRules (text : String) : Except String (Array RuleInput) := Id.run do
+def parseRules (text : String) (path : String := rulesRelativePath) :
+    Except String (Array RuleInput) := Id.run do
   let mut out : Array RuleInput := #[]
   let mut lineNumber := 0
   for line in Gates.Common.lines text do
@@ -947,9 +1046,9 @@ def parseRules (text : String) : Except String (Array RuleInput) := Id.run do
     match line.splitOn "\t" with
     | [name, locator] =>
       if name.isEmpty || locator.isEmpty then
-        return .error s!"{rulesRelativePath} line {lineNumber}: empty field"
+        return .error s!"{path} line {lineNumber}: empty field"
       out := out.push { name := name, locator := locator }
-    | _ => return .error s!"{rulesRelativePath} line {lineNumber}: expected two tab-separated fields"
+    | _ => return .error s!"{path} line {lineNumber}: expected two tab-separated fields"
   return .ok out
 
 def scanRules (bs : ByteArray) (inputs : Array RuleInput) : Except String (Array Row) := Id.run do
@@ -966,6 +1065,156 @@ def scanRules (bs : ByteArray) (inputs : Array RuleInput) : Except String (Array
       | none => bs.size
     out := out.push { kind := .rule, id := "rule." ++ kebab input.name,
                       anchorB := start, anchorE := start, spanB := start, spanE := stop }
+  return .ok out
+
+/-! ## Definition rows
+
+A definition-keyed standard states almost everything as a `<dfn>` in a
+paragraph rather than as an algorithm block: the Infra Standard has 178
+definitions against 18 blocks at its pin. Every `<dfn>` that is not marked
+`ignore` and is not an algorithm parameter (`for=list/slice`) becomes a row.
+Its id follows the ladder `scanOps` uses: the `id` attribute, else the first
+alternative of `lt`, else the text, the last two prefixed by the kebab-cased
+first alternative of `for`. Its span is the enclosing algorithm block when
+there is one; otherwise it runs from the enclosing `<p>`, `<dt>` or `<li>` to
+the next blank line, and on through the numbered list that follows when the
+paragraph ends in a colon, which is how the text writes an algorithm outside a
+block ("if the following steps return true:"). Kind is `type` for the names
+listed in the standard's `types.tsv` and `op` for every other definition;
+an authored type name that matches no row fails generation. -/
+
+/-- Text with every `<…>` tag removed. -/
+def stripTags (text : String) : String := Id.run do
+  let mut out : String := ""
+  let mut depth : Nat := 0
+  for c in text.toList do
+    if c == '<' then depth := depth + 1
+    else if c == '>' then depth := depth - 1
+    else if depth == 0 then out := out.push c
+  return out
+
+/-- The largest element of the increasing array `xs` below `bound`. -/
+private def lastBefore (xs : Array Nat) (bound : Nat) : Option Nat := Id.run do
+  let mut best : Option Nat := none
+  for x in xs do
+    if x < bound then best := some x else break
+  return best
+
+/-- Whether the bytes `[b, e)`, after trailing whitespace and an optional
+`</p>`, end in a colon. -/
+def endsWithColon (bs : ByteArray) (b e : Nat) : Bool := Id.run do
+  let mut i := e
+  for _ in [0:e - b] do
+    if i == b || !isSpaceByte (byteAt bs (i - 1)) then break
+    i := i - 1
+  if i ≥ b + 4 && matchesAt bs "</p>".toUTF8 (i - 4) then i := i - 4
+  return i > b && byteAt bs (i - 1) == 0x3a
+
+/-- Every algorithm block as `(opener, end)`, in document order. -/
+def algorithmBlocks (bs : ByteArray) : Except String (Array (Nat × Nat)) := Id.run do
+  let opens := occurrences bs "<div".toUTF8 4096
+  let closes := occurrences bs "</div>".toUTF8 4096
+  let mut out : Array (Nat × Nat) := #[]
+  for i in occurrences bs "<div algorithm".toUTF8 4096 do
+    let oi := firstIndexAfter opens i
+    let ci := firstIndexAfter closes i
+    let some e := matchCloseAux opens closes 6 oi ci 0 (opens.size + closes.size + 1)
+      | return .error s!"census: unbalanced algorithm block at byte {i}"
+    out := out.push (i, e)
+  return .ok out
+
+/-- The authored `types.tsv`: one kebab-cased row name per line. -/
+def parseTypes (text : String) (path : String) : Except String (Array String) := Id.run do
+  let mut out : Array String := #[]
+  let mut lineNumber := 0
+  for line in Gates.Common.lines text do
+    lineNumber := lineNumber + 1
+    let trimmed := Gates.Common.trimmed line
+    if trimmed.isEmpty || trimmed.startsWith "#" then continue
+    if out.contains trimmed then
+      return .error s!"{path} line {lineNumber}: duplicate type name {trimmed}"
+    out := out.push trimmed
+  return .ok out
+
+def scanDefinitions (bs : ByteArray) (typeNames : Array String) (typesPath : String) :
+    Except String (Array Row) := Id.run do
+  let gt := ">".toUTF8
+  let dfnClose := "</dfn>".toUTF8
+  let blank := "\n\n".toUTF8
+  let blocks ← match algorithmBlocks bs with
+    | .error message => return .error message
+    | .ok blocks => pure blocks
+  let paragraphOpens :=
+    (occurrences bs "<p>".toUTF8 4096 ++ occurrences bs "<p ".toUTF8 4096 ++
+      occurrences bs "<dt>".toUTF8 4096 ++ occurrences bs "<li>".toUTF8 4096).qsort (· < ·)
+  let olOpens := occurrences bs "<ol".toUTF8 4096
+  let olCloses := occurrences bs "</ol>".toUTF8 4096
+  let mut out : Array Row := #[]
+  let mut usedTypes : Array Nat := #[]
+  for d in occurrences bs "<dfn".toUTF8 4096 do
+    let some tagE := findFrom bs gt d
+      | return .error s!"census: unterminated <dfn at byte {d}"
+    if hasBareAttr bs d (tagE + 1) "ignore" then continue
+    let forAttr := attrValue? bs d (tagE + 1) "for"
+    if let some f := forAttr then
+      if f.any (· == '/') then continue
+    let owner := match forAttr with
+      | some f => kebab (normalizeWhitespace ((f.splitOn ",").headD f)) ++ "-"
+      | none => ""
+    let mut name : String := ""
+    match attrValue? bs d (tagE + 1) "id" with
+    | some dfnId => name := kebab dfnId
+    | none =>
+      match attrValue? bs d (tagE + 1) "lt" with
+      | some lt =>
+        let head := (lt.splitOn "|").headD lt
+        name := owner ++ kebab (normalizeWhitespace head)
+      | none =>
+        let some textE := findFrom bs dfnClose (tagE + 1)
+          | return .error s!"census: unterminated <dfn> text at byte {d}"
+        let some text := sliceString? bs (tagE + 1) textE
+          | return .error s!"census: <dfn> text at byte {d} is not valid UTF-8"
+        name := owner ++ kebab (normalizeWhitespace (stripTags text))
+    if name.isEmpty then
+      return .error s!"census: definition at byte {d} derived an empty name"
+    -- Span.
+    let mut spanB := 0
+    let mut spanE := 0
+    match blocks.find? (fun (i, e) => i < d && d < e) with
+    | some (i, e) =>
+      spanB := i
+      spanE := e
+    | none =>
+      let some pb := lastBefore paragraphOpens d
+        | return .error s!"census: definition at byte {d} has no enclosing paragraph"
+      spanB := pb
+      let e0 := (findFrom bs blank d).getD bs.size
+      spanE := e0
+      if endsWithColon bs pb e0 then
+        let oi := firstIndexAfter olOpens (e0 - 1)
+        match olOpens[oi]? with
+        | none => return .error s!"census: definition at byte {d} announces steps but no list follows"
+        | some olStart =>
+          let ci := firstIndexAfter olCloses olStart
+          let some olEnd :=
+              matchCloseAux olOpens olCloses 5 (oi + 1) ci 0 (olOpens.size + olCloses.size + 1)
+            | return .error s!"census: unbalanced list after the definition at byte {d}"
+          spanE := olEnd
+    -- Kind.
+    let mut kind := Kind.op
+    match typeNames.findIdx? (· == name) with
+    | some ti =>
+      kind := .type
+      usedTypes := usedTypes.push ti
+    | none => pure ()
+    out := out.push { kind := kind, id := kind.name ++ "." ++ name,
+                      anchorB := spanB, anchorE := spanB, spanB := spanB, spanE := spanE }
+  let mut unused : Array String := #[]
+  for i in [0:typeNames.size] do
+    unless usedTypes.contains i do
+      unused := unused.push (typeNames.getD i "")
+  unless unused.isEmpty do
+    return .error s!"census: {typesPath} names {unused.size} type(s) that match no definition: {unused.toList}"
   return .ok out
 
 /-! ## The disposition join
@@ -1000,7 +1249,8 @@ inductive JoinSource
   | fromSection (index : Nat)
   deriving Inhabited
 
-def parseDispositions (text : String) : Except String (Array DispositionRule) := Id.run do
+def parseDispositions (text : String) (path : String := dispositionsRelativePath) :
+    Except String (Array DispositionRule) := Id.run do
   let mut out : Array DispositionRule := #[]
   let mut lineNumber := 0
   for line in Gates.Common.lines text do
@@ -1012,19 +1262,20 @@ def parseDispositions (text : String) : Except String (Array DispositionRule) :=
       let kind ← if kindText == "*" then pure none else
         match Kind.ofString? kindText with
         | some k => pure (some k)
-        | none => return .error s!"{dispositionsRelativePath} line {lineNumber}: unknown kind {kindText}"
+        | none => return .error s!"{path} line {lineNumber}: unknown kind {kindText}"
       let some disposition := Disposition.ofString? dispositionText
-        | return .error s!"{dispositionsRelativePath} line {lineNumber}: unknown disposition {dispositionText}"
+        | return .error s!"{path} line {lineNumber}: unknown disposition {dispositionText}"
       if sectionId.isEmpty then
-        return .error s!"{dispositionsRelativePath} line {lineNumber}: empty section id"
+        return .error s!"{path} line {lineNumber}: empty section id"
       if out.any (fun d => d.sectionId == sectionId && d.kind == kind) then
-        return .error s!"{dispositionsRelativePath} line {lineNumber}: duplicate entry for {sectionId} {kindText}"
+        return .error s!"{path} line {lineNumber}: duplicate entry for {sectionId} {kindText}"
       out := out.push { sectionId := sectionId, kind := kind, disposition := disposition }
     | _ =>
-      return .error s!"{dispositionsRelativePath} line {lineNumber}: expected three tab-separated fields"
+      return .error s!"{path} line {lineNumber}: expected three tab-separated fields"
   return .ok out
 
-def parseOverrides (text : String) : Except String (Array OverrideRule) := Id.run do
+def parseOverrides (text : String) (path : String := overridesRelativePath) :
+    Except String (Array OverrideRule) := Id.run do
   let mut out : Array OverrideRule := #[]
   let mut lineNumber := 0
   for line in Gates.Common.lines text do
@@ -1034,14 +1285,14 @@ def parseOverrides (text : String) : Except String (Array OverrideRule) := Id.ru
     match line.splitOn "\t" with
     | [rowId, dispositionText, reason] =>
       let some disposition := Disposition.ofString? dispositionText
-        | return .error s!"{overridesRelativePath} line {lineNumber}: unknown disposition {dispositionText}"
+        | return .error s!"{path} line {lineNumber}: unknown disposition {dispositionText}"
       if rowId.isEmpty || reason.isEmpty then
-        return .error s!"{overridesRelativePath} line {lineNumber}: empty field"
+        return .error s!"{path} line {lineNumber}: empty field"
       if out.any (fun o => o.rowId == rowId) then
-        return .error s!"{overridesRelativePath} line {lineNumber}: duplicate override for {rowId}"
+        return .error s!"{path} line {lineNumber}: duplicate override for {rowId}"
       out := out.push { rowId := rowId, disposition := disposition, reason := reason }
     | _ =>
-      return .error s!"{overridesRelativePath} line {lineNumber}: expected three tab-separated fields"
+      return .error s!"{path} line {lineNumber}: expected three tab-separated fields"
   return .ok out
 
 def resolveDisposition (rules : Array DispositionRule) (overrides : Array OverrideRule)
@@ -1077,29 +1328,30 @@ def renderRow (bs : ByteArray) (row : Row) : Except String String := do
   let summary := normalizeWhitespace raw
   .ok s!"{row.kind.name}|{row.id}|{escapeField anchor}|{row.spanB}|{row.spanE}|{digest}|{escapeField summary}"
 
-def censusHeader (rowCount : Nat) : String :=
-  s!"#census format={formatVersion} generator=Gates.Census input={inputRelativePath} " ++
-  s!"input-sha256={inputDigest} rows={rowCount} regenerate={regenerateCommand}"
+def censusHeader (std : Standard) (rowCount : Nat) : String :=
+  s!"#census format={formatVersion} generator=Gates.Census input={std.inputRelativePath} " ++
+  s!"input-sha256={std.inputDigest} rows={rowCount} regenerate={std.regenerateCommand}"
 
-def renderCensus (bs : ByteArray) (rows : Array Row) : Except String String := do
-  let mut out := censusHeader rows.size ++ "\n"
+def renderCensus (std : Standard) (bs : ByteArray) (rows : Array Row) : Except String String := do
+  let mut out := censusHeader std rows.size ++ "\n"
   for row in rows do
     out := out ++ (← renderRow bs row) ++ "\n"
   .ok out
 
-def renderRowsModule (entries : Array CoverageRow) (denominator : Nat) : String := Id.run do
+def renderRowsModule (std : Standard) (entries : Array CoverageRow) (denominator : Nat) :
+    String := Id.run do
   let mut out :=
     "/-\nGENERATED FILE. Do not edit.\n\n" ++
-    s!"Written by `{regenerateCommand}` (`Gates.Census`) from the pinned\n" ++
-    s!"`{inputRelativePath}` (SHA-256 `{inputDigest}`), the census projection\n" ++
-    s!"`{censusRelativePath}`, and the authored disposition inputs under `census/`.\n" ++
-    "Format version " ++ formatVersion ++ ". `lake exe census` fails on any byte of drift.\n\n" ++
+    s!"Written by `{std.regenerateCommand}` (`Gates.Census`) from the pinned\n" ++
+    s!"`{std.inputRelativePath}` (SHA-256 `{std.inputDigest}`), the census projection\n" ++
+    s!"`{std.censusRelativePath}`, and the authored disposition inputs under `{std.authoredDir}/`.\n" ++
+    "Format version " ++ formatVersion ++ s!". `{std.regenerateCommand.replace " --write" ""}` fails on any byte of drift.\n\n" ++
     "This is the frozen row list of the specification-coverage numerator:\n" ++
     "one entry per census row, carrying the row id, the joined disposition, the\n" ++
     "coverage state, and the witness list. `WhatwgTest/Audit/SpecCoverage.lean`\n" ++
     "owns the checks over it and `docs/SPEC-COVERAGE.md` owns the rules.\n-/\n\n" ++
     "import Gates\n\n" ++
-    "namespace WhatwgTest.Audit.SpecCoverageRows\n\n" ++
+    s!"namespace {std.rowsNamespace}\n\n" ++
     "open Gates.Census\n\n" ++
     "/-- One entry per census row, sorted by kind then id, as the census is. -/\n" ++
     "def rows : Array CoverageRow := #[\n"
@@ -1113,7 +1365,7 @@ def renderRowsModule (entries : Array CoverageRow) (denominator : Nat) : String 
   out := out ++ "]\n\n" ++
     s!"/-- Total census rows. -/\ndef rowTotal : Nat := {entries.size}\n\n" ++
     s!"/-- Rows inside the coverage denominator. -/\ndef denominator : Nat := {denominator}\n\n" ++
-    "end WhatwgTest.Audit.SpecCoverageRows\n"
+    s!"end {std.rowsNamespace}\n"
   return out
 
 /-! ## Building the census -/
@@ -1134,18 +1386,25 @@ private def countKind (rows : Array Row) (k : Kind) : Nat :=
 private def countDisposition (ds : Array Disposition) (d : Disposition) : Nat :=
   ds.foldl (fun acc x => if x == d then acc + 1 else acc) 0
 
-def build (bs : ByteArray) (dispositionsText overridesText rulesText : String) :
-    Except String Built := do
+def build (std : Standard) (bs : ByteArray)
+    (dispositionsText overridesText rulesText typesText : String) : Except String Built := do
   let headings ← scanHeadings bs
-  let ops ← scanOps bs
-  let slots ← scanSlots bs
-  let (idl, skippedIdl) ← scanIdl bs
-  let requirements ← scanRequirements bs ops
-  let ruleInputs ← parseRules rulesText
+  let (sourced, skippedIdl) ←
+    if std.definitionKeyed then do
+      let types ← parseTypes typesText std.typesRelativePath
+      let definitions ← scanDefinitions bs types std.typesRelativePath
+      pure (definitions, 0)
+    else do
+      let ops ← scanOps bs
+      let slots ← scanSlots bs
+      let (idl, skippedIdl) ← scanIdl bs
+      let requirements ← scanRequirements bs ops
+      pure (ops ++ slots ++ idl ++ requirements, skippedIdl)
+  let ruleInputs ← parseRules rulesText std.rulesRelativePath
   let rules ← scanRules bs ruleInputs
-  let dispositionRules ← parseDispositions dispositionsText
-  let overrides ← parseOverrides overridesText
-  let unsorted := ops ++ slots ++ idl ++ requirements ++ rules
+  let dispositionRules ← parseDispositions dispositionsText std.dispositionsRelativePath
+  let overrides ← parseOverrides overridesText std.overridesRelativePath
+  let unsorted := sourced ++ rules
   let sorted := unsorted.qsort (fun a b => a.sortKey < b.sortKey)
   -- Ids are unique, so the sort is total and its result is deterministic.
   let mut duplicates : Array String := #[]
@@ -1187,15 +1446,15 @@ def build (bs : ByteArray) (dispositionsText overridesText rulesText : String) :
     unless usedRules.contains i do
       let entry := dispositionRules.getD i default
       let kindText := match entry.kind with | none => "*" | some k => k.name
-      stale := stale.push s!"{dispositionsRelativePath}: {entry.sectionId} {kindText} matches no row"
+      stale := stale.push s!"{std.dispositionsRelativePath}: {entry.sectionId} {kindText} matches no row"
   for i in [0:overrides.size] do
     unless usedOverrides.contains i do
-      stale := stale.push s!"{overridesRelativePath}: {(overrides.getD i default).rowId} matches no row"
+      stale := stale.push s!"{std.overridesRelativePath}: {(overrides.getD i default).rowId} matches no row"
   unless stale.isEmpty do
     .error s!"census: {stale.size} authored disposition entr(ies) outlived their rows: {stale.toList}"
   let denominator :=
     dispositions.foldl (fun acc d => if d.excluded then acc else acc + 1) 0
-  let censusText ← renderCensus bs anchored
+  let censusText ← renderCensus std bs anchored
   let mut coverageRows : Array CoverageRow := #[]
   for i in [0:anchored.size] do
     coverageRows := coverageRows.push
@@ -1203,39 +1462,45 @@ def build (bs : ByteArray) (dispositionsText overridesText rulesText : String) :
         state := .absent, witnesses := [] }
   .ok { rows := anchored, dispositions := dispositions, paths := paths,
         skippedIdl := skippedIdl, censusText := censusText,
-        rowsModuleText := renderRowsModule coverageRows denominator,
+        rowsModuleText := renderRowsModule std coverageRows denominator,
         denominator := denominator }
 
 /-! ## Reading the pinned input -/
 
-def readPinnedInput (root : System.FilePath) : IO (Except String ByteArray) := do
-  let path := root / inputRelativePath
+def readPinnedInput (root : System.FilePath) (std : Standard) : IO (Except String ByteArray) := do
+  let path := root / std.inputRelativePath
   unless ← path.pathExists do
-    return .error s!"census: the pinned specification source is missing: {inputRelativePath}"
+    return .error s!"census: the pinned specification source is missing: {std.inputRelativePath}"
   let bytes ← IO.FS.readBinFile path
   let observed := Gates.Sha256.hexDigest bytes
-  if observed != inputDigest then
+  if observed != std.inputDigest then
     return .error
-      s!"census: refusing bytes that are not the pin; {inputRelativePath} has SHA-256 {observed}, expected {inputDigest}"
+      s!"census: refusing bytes that are not the pin; {std.inputRelativePath} has SHA-256 {observed}, expected {std.inputDigest}"
   return .ok bytes
 
-def readAuthored (root : System.FilePath) : IO (Except String (String × String × String)) := do
+/-- The four authored inputs. `types.tsv` is read only for a definition-keyed
+standard and is required there. -/
+def readAuthored (root : System.FilePath) (std : Standard) :
+    IO (Except String (String × String × String × String)) := do
   let mut texts : Array String := #[]
-  for relative in [dispositionsRelativePath, overridesRelativePath, rulesRelativePath] do
+  let mut wanted := [std.dispositionsRelativePath, std.overridesRelativePath, std.rulesRelativePath]
+  if std.definitionKeyed then wanted := wanted ++ [std.typesRelativePath]
+  for relative in wanted do
     let path := root / relative
     unless ← path.pathExists do
       return .error s!"census: missing authored input {relative}"
     texts := texts.push (← IO.FS.readFile path)
-  return .ok (texts.getD 0 "", texts.getD 1 "", texts.getD 2 "")
+  return .ok (texts.getD 0 "", texts.getD 1 "", texts.getD 2 "", texts.getD 3 "")
 
-def buildFromRoot (root : System.FilePath) : IO (Except String (ByteArray × Built)) := do
-  match ← readPinnedInput root with
+def buildFromRoot (root : System.FilePath) (std : Standard) :
+    IO (Except String (ByteArray × Built)) := do
+  match ← readPinnedInput root std with
   | .error message => return .error message
   | .ok bytes =>
-    match ← readAuthored root with
+    match ← readAuthored root std with
     | .error message => return .error message
-    | .ok (dispositionsText, overridesText, rulesText) =>
-      match build bytes dispositionsText overridesText rulesText with
+    | .ok (dispositionsText, overridesText, rulesText, typesText) =>
+      match build std bytes dispositionsText overridesText rulesText typesText with
       | .error message => return .error message
       | .ok built => return .ok (bytes, built)
 
@@ -1256,18 +1521,20 @@ def summaryLine (built : Built) : String := Id.run do
     s!"{built.skippedIdl} IDL statement(s) outside the row vocabulary"
   return text
 
-def write (root : System.FilePath) : IO UInt32 := do
-  match ← buildFromRoot root with
+def write (root : System.FilePath) (std : Standard) : IO UInt32 := do
+  match ← buildFromRoot root std with
   | .error message =>
     IO.eprintln s!"FAIL {message}"
     return 1
   | .ok (_, built) =>
     IO.FS.createDirAll (root / "generated")
-    IO.FS.writeBinFile (root / censusRelativePath) built.censusText.toUTF8
-    IO.FS.writeBinFile (root / rowsRelativePath) built.rowsModuleText.toUTF8
+    if let some parent := (root / std.rowsRelativePath).parent then
+      IO.FS.createDirAll parent
+    IO.FS.writeBinFile (root / std.censusRelativePath) built.censusText.toUTF8
+    IO.FS.writeBinFile (root / std.rowsRelativePath) built.rowsModuleText.toUTF8
     IO.println (summaryLine built)
-    IO.println s!"WROTE {censusRelativePath}"
-    IO.println s!"WROTE {rowsRelativePath}"
+    IO.println s!"WROTE {std.censusRelativePath}"
+    IO.println s!"WROTE {std.rowsRelativePath}"
     return 0
 
 /-- Independent verification of one on-disk census line against the pinned
@@ -1336,38 +1603,43 @@ def verifyEmit (built : Built) (emit : Array CoverageRow) : Array String := Id.r
           s!"coverage emit row {entry.id} is {entry.state.name}, but its disposition {disposition.name} is outside the denominator"
   return failures
 
-def check (root : System.FilePath) (emit : Array CoverageRow) : IO UInt32 := do
-  match ← buildFromRoot root with
+/-- `emit?` is the numerator's coverage emit where the standard has a
+numerator (Streams), and `none` where it has none yet (Infra); the emit
+checks are skipped in the second case and the PASS line says so. -/
+def check (root : System.FilePath) (std : Standard) (emit? : Option (Array CoverageRow)) :
+    IO UInt32 := do
+  match ← buildFromRoot root std with
   | .error message =>
     IO.eprintln s!"FAIL {message}"
     return 1
   | .ok (bytes, built) =>
     let mut failures : Array String := #[]
-    let censusPath := root / censusRelativePath
-    let rowsPath := root / rowsRelativePath
+    let censusPath := root / std.censusRelativePath
+    let rowsPath := root / std.rowsRelativePath
+    let regenerate := std.regenerateCommand
     let mut onDisk : String := ""
     if ← censusPath.pathExists then
       onDisk ← IO.FS.readFile censusPath
       if onDisk.toUTF8 != built.censusText.toUTF8 then
         failures := failures.push
-          s!"{censusRelativePath} is not byte-identical to a fresh regeneration; run `{regenerateCommand}`"
+          s!"{std.censusRelativePath} is not byte-identical to a fresh regeneration; run `{regenerate}`"
     else
-      failures := failures.push s!"missing {censusRelativePath}; run `{regenerateCommand}`"
+      failures := failures.push s!"missing {std.censusRelativePath}; run `{regenerate}`"
     if ← rowsPath.pathExists then
       let rowsOnDisk ← IO.FS.readFile rowsPath
       if rowsOnDisk.toUTF8 != built.rowsModuleText.toUTF8 then
         failures := failures.push
-          s!"{rowsRelativePath} is not byte-identical to a fresh regeneration; run `{regenerateCommand}`"
+          s!"{std.rowsRelativePath} is not byte-identical to a fresh regeneration; run `{regenerate}`"
     else
-      failures := failures.push s!"missing {rowsRelativePath}; run `{regenerateCommand}`"
+      failures := failures.push s!"missing {std.rowsRelativePath}; run `{regenerate}`"
     -- Independent re-verification of every on-disk row.
     let allLines := Gates.Common.lines onDisk
-    let expectedHeader := censusHeader built.rows.size
+    let expectedHeader := censusHeader std built.rows.size
     match allLines with
-    | [] => failures := failures.push s!"{censusRelativePath} is empty"
+    | [] => failures := failures.push s!"{std.censusRelativePath} is empty"
     | header :: dataLines =>
       if header != expectedHeader then
-        failures := failures.push s!"{censusRelativePath} header line does not match the generator identity"
+        failures := failures.push s!"{std.censusRelativePath} header line does not match the generator identity"
       let mut lineNumber := 1
       for line in dataLines do
         lineNumber := lineNumber + 1
@@ -1376,15 +1648,19 @@ def check (root : System.FilePath) (emit : Array CoverageRow) : IO UInt32 := do
         | .error message => failures := failures.push message
       if dataLines.length != built.rows.size then
         failures := failures.push
-          s!"{censusRelativePath} carries {dataLines.length} rows; the generator produced {built.rows.size}"
-    for failure in verifyEmit built emit do
-      failures := failures.push failure
+          s!"{std.censusRelativePath} carries {dataLines.length} rows; the generator produced {built.rows.size}"
+    if let some emit := emit? then
+      for failure in verifyEmit built emit do
+        failures := failures.push failure
     if failures.isEmpty then
       IO.println (summaryLine built)
+      let emitClause := match emit? with
+        | some _ => ", and the coverage emit agrees with that regeneration row for row"
+        | none => "; no numerator exists for this standard yet, so no emit was checked"
       IO.println
-        s!"PASS census: input digest is the pin, every anchor occurs exactly once at its span start, every span digest recomputes, every row has exactly one disposition, both projections are byte-identical to a fresh regeneration, and the coverage emit agrees with that regeneration row for row"
+        s!"PASS census ({std.key}): input digest is the pin, every anchor occurs exactly once at its span start, every span digest recomputes, every row has exactly one disposition, both projections are byte-identical to a fresh regeneration{emitClause}"
       return 0
-    IO.eprintln s!"FAIL census: {failures.size} problem(s)"
+    IO.eprintln s!"FAIL census ({std.key}): {failures.size} problem(s)"
     for failure in failures do IO.eprintln s!"  {failure}"
     return 1
 
@@ -1396,8 +1672,8 @@ regeneration; every coverage state and witness comes from the numerator's
 here assumes a state: with the P3 witnesses landed, `green` and `partial` are
 counted, and a disagreement between the two sides is a failure rather than a
 printed number. -/
-def report (root : System.FilePath) (emit : Array CoverageRow) : IO UInt32 := do
-  match ← buildFromRoot root with
+def report (root : System.FilePath) (std : Standard) (emit : Array CoverageRow) : IO UInt32 := do
+  match ← buildFromRoot root std with
   | .error message =>
     IO.eprintln s!"FAIL {message}"
     return 1
@@ -1425,7 +1701,7 @@ def report (root : System.FilePath) (emit : Array CoverageRow) : IO UInt32 := do
       (emit.filter (fun row => row.state == CoverageState.partialCoverage)).map (fun row => row.id)
     let sortedIds := partialIds.qsort (fun a b => a < b)
     IO.println
-      s!"WHATWG Streams (b9ba9f49) coverage: denominator {denominator}; owned-with-green {ownedWithGreen}/{denominator};"
+      s!"{std.label} coverage: denominator {denominator}; owned-with-green {ownedWithGreen}/{denominator};"
     IO.println
       s!"green {green}, partial {partialCount}, absent {absent}; census {total} rows, {excluded} excluded"
     if sortedIds.isEmpty then
@@ -1435,19 +1711,33 @@ def report (root : System.FilePath) (emit : Array CoverageRow) : IO UInt32 := do
     return 0
 
 def usage : String :=
-  "usage: lake exe census           check the census against the pinned specification bytes\n" ++
-  "       lake exe census --write   regenerate the census and the frozen coverage row list\n" ++
-  "       lake exe census --report  print the coverage block of docs/SPEC-COVERAGE.md"
+  "usage: lake exe census [--standard <key>]           check the census against the pinned specification bytes\n" ++
+  "       lake exe census [--standard <key>] --write   regenerate the census and the frozen coverage row list\n" ++
+  "       lake exe census [--standard <key>] --report  print the coverage block of docs/SPEC-COVERAGE.md\n" ++
+  "keys: " ++ String.intercalate ", " (standards.map (·.key)) ++ " (default streams)"
 
 /-- Command-line entry, invoked by `bin/Census.lean`, which supplies the
-numerator's coverage emit. `--write` does not take it: regenerating the census
-must stay possible while the numerator is red. -/
+Streams numerator's coverage emit. `--write` does not take it: regenerating
+the census must stay possible while the numerator is red. A standard without
+a numerator (Infra today) is checked without the emit and has no report. -/
 def cli (emit : Array CoverageRow) (args : List String) : IO UInt32 := do
   let root ← Gates.Common.projectRoot
-  match args with
-  | [] => check root emit
-  | ["--write"] => write root
-  | ["--report"] => report root emit
+  let (std?, rest) := match args with
+    | "--standard" :: key :: rest => (Standard.ofKey? key, rest)
+    | _ => (some streams, args)
+  let some std := std?
+    | IO.eprintln usage
+      return 2
+  let emit? := if std.key == streams.key then some emit else none
+  match rest with
+  | [] => check root std emit?
+  | ["--write"] => write root std
+  | ["--report"] =>
+    match emit? with
+    | some e => report root std e
+    | none =>
+      IO.eprintln s!"census: no coverage numerator exists for {std.key}, so there is no report yet"
+      return 2
   | _ =>
     IO.eprintln usage
     return 2

@@ -1,0 +1,5 @@
+# Per-row disposition overrides: authored input to the Infra census.
+#
+# Three tab-separated fields: <row id> <disposition> <reason>. An override
+# beats every line in dispositions.tsv; one that no row matches fails
+# generation.
