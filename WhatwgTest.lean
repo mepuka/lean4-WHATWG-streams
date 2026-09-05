@@ -2,6 +2,11 @@ import Gates
 import WhatwgTest.Streams.Counterexamples.Data.Queue
 import WhatwgTest.Streams.Data.QueueContract
 import WhatwgTest.Streams.Data.QueueAxiomReport
+import WhatwgTest.Html.DecideBenchmark
+import WhatwgTest.Html.Lattice
+import WhatwgTest.Html.Builders
+import WhatwgTest.Html.Breakers
+import WhatwgTest.Html.Print
 import WhatwgTest.Audit.SpecCoverage
 import WhatwgTest.Audit.AxiomGate
 

@@ -13,17 +13,20 @@ jobs:
       - uses: leanprover/lean-action@v1
         with:
           auto-config: false
-      # The test root is deliberately red while a frozen breaker battery
-      # waits for its builder (test/fixtures/trust-gate/known-red.txt). The
-      # production libraries and gate executables build here; the trust
-      # self-test below verifies the declared red set, excises it, and runs
-      # the axiom gate on the green remainder, so it is the deciding gate.
+      # The production libraries and gate executables; the test root with its
+      # elaboration-time axiom gate is built by the default targets below.
       - name: Build production libraries and gate executables
-        run: lake --wfail build Whatwg Gates vendorseal citations trustselftest census
+        run: lake --wfail build Whatwg Gates vendorseal citations census tyxmlschema
       - name: Vendor seal in both directions
         run: lake exe vendorseal
       - name: Internal-citation gate
         run: lake exe citations
+      # The TyXML schema projection (slice H1 of docs/HTML-PACKAGE-PLAN.md):
+      # generated/tyxml-html-schema.tsv against a fresh regeneration from the
+      # sealed vendor/tyxml-d2916535 sources, whose digests the gate refuses
+      # to deviate from.
+      - name: TyXML schema projection drift
+        run: lake exe tyxmlschema
       # Both census steps link the coverage numerator: since the first P3
       # witnesses landed, bin/Census.lean imports
       # WhatwgTest/Audit/SpecCoverage.lean so that the block below is
@@ -34,7 +37,5 @@ jobs:
         run: lake exe census
       - name: Specification coverage block from the Lean emit
         run: lake exe census --report
-      - name: Trust self-test with planted violations
-        run: lake exe trustselftest
-      - name: Rename parity receipt (WP-7) against the pre-rename source receipt
-        run: ./scripts/check-whatwg-parity.sh
+      - name: Test root and the elaboration-time axiom gate
+        run: lake --wfail build WhatwgTest

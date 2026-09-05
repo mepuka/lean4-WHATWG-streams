@@ -1,0 +1,948 @@
+#tyxml-html-schema format=1 generator=Gates.TyxmlSchema inputs=vendor/tyxml-d2916535/lib/html_types.mli,vendor/tyxml-d2916535/lib/html_sigs.mli,vendor/tyxml-d2916535/lib/html_f.ml input-sha256=0031c56d5bcc048b11ba47fd4d840235bfc52ced9722269510818c14004b3df3,5cf48b32cc19f4c9b400f388a749b1a8c0f4e5b058ae88e21ca568a899622f9b,4b777d7c2716e8e39c306a2c4018f3da7aee3bf7678ff3966bda6a441c793c57 rows=946 regenerate=lake exe tyxmlschema --write
+#kind	file	line	span-sha256	module	name	params	body	attrs
+type	lib/html_types.mli	37	0956a511b23625fa2aac3348cac99a219761e5d666a50c347a2e727d605dd159		cdata		string	
+type	lib/html_types.mli	40	a366b77be7c5d43476fa8a2e9d8f2de7d7e7a6920913faaabdab00d75885adb1		id		string	
+type	lib/html_types.mli	43	08d6e34916835b9ed9dba3ec1af8af3858a985a19d5975816e2bc2d2ff297000		idref		string	
+type	lib/html_types.mli	46	e9bfd84c91bbf9420ec96c2f4b2df318ead5bade2ccc2f711bffe493527210cf		idrefs		idref list	
+type	lib/html_types.mli	49	ee6017d0bb6316d2a89ba5a91a25f07efbbc5cd503026a832f3d664045804b0f		name		string	
+type	lib/html_types.mli	52	8a0faff88477e075d0bc46b1544d0ed8b5ab7b193545c151fa7e2488334a7bbc		nmtoken		string	
+type	lib/html_types.mli	56	edad43b8b41c5fca395bc88e28d50c3762229f2948f898e03ab34528bdb2801e		nmtokens		nmtoken list	
+type	lib/html_types.mli	61	a387bf19f941950168c68b8c50338835c78b017674b1d5efbede6bdd6cafbabc		character		char	
+type	lib/html_types.mli	64	40eac7826f55eda8a2f78d5bbe70187ac73c0561984c3b93d70ab85d99f55e84		charset		string	
+type	lib/html_types.mli	68	0286361f6179fb11d98fed4a5f1d6c68917afcdfc212eb95990be983d0ece8fd		charsets		charset list	
+type	lib/html_types.mli	72	14df51ea9bae76d648c176b9adb0863312d412ac45a8bcc7e631f59cf7b43ba4		contenttype		string	
+type	lib/html_types.mli	76	a7c9cf4f14f672bf2630138c11a18d08b84d747e0fe00194bc49cacfaf9bcce7		contenttypes		contenttype list	
+type	lib/html_types.mli	80	ca28403cd267d6fce9261b7a34fcd986d280b233d427bce1f12b9972197a522a		number		int	
+type	lib/html_types.mli	83	3818f3185cf068070b5761f26c3ae89780b55e62e8a736684042f18df245f118		numbers		number list	
+type	lib/html_types.mli	85	0478a41048550d8703c76162e45091e9efee99d70b04219f11f17dad328f706a		coords		string list	
+type	lib/html_types.mli	88	89e49346ee038f5331bf2819ccb412c4ead0f32bfd67658052f113b30ea793ed		datetime		string	
+type	lib/html_types.mli	91	94a818b10d31ac3adfc0280e22d445ead718931d73677b684e2afb5a1fae47c5		number_or_datetime		[ `Number of number | `Datetime of datetime ]	
+type	lib/html_types.mli	94	3e03f1b0cc1131eda706af02f71b62a35faef9fb51dbcab2618c5b54c34fe8d8		fpi		string	
+type	lib/html_types.mli	97	b1b6b80039b9c86aa2886afe876e1e6430ffa9cd197b3cdcd72da6938a962761		frametarget		string	
+type	lib/html_types.mli	100	de3a5640bbc91842dd63829b274c54d30208f68e8319f7cfb822a65779d5abe0		languagecode		string	
+type	lib/html_types.mli	104	7f67ad23fcdb2af133521c6f2710120df840af5d8d5e186add30d08e59fb3bcf		linktype		[ `Alternate | `Archives | `Author | `Bookmark | `Canonical | `Dns_prefetch | `External | `First | `Help | `Icon | `Index | `Last | `License | `Manifest | `Me | `Modulepreload | `Next | `Nofollow | `Noopener | `Noreferrer | `Opener | `Pingback | `Preconnect | `Prefetch | `Prev | `Preload | `Prerender | `Search | `Stylesheet | `Sidebar | `Tag | `Up | `Other of string ]	reflect.total_variant
+type	lib/html_types.mli	140	ebf24d9b2c524a48470b175333760775f2923ca825b6e39a1ab76a7665d3d60b		linktypes		linktype list	
+type	lib/html_types.mli	218	616e3b340e331d7af11ed30356d7b9f638f236881f79c992473c46ecb3b16f22		mediadesc_token		[ `All | `Aural | `Braille | `Embossed | `Handheld | `Print | `Projection | `Screen | `Speech | `Tty | `Tv | `Raw_mediadesc of string ]	reflect.total_variant
+type	lib/html_types.mli	232	ec142efca2e46e95df138a9651eab534b85561b543781f32a77bef2f235d7fe0		mediadesc		mediadesc_token list	
+type	lib/html_types.mli	260	bb819f0fbb1f6299a9d6c00f84c4ff00c5ff6e446e79e183423d2647aaf597c7		float_number		float	
+type	lib/html_types.mli	262	f713655d3cb975153070e5546690fcefd5fcecce5b687973493a0c6679ff1fb8		pixels		int	
+type	lib/html_types.mli	269	835f9fe906d6af24bbd9f7e3cc3f01c4da83434926b5d8fc53baba4f931944de		script_		string	
+type	lib/html_types.mli	282	f2fea48c8499aaa3db39d0aa07257f81ba50643581cc5d00e0d3abe7d01635dc		text		string	
+type	lib/html_types.mli	287	82eb0272e063e9d88556b9da991a1bea24d36843da15c83ca8d237134ba879ca		i18n		[ `XML_lang | `Lang ]	
+type	lib/html_types.mli	289	78541eb0cb12af5129cdfc30ee124a841627e832fe2e1ea90290bbf83caacf1b		core		[ `Accesskey | `Class | `Contenteditable | `Contextmenu | `Dir | `Draggable | `Hidden | `Id | i18n | `Spellcheck | `Style_Attr | `Tabindex | `Translate | `Title | `User_data | `XMLns ]	
+type	lib/html_types.mli	312	e3ae6d4b109a9905e3296d4436df2296e8fc2082c65bf4794ae821f7f612865f		events		[ `OnAbort | `OnBlur | `OnCanPlay | `OnCanPlayThrough | `OnChange | `OnClick | `OnClose | `OnContextMenu | `OnDblClick | `OnDrag | `OnDragEnd | `OnDragEnter | `OnDragLeave | `OnDragOver | `OnDragStart | `OnDrop | `OnDurationChange | `OnEmptied | `OnEnded | `OnError | `OnFocus | `OnFormChange | `OnFormInput | `OnInput | `OnInvalid | `OnMouseDown | `OnMouseUp | `OnMouseOver | `OnMouseMove | `OnMouseOut | `OnMouseWheel | `OnPause | `OnPlay | `OnPlaying | `OnProgress | `OnRateChange | `OnReadyStateChange | `OnScroll | `OnSeeked | `OnSeeking | `OnSelect | `OnShow | `OnStalled | `OnSubmit | `OnSuspend | `OnTimeUpdate | `OnTouchStart | `OnTouchEnd | `OnTouchMove | `OnTouchCancel | `OnVolumeChange | `OnWaiting | `OnKeyPress | `OnKeyDown | `OnKeyUp | `OnLoad | `OnLoadedData | `OnLoadedMetaData | `OnLoadStart ]	
+type	lib/html_types.mli	377	452183acf73dbc96cb861d1b05421b3e3d302844bb52acf16bba65ed5f5f381e		aria		[ `Role | `Aria ]	
+type	lib/html_types.mli	384	629a4d95563ef4a47ace863798f061467f3eddef71a9aa39102df896e4cd001e		common		[ core | i18n | events | aria ]	
+type	lib/html_types.mli	394	76dde0eada1d509f3f782066a9cea4fa6cf09dd0b67f9df0c7b0fe5c5ac662ee		heading		[ `H1 | `H2 | `H3 | `H4 | `H5 | `H6 | `Hgroup ]	
+type	lib/html_types.mli	396	db195639ce3e5ec63e8b69e07d5be75776fa6090e7aef98221b1936670e226fe		sectioning		[ `Section | `Nav | `Aside | `Article ]	
+type	lib/html_types.mli	398	621aa10324fa7dbf12b6eb56a4008ab7693524ddc6deeb8d5462f54062b9de75		resetable		[ `Textarea | `Select | `Output | `Keygen | `Input ]	
+type	lib/html_types.mli	400	a7842bc474926854ee8f606a81fd9a9378368c0fd498f97cd87e5e6210c77d0a		submitable		[ `Textarea | `Select | `Keygen | `Input | `Button ]	
+type	lib/html_types.mli	402	bbf08724964cfd35a2982b76087f9a65e97aa8c032c5c74cd3d095436924dbb3		labelable		[ resetable | `Progress | `Meter | `Button ]	
+type	lib/html_types.mli	404	b2288d213bbebfd9fc597efc1eeaef7ca976f1518e9a49d783017eebed088079		labelable_without_interactive		[ `Progress | `Meter ]	
+type	lib/html_types.mli	406	5fddf910449ab23f8c575efa401ec48948efcc742a70f8a39d8a5ede7addfae1		formatblock		[ heading | sectioning | `Pre | `P | `Header | `Footer | `Div | `Blockquote | `Address ]	
+type	lib/html_types.mli	419	2025a5a324cf27c4aadeca37785d97c1fcdd82f5fefe28232a7cb7fcaa7c4f4d		sectionningroot		[ `Td | `Figure | `Fieldset | `Details | `Body | `Blockquote | `Dialog ]	
+type	lib/html_types.mli	423	4f1c437e44208c8b8a568970e6e3599e6ca3d67f14154cd69563fb6f376da9b4		listed		[ resetable | submitable | `Fieldset ]	
+type	lib/html_types.mli	425	87dfefa8712e0a4b16f475cdbac514c1fefacdd1e8ad658928404c0778473239		formassociated		[ listed | `Progress | `Meter | `Label ]	
+type	lib/html_types.mli	427	7acd4597b5971a33f65084c8928fdc06c52891e06667d898f85f81ed07d56ce5		subressource_integrity		[ `Crossorigin | `Integrity ]	
+type	lib/html_types.mli	440	aa22d61bf5ecb0f600461eb3728b9a894c490613e7c61836fe547b5aed89d41f		transparent	(+'interactive, +'noscript, +'regular, +'media)	[ `A of 'interactive | `Noscript of 'noscript | `Canvas of 'regular | `Map of 'regular | `Ins of 'regular | `Del of 'regular | `Object of 'regular | `Object_interactive of 'regular | `Audio_interactive of 'media | `Video_interactive of 'media | `Audio of 'media | `Video of 'media ]	
+type	lib/html_types.mli	456	56472e6d073b108ea421487791a8e40af5f51e333da558ef260345127b46c3c2		transparent_without_interactive	(+'noscript, +'regular, +'media)	[ `Noscript of 'noscript | `Ins of 'regular | `Del of 'regular | `Object of 'regular | `Canvas of 'regular | `Map of 'regular | `Audio of 'media | `Video of 'media ]	
+type	lib/html_types.mli	468	ba9b63d8be09781f7c2f76709efa74260bcfd05c92b95db8756164b82c9fbc00		transparent_without_noscript	(+'interactive, +'regular, +'media)	[ `A of 'interactive | `Ins of 'regular | `Del of 'regular | `Canvas of 'regular | `Map of 'regular | `Object of 'regular | `Object_interactive of 'regular | `Video of 'media | `Audio of 'media | `Video_interactive of 'media | `Audio_interactive of 'media ]	
+type	lib/html_types.mli	483	58d640499469449b1a2b502e278e34f17920d77f50c52000a4af3e857ae3fa47		transparent_without_media	(+'interactive, +'noscript, +'regular)	[ `A of 'interactive | `Noscript of 'noscript | `Ins of 'regular | `Del of 'regular | `Map of 'regular | `Canvas of 'regular | `Object of 'regular | `Object_interactive of 'regular ]	
+type	lib/html_types.mli	496	aff1441d2d8548bb18cb62d2d7d6542cbf906df40a0b3d3e5a61d615ad51f867		metadata_without_title		[ `Template | `Style | `Script | `Noscript of [ `Meta | `Link | `Style ] | `Meta | `Link | `Command | `Base ]	
+type	lib/html_types.mli	509	4dad09d0d28f7065050e74987db471901dcf3f7b81ac83989f04dc01730d6c0e		metadata		[ metadata_without_title | `Title ]	
+type	lib/html_types.mli	515	3fc51eb99c7c8758443fb3c9dbcdc364cb97803a088906f5d491360174f29e28		core_interactive		[ `Textarea | `Select | `Menu | `Label | `Keygen | `Input | `Img_interactive | `Iframe | `Embed | `Details | `Button ]	
+type	lib/html_types.mli	530	a1e1c838f2246d22e71b1a03b2b5cf44eb5991d7846ce9e92a1f9254a7a1f4cc		interactive		[ core_interactive | (interactive, interactive, interactive) transparent_without_interactive ]	
+type	lib/html_types.mli	536	9cefa235267019dbdbf6f885a227fb9b6583908ca46eb003644de086c080e0ca		core_phrasing		[ labelable | submitable | `Wbr | `Var | `U | `Svg | `Time | `Template | `Sup | `Sub | `Strong | `Span | `Small | `Script | `Samp | `Ruby | `Q | `Mark | `Label | `Kbd | `Iframe | `I | `Embed | `Em | `Dfn | `Datalist | `Command | `Code | `Cite | `Br | `Bdo | `B | `Abbr | `Img | `Img_interactive | `Picture | `PCDATA ]	
+type	lib/html_types.mli	576	831988ad325f69db6b10ab6d58854119a872328a2c9a9951288c44306049dbd4		core_phrasing_without_noscript		[ labelable | submitable | `Wbr | `Var | `U | `Time | `Template | `Sup | `Sub | `Svg | `Strong | `Span | `Small | `Script | `Samp | `Ruby | `Q | `Mark | `Label | `Kbd | `Iframe | `I | `Embed | `Em | `Dfn | `Datalist | `Command | `Code | `Cite | `Br | `Bdo | `Img | `Img_interactive | `Picture | `B | `Abbr | `PCDATA ]	
+type	lib/html_types.mli	615	d2210a08681d331cd77ce44211c835c11d6c951fd6617cd464aefffea10ca450		core_phrasing_without_interactive		[ labelable_without_interactive | `Wbr | `Var | `U | `Time | `Template | `Sup | `Sub | `Strong | `Span | `Small | `Script | `Svg | `Samp | `Ruby | `Q | `Mark | `Kbd | `Img | `Picture | `I | `Em | `Dfn | `Datalist | `Command | `Code | `Cite | `Br | `Bdo | `B | `Abbr | `PCDATA ]	
+type	lib/html_types.mli	651	596ef03d7f9e2cfd34d2925ca05e0d216186821223a856c4acab8f462ef16d6a		core_phrasing_without_media		[ labelable | submitable | `Wbr | `Var | `U | `Time | `Template | `Svg | `Sup | `Sub | `Strong | `Span | `Small | `Script | `Samp | `Ruby | `Q | `Mark | `Label | `Kbd | `Img | `Img_interactive | `Picture | `Iframe | `I | `Embed | `Em | `Dfn | `Datalist | `Command | `Code | `Cite | `Br | `Bdo | `B | `Abbr | `PCDATA ]	
+type	lib/html_types.mli	691	8e6906d90ea59dd673021f54cacf3837903cbfc1e488ef65281dada4a6f65e9e		phrasing_without_noscript		(phrasing_without_interactive, phrasing, phrasing_without_media) transparent_without_noscript	
+type	lib/html_types.mli	696	fc78a421df8d68ddae2fa0214eb8b1f15b1177df03d597d9cf65772176091a5c		phrasing_without_media		[ core_phrasing_without_media | (phrasing_without_interactive, phrasing_without_noscript, phrasing) transparent_without_media ]	
+type	lib/html_types.mli	704	1e6d1b36eb61767091d139bd3386d468b14e3994c0fffda6aad06b11bfcd54ca		phrasing_without_interactive		[ core_phrasing_without_interactive | (phrasing_without_noscript, phrasing, phrasing_without_media) transparent_without_interactive ]	
+type	lib/html_types.mli	711	8407f20bd1545581ddee53d4f8ea569f0afd36fa24b139a51d3624837367df8b		phrasing		[ (phrasing_without_interactive, phrasing_without_noscript, phrasing, phrasing_without_media) transparent | core_phrasing ]	
+type	lib/html_types.mli	718	5ae7110c9d92b0de8cef40ed57c82643e44754db4731c041a5e78f44137c6a9a		between_phrasing_and_phrasing_without_interactive	(+'a, +'b)	[< core_phrasing | ([< phrasing_without_interactive ] as 'b, phrasing_without_noscript, phrasing, phrasing_without_media) transparent > `Abbr `B `Bdo `Br `Canvas `Cite `Code `Command `Datalist `Del `Dfn `Em `I `Img `Picture `Ins `Kbd `Map `Mark `Meter `Noscript `Object `PCDATA `Progress `Q `Ruby `Samp `Script `Small `Span `Strong `Sub `Sup `Svg `Template `Time `U `Var `Wbr ] as 'a	
+type	lib/html_types.mli	730	dbd4d9dce00832d3de21d695684f2f511c9e28328788ea0b851a8146f9aba5d7		phrasing_without_dfn		[ labelable | submitable | `Wbr | `Var | `U | `Time | `Template | `Sup | `Sub | `Strong | `Span | `Small | `Script | `Samp | `Ruby | `Q | `Mark | `Label | `Img | `Img_interactive | `Picture | `Kbd | `I | `Em | `Datalist | `Command | `Code | `Cite | `Br | `Bdo | `B | `Abbr | `PCDATA | (phrasing_without_interactive, phrasing_without_noscript, phrasing_without_dfn, phrasing_without_media) transparent ]	
+type	lib/html_types.mli	768	529c1e273b4134a6ad584fd8640cc08b8ca7cb610fc979ac15f1646d1c755353		phrasing_without_label		[ labelable | submitable | `Wbr | `Var | `U | `Time | `Template | `Sup | `Sub | `Strong | `Span | `Img | `Img_interactive | `Picture | `Small | `Script | `Samp | `Ruby | `Q | `Mark | `Kbd | `I | `Em | `Dfn | `Datalist | `Command | `Code | `Cite | `Br | `Bdo | `B | `Abbr | `PCDATA | (phrasing_without_interactive, phrasing_without_noscript, phrasing_without_label, phrasing_without_media) transparent ]	
+type	lib/html_types.mli	806	9870d0f9de34819943a3934bc98c3d2fe753225a5b7cf391d314de0d81941120		phrasing_without_progress		[ resetable | submitable | `Wbr | `Var | `U | `Time | `Template | `Sup | `Sub | `Strong | `Span | `Small | `Script | `Samp | `Img | `Img_interactive | `Picture | `Ruby | `Q | `Meter | `Mark | `Label | `Kbd | `I | `Em | `Dfn | `Datalist | `Command | `Code | `Cite | `Button | `Br | `Bdo | `B | `Abbr | `PCDATA | (phrasing_without_interactive, phrasing_without_noscript, phrasing_without_progress, phrasing_without_media) transparent ]	
+type	lib/html_types.mli	847	0f077c7ce4aa370c4f9094c39537bf70237d254f36ad6b1ddd9f919daaa6b596		phrasing_without_time		[ labelable | submitable | `Wbr | `Var | `U | `Template | `Sup | `Sub | `Strong | `Img | `Img_interactive | `Picture | `Span | `Small | `Script | `Samp | `Ruby | `Q | `Mark | `Label | `Kbd | `I | `Em | `Dfn | `Datalist | `Command | `Code | `Cite | `Br | `Bdo | `B | `Abbr | `PCDATA | (phrasing_without_interactive, phrasing_without_noscript, phrasing_without_time, phrasing_without_media) transparent ]	
+type	lib/html_types.mli	885	561297c63e344719926c04b531d694bd4d3545886354319b15181c83a6d739bb		phrasing_without_meter		[ submitable | resetable | `Progress | `Button | `Wbr | `Var | `U | `Time | `Template | `Sup | `Img | `Img_interactive | `Picture | `Sub | `Strong | `Span | `Small | `Script | `Samp | `Ruby | `Q | `Mark | `Label | `Kbd | `I | `Em | `Dfn | `Datalist | `Command | `Code | `Cite | `Br | `Bdo | `B | `Abbr | `PCDATA | (phrasing_without_interactive, phrasing_without_noscript, phrasing_without_meter, phrasing_without_media) transparent ]	
+type	lib/html_types.mli	926	c75862fe8b8e62ecf63d3566c1a671b4cd63092009fa324f5f833bbf47df6aec		core_flow5		[ core_phrasing | formassociated | formatblock | `Ul | `Table | `Style | `Ol | `Menu | `Hr | `Form | `Figure | `Dl | `Details | `Main | `Dialog ]	
+type	lib/html_types.mli	945	7ddba4ec41808f640c90b41fa21e46ce0923c3fd1a2f4a8c15d21d4049fb2948		core_flow5_without_interactive		[ core_phrasing_without_interactive | formassociated | formatblock | `Ul | `Table | `Style | `Ol | `Menu | `Hr | `Form | `Figure | `Dl | `Main | `Dialog ]	
+type	lib/html_types.mli	963	8b5d4e89d7c3d5eff71ece34873c17a495bcd82fea050a69a99788f4672ff608		core_flow5_without_noscript		[ core_phrasing_without_noscript | formassociated | formatblock | `Ul | `Table | `Style | `Ol | `Menu | `Hr | `Form | `Figure | `Dl | `Details | `Main | `Dialog ]	
+type	lib/html_types.mli	981	651af3ea12ca7a753b8f49e7e78b9d129f2582824cb2430fae80d16bcb147a7a		core_flow5_without_media		[ core_phrasing_without_media | formassociated | formatblock | `Ul | `Table | `Style | `Ol | `Menu | `Hr | `Form | `Figure | `Dl | `Details | `Main | `Dialog ]	
+type	lib/html_types.mli	1000	64b2d00b0f2b774cd60b1b4873250134eae3e6e17fdeca6688eaa5bb8260f86e		flow5_without_interactive		[ core_flow5_without_interactive | (flow5_without_noscript, flow5, flow5_without_media) transparent_without_interactive ]	
+type	lib/html_types.mli	1007	c9ca3ee54dfcdb836fe87681bb1c0f128eab5de5b7d7b34a7c45054c1fc6f3ae		flow5_without_noscript		[ core_flow5_without_noscript | (flow5_without_interactive, flow5, flow5_without_media) transparent_without_noscript ]	
+type	lib/html_types.mli	1014	25bf403eaba7cd55a462b667c273b270ac23ffbeeeee631264e062e1a19e936f		flow5_without_media		[ core_flow5_without_media | (flow5_without_interactive, flow5_without_noscript, flow5) transparent_without_media ]	
+type	lib/html_types.mli	1019	d9f676921e1e8606a66b0424709f281cb44e7ed4d7057b06182a4c9079258735		flow5		[ core_flow5 | (flow5_without_interactive, flow5_without_noscript, flow5, flow5_without_media) transparent ]	
+type	lib/html_types.mli	1026	2488030347b0fab76f1cd8227ad920b12395aae35959d3bcc1d2debfde78471c		flow5_without_table		[ core_phrasing | formassociated | formatblock | `Ul | `Style | `Ol | `Menu | `Hr | `Form | `Figure | `Dl | `Details | `Main | `Dialog | (flow5_without_interactive, flow5_without_noscript, flow5, flow5_without_media) transparent ]	
+type	lib/html_types.mli	1046	4d67314ccb01add279c427644513338d389a64f120b2a8e36cba2ae3c54ea5d5		flow5_without_interactive_header_footer		[ heading | sectioning | `Pre | `P | `Div | `Blockquote | `Address | core_phrasing_without_interactive | formassociated | `Ul | `Table | `Style | `Ol | `Menu | `Hr | `Form | `Figure | `Dl | `Main | `Dialog | (flow5_without_noscript, flow5, flow5_without_media) transparent_without_interactive ]	
+type	lib/html_types.mli	1072	12b790bfc1e286644f57da56e2b01b0bbab7f29f5ad9e7b9a82b494445489242		flow5_without_header_footer		[ heading | sectioning | `Pre | `P | `Div | `Blockquote | `Address | core_phrasing | formassociated | `Ul | `Table | `Style | `Ol | `Menu | `Hr | `Form | `Figure | `Dl | `Details | `Main | `Dialog | (flow5_without_interactive_header_footer, flow5_without_noscript, flow5, flow5_without_media) transparent ]	
+type	lib/html_types.mli	1100	19e42ed77594081ce998274f850c41d2a6c5a5bab24c5ef612b8a5b275fa52a9		between_flow5_and_flow5_without_interactive_header_footer	+'a	[< flow5 > `Abbr `Address `Article `Aside `Audio `B `Bdo `Blockquote `Br `Button `Canvas `Cite `Code `Command `Datalist `Del `Dfn `Dialog `Div `Dl `Em `Fieldset `Figure `Form `H1 `H2 `H3 `H4 `H5 `H6 `Hgroup `Hr `I `Img `Picture `Input `Ins `Kbd `Keygen `Label `Map `Mark `Menu `Meter `Nav `Noscript `Object `Ol `Output `P `PCDATA `Pre `Progress `Q `Ruby `Samp `Script `Section `Select `Small `Span `Strong `Style `Sub `Sup `Svg `Table `Template `Textarea `Time `U `Ul `Var `Video `Wbr ] as 'a	
+type	lib/html_types.mli	1109	bc020cc020eef2d452a26f87ea43027dad7f87deee57d0764bbb1371f792468e		between_flow5_and_flow5_without_header_footer	(+'a, +'b)	[< core_flow5 | ([< flow5_without_interactive ] as 'b, flow5_without_noscript, 'a, flow5_without_media) transparent > `A `Abbr `Address `Article `Aside `Audio `Audio_interactive `B `Bdo `Blockquote `Br `Button `Canvas `Cite `Code `Command `Datalist `Del `Details `Dfn `Dialog `Div `Dl `Em `Embed `Fieldset `Figure `Form `H1 `H2 `H3 `H4 `H5 `H6 `Hgroup `Hr `I `Iframe `Img `Img_interactive `Picture `Input `Ins `Kbd `Keygen `Label `Map `Mark `Menu `Meter `Nav `Noscript `Object `Object_interactive `Ol `Output `P `PCDATA `Pre `Progress `Q `Ruby `Samp `Script `Section `Select `Small `Span `Strong `Style `Sub `Sup `Svg `Table `Template `Textarea `Time `U `Ul `Var `Video `Video_interactive `Wbr ] as 'a	
+type	lib/html_types.mli	1126	3b43575b2d6102d5a0a0b625c497f33852e61735a6a0d4dcc7b078587ddc15ba		flow5_without_form		[ core_phrasing | formassociated | formatblock | `Ul | `Table | `Style | `Ol | `Menu | `Hr | `Figure | `Dl | `Details | `Main | `Dialog | (flow5_without_interactive, flow5_without_noscript, flow5, flow5_without_media) transparent ]	
+type	lib/html_types.mli	1146	c59d509a7f1b6fc39479b7793e8e88a6867b0a8aab47d2ba33a0d86cbd9e82cf		flow5_without_sectioning_heading_header_footer_address		[ core_phrasing | formassociated | `Pre | `P | `Div | `Blockquote | `Ul | `Table | `Style | `Ol | `Menu | `Hr | `Form | `Figure | `Dl | `Details | `Main | `Dialog | (flow5_without_interactive, flow5_without_noscript, flow5, flow5_without_media) transparent ]	
+type	lib/html_types.mli	1170	57557e4a34bafd8b2fd62105a5724b33f8e2c4bd5541c5284074ec744ec8f8f2		flow5_without_sectioning_heading_header_footer		[ flow5_without_sectioning_heading_header_footer_address | `Address ]	
+type	lib/html_types.mli	1179	b30e5633b93ad2a431c47ac6fb938f138ffb01dcb3b0b77dc424ce83cfff231f		pcdata		[ `PCDATA ]	
+type	lib/html_types.mli	1180	c67b71e7f84e284600920fc8c24fb6a683ca0a7c371eccfa2a120190797c157f		txt		[ `PCDATA ]	
+type	lib/html_types.mli	1182	cc6f87b88ddb67e1f723c3d5d27f38205e567b37b816aafdd5f13269df202b26		notag		<abstract>	
+type	lib/html_types.mli	1184	607277cde09678ea4afdeee4577673abd0ff6efa7397b892ba51de5f253d1898		no_attribute_allowed		<abstract>	
+type	lib/html_types.mli	1186	9ba6c685f64185a5f8f0bcacd99c530638f6cf70ccfb87e0e68a59ad9a540f1a		noattrib		[ `No_attribute_allowed of no_attribute_allowed ]	
+type	lib/html_types.mli	1188	b8774618ba8785690176e996b2811def9cd1a10323422c4d9af6ffe31305e142		html		[ `Html ]	
+type	lib/html_types.mli	1190	a68e7a6b4dde4fe7d673ff770ac131c8e3672598f242940791cae5bba8fa3b6f		html_content_fun		[ `Head | `Body ]	
+type	lib/html_types.mli	1192	ad89663afa2686a343ae6448a7c3f1e28bae3d7ca521e4a2eab41b51fa7af3b2		html_content		html_content_fun	
+type	lib/html_types.mli	1194	c443761247ffdd977f8fcf98ea2024c3c6acb50d351270c555f27ea88c8c4c8e		html_attrib		[ common | `Manifest ]	
+type	lib/html_types.mli	1196	b3189fff318132dd9bda97c454666e957cba3d40e88f1130f02a815cf8760fe7		head		[ `Head ]	
+type	lib/html_types.mli	1198	3f8c3680fd998b199dbefc351546cf3158fea8d81c290a175d7af1e5d58649c4		head_content		[ metadata ]	
+type	lib/html_types.mli	1200	f99576bc09a076cdf4e9112acc89f983b61688ca4576e9e21eee741f1c04f7f9		head_content_fun		[ metadata_without_title ]	
+type	lib/html_types.mli	1202	31ec5611326322fbca7012588130bb08becbb677685c128c80d8c792faf1f2ea		head_attrib		[ common ]	
+type	lib/html_types.mli	1204	d3ad2e497981964edca0c79117ccdfb628623e48f080674b49f583c78af2c17c		body		[ `Body ]	
+type	lib/html_types.mli	1206	6bb0b1e4d162663728a1e8601d63534b828edff4b34a2c3d85dcd5828743bbac		body_attrib		[ common | `OnAfterPrint | `OnBeforePrint | `OneBeforeUnload | `OnHashChange | `OnMessage | `OnOffLine | `OnOnLine | `OnPageHide | `OnPageShow | `OnPopState | `OnRedo | `OnResize | `OnStorage | `OnUndo | `OnUnload ]	
+type	lib/html_types.mli	1226	4aad6e90d58972c7803db32beb6df484461609b56b11f26b90c976992e23f0c2		body_content		flow5	
+type	lib/html_types.mli	1228	945c155e38b4712d986a0fee9624cc74724f36b256acf28508c9abc113058149		body_content_fun		flow5	
+type	lib/html_types.mli	1231	ee0a280a85f8c72afa3cfc1cbd275bae96b8340e3b06adc922ecc65f6861e792		svg		[ `Svg ]	
+type	lib/html_types.mli	1232	60578b4bdd0d4142804511a2538aaa484d98b020da69522a31a5c3ee76dfa1c5		svg_content		Svg_types.svg_content	
+type	lib/html_types.mli	1233	a2f226ed9b6b5d36dd5cb7aa2ba7db1e5692bea1be418680e09e41db7978711e		svg_attrib		Svg_types.svg_attr	
+type	lib/html_types.mli	1235	ccdbeca734b859b9a4fab1ee2f8c213f0a668228a8636969b0dee3fa3c333e9c		base		[ `Base ]	
+type	lib/html_types.mli	1237	0ea70b58f62108f262526b04deba027cb3cbb6408122222845590a86185b20f5		base_content		notag	
+type	lib/html_types.mli	1239	f96d907005322eb49dcf8949af452912a1fa06ade054c9da42b502ab6202ddf6		base_content_fun		notag	
+type	lib/html_types.mli	1241	5aa79303fe2a7114fafcd7174b2aa0b5c3054cb06a092f1280702628ea51b854		base_attrib		[ common | `Href | `Target ]	
+type	lib/html_types.mli	1243	47d164d831847376d792e4f3e679aa715f19134b4b3f3cb8c6f7a0244494cbe3		title		[ `Title ]	
+type	lib/html_types.mli	1245	92ddc2cd2a9ed096fe8924f31bf7a9f7a1131e2af55994dd981f8871c3a4b438		title_content		[ `PCDATA ]	
+type	lib/html_types.mli	1247	e248d80f92b45c9052cf66caa6142c4645c54b48a3fcfe22d4ef383c6032abc8		title_content_fun		[ `PCDATA ]	
+type	lib/html_types.mli	1249	1e1aed7932d70207cfb5f2b14e0b140c866a4e5b18477ebafdefff479ba77c60		title_attrib		noattrib	
+type	lib/html_types.mli	1252	931c04d91a007145e8c4ef4b55b43e36e33b1748d8f187ed09ed492f5b83b325		footer		[ `Footer ]	
+type	lib/html_types.mli	1254	a708f897397dbd05f3e064bbcec40d8cca90129caa6a73b968ce4fc375218ed9		footer_content		[ flow5_without_header_footer ]	
+type	lib/html_types.mli	1256	f719ff4ae7cbfd9e164b0a0c1bb8af255027ef77500c7b36d8f3caefdd4c325b		footer_content_fun		[ flow5_without_header_footer ]	
+type	lib/html_types.mli	1258	35c60a4f8e0e25dd2f11d51cdd97350de785935520be71449c580549250a288c		footer_attrib		[ common ]	
+type	lib/html_types.mli	1261	af7cfc971dd5acbd603714458b1793c988af0f086f5b62fd94ab6a2a19dea819		header		[ `Header ]	
+type	lib/html_types.mli	1263	c8d6eb8cd8313f6588f8a98a60b3aac6482db84a8e1335c92321b4628fba83d7		header_content		[ flow5_without_header_footer ]	
+type	lib/html_types.mli	1265	3baac149a8bd2acb4398a11f4390a25132cff69a5d5b74646d41d389e430eb86		header_content_fun		[ flow5_without_header_footer ]	
+type	lib/html_types.mli	1267	5ca16b170716c1deb8c3a82bb11fb8ef66a17f87fd56f46715c83506b8a6383b		header_attrib		[ common ]	
+type	lib/html_types.mli	1270	ac48fb71fe6ae521cbfa255029cd1fcd8d9c274b04e200d3742986d3d8f20a6f		section		[ `Section ]	
+type	lib/html_types.mli	1272	4010e3e4b12d68df9754e56725dd0a7f635a61b2878400b4342dbf0283b135b6		section_content		[ flow5 ]	
+type	lib/html_types.mli	1274	2177598ca352780554ccd62b0b0d58f9d4a114e003c9f2169559a9f68b961281		section_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1276	6220dffc22999802d1aa331d22d6359ee3aa2c9376207ed69975f0f5a85c75ba		section_attrib		[ common ]	
+type	lib/html_types.mli	1279	af8d5f6b7e4b20e64696834129f100a8d661de78b4e3771a67acbee433abfcfa		nav		[ `Nav ]	
+type	lib/html_types.mli	1281	8deaec5d34f2d59043421a110d5001511ed8606e6108ccb95138c05bdee1b5ca		nav_content		[ flow5 ]	
+type	lib/html_types.mli	1283	d1306cf9e7499a41d74ffe7d01d7a5a7441648850489943a85f7b108315023ca		nav_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1285	69b01a7ab97f37755ee645f1179b351ba49f6bb2b082477e0723b7f8d5417100		nav_attrib		[ common ]	
+type	lib/html_types.mli	1288	ea08268efd504855ebd4ad22df9f090711fa643b56c7981db14862463083d15b		h1		[ `H1 ]	
+type	lib/html_types.mli	1290	51176d116b3dc3a7794153681a2a108da14c4e9c0663d8e6d260baaca5548d4b		h1_content		[ phrasing ]	
+type	lib/html_types.mli	1292	8ac803e936e13d6b605e9393fde25f59bbfc0f8bd3509643d79c922b8fd23066		h1_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1294	ea44641f0c5b9f152523c978d530b21fab625ae3bd5f4378701e3c846a1dcecd		h1_attrib		[ common ]	
+type	lib/html_types.mli	1297	9e2bd2b80a82b64fcab702d06940de19112e931bd61c325eb586f4aced5c6eca		h2		[ `H2 ]	
+type	lib/html_types.mli	1299	b259eb34a23af9d8b851e2a3924be89e14df2c331a1b2e809bde8093e32c17eb		h2_content		[ phrasing ]	
+type	lib/html_types.mli	1301	fca37f5e5fbb56b333da5b95bd1605448399039b4c7f79afd186f5ff8419c9c8		h2_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1303	c3a6d901d7bbd9c81181ab2aaebaeef89d9f30b5a9fa7a9eba8729cd0780a416		h2_attrib		[ common ]	
+type	lib/html_types.mli	1306	a9542e94fb4915792df86614f6527641469bcba1e76429bdfefc739cbe9aee4c		h3		[ `H3 ]	
+type	lib/html_types.mli	1308	5c7092b8591918f6ffa96b95f0033caf71f83ec840a9ff5facfca531b1724ebe		h3_content		[ phrasing ]	
+type	lib/html_types.mli	1310	8d158f938ae3715f11e3766601b5029a30dc5ff532264e3a6535b775243923cd		h3_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1312	782e0c2880bce771109fed048c9ca1049a0f66ea5f5187b793681116388eda0a		h3_attrib		[ common ]	
+type	lib/html_types.mli	1315	c0b3935686ca69b6e0f1bdf861ffd0159a3ff13d90e8417b7573ecc692825310		h4		[ `H4 ]	
+type	lib/html_types.mli	1317	5d805a9eea24fe52d92605df103f49775e295352b825f1bbfe19651f3a04f62b		h4_content		[ phrasing ]	
+type	lib/html_types.mli	1319	1fa76ecc85f5ced0040b81dd933d7665a3c6426fce675b428dfb77fb59543cb4		h4_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1321	876fb56d4f15ba4419937e1c62fa7dbabdca4f35a5d2877628a61008ae097cae		h4_attrib		[ common ]	
+type	lib/html_types.mli	1324	089c2438e10b07f16f6b72da5ada8133922b8fc57f0768a2dc77af14cf386b5e		h5		[ `H5 ]	
+type	lib/html_types.mli	1326	b6efa51b2f499fbadfa83944feb8d986ab94583e80a7aa091298f56ec8ed6a6a		h5_content		[ phrasing ]	
+type	lib/html_types.mli	1328	c9ef6eadd2146ba9cb5988e831d303696e54c1dec2aac3d92d9b4e651b8c170b		h5_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1330	04158cd1c900857e90bfaa1b89beceb3fa0a07d61a41251b37ddd5bcd7387dc2		h5_attrib		[ common ]	
+type	lib/html_types.mli	1333	1c264ef08fb617023431900ca2f734ee55e0b1cace8cf09d10ca309e271ef096		h6		[ `H6 ]	
+type	lib/html_types.mli	1335	97295b0f8eeb0ab6c29a183ba84fa7658d3bbab4124de3587055ba00130bd179		h6_content		[ phrasing ]	
+type	lib/html_types.mli	1337	a4d4d9cae6a5b506fa5acc712463f6afb26b242e5820f389e4199051d335c493		h6_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1339	3ebe3047418a83e48399b47ed3323086eb8e9aac5ffe9cae8e4201a2a381c4fb		h6_attrib		[ common ]	
+type	lib/html_types.mli	1342	edfd539de9e83cb038113e52a2dd44112128e6027a5d7ecdc84c0d70056712c3		hgroup		[ `Hgroup ]	
+type	lib/html_types.mli	1344	5f6526aac994c91ad3765e1c6e35c6c63987bcd7d7b378921e0dcb3929b2e9f1		hgroup_content		[ `H1 | `H2 | `H3 | `H4 | `H5 | `H6 ]	
+type	lib/html_types.mli	1346	fa9b7b836724899bc3b8887f4c7196695ddd138c081436c54ffcf0385e137274		hgroup_content_fun		[ `H1 | `H2 | `H3 | `H4 | `H5 | `H6 ]	
+type	lib/html_types.mli	1348	2c0a09fc067a5810c6339d69e45feac31f5a923dad2fb8bfcc554a3bc065f489		hgroup_attrib		[ common ]	
+type	lib/html_types.mli	1351	210c04f25ee491b9c23abfc04fa96ed075c9377ae9bd0d1aa876e75044f48992		address		[ `Address ]	
+type	lib/html_types.mli	1353	521e5331ce4687ed396704732fa68b371cd1f50308142ce14c3319d109c120e8		address_content		[ flow5_without_sectioning_heading_header_footer_address ]	
+type	lib/html_types.mli	1357	8114b88ef0b8fd783c3649cea2d27e43169e867049d508672945b99876c40042		address_content_fun		[ flow5_without_sectioning_heading_header_footer_address ]	
+type	lib/html_types.mli	1361	eb77786df06d6402c035042308cc2cb000ad375be0056f4ade59e2f2d3d8b390		address_attrib		[ common ]	
+type	lib/html_types.mli	1364	f716e7c462a2e947f29c777133b4101ac0cc3c0e959253803af4114ea2d0a36d		article		[ `Article ]	
+type	lib/html_types.mli	1366	186fa7509b80b60a74719a2c1caa81b6980c2ac6eea1b2e9833716d5d5bb3ff9		article_content		[ flow5 ]	
+type	lib/html_types.mli	1368	e3da225fa10161f7dbd37fc0beb626ec94cf80411c66ba577aa73d4c26efe0d9		article_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1370	643e6c4c2009c60ad5df3aa57d90a6f2304f5410b9a5180ff17893851beaa0e2		article_attrib		[ common ]	
+type	lib/html_types.mli	1373	fcb869c2eb7114a4248e158443938b0a5a0bd555e4f642cc4dfa2563876d4df5		aside		[ `Aside ]	
+type	lib/html_types.mli	1375	4812dc89457cb850bf2662ab946f5ca05dcbd2d7b3e668f91b78d2734a3e7701		aside_content		[ flow5 ]	
+type	lib/html_types.mli	1377	596fd99d4b3d0a446a53dca19e23db79ec559e68c42870c0fd5612f1c4a9da32		aside_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1379	48b29f53dc6e3d2a2a612584969e98f5fe312017bdf438c6e6722d1ae92ab1a7		aside_attrib		[ common ]	
+type	lib/html_types.mli	1382	501b2b159ead1fe73a9d45ae261edee220a100eb01e79d6c60247006206b1b89		main		[ `Main ]	
+type	lib/html_types.mli	1384	1bf50b0dc68fb392fbe4a9197e892eae9f058ff2d0b8c461fcf5e1ac3301af8a		main_content		[ flow5 ]	
+type	lib/html_types.mli	1386	465fbb1865958696889e7b882f9cf8320a9818a818f24ff1867bb8d9e735b28b		main_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1388	f3e8016e11006fb022c44e6ccdee1066ba97d5f65ad9942cca0252dd02b821dd		main_attrib		[ common ]	
+type	lib/html_types.mli	1391	2ef6dffa9f8a4e913247d0cdc85def13bed7b3a8bc1be0bea956815e31db0b65		p		[ `P ]	
+type	lib/html_types.mli	1393	c9cb76e128ceb3b3c4d651b672601798139a9fd02e7859ba34db200f5442b257		p_content		[ phrasing ]	
+type	lib/html_types.mli	1395	b44cfd5bdc8f39c5be6fa96d17f32b19b718dfba72c6b59a9ee559e1b67372c4		p_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1397	a786a938bfb195eb6880c14b8c0914b4dff7d3550dce04e02f127deff998a432		p_attrib		[ common ]	
+type	lib/html_types.mli	1400	4060bedda43674a50dfbb6d015911e1483d2423cb045c98529146c578a01dd6a		pre		[ `Pre ]	
+type	lib/html_types.mli	1402	90ddac072556d439ac77761a93f541a7d6a61401d21001653f4abc9661a28ecf		pre_content		[ phrasing ]	
+type	lib/html_types.mli	1404	1cff166129a25772d6c246c631f900b8db0a1ba0b8f8ff9be0ddfa3a0db2628f		pre_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1406	9ad14fdac899a73fdc8f238cbffe86d67ce93b75ee1a11aeb77f2b99b652fdfc		pre_attrib		[ common ]	
+type	lib/html_types.mli	1409	36b6d8760cb4d720faae148aa461fcb63040d85f5512648adf4fa15b61c79c51		blockquote		[ `Blockquote ]	
+type	lib/html_types.mli	1411	b98fbe3abdb44c7edbcddf33820e809a5f9c47b8850a4a92fef199aebf3fb626		blockquote_content		[ flow5 ]	
+type	lib/html_types.mli	1413	12b5b23085decff4215994072bd38909eb4e084fbe539cb867bf9b13c750a30f		blockquote_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1415	6e66710bb75f0e4577ee915396016cb112ad5e4cd7b5935f0498a461491c616f		blockquote_attrib		[ common | `Cite ]	
+type	lib/html_types.mli	1418	766e6242fa32b5f62fe34aed8f1d8e24fbdaa134c2bb80bb3266da04bac4e40f		dialog		[ `Dialog ]	
+type	lib/html_types.mli	1420	fa6944b62cf03ef523622b0fa8cdc4b41ff62e2427d0921df6009c72de6577fb		dialog_content		[ flow5 ]	
+type	lib/html_types.mli	1422	8d2347edbd9759a0ddbc9e9ace6253cdca946a5ce12d9244967e6dfee6b73eb9		dialog_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1424	461505eef33dad269ba3e9371e25d62ea25864031bf4001edf7d88f23e1bba6c		dialog_attrib		[ common | `Open ]	
+type	lib/html_types.mli	1427	a91c70f634a7e3b7b39ec37500859663fddd4148d0e550e5a6e8da1387c747da		div		[ `Div ]	
+type	lib/html_types.mli	1429	65efef89d7a045ddfde00fa952266b4ca5990fb03ef3c5502a47e49ab4445c1b		div_content		[ flow5 ]	
+type	lib/html_types.mli	1431	47a35a45c7638f2b61e9b8ce799c7b869bbdd140cbc9b5af423fb895e32e07e0		div_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1433	68f2919560c5bb74e6ec43ff05fa4de5dcaab98b81ee462a741fd55b74dd4aa9		div_attrib		[ common ]	
+type	lib/html_types.mli	1436	b35035d4fb39632b58d23db874cce94b12259a693c0e05d66f89a733676ad394		ol		[ `Ol ]	
+type	lib/html_types.mli	1438	90da66d4e256fc4a87496bdcd68563746fa9818a626cf7318a41c168c49f3bcb		ol_content		[ `Li of [ common | `Int_Value ] ]	
+type	lib/html_types.mli	1440	86dd0b42473d6795a4a3b25dd02c9a87cf175ccc2f2e90eb2f35475b4484e31c		ol_content_fun		[ `Li of [ common | `Int_Value ] ]	
+type	lib/html_types.mli	1442	5dc9fac1124bf7651639ae0b1bfb7196add2ca5e297174beae19b6fe4afa425d		ol_attrib		[ common | `Reversed | `Start ]	
+type	lib/html_types.mli	1445	c541e44c61ddfdab132373330acd93ca34be952b97c1d2783ed4b6b64553123b		li_content		[ flow5 ]	
+type	lib/html_types.mli	1447	ea82710b8d332e4504eb64236f651b3438c07f36b101e6fb03b1fef476531344		li_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1449	137705abf9254c3fced004d5cdcefa7ebb489b63f58917dd4221f6a45577778f		li_attrib		[ common | `Int_Value ]	
+type	lib/html_types.mli	1451	78f9572075c1f983b546e1c286abcd987b3efe4671a0ffdc8c037e8d750daf60		li		[ `Li of li_attrib ]	
+type	lib/html_types.mli	1453	f928c0b07120068ce91291dc4e5312e7a4513565e64a0b4a9bbb8087024a860d		ul		[ `Ul ]	
+type	lib/html_types.mli	1455	b44daa8582da967319a3e7d003d2385830bbcbb44554eb6ad2198cd180ab0c06		ul_content		[ `Li of [ li_attrib ] ]	
+type	lib/html_types.mli	1457	43b6eb36f0d3243e825974f9f419aefd0333645521cfe52ed1a78c3d841e5fbb		ul_content_fun		[ `Li of [ li_attrib ] ]	
+type	lib/html_types.mli	1459	fe27cb07eeaed3dfa054d49ddb29d05b2d99a6786eea5e6d5dd3c64c618b34fa		ul_attrib		[ common ]	
+type	lib/html_types.mli	1462	63988a44b5edd69ad3689362b33770fc35382aed50afac90dc235fad8b33021a		dd		[ `Dd ]	
+type	lib/html_types.mli	1464	da1d5484150b8ad546006248cdec076c91f66c23e84f856deadbd92b91dcf58b		dd_content		[ flow5 ]	
+type	lib/html_types.mli	1466	7f2cb824b2f5c9a16e0c5ed86a920e91fcf814cf8fdeadf8a9aee90b9d3d86ee		dd_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1468	1129015ec3390281fb9f295c20c5093adcd443243f4605f0147aa15eaed9744b		dd_attrib		[ common ]	
+type	lib/html_types.mli	1471	400a7253309ad070f5ebeb4da493c2d85b30f1e6dce6d6472faee113549bedc0		dt		[ `Dt ]	
+type	lib/html_types.mli	1473	2da2b9e0b41a08dd584aee6c2674d67c30a291ffd99e79bee776146cf1ad3a32		dt_content		[ flow5_without_sectioning_heading_header_footer ]	
+type	lib/html_types.mli	1475	d5943fc7c553dc6fc54d6795ac5e37c8b101fd4f657bcc243aa48b99397a7fdd		dt_content_fun		[ flow5_without_sectioning_heading_header_footer ]	
+type	lib/html_types.mli	1477	e374719839d0ce35af85b030633d2cc133790943bce99287bb587696e091144b		dt_attrib		[ common ]	
+type	lib/html_types.mli	1480	845602a4c13078ec7a78d35484cd0f55681dcf301c1a305ce2c7195ffecbcc79		dl		[ `Dl ]	
+type	lib/html_types.mli	1482	59ec9fd3737dfad8480448e9eca6fde877101eb4b35c4638c0dee700f8d0c186		dl_content		[ `Dt | `Dd ]	
+type	lib/html_types.mli	1484	e85c95495f49b08a7a8abe8f3fba45cb005e491398f26104d7d4cca6b9832a59		dl_content_fun		[ `Dt | `Dd ]	
+type	lib/html_types.mli	1486	9d831cc1f11759fbd80b45e589143374bf5cc9beef108ce0c7eadc4472f97aa1		dl_attrib		[ common ]	
+type	lib/html_types.mli	1490	e59176cb7fa87ad023de8ddd2eb44779d396aac4677b20f536c92974929cc0e0		figcaption		[ `Figcaption ]	
+type	lib/html_types.mli	1492	e987a40542adc515507ebb1d9f55e2f6741aa246636ca2831194d634fc2d6ad8		figcaption_content		[ flow5 ]	
+type	lib/html_types.mli	1494	4afaf1c2e614af6f08181b5d3b0c9bf195e77ccec795a43f984f6c1f74dbb80f		figcaption_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1496	29d991abaf11a296f2a95b106ed9006d5d25f59a8c464cc463b3c8aa2f56317e		figcaption_attrib		[ common ]	
+type	lib/html_types.mli	1500	fd37c66e368cc7d7650753e4216a1e6df514e69951e669a9607eab80b9500fa9		figure		[ `Figure ]	
+type	lib/html_types.mli	1502	20ccd3e700c2fa6a0e0d848089ea371c79d419a1f665c9018e17c6731e5434ce		figure_content		[ flow5 ]	
+type	lib/html_types.mli	1504	3f8dab0afacbcea1ef15216c0cc963587bd1579100ca2a3651696a96b56da7bd		figure_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1506	09d9c9738c4c0260d7ae21968bdfeec0d8f3636a137f36c5f4500e26c2e660d2		figure_attrib		[ common ]	
+type	lib/html_types.mli	1510	e693ccd6f9dd8cec19f37471fee8999b4ce69e4f556986bddec7cb03b2400f3a		rp		[ `Rp ]	
+type	lib/html_types.mli	1511	72a80c55b0ec9adc6a06cbffc58200a061fa8cfeb846924e4305cec3a47f6949		rp_content		[ phrasing ]	
+type	lib/html_types.mli	1512	74a5155b4f7de9ee1c588e543691a0b239a931c4ff1e62e9c3ceec19b01e4ea9		rp_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1513	885efa97adfda8153df11adc918f66dc698c8ddd5acda91b94583875b40e02ee		rp_attrib		[ common ]	
+type	lib/html_types.mli	1515	a79481c570889f13af92144fb40ed28552079102d74e421a39d136919f5b5d22		rt		[ `Rt ]	
+type	lib/html_types.mli	1516	df7e62531c27dde1fb7ffe0b533b048a95c1e83f381c5abe41f916e15263bdfd		rt_content		[ phrasing ]	
+type	lib/html_types.mli	1517	71c983880e030dca6f740a387eb8d226ba9f0b55a2ff84b15fb8a14d51c534b9		rt_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1518	18d9015fb0ab8fdd6c637440327c54c97ce84845b9e07cff44b5a462e1b826a7		rt_attrib		[ common ]	
+type	lib/html_types.mli	1520	21bdb84af8d6e9cfb75a273843133baa3d45a6430db263a762149be845d2212d		ruby		[ `Ruby ]	
+type	lib/html_types.mli	1521	0ead3c330b86cfa97ec02e65a965cf0b56de105ddbac37c941c2dcdc10a4bc21		ruby_content		[ phrasing | rp | rt ]	
+type	lib/html_types.mli	1522	f3d5da8e2ebb8d9a423ac71858e155fec7d3c6e8d12ca0e24ee22d34f75570fd		ruby_content_fun		[ phrasing | rp | rt ]	
+type	lib/html_types.mli	1523	153b461878d2d1ef9cd6c74b83a796a9760ba2dedc67ec4a14d3d1ad2669679a		ruby_attrib		[ common ]	
+type	lib/html_types.mli	1527	fc72c46f2256d7b5c427c34c5fec8d5e068f1fbcd5a4687b5259654c917a3049		hr		[ `Hr ]	
+type	lib/html_types.mli	1529	e22084ef4a90241733f64f698bb9c794fce7a1a9a29edf04977878d8b4bf3768		hr_content		notag	
+type	lib/html_types.mli	1531	8690cd0849dc19224076fb4d28e5ae0dae9e7abdb8192e6da5400492638c2471		hr_content_fun		notag	
+type	lib/html_types.mli	1533	1dc99008e6ac15ff057edc92eeabc92837e4684e5631f4578ae110408d616b22		hr_attrib		[ common ]	
+type	lib/html_types.mli	1536	8c16dd0de619dd3c841f2a4448f008718384b0828794b506cbccc4d13fcbf476		b		[ `B ]	
+type	lib/html_types.mli	1538	ecc9f79f95baeaffca524552574c295629bb0ada185db13498f016df986a9703		b_content		[ phrasing ]	
+type	lib/html_types.mli	1540	e147dba787e375a1131042a7fbffe68e63b64b3415604b22113803c106c19c28		b_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1542	f40df532a9ebfc8750805005936e4d0fb281cc1b0dc94d05b011674417e77409		b_attrib		[ common ]	
+type	lib/html_types.mli	1545	0dca13ea7d2f6e338b3743089b7946792ca59b8534c48345404c317d159d7372		i		[ `I ]	
+type	lib/html_types.mli	1547	129f953decc8a0bcf525012a9a8b406f693e3de32f74f2105c3002af3e91446b		i_content		[ phrasing ]	
+type	lib/html_types.mli	1549	912a6018f42ac41d8b7ab413b62959943b15b32837616e06c81a1145388eaf9b		i_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1551	9bb854f13b54fc908be2e7f73797241861a8cea8ee8469b8a2276977c5fb05de		i_attrib		[ common ]	
+type	lib/html_types.mli	1554	e54f54019c0ede6bfde9acc5e51a99d78d0af2d3f18350eb67bcb9947773c0d6		u		[ `U ]	
+type	lib/html_types.mli	1556	805f0dae2616e96f1914a38bcacde4fdc9b596e69939d0b5559bac4a7ab8a0aa		u_content		[ phrasing ]	
+type	lib/html_types.mli	1558	4028d203a79931be0cd1099eb56a1d4ffd44dcd6a02a2b88a06c0815865065cc		u_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1560	5342532f52a5bca02be2e470dab3c694baafae6f068a8e16c59547a916ef5a27		u_attrib		[ common ]	
+type	lib/html_types.mli	1563	a32253022d3a3cfc08b4ebab8f6e55d4b9b2810f27d051b100bf398c57282dcd		small		[ `Small ]	
+type	lib/html_types.mli	1565	a585db24e3a1fab1d0b12a4ca5c380be7ade7bf43c7b4ccbe71a7e94eee87589		small_content		[ phrasing ]	
+type	lib/html_types.mli	1567	e38951b96125a8f8a57e5005368c4f3b9645c98ba7d06f26e390578aaa10cb18		small_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1569	59f9fd948d33dba8afb852772c08ec5e803ed9ff60cf36802a52ce2962902982		small_attrib		[ common ]	
+type	lib/html_types.mli	1572	16c3e83c21d3a12bf5f1558ac74fd99fd1a526cd07069b4242fd27b5618540cc		sub		[ `Sub ]	
+type	lib/html_types.mli	1574	33337f444e9b1c322a6ba26aa926df03095753c7860181f3688adc9c88e151b0		sub_content		[ phrasing ]	
+type	lib/html_types.mli	1576	c4783c2b77375efd0278bfb4ea208b3df58426e9b32ff2ed54f8cd97f0171292		sub_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1578	5c558a9adf1adea961810a8f0b347e345b116cff4e6ef1b6368e15b6594b6db5		sub_attrib		[ common ]	
+type	lib/html_types.mli	1581	757266884d72b490b66fe8f0ea1e7dd34159a83b9474d0b62fbf8f7702276cbb		sup		[ `Sup ]	
+type	lib/html_types.mli	1583	358f8fdeb28ca3b34e92a7e5cd103799afcd81bcf4a88121257d17b53bf7d929		sup_content		[ phrasing ]	
+type	lib/html_types.mli	1585	b07e04fb0ba8f52a02188f28bf2430b109e5225a869eeba1c9a0bebb471d9b89		sup_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1587	beb1f1d60d345368610c62e638d40e238de95d12c2ddc3d66d546b89b0278685		sup_attrib		[ common ]	
+type	lib/html_types.mli	1590	746d7f1e038208153b2f0ee02429f3fbaa19c503030142ec0826ba75334b6ec9		mark		[ `Mark ]	
+type	lib/html_types.mli	1592	1688950dd45ed5c93cdf98d0dd2772e69037b952c9f00635aebd30806482ce34		mark_content		[ phrasing ]	
+type	lib/html_types.mli	1594	e08f68901de2d432d6edb46736b9951af5e037401863e389888055f549d6ff7e		mark_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1596	54edb2b19c53a4c6b22287a1fb96ca8ba210224df3d22920df98fdae710d9411		mark_attrib		[ common ]	
+type	lib/html_types.mli	1599	21ec9d7de262aa759f716d19312b8fbdb013829d0f8d4b1fe60494f527223f40		wbr		[ `Wbr ]	
+type	lib/html_types.mli	1601	93ff40bfb786aa5613f7498bf94b490a4ce18d7d61fc8c76adfa18cc6615f5f7		wbr_content		notag	
+type	lib/html_types.mli	1603	72df2e74776dc9209b335940713e6afdb12581d100aba8849e947f6c542e81e9		wbr_content_fun		notag	
+type	lib/html_types.mli	1605	e4c9e5193dfbb218ee0307d118854b79bda32ed24a609134b6d219c4ce1c928b		wbr_attrib		[ common ]	
+type	lib/html_types.mli	1608	d2320e3ae3f5231382624058bea2748c3e13992be069e24d508df184e0c18a73		bdo		[ `Bdo ]	
+type	lib/html_types.mli	1610	88edf76ea04d66dd4b24d6299703e76cc7f2285baa7bf96b0ed1df17911648ad		bdo_content		[ phrasing ]	
+type	lib/html_types.mli	1612	2c3ca1e5a069e24924f148b28a4e16738f7acdc7d8016818b3139162f252dea3		bdo_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1614	863ed5bc1b75ddf54461a9e7097b7ffaa33bbf05245f3c13d09636848e2562a6		bdo_attrib		[ common ]	
+type	lib/html_types.mli	1617	48b390ead823e334972ab2e2b410680e679d434e126349c2f64f8a2d8923f13b		abbr		[ `Abbr ]	
+type	lib/html_types.mli	1619	cd86a877631db6f042ff3d1ee331d61a2a19fa76d69be4d5cf6b7547b800d535		abbr_content		[ phrasing ]	
+type	lib/html_types.mli	1621	1037e2ccc26ec2df64e8313f19b3511002dd4234e3c158a7f29870157a1e5d9f		abbr_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1623	be958d17cee821bf3c9281ff54beea5df8dc6a1e9f0834ef19e44dc29d1e741d		abbr_attrib		[ common ]	
+type	lib/html_types.mli	1626	3e6be2a670181fa9a29c9a5199a2f55b3e308a057ae117fcfcab6c72efc0619b		br		[ `Br ]	
+type	lib/html_types.mli	1628	3ef496b2b8b878f92ae7cb93dd285d16ea40afcd3c852f6990bff9dd34d5d758		br_content		notag	
+type	lib/html_types.mli	1630	7eab02d9d06dc622580c3de360872c46560c4a0b5c6f1b526524898b1a26af4c		br_content_fun		notag	
+type	lib/html_types.mli	1632	a38239da112ec223eef22ca8f38d396d3691a3f83e75d441583410cb7d9f98d5		br_attrib		[ common ]	
+type	lib/html_types.mli	1635	f312e14371d4b30114a1fd6184e7edd8c97870cf5ed478c826fca15ba907fdba		cite		[ `Cite ]	
+type	lib/html_types.mli	1637	b12e867e0b7806d2c0d7e13116f0add209764962b6f53012f9be9b5b6d4bdb4b		cite_content		[ phrasing ]	
+type	lib/html_types.mli	1639	1e8ec0baebdc84b99e6d7427c1dc326fd74288317b89df602bd4f9d413d56953		cite_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1641	3b4592487d32dc00d2274393650cc0259be8562f1b9821366561e944e3e655c4		cite_attrib		[ common ]	
+type	lib/html_types.mli	1644	953d3b4ce1173a7d13cf13842fe8b4b52a946f3d2384be7034c2dc506f2e95b3		code		[ `Code ]	
+type	lib/html_types.mli	1646	774c8b63952c11cd4365cb1689bcbb2f9c1c305fdc2a78089eed14743c3a35f4		code_content		[ phrasing ]	
+type	lib/html_types.mli	1648	1c83862b7432a83e9787df3875831f55290a971fb695f5df09d4a4f7f001d881		code_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1650	0436532701058e0b968bdcd0b990d0f895401522edf356be192e9bde437e12b0		code_attrib		[ common ]	
+type	lib/html_types.mli	1653	1946258c095b6f956e331ca54bc6a0543514e1a64062bbb751ca56e888f3bda0		dfn		[ `Dfn ]	
+type	lib/html_types.mli	1655	79dd1300fbfc72e998f3dd27ca5b774d780d6ea0cbcdf020a9c2a95ffa0336ee		dfn_content		[ phrasing_without_dfn ]	
+type	lib/html_types.mli	1657	a4420619df7a7a44253044d7f54ecfddbffc2e35a76724a60a992743e40e1a18		dfn_content_fun		[ phrasing_without_dfn ]	
+type	lib/html_types.mli	1659	059d7eb54ac9cdefd7d47e4584f2cb8e02d00ecd28ed2568e4a56d4fa119c358		dfn_attrib		[ common ]	
+type	lib/html_types.mli	1662	be9b5ff99305c85b737a5e9a7add011a8508c37965a1dba7e9f1bf0a5f90b197		em		[ `Em ]	
+type	lib/html_types.mli	1664	e330034c3a801ed45bcd4feb7d821f0b539b7d2eea82f3d246de9fcd3fbdb55d		em_content		[ phrasing ]	
+type	lib/html_types.mli	1666	dba94ebd09ef9d90333d4c9f909ab9bf72736370c6f87e8fe5b8fbba7b784e46		em_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1668	b797e205740559ddb577d59185a18f709e7df5b05a55123060124f5e274c8070		em_attrib		[ common ]	
+type	lib/html_types.mli	1671	c6baad46d89664deeef6412b591c53a84ebb4606ceb90897caba58b3499904f7		kbd		[ `Kbd ]	
+type	lib/html_types.mli	1673	f228f6f4f4066f38d7ee47e805745120d8357a1b534faba03523f614cd34d6b9		kbd_content		[ phrasing ]	
+type	lib/html_types.mli	1675	b65d7f564b3fa928581f760c5968046b60a5faf164f6d780bfad0686bef56343		kbd_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1677	5d2fadf24cef57bba5ea540133130a1a49750c7e8ac344c6beaf3ea898a07226		kbd_attrib		[ common ]	
+type	lib/html_types.mli	1680	59d7edc91d2aac3f007271459dad24edb42bb6adfba8912c997d73cae02f8833		q		[ `Q ]	
+type	lib/html_types.mli	1682	f16135caa19ab295bcc0c7f8141e46dad12eb1d77a9acb0ae20bb4fececcac60		q_content		[ phrasing ]	
+type	lib/html_types.mli	1684	1d7217cfae177b3478e3beb4b04a52845f38097ad9b1b743e6fd955f40cbbfd2		q_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1686	cda59c416612870a162134e8bcc40224f12ec58d84149d727012e482812d2361		q_attrib		[ common | `Cite ]	
+type	lib/html_types.mli	1689	316902caf8ede81e73aab920911bba4b35d542e6cb4738e44dc0bd30ce0d5afb		samp		[ `Samp ]	
+type	lib/html_types.mli	1691	7fb891c15c8a883b94c0571a5d51179afcd43006a5dc2c3374b903a2347eed5f		samp_content		[ phrasing ]	
+type	lib/html_types.mli	1693	8bc89d5549a29c9b69c8c2214ec833b5561149d27b57e869ca93615b5f5d49a1		samp_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1695	098456dfaa9f6a9937a0338134c346fe1fa9548b0cb29c51b902e7debf32bb07		samp_attrib		[ common ]	
+type	lib/html_types.mli	1698	504c20724a2cb122fe37f76673cb31f15708991e1ab4b4c62e45b852a9308b15		span		[ `Span ]	
+type	lib/html_types.mli	1700	e77a04806321af85650f70cb9fe2b1fe81e22db087af6619d71317c45c1771fd		span_content		[ phrasing ]	
+type	lib/html_types.mli	1702	57b35125f18dbaa75dc808e77c439263b1880458c0b3ca1e6a0dd47dfec9ad94		span_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1704	fc6f1b472b28953ba145b7ff483ed125ee40bcdd586c7d35f4500f91e6610bd9		span_attrib		[ common ]	
+type	lib/html_types.mli	1707	b432a866f9b2eeab58baa576745e5f9f0ba80df3be1b97166373037e4a374cec		strong		[ `Strong ]	
+type	lib/html_types.mli	1709	70c78cdaf4f01f999538cfa06a06d24a846cf9af46daef3ce081a678c9e27c87		strong_content		[ phrasing ]	
+type	lib/html_types.mli	1711	8a4d6e3569b8b456b601f6778bf6a5493aacf244dcbf8d8cbdb6062d68061104		strong_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1713	3ee0765c36ee1884e9f8ac663358239e5152620260143c86f91e47ad850e8b24		strong_attrib		[ common ]	
+type	lib/html_types.mli	1716	b010f80205773b29544cf039b883bee222585515a2d17b2ca9abcc2bfa3a1119		time		[ `Time ]	
+type	lib/html_types.mli	1718	eb8a31e52436954d90eb3d47c6fc6733437e027ae177d7bf85c342e9123e19ba		time_content		[ phrasing_without_time ]	
+type	lib/html_types.mli	1720	4b139f274802bd2c37501d0b6c4b5a0da6564394b065aa1f551df5f56d725d88		time_content_fun		[ phrasing_without_time ]	
+type	lib/html_types.mli	1722	7903438f93f17b5b36fba34b401b8c16fd046bde071d6650f04079240a44836e		time_attrib		[ common | `Datetime | `Pubdate ]	
+type	lib/html_types.mli	1725	d58900f81778354f1bc9311bfd14989bc7289f0015b3665ed95b342ea958d427		var		[ `Var ]	
+type	lib/html_types.mli	1727	c41769e0a85998862bb59cee59b2e39b44ba039a9f76fddc5809088631418657		var_content		[ phrasing ]	
+type	lib/html_types.mli	1729	3a02bc91fd5bdbb08cd0be257f4a41f19c7356cab88c5e3d1c93daaffcfb7574		var_content_fun		[ phrasing ]	
+type	lib/html_types.mli	1731	cb0f6a5ff600fa2540f91dfee91a5ba57b316aa1306879afdda84770036ddea4		var_attrib		[ common ]	
+type	lib/html_types.mli	1734	13b90683a396bed624190a622f00da12c611f0285ef151282a6b90e8770b0183		a_content		flow5_without_interactive	
+type	lib/html_types.mli	1736	c939d48301a04fbe968419f5371e2939aaafd26e7cac6296ca0bc9942c89731d		a_content_fun		flow5_without_interactive	
+type	lib/html_types.mli	1738	ad07a81b8895e17102954a56750108fb02129ec43000134f32fba2252f1dad78		a	'a	[ `A of 'a ]	
+type	lib/html_types.mli	1739	0b0dcb917eee85d2eb868f249f458518a48dc3b66cfd0f18824d5eafc9aa6999		a_		[ `A of a_content ]	
+type	lib/html_types.mli	1740	4b4f437c8d24d9edd087b067a256467207046fbb38aefd7be7c41589a8f5a054		a_attrib		[ common | `Href | `Hreflang | `Media | `Rel | `Target | `Mime_type | `Download ]	
+type	lib/html_types.mli	1746	45289036f8a960b62f38d4a937fc7966acb64c59de2a2c86f87d61ea12eb7310		del	'a	[ `Del of 'a ]	
+type	lib/html_types.mli	1747	c31086ab3108674cef01995df336a84213a7e6d40ee5be6eb66808adf117e4f9		del_content		flow5	
+type	lib/html_types.mli	1748	ba221282bc19e46e7b613e6c0943071775a9e55357fdf008d001dedaf61f254d		del_		del_content del	
+type	lib/html_types.mli	1749	66175b68c9c387d5b8f54427db57847bc6dff38d559efeafd82a0135bceb76e8		del_content_fun		flow5	
+type	lib/html_types.mli	1751	233ee51174021427bcfbc46aa87d5bbc287626c76439c1d238d28d2222074e38		del_attrib		[ common | `Cite | `Datetime ]	
+type	lib/html_types.mli	1754	f991f0a7581605dc480131b8821c724a022ff190a9ee13005bc60650fef88bb9		ins	'a	[ `Ins of 'a ]	
+type	lib/html_types.mli	1756	27fddbd7a501d5f747543faf2e913031616fcde69304327a3fa91c9ab72cb110		ins_content		flow5	
+type	lib/html_types.mli	1757	11651744da5c6bf6f3cddd7a278976f60a7f1b7bd40475c46db0e69ae7747d22		ins_		ins_content ins	
+type	lib/html_types.mli	1758	cea34c8a304ec1cd339d51a8de4669ddf6b2ad44efda646aecc2cb53255e3647		ins_content_fun		flow5	
+type	lib/html_types.mli	1760	e1201d3c2abac65c13dff2115dc9577298793637300153cbc7634e37d7c59dab		ins_attrib		[ common | `Cite | `Datetime ]	
+type	lib/html_types.mli	1763	550c70d1a9b2177221592480f61e7fa08166f598280c5db41dc3bc356836faac		iframe		[ `Iframe ]	
+type	lib/html_types.mli	1765	aab92ad07f6fb4c57fc9db63961d789fcbb1f9328e8bcb9af839bc970d603555		iframe_content		[ `PCDATA ]	
+type	lib/html_types.mli	1767	0cac80049acba48cf1c57f14424486449b9aa5402a2ccb404a7fe246cea1b960		iframe_content_fun		[ `PCDATA ]	
+type	lib/html_types.mli	1769	042bb0161e4c78e5ccbdbae48283faee3227dd458f975dd6571ca719e71b6d33		iframe_attrib		[ common | `Allowfullscreen | `Allowpaymentrequest | `Src | `Name | `Sandbox | `Seamless | `Width | `Height | `Referrerpolicy ]	
+type	lib/html_types.mli	1784	5cdaab167c7a2df17e5f9f8b3a9cc0ed9b999962fca1b551aee84926f660f208		object__content		[ flow5 | `Param ]	
+type	lib/html_types.mli	1786	3485c8eae5c8fc4bcb238cd931955fd3ee2b33d9635f356c4bfaa8cf7b50ed80		object__content_fun		flow5	
+type	lib/html_types.mli	1788	ed523ca85ed0c98d93811347ed060c4c16913ab06992c8dd68bc3972ae5a8d41		object_	'a	[ `Object of 'a | `Object_interactive of 'a ]	
+type	lib/html_types.mli	1789	1d1ac84e4670b395a63fe44beddb86c79ad6122242841242bcd8b8ccabab5128		object__		object__content object_	
+type	lib/html_types.mli	1790	873dd6e946279c3ea00720035d39ea96b6ddd44ed82758eaeefcda46ba1877a8		object__attrib		[ common | `Data | `Form | `Mime_type | `Height | `Width | `Name | `Usemap ]	
+type	lib/html_types.mli	1803	78b401192809672b3dd339c5bea58d7d6fe2ed1fdb49bc47dad7ac0d2644bb3c		param		[ `Param ]	
+type	lib/html_types.mli	1805	b07f0f170a2fb209543d0d5ca49caa9815870ac5dcb5d67a724eea8757750e4c		param_content		notag	
+type	lib/html_types.mli	1807	c9efd9f88ff03d0b64102637d7444568cee746997bdd807ea8f981363db305e1		param_content_fun		notag	
+type	lib/html_types.mli	1809	302b25305c524709559c154e911207932a8cbef0b2ed5f2285c82258a452e21e		param_attrib		[ common | `Name | `Text_Value ]	
+type	lib/html_types.mli	1812	2b7df58a55e89ffa76c5bf2d4782d609927e40a924756843b06ae8ac80f7693a		embed		[ `Embed ]	
+type	lib/html_types.mli	1814	73bf08e4f3b19d333ad0babf44961e18e667fa26d73e056b0b79a007b1e585fd		embed_content		notag	
+type	lib/html_types.mli	1816	b4ac35d44d7b4f7d704b1a0a2a8227aa85037f68b0763741f49e0c1bac0c9d91		embed_content_fun		notag	
+type	lib/html_types.mli	1818	3c3ffde457ec11bc0313b33c7e8342686a002edb67c512710f7734065f29f634		embed_attrib		[ common | `Src | `Height | `Mime_type | `Width ]	
+type	lib/html_types.mli	1820	3d5268e599d7fbfa31eccd410f39c65cf078d705076d7656981a16b98f1b6a80		img		[ `Img ]	
+type	lib/html_types.mli	1821	e851a823d17ca70273418db2412346098b4b8192356d21ae5d96a36f94804aa2		img_interactive		[ `Img | `Img_interactive ]	
+type	lib/html_types.mli	1822	d2dc14dfda65e458f342b16374d6bd15785dc89a5ea382712cba531351f6639a		img_content		notag	
+type	lib/html_types.mli	1823	332a39d7b0ae3b83537c731231f2df9e6ae5a86d7900e92dc80f75058c89cbf3		img_content_fun		notag	
+type	lib/html_types.mli	1824	8b028885b9cc88208b425a1dd9fc41cb7ae49ab76d9835f6d6b77403593a52fd		img_attrib		[ common | `Height | `Ismap | `Width | `Srcset | `Img_sizes ]	
+type	lib/html_types.mli	1827	a7cdfa2cbb83779cfaa34e8166b3211459c95480310c7540cb233850923a8c73		media_attrib		[ `Crossorigin | `Preload | `Autoplay | `Mediagroup | `Loop | `Muted | `Controls ]	
+type	lib/html_types.mli	1837	87ceb7ec769243590f56d0d603e1ef5ddc1238fdb7fcc1bdea5e0aed039436ae		audio	'a	[ `Audio of 'a ]	
+type	lib/html_types.mli	1838	e54c51383444fd39c03953c50810d95b7b56ad3712096b924cb0dc1ae0235425		audio_interactive	'a	[ `Audio of 'a | `Audio_interactive of 'a ]	
+type	lib/html_types.mli	1840	4258bd81b311e3f85e757ca8f7dbecd17e3c52d163d085b53b23347d1cdd15a3		audio_content		flow5_without_media	
+type	lib/html_types.mli	1841	0d5711ca977977e4510bb611b9a224256301faf468eb750b87d755440b4bb9d8		audio_		audio_content audio	
+type	lib/html_types.mli	1842	b1ab4062bbfb7668f1f532b0b253eaee0353888d18858660f2e8533296a45b5a		audio_content_fun		flow5_without_media	
+type	lib/html_types.mli	1844	88a133008228cc8f70cb13f3002a19f84bfdb24d532225c26f923c22b5258eee		audio_attrib		[ common | media_attrib ]	
+type	lib/html_types.mli	1850	546387cb8110f05ad9add6c6e4b3d95c07632e27d6ff402694dc05c452a4e3ab		video	'a	[ `Video of 'a ]	
+type	lib/html_types.mli	1851	18066c518cf64a3584a45be9a17a7229db3547a081c6bb0806ff0552abeb4c7c		video_interactive	'a	[ `Video of 'a | `Video_interactive of 'a ]	
+type	lib/html_types.mli	1853	ca3ff10571512af2af7ae90c98adb9a84511367e8a03a0f45c2b6d0b63a1920e		video_content		flow5_without_media	
+type	lib/html_types.mli	1854	69a0688a5878f0f0891f367815ff80b879dfb4baeee5bb42e9660f083cae6bc2		video_		video_content video	
+type	lib/html_types.mli	1855	cbd3a8966fe664da544dbc6d3552601493d2f364873ac2d129b34b608c30ff9f		video_content_fun		flow5_without_media	
+type	lib/html_types.mli	1857	8854f61647b54a8c3891256755e9515fbf5fbe655f0c121db39205ec6c2ad1c1		video_attrib		[ common | media_attrib | `Poster | `Width | `Height ]	
+type	lib/html_types.mli	1866	ac643df345981488db21c7d6e05a205ef91733ae944058c90aea45ed060da952		canvas	'a	[ `Canvas of 'a ]	
+type	lib/html_types.mli	1868	2edd92991734dabb014fb54c5008f7ff739cca19dfb89360e379ac082305ad23		canvas_content		flow5	
+type	lib/html_types.mli	1869	048f29b7648f7c9be644d527773ab70c2d3e019524f2986b0a4ecb98ee406be8		canvas_		canvas_content canvas	
+type	lib/html_types.mli	1870	104c3451a52768cb56fec9cf433587210e94d9e682db345f7a3f39a7f4d8e957		canvas_content_fun		flow5	
+type	lib/html_types.mli	1872	3b3fede8cf2e2caab530c4e494218daedc30c8c7af8bcb06d43090aead205193		canvas_attrib		[ common | `Width | `Height ]	
+type	lib/html_types.mli	1875	e3c66105f40ad4b0b1f1bdaa960f89cd0594b075e2b2de67aee40076ff859d33		source		[ `Source ]	
+type	lib/html_types.mli	1877	77f8ad32e6f28c92018f8a1ec4a4b16bd7e648b40ef1b411c807ae1974624ca1		source_content		notag	
+type	lib/html_types.mli	1879	7432c0b2da3c769d8a2ed758895dde66dcf22edfbe1bb643c7f34388841b4396		source_content_fun		notag	
+type	lib/html_types.mli	1881	23ff1c771dc9e024bfd2bd249345dad5ee6fcf35e7b8b279c11c2edf0652d3bf		source_attrib		[ common | `Src | `Srcset | `Mime_type | `Media ]	
+type	lib/html_types.mli	1884	59678633fa702dd402e2344db028abafbdb944b5ef5025c6d90a0b2a90d77a87		area		[ `Area ]	
+type	lib/html_types.mli	1886	d2570e8d87a05c7c9100e15b5dd9c8fbc00b7b1fc5cab2fe87b68b9ba26d1959		area_content		notag	
+type	lib/html_types.mli	1888	7fd56d861341fc0911fc50a2a1472c3598081b053939a40a24113a1098f081dc		area_content_fun		notag	
+type	lib/html_types.mli	1890	0984b62441c5cac2c2d6e4e4d474eada6a6812ba52e5c550b0fc30f553e82592		area_attrib		[ common | `Alt | `Coords | `Shape | `Target | `Rel | `Media | `Hreflang | `Mime_type | `Download ]	
+type	lib/html_types.mli	1905	68b5718d7f7dde9462f8a654f1d59b67866c0c07837942c3020d7f18641f6903		map	'a	[ `Map of 'a ]	
+type	lib/html_types.mli	1907	5982222c8249aa4d4bbef618b6a362c68198271c51107505db3b6ec981423d1f		map_content		flow5	
+type	lib/html_types.mli	1908	98f2c8405f3c4e1900be7cd5d73861367823187b213866ff8b553fd8a57685c1		map_		map_content map	
+type	lib/html_types.mli	1910	ef58e8c1bf4c11b2300bcb8574ccdabd6c0394c088fc7f4501eaaf259fb6c1df		map_content_fun		flow5	
+type	lib/html_types.mli	1912	6cde9be229c791c199a0fa692bb001bb118be5f1e5ba76a034050ae3aa082f67		map_attrib		[ common | `Name ]	
+type	lib/html_types.mli	1915	cb853d9dd8e05397d5657b4080d2dd27fccc4dda086e3e1f1a1f1a2f5b17ed85		caption		[ `Caption ]	
+type	lib/html_types.mli	1917	84d6bf3484e166be4950ad27a603a734710e3be922f4e53f128db23fc6ee283b		caption_content		[ flow5_without_table ]	
+type	lib/html_types.mli	1919	dc74bc6a787e1bf4a301e338f2a3d7fe5579ac5e2de9ca271a9bbae323e7b814		caption_content_fun		[ flow5_without_table ]	
+type	lib/html_types.mli	1921	b49bfb75b57c6a682624b2c5e6472bb3e090b1c05711e299a44098ceab077fde		caption_attrib		[ common ]	
+type	lib/html_types.mli	1924	4427b27edf8c75f9dfca29dba6640d86233d4ed39c8f2edb5f975943dd742fb5		table		[ `Table ]	
+type	lib/html_types.mli	1926	e95d76311c4af712d65b092de0dcb75ac7b8cd60ef8f9ad2cc55057750b5038b		table_content		[ `Tr ]	
+type	lib/html_types.mli	1928	8179912a4fe96d6daf9ae4678cd22827e94fe31eeaee16f6b4a3d68877564166		table_content_fun		[ `Tr ]	
+type	lib/html_types.mli	1930	cfcd755c2fd6adfce5c8f82dac113119255175c5f4b524a8c43bee84a1ee2363		table_attrib		[ common | `Summary ]	
+type	lib/html_types.mli	1933	ee74e258f55dd64e6575d80f4caae6952cce2943578bfab28fa39d5d8f1ec0cd		tablex		[ `Table ]	
+type	lib/html_types.mli	1935	e81ba5bb0938d3069bca83e080adbc7aa6862efcbdc0bdf0cb0da87afc130f10		tablex_content		[ `Tbody ]	
+type	lib/html_types.mli	1937	e81351e0590105604b46b0c15d88a645abba1b261e705514686eae490db9aad3		tablex_content_fun		[ `Tbody ]	
+type	lib/html_types.mli	1939	1c4163b8bf10d5688091323c753dae6dfd0b9afbeb7efc6c5905c1baca179be4		tablex_attrib		[ common | `Summary ]	
+type	lib/html_types.mli	1942	7fb2f2867c620b2e3dc2db075d340454b9006e2143dd5405a70a771a103f8a0f		colgroup		[ `Colgroup ]	
+type	lib/html_types.mli	1944	b969c0eae4d5903c22d6233f71878e6b52900c6d659857c81cce7a019cf80e9a		colgroup_content		[ `Col ]	
+type	lib/html_types.mli	1946	6c53a64610926799edbc1751a474bca4e9fa12c96513d252c1c492d2de89014b		colgroup_content_fun		[ `Col ]	
+type	lib/html_types.mli	1948	17abcb9593cd26351bd5057edece5db58abe7a87b452b3271b231242562d24ba		colgroup_attrib		[ common | `Span ]	
+type	lib/html_types.mli	1951	8e9033ea17b8aa7f501b494a991c2b94a54b5fc50e322eba04a4c04195c42107		col		[ `Col ]	
+type	lib/html_types.mli	1953	7236739a66be0f88f36031dafdaac83a28b7f456f8e3d0cdff684c0c43ba39b3		col_content		notag	
+type	lib/html_types.mli	1955	e3a0a7dee67815e22bec5295ab7dff1f2b61f9943c6151038c6a07ed7a3c89e7		col_content_fun		notag	
+type	lib/html_types.mli	1957	881e48bf4ed96316d3918ab1955a3ee533fa0f78256aa3b2bde2010483ffe278		col_attrib		[ common | `Span ]	
+type	lib/html_types.mli	1960	856deccf9a55cbb69f5462eeed87f7409ac06d5c5f6fa912bdcfa46f502ea0a3		thead		[ `Thead ]	
+type	lib/html_types.mli	1962	42088aff478af3b93dc82cf46fca24ed3d7216ccc0ccb8c061393da9803a0b33		thead_content		[ `Tr ]	
+type	lib/html_types.mli	1964	fad67c56af16a5172a34bb0877a10cf8058d2d077b4bab5d9811d4f83aa2f14c		thead_content_fun		[ `Tr ]	
+type	lib/html_types.mli	1966	e13b3668a28ec2b811b4ee3b9dc901f65289026af91d557ba356530de7d7c914		thead_attrib		[ common ]	
+type	lib/html_types.mli	1969	d3a1f84d90d3be862d9ada168cbced82d6783e021e4194d2a15f88b2b6ef3eee		tbody		[ `Tbody ]	
+type	lib/html_types.mli	1971	08c116dc8dd152741954c19a9adc219cebed9bb760e27ad905113e0dc4b256c6		tbody_content		[ `Tr ]	
+type	lib/html_types.mli	1973	18fd33556c3f1f8bb4f1a014b411725a8bc1e88e46ec27b32cab693ff60e7146		tbody_content_fun		[ `Tr ]	
+type	lib/html_types.mli	1975	359feb6eed11f11b9d46958db0ca7be78eec71bb01df51241165a1acb281e341		tbody_attrib		[ common ]	
+type	lib/html_types.mli	1978	46b968aa80fcb80548dd78bd04518bdeb3cffa21f942a72eabf574f28590160e		tfoot		[ `Tfoot ]	
+type	lib/html_types.mli	1980	ee4ee16da439f530fd0c50323b5e49baf0d4a0896d522f8ccd97ed841fee186c		tfoot_content		[ `Tr ]	
+type	lib/html_types.mli	1982	9573560849b7f42a474b5f2269f32aef90689d0c95ae0cc80f672c3de2114a7e		tfoot_content_fun		[ `Tr ]	
+type	lib/html_types.mli	1984	815573e8e3a3f2ee5747c17c67804c8f3a0167fe02e2ae5703c44fa75c7d3fab		tfoot_attrib		[ common ]	
+type	lib/html_types.mli	1987	cd9a00d236b8d833cf6cf65ada46d0e275cfe5f539737de8e48595ee7d3cda7e		td		[ `Td ]	
+type	lib/html_types.mli	1989	099f0bc502f6860a1a27ad61c3e9eb04105cabdf01ca651df7aefde0ef329bee		td_content		[ flow5 ]	
+type	lib/html_types.mli	1991	4431288f22b3cb0d1376ba977d241bb674a0b4c79df55945eb8f676386441fdd		td_content_fun		[ flow5 ]	
+type	lib/html_types.mli	1993	a5e61813650bf5b1bea3063d574d02b5f7a4503a2a61144f112971425bd60d50		td_attrib		[ common | `Colspan | `Headers | `Rowspan ]	
+type	lib/html_types.mli	1996	73c364fbdc736589943226fa12dd7925646937ffc7c4d1c6f4c588788c922205		th		[ `Th ]	
+type	lib/html_types.mli	1998	e7d6ccb565b0b5996856fa8a7761bc3f724c3fe8c1fcb1dc789075aeca6d2e74		th_content		[ flow5 ]	
+type	lib/html_types.mli	2000	047eab221fb937bbff485204e020c542a097b92124d0ad281dc15480221af2f3		th_content_fun		[ flow5 ]	
+type	lib/html_types.mli	2002	6c6e1afbde35cecd21b27ec275fe22bede448aaa6ad0af46e9cd41346af6f514		th_attrib		[ common | `Colspan | `Headers | `Rowspan | `Scope ]	
+type	lib/html_types.mli	2005	dbba6a2ad1cae7030241d4b02bcfa504e08d61c362e01e05fcf8296483fa033b		tr		[ `Tr ]	
+type	lib/html_types.mli	2007	b3f746b507a565c97c6fe7c0cf127e41bf799ba9fddce70de7219d95b900d410		tr_content		[ `Td | `Th ]	
+type	lib/html_types.mli	2009	6aeab331964de26e17552bddc1f1346c545af669d6976dac2209a25e7d589455		tr_content_fun		[ `Td | `Th ]	
+type	lib/html_types.mli	2011	62844c808c087870da514192b7677ded0c0b629de43f9c73f245ac593c1039f3		tr_attrib		[ common ]	
+type	lib/html_types.mli	2014	1b5cadf6cbebdd32275c1d80baef53675f2506ae6fec6ac31fc40ae3db8337f7		form		[ `Form ]	
+type	lib/html_types.mli	2016	3dd0d7752897cf4f86aafd5dec6a3387d35b876600a14f47edc972d2e21ececd		form_content		[ flow5_without_form ]	
+type	lib/html_types.mli	2018	d32e4cd19889031660b2bd505190af473a3f305125799fb9ec6a1fe5d7cb9e83		form_content_fun		[ flow5_without_form ]	
+type	lib/html_types.mli	2020	e3c48d7310108dfbc29f764f152d5611fc2c91b40f5f775ebbeb9bd676c635af		form_attrib		[ common | `Accept_charset | `Action | `Enctype | `Method | `Name | `Target | `Autocomplete | `Novalidate ]	
+type	lib/html_types.mli	2034	9d31827bde33c5ebab5db1cc70591d46540d86f5e02b3a5ecbe2f7d2b6624731		fieldset		[ `Fieldset ]	
+type	lib/html_types.mli	2036	d912f7480c539a68f7443cabaec0b74fcedcda65373d5c044b110aad508c4592		fieldset_content		[ flow5 ]	
+type	lib/html_types.mli	2038	dd05485db2bd6d8c15b8e10719dfb34d4894409718397fffd6cde4f3ee2be14e		fieldset_content_fun		[ flow5 ]	
+type	lib/html_types.mli	2040	43d5362a073dba2ef4ac8970a85fe64f54075307589c9ba6531ed85273ece9b6		fieldset_attrib		[ common | `Disabled | `Form | `Name ]	
+type	lib/html_types.mli	2043	a861580dc56823946739234b4c7e8261a50483c3119402537a2c0899e792e21d		legend		[ `Legend ]	
+type	lib/html_types.mli	2045	f7f5468b5ceac33f3eb035f6f7559041dedabf34a454ee0f29243cd32f53150f		legend_content		[ phrasing ]	
+type	lib/html_types.mli	2047	7195ddf11b7a8874da2edcd61cd1c3a8059b7565f53d7111a9ff9168bcd7d766		legend_content_fun		[ phrasing ]	
+type	lib/html_types.mli	2049	b71e511ff5c13bc1bfeb1c4a368a09343126bf13c7c3dfe3f48f01553569fb2b		legend_attrib		[ common ]	
+type	lib/html_types.mli	2052	21837a0c82c51785f2270f1828288af4b13d7ffc68b463275f8443e3154a8a04		label		[ `Label ]	
+type	lib/html_types.mli	2054	4b869179bbc4225152d437daba0174b940203a48bd5b43daf5e792d9b58bb136		label_content		[ phrasing_without_label ]	
+type	lib/html_types.mli	2056	f10284be00c4507f4db4f203564a11e97972d0aee3f883da5c506e8ae68a19c1		label_content_fun		[ phrasing_without_label ]	
+type	lib/html_types.mli	2058	b8a22ee6f8a5d0cd7771bfa5507077e13895c065c730d33d63807c573f51c9a9		label_attrib		[ common | `Label_for | `Form ]	
+type	lib/html_types.mli	2061	fa140966a8a2781f07706066bf30fbab8f4409d67bf96560fdaa63336a8007ed		input		[ `Input ]	
+type	lib/html_types.mli	2063	3893acaaa0f6b72e2fcea4621721388f361e6865402855738d407fb3ba256866		input_content		notag	
+type	lib/html_types.mli	2065	56c32d09dce4f7c46b14e5c5a35faeb95dc637f46be4dc709e2d34ec4c63e3b7		input_content_fun		notag	
+type	lib/html_types.mli	2067	6e1a39a56f2e71a95f4a86d0b9d1606f74c34d0da7bec5316e762f2f39743874		input_attrib		[ common | `Accept | `Alt | `Autocomplete | `Autofocus | `Checked | `Disabled | `Form | `Formaction | `Formenctype | `Formmethod | `Method | `Formnovalidate | `Formtarget | `Height | `List | `Input_Max | `Maxlength | `Minlength | `Input_Min | `Multiple | `Name | `Pattern | `Placeholder | `ReadOnly | `Required | `Size | `Src | `Step | `Input_Type | `Value | `Width | `Inputmode ]	
+type	lib/html_types.mli	2104	75f6fb23c25441e09aa89c0eee5e7df02eb8236a980b6fdb592747cb744a4a2e		textarea		[ `Textarea ]	
+type	lib/html_types.mli	2106	21273a260e7968f0c93cc4dbdbb3fb162b37460a945d28d40219498d4743ed29		textarea_attrib		[ common | `Autofocus | `Disabled | `Form | `Maxlength | `Minlength | `Name | `Placeholder | `ReadOnly | `Required | `Wrap | `Rows | `Cols ]	
+type	lib/html_types.mli	2123	c965552f4033b5d33c0bd92e387610173cf41b81ee3964ad0eee07f1861ec5c7		textarea_content		[ `PCDATA ]	
+type	lib/html_types.mli	2125	2f50f5df59a0fba0e40d6be8fd8db412ea7965feb830c68a2e10a47f84308cf1		textarea_content_fun		textarea_content	
+type	lib/html_types.mli	2128	edda2e9bbae4405d94744088b991c5fa816c2bcfbeb5711c8a6d8cc9775498a7		button		[ `Button ]	
+type	lib/html_types.mli	2130	f206fab414d5f94d4d2076bbe034856dd5fb6640e5c2164b456672892886a06e		button_content		[ phrasing_without_interactive ]	
+type	lib/html_types.mli	2132	89b7a48ddd88a0b26e26dc682533a6fab83a2062b9805fa11974c726808b2384		button_content_fun		[ phrasing_without_interactive ]	
+type	lib/html_types.mli	2134	2fc34c727148a89a60fb131386d06d17fceef76b8407f73e19133e5e477928b7		button_attrib		[ common | `Autofocus | `Disabled | `Form | `Formaction | `Formenctype | `Formmethod | `Method | `Formnovalidate | `Formtarget | `Name | `Text_Value | `Button_Type ]	
+type	lib/html_types.mli	2152	e1b3f01c77c2070c115e733a2e2d3f052283f6eba842aecdf3e5d9baa6927590		select		[ `Select ]	
+type	lib/html_types.mli	2154	aad34b3ecf03ed23e89713f34fcd10c0af5b31b28f56f98a57a74a2e640ed066		select_content		[ `Optgroup | `Option ]	
+type	lib/html_types.mli	2156	9eb9c1fdc7b1ad35d74b512cfd7058afaf9bab321c42fc77933da8fb0c0e0acc		select_content_fun		[ `Optgroup | `Option ]	
+type	lib/html_types.mli	2158	4cfdffab30403556e4b30e8aa2bc4fca4640ce2ee1b290e92cb037b463bfee41		select_attrib		[ common | `Autofocus | `Multiple | `Name | `Size | `Form | `Disabled | `Required ]	
+type	lib/html_types.mli	2163	f3a80d1b2bd1fb97d648d557176076caeb29ac3f885c0a5a3ee7c7c0fa830161		datalist		[ `Datalist ]	
+type	lib/html_types.mli	2165	a1757c92363941780be076dd40d7427b66537d469a76c31ce5fc362b70f1b796		datalist_content		notag	
+type	lib/html_types.mli	2167	3e2b670a9f695462c5763bf7e6585f50b9480961ffcfdf0dd535c315ae3c81e4		datalist_content_fun		notag	
+type	lib/html_types.mli	2169	0019814fa6d2132b0e2f9c14d49afb99e5908c89f00213a9cc86f04337a2816d		datalist_attrib		[ common ]	
+type	lib/html_types.mli	2172	1f06b5138388120673d932a6b957159f002355ab501404d1a3856c0c824b9770		optgroup		[ `Optgroup ]	
+type	lib/html_types.mli	2174	fc0afb1ab89d0f9fbe8cdabaf2df28b06e982721f5849c0ac43f21f302d26996		optgroup_content		[ `Option ]	
+type	lib/html_types.mli	2176	1a370bebb64a1afad52ad932802b5eee0c183b176f5947a0f071f4c1d73135e9		optgroup_content_fun		[ `Option ]	
+type	lib/html_types.mli	2178	92d92e47561d55d68912271f10ded28022c26302a8d4e31fb4cee3b3c37cb207		optgroup_attrib		[ common | `Disabled | `Label ]	
+type	lib/html_types.mli	2180	6bffc5c99a6369fbc5b248947d715235744f515c5c034fd760fbcfdfd78aae90		option_attrib		[ common | `Selected | `Text_Value | `Disabled | `Label | `Value ]	
+type	lib/html_types.mli	2183	9663c033dfbadd81dff06ef675ac9d264912191c71c776acaf1421ce979c2f5b		selectoption		[ `Option ]	
+type	lib/html_types.mli	2185	e787390bf39abd0d2b654809c21e64251960a38cb0b069389b0b8f0a133b7cc7		option_content_fun		[ `PCDATA ]	
+type	lib/html_types.mli	2187	1da19c6e4fd2c1e3d3cae211144a9cc582b3927c7a66bfe106f0afe4528a8b52		option_content		[ `PCDATA ]	
+type	lib/html_types.mli	2190	ef16007dedce8b5faeda23e85869afb10d32ea61e4db370624792d802c14afd6		keygen		[ `Keygen ]	
+type	lib/html_types.mli	2192	70b99fcd539f6401172c2b5247118606eb5b3ce043291a8548600f0ebff9f757		keygen_content		notag	
+type	lib/html_types.mli	2194	8f46c1507ec224ef7f6ac030827b0e7b57e83bf54f6ee53784ababafc529f2e0		keygen_content_fun		notag	
+type	lib/html_types.mli	2196	3f656285fcfe1de5089b1a045f3dc99ac116907e0101ce78348e81f68c96b06c		keygen_attrib		[ common | `Autofcus | `Challenge | `Disabled | `Form | `Keytype | `Name ]	
+type	lib/html_types.mli	2201	ed1d26eefa07077c68fb00991fbf749307872a95a59e5e00cb428050c2e72266		progress		[ `Progress ]	
+type	lib/html_types.mli	2203	8ed163377135696f41589715bb96835227556be41e448c7c6304075a53d837a5		progress_content		[ phrasing_without_progress ]	
+type	lib/html_types.mli	2205	108fe3a7b95fe9602397dc7c2be48cf9053dfe14023a5cee7ddcf3dea9e0377f		progress_content_fun		[ phrasing_without_progress ]	
+type	lib/html_types.mli	2207	3884a307297d32a5ead5241c10fea734cd84e95ce31f6644dd4bd29bcf5a719b		progress_attrib		[ common | `Float_Value | `Max | `Form ]	
+type	lib/html_types.mli	2210	8203453f602b82748ec18ce6b818c28de77e31babf043df22c4b7de44f895005		meter		[ `Meter ]	
+type	lib/html_types.mli	2212	0cea05f57c07bd68c290d1e1620e6c6f35edc701f2ddf0da03fe3c5a43cea2d4		meter_content		[ phrasing_without_meter ]	
+type	lib/html_types.mli	2214	e0310eeeb71833df72e37a975e3b68372e254a20262e1b4a819f047904d58f03		meter_content_fun		[ phrasing_without_meter ]	
+type	lib/html_types.mli	2216	4032245a4cffc2b648a7e3d4a2138043c4eca1c729fb194e0f063bad5465b76c		meter_attrib		[ common | `Float_Value | `Min | `Max | `Low | `High | `Optimum | `Form ]	
+type	lib/html_types.mli	2221	cc62b364b96da87f8f2d04b08547a95402be1e26b6c530c5544c6cae887df166		output_elt		[ `Output ]	
+type	lib/html_types.mli	2223	cfbbcf1302c585b5059a4bcea85a397a19925843d8b3f34742f2fd6df06ef01b		output_elt_content		[ phrasing ]	
+type	lib/html_types.mli	2225	90c62e0ced38ccf0592f34d1845b18c1c2ef57afb0ea6793e003dc5d554c7a6e		output_elt_content_fun		[ phrasing ]	
+type	lib/html_types.mli	2227	ef212db83d87c997538a76be509b13b062932e53be7e9acc9731a1b06c3418cf		output_elt_attrib		[ common | `Form | `Output_for | `Name ]	
+type	lib/html_types.mli	2230	887abeeae544872ca635a5407307df871998a709bed60a8f4be1f034d0beefd7		details		[ `Details ]	
+type	lib/html_types.mli	2232	cad69436b054f57a85b18de25990eb5fb7b1dd4beb1486eaefc1a753f7988eac		details_content		[ flow5 ]	
+type	lib/html_types.mli	2234	b43316deab67d0ddcb2a4af7480036bcd2ba7e11dd4c793261c38b5926cd92ba		details_content_fun		[ flow5 ]	
+type	lib/html_types.mli	2236	a4f07e1753d56b4e02389552e79e90fa9d6b9ba1b2e4001c5f4171229fe7bd7a		details_attrib		[ common | `Open ]	
+type	lib/html_types.mli	2239	5b653e706e387ae4349c6a9e7d66745e72c75f7571c01b231297e02ab26431e7		summary		[ `Summary ]	
+type	lib/html_types.mli	2241	b4c7b90569a6ab785f946871137763e1a20f06a4aa6fa73643a2dad94404bd00		summary_content		[ phrasing ]	
+type	lib/html_types.mli	2243	b0daaedfd0a470855ba2aa5696e426f6ae49ea54bdc877d9adf1d3d16149e370		summary_content_fun		[ phrasing ]	
+type	lib/html_types.mli	2245	25bcec6ccf913eebfcca43eef2d01b07e16445b4cf70fb839ec899f22ceaac11		summary_attrib		[ common ]	
+type	lib/html_types.mli	2248	1c5125f2aeb7f9d0a6e6fb4cab401e3e1e637c563c31e89e6ca0808f7a7059b6		command		[ `Command ]	
+type	lib/html_types.mli	2250	8d7e1bde725ab6b70309869f23b6f8314ebcc233591a0faabd2ec67472b87b89		command_content		notag	
+type	lib/html_types.mli	2252	16e2a00fbe40cc71960f5f1b35a931b801d3d4d114585c49727fd3ecdedac9e0		command_content_fun		notag	
+type	lib/html_types.mli	2254	6c4589169535ecfe3aa0a1093eda4c0802f044e840c668fd15b031447fd57354		command_attrib		[ common | `Icon | `Disabled | `Checked | `Radiogroup | `Command_Type ]	
+type	lib/html_types.mli	2259	8a2c47d0fe76bdacd3b65e25368c056141b5072cc935a417e66fcd4a2a778012		menu		[ `Menu ]	
+type	lib/html_types.mli	2261	8125b9da9901b7b8733d255b3e9e4c5179048392a22c8b7bd53aa3f8bb03e1cf		menu_content		notag	
+type	lib/html_types.mli	2263	1ee4aa99868a1cdbc4c1151dedfc2743635f2b0f75a26dfe2431a3a69974cfa6		menu_content_fun		notag	
+type	lib/html_types.mli	2265	ee3e0653485b3e50f1ebe86ecf4a118bed6dccec7d6706a5bab1d70fa2209215		menu_attrib		[ common | `Label | `Menu_Type ]	
+type	lib/html_types.mli	2268	7e5014d0b79efadee178bc2d5159ca9af2eff9faece2e7f63c24be17ee55ca4f		noscript		[ `Noscript of flow5_without_noscript ]	
+type	lib/html_types.mli	2270	d935d2308c2772b7089fc0154c8c7a4bbf2007d16b0a32c03f6a4c2ffb9217be		noscript_content		flow5_without_noscript	
+type	lib/html_types.mli	2272	46075d6601811c9df4d0ec8844116bc54add620e17b4302276b55774bb160391		noscript_content_fun		flow5_without_noscript	
+type	lib/html_types.mli	2274	f3a04577fb982e8aa01466632c1273db2ff8968b6e23ce5e4be2a4501dd0d302		noscript_attrib		[ common ]	
+type	lib/html_types.mli	2277	f2a24473e38d6b166b246eaf0c6a7e66fe9792b658576dbb8c61e4db05c20e26		meta		[ `Meta ]	
+type	lib/html_types.mli	2279	31a846c252f9ae7ca70870d5fe141cc4d34a065f4fec093cb1efab978164a3ea		meta_content		notag	
+type	lib/html_types.mli	2281	1a5ceae9ef1edbfe7ea58d15d47ba40ec5a709eb812be24adea9a1857b8ac464		meta_content_fun		notag	
+type	lib/html_types.mli	2283	a1ade417fcd6782c62754e0382e8e0f9da25023dc92db46237b77337fe2baa2a		meta_attrib		[ common | `Http_equiv | `Name | `Content | `Charset | `Property ]	
+type	lib/html_types.mli	2286	07bf0bce918cc4820fd5bd9224a51b90023dd413e8aea300fbe12436618dc324		style		[ `Style ]	
+type	lib/html_types.mli	2288	36d53c8d1dd195412e1169eb09f8fb555be1aee903834b1caee13138e97f2c94		style_content		[ `PCDATA ]	
+type	lib/html_types.mli	2290	8cd4e62a1bb9657cc337bfc49e8aabbaa114efc98aa7c569d5469e412346e184		style_content_fun		[ `PCDATA ]	
+type	lib/html_types.mli	2292	cedf7618aeac428dff3febc8bec00eb3372be7c64f09a7a3d001de38380eedd4		style_attrib		[ common | `Media | `Mime_type | `Scoped ]	
+type	lib/html_types.mli	2294	55be0037b9a2ac3b25a5ff615b65ea88beb55d96f0d48c9a216cf0347fa6aa20		script		[ `Script ]	
+type	lib/html_types.mli	2296	3dad4381644eccb66ec28a686d8090981bbb936eaf4c82f3b31c9a3001288414		script_attrib		[ common | subressource_integrity | `Async | `Charset | `Src | `Defer | `Script_type ]	
+type	lib/html_types.mli	2301	10387101ee64786c89b9fd5e3ff1e42a2eba96402e5e9a01977031850c110229		script_content		[ `PCDATA ]	
+type	lib/html_types.mli	2303	290cb1268f2a5bdff02ae3ec1cffb8aead9bcefa520b0814fcf7c7e102c50563		script_content_fun		[ `PCDATA ]	
+type	lib/html_types.mli	2306	f811e991d8365637439bff4874ff8785c0e071286c3e848ae02aa92ca10bb747		template		[ `Template ]	
+type	lib/html_types.mli	2308	6c0fca09944bb2379af567e613fc4394db2e8598c5d3ef3ca900f344cc3cc3cc		template_attrib		[ common ]	
+type	lib/html_types.mli	2310	3247f1614c7c7479b19ef51c744c0fab5da5e597c050a8b950b04ceed13362b6		template_content		[ flow5 ]	
+type	lib/html_types.mli	2312	b8b475ce6b49ccc14fd8da7e4ebf5bfaccf8a3c3a89cc80b93852309ddbd26b1		template_content_fun		[ flow5 ]	
+type	lib/html_types.mli	2315	8e305626be8c18d79d997a7491f36ac17a9fcabd6cd9516d02c152b3590b78a3		link		[ `Link ]	
+type	lib/html_types.mli	2317	dd307280f3936194d9628323897c80f8bf4622450162ce35d91c6e1ffbf358cb		link_content		notag	
+type	lib/html_types.mli	2319	5c5ee8626f9406beeb859e74160aba10a483f189f17db34c289e4f8949044ab7		link_content_fun		notag	
+type	lib/html_types.mli	2321	3bb36c73c0854832c6b6f914fc96a8a1c09052d4b8410b1ae4679240c1b49e8b		link_attrib		[ common | subressource_integrity | `Hreflang | `Media | `Rel | `Href | `Sizes | `Mime_type ]	
+type	lib/html_types.mli	2326	d531ff72aeffb1e8dd8efa4d71a698a4b5e3591da8e52a6671fa5ab62db558ad		picture		[ `Picture ]	
+type	lib/html_types.mli	2327	3e1d25e164423dad2d6ee87cbc34175008cb5f3ef7fc236a5b321deb4feb0599		picture_content		[ source | script | template ]	
+type	lib/html_types.mli	2328	810e2e878f10b1fcc84f1b28c68819c4351b1f9b639781c4b4eb073c1de23080		picture_content_fun		[ source | script | template ]	
+type	lib/html_types.mli	2329	86291598d9414a3a51b33c64edd303a999f995ec7ddbd9d7c74e40c74cdef50f		picture_attrib		[ common ]	
+type	lib/html_types.mli	2331	44d4e2fa2f68ce556f11753bd5a9401a564fd308cc6ea1fee08419a8ef812ca3		referrerpolicy		[ `Empty | `No_referrer | `No_referrer_when_downgrade | `Origin | `Origin_when_cross_origin | `Same_origin | `Strict_origin | `Strict_origin_when_cross_origin | `Unsafe_url ]	
+type	lib/html_types.mli	2343	4fa53fc1eaec73d0a6c54b166d58daad4c7d5273b5e2d7724efcffc8309dcf9a		big_variant		[ `W3_org_1999_xhtml | `Default | `Preserve | `Selected | `Get | `Post | `Checked | `Disabled | `ReadOnly | `Async | `Autofocus | `Autoplay | `Muted | `Anonymous | `Use_credentials | `Controls | `Ltr | `Rtl | `Formnovalidate | `Hidden | `Ismap | `Loop | `Novalidate | `Open | `Audio | `Metadata | `None | `Pubdate | `Required | `Reversed | `Scoped | `Seamless | `Hard | `Soft | `Multiple | `Checkbox | `Command | `Radio | `Context | `Toolbar | `Char | `Justify | `Left | `Right | `Col | `Colgroup | `Row | `Rowgroup | `All | `Cols | `Groups | `None | `Rows | `Rect | `Circle | `Poly | `Default | `One | `Zero | `Auto | `No | `Yes | `Defer | `Verbatim | `Latin | `Latin_name | `Latin_prose | `Full_width_latin | `Kana | `Katakana | `Numeric | `Tel | `Email | `Url | `Text | `Decimal | `Search ]	
+type	lib/html_types.mli	2423	e7255fa8428c56855ccb20f0219f97970019a7779a507c40f2e68928a9a7633f		sandbox_token		[ `Allow_forms | `Allow_pointer_lock | `Allow_popups | `Allow_top_navigation | `Allow_same_origin | `Allow_script ]	
+type	lib/html_types.mli	2432	a5b9a4f17dac2a07bcc51e6491ee3bebbd50b8ed89dde7c56e0acfa01638dc35		input_type		[ `Button | `Checkbox | `Color | `Date | `Datetime | `Datetime_local | `Email | `File | `Hidden | `Image | `Month | `Number | `Password | `Radio | `Range | `Reset | `Search | `Submit | `Tel | `Text | `Time | `Url | `Week ]	
+type	lib/html_types.mli	2457	4e847e9ecd931b45a4fbaca5086da75409b2f6c218fb6458924ffef29d7a9e11		script_type		[ `Javascript | `Module | `Mime of string ]	
+type	lib/html_types.mli	2459	76f49445ffe8752137896d348bd8890057697062fce6a4cb0e996a9f89523d09		autocomplete_option		[ `On | `Off | `Tokens of string list ]	
+type	lib/html_sigs.mli	50	f038d570ee46f2794e10dc127c5028a4c75cd599ea9a34b297abf4c071f32da6	T	elt	+'a	<abstract>	
+type	lib/html_sigs.mli	53	bf7421a37c294625054786faf991230a5c6217c2f7ae5fe9e3c0be44c09d751b	T	doc		html elt	
+type	lib/html_sigs.mli	79	8ec7343f528f86513264e070cac7f67926e5f4ba521690085d7ab4065d0893b6	T	attrib	+'a	<abstract>	
+type	lib/html_sigs.mli	100	8ee4978802b0dff85e9aa09b2a6a370020073b7586f3ad2b407aaea128725cfb	T	wrap	'a	'a Xml.W.t	
+type	lib/html_sigs.mli	107	9d2d1f3d8f82963ab329638441e73bb58bfa6202556cccfed0bb62016914a06c	T	list_wrap	'a	'a Xml.W.tlist	
+type	lib/html_sigs.mli	110	bc3070a93bceda85cfd46491ff2a056760dd0db00664ab87c5944a3acf09c11c	T	nullary	('a, 'b)	?a:'a attrib list -> unit -> 'b elt	
+type	lib/html_sigs.mli	113	258d3cc311e39cfcec7e8669c97dcdfc1bbf21811a355a8a5aa846df1f3c3082	T	unary	('a, 'b, 'c)	?a:'a attrib list -> 'b elt wrap -> 'c elt	
+type	lib/html_sigs.mli	116	1ee8f7df913f4c23b801bdde972f973a7f1d3fd1929204adce3d5a8543cc9adb	T	star	('a, 'b, 'c)	?a:'a attrib list -> 'b elt list_wrap -> 'c elt	
+type	lib/html_sigs.mli	127	a6ea21f71932094a41c1f636f16ad84f33db06e3c043a3d460d966e90cdbb1ec	T	uri		Xml.uri	
+val	lib/html_sigs.mli	128	c253191c2f0e9013d2c6c14518c4b9d179c1fa4efa995aa87fce7f125a80d2f5	T	string_of_uri		(uri, string) Xml.W.ft	
+val	lib/html_sigs.mli	129	c3f111936de65d48d480981a243e588f639ecda198a27fb13d6a4123d66492b1	T	uri_of_string		(string, uri) Xml.W.ft	
+val	lib/html_sigs.mli	133	af2df2c620ae89a731787b732800015a060be7498b55cd705ff5ad33aeab4049	T	a_class		nmtokens wrap -> [> `Class ] attrib	
+val	lib/html_sigs.mli	138	991c1f91585e41a8ee916b97ea7c2948eb618c9f808a720de0bb68a0d9242986	T	a_user_data		nmtoken -> text wrap -> [> `User_data ] attrib	
+val	lib/html_sigs.mli	147	cd95723a08a78285071bace676ecc21b4df5d67758e676169ac62178b3893d56	T	a_id		text wrap -> [> `Id ] attrib	
+val	lib/html_sigs.mli	151	2f61c1a39b45237c5aa67244177830a9e4f8cd119a1e55598057e8f1f1d15d63	T	a_title		text wrap -> [> `Title ] attrib	
+val	lib/html_sigs.mli	167	7537c05751d4769165333d5f38447fa239ab5fb7dbb9ecfae02fe73506b2c08d	T	a_xml_lang		languagecode wrap -> [> `XML_lang ] attrib	
+val	lib/html_sigs.mli	169	e0c23ba7f6bd5467578f5fb0efb6b19a0d849b2dd00cbd2192f8484fc858a3e7	T	a_lang		languagecode wrap -> [> `Lang ] attrib	
+val	lib/html_sigs.mli	175	cbdf73cf9c6ba7feb43dc5732eb009e46558181930da235b42dd5acf7f524edc	T	a_onabort		Xml.event_handler -> [> `OnAbort ] attrib	
+val	lib/html_sigs.mli	176	3c2178b984387f814aedc341cae6dfb4b5f7859b42a8d2137766a06eb875b3ae	T	a_onafterprint		Xml.event_handler -> [> `OnAfterPrint ] attrib	
+val	lib/html_sigs.mli	177	0676fbcf5d2d63a8af9f964a6831b3c7c35fce46400cad778f51705cf2d43d1b	T	a_onbeforeprint		Xml.event_handler -> [> `OnBeforePrint ] attrib	
+val	lib/html_sigs.mli	178	f29bfee872bdcb4f971643ffe5c195f67a9b3878ab12e75ff336f1725a8e257e	T	a_onbeforeunload		Xml.event_handler -> [> `OnBeforeUnload ] attrib	
+val	lib/html_sigs.mli	179	a392b7fc7453431f19c266cd77dcad2f8942900bbb4402b9b36262bca6e0ab8f	T	a_onblur		Xml.event_handler -> [> `OnBlur ] attrib	
+val	lib/html_sigs.mli	180	5ea11145382629bda73cb5bf3a03304fa2f70bb77249b10d7a56329aa66812ea	T	a_oncanplay		Xml.event_handler -> [> `OnCanPlay ] attrib	
+val	lib/html_sigs.mli	181	3d90122dcacff9f875894942658d74ff46d6702d738e1ab19d9dbaa85e7a3a81	T	a_oncanplaythrough		Xml.event_handler -> [> `OnCanPlayThrough ] attrib	
+val	lib/html_sigs.mli	182	ffcdcc031907e78595e2ee7d3d26f7f7a6fb50679d12052883086095a0a3c1fa	T	a_onchange		Xml.event_handler -> [> `OnChange ] attrib	
+val	lib/html_sigs.mli	183	f8523fc55ad64fc9267db30a2f304dc0fec3d12b8084dd53a8237956d6cc07f4	T	a_onclose		Xml.event_handler -> [> `OnClose ] attrib	
+val	lib/html_sigs.mli	184	9d4ab9cd5a57e9135cef156a238525584e0c3248722a0212c85e98822de456fa	T	a_ondurationchange		Xml.event_handler -> [> `OnDurationChange ] attrib	
+val	lib/html_sigs.mli	185	b8b5a1c07e44c068a5cc2dc9431d8b468c3b57301e9a3fc8a1a99f8e56123726	T	a_onemptied		Xml.event_handler -> [> `OnEmptied ] attrib	
+val	lib/html_sigs.mli	186	2cfacc596acad9e2a568bc8e42a9ab73e198015d71ab8455c1da075033daab13	T	a_onended		Xml.event_handler -> [> `OnEnded ] attrib	
+val	lib/html_sigs.mli	187	244ae8c333f50dceef3d8574e0366609c20750523ec08e85b46ad4d51d1883bf	T	a_onerror		Xml.event_handler -> [> `OnError ] attrib	
+val	lib/html_sigs.mli	188	297bd84de1d1ac1ab8b8f1044744a452ca52a94fc938aa129bd643d6ec77bdcc	T	a_onfocus		Xml.event_handler -> [> `OnFocus ] attrib	
+val	lib/html_sigs.mli	189	0c3fe30802fc56ef36c8e08e97e36b4cf98a7fcc18824cb128ab9205341d2e80	T	a_onformchange		Xml.event_handler -> [> `OnFormChange ] attrib	
+val	lib/html_sigs.mli	190	bb016026480ce48a93f5db43bf6d47a28ac1b9b6441bd9ea8e38e205a9d927d5	T	a_onforminput		Xml.event_handler -> [> `OnFormInput ] attrib	
+val	lib/html_sigs.mli	191	61035f302d782f39d998f6b9000bfb1ab6751c80a3d071a8cd2d182b7c74e9c8	T	a_onhashchange		Xml.event_handler -> [> `OnHashChange ] attrib	
+val	lib/html_sigs.mli	192	d34c91a2403e684894c22cb2dc704381e9fa0858ae967ad7baf6d26b1a62d910	T	a_oninput		Xml.event_handler -> [> `OnInput ] attrib	
+val	lib/html_sigs.mli	193	50e8951d372b7c6510ad15a734bc78cd6414783860e92fa5f0f49b2ee6269931	T	a_oninvalid		Xml.event_handler -> [> `OnInvalid ] attrib	
+val	lib/html_sigs.mli	194	02870954bb57363a9351a4b0356152f864e78732f026df5a9de4ce974a9f1f82	T	a_onmousewheel		Xml.event_handler -> [> `OnMouseWheel ] attrib	
+val	lib/html_sigs.mli	195	aba72af04c5a9ab4aee3ed7720c5e692f57be66bbcf64fdba877d140f81f090d	T	a_onoffline		Xml.event_handler -> [> `OnOffLine ] attrib	
+val	lib/html_sigs.mli	196	88bcdedff1e5d875e032311342a956f98b48ff08caebf6bd43c2db41e092e581	T	a_ononline		Xml.event_handler -> [> `OnOnLine ] attrib	
+val	lib/html_sigs.mli	197	ebd0ae899f659d42bbdd8a8d2deccff658e15cd21673fbae41904d9998f9302f	T	a_onpause		Xml.event_handler -> [> `OnPause ] attrib	
+val	lib/html_sigs.mli	198	b7494546f684350ad09bdd287913bbcc9353b57ebbe8d8f9ec9d234fc2d5245c	T	a_onplay		Xml.event_handler -> [> `OnPlay ] attrib	
+val	lib/html_sigs.mli	199	b64054cff15cc0ac79dd9c69deac654390597c0db462caf79692d000b67387b3	T	a_onplaying		Xml.event_handler -> [> `OnPlaying ] attrib	
+val	lib/html_sigs.mli	200	78635878012ff31b59b7c2b024b4e33305298f4139129af50aa840e04a6b3a6c	T	a_onpagehide		Xml.event_handler -> [> `OnPageHide ] attrib	
+val	lib/html_sigs.mli	201	ab3b49a88e2131b41cd78acb83c7035dbd06cae082f3d0268d457f999bc18292	T	a_onpageshow		Xml.event_handler -> [> `OnPageShow ] attrib	
+val	lib/html_sigs.mli	202	538a64195ef96d36d578b2cc78105156ddc8a5110b5def6d86b0791ef1121396	T	a_onpopstate		Xml.event_handler -> [> `OnPopState ] attrib	
+val	lib/html_sigs.mli	203	87d0ac81eea31ff3db34b7cde37f2aa1e51f3606636f9552cd7a451f5dbc6867	T	a_onprogress		Xml.event_handler -> [> `OnProgress ] attrib	
+val	lib/html_sigs.mli	204	225288f59ac5a9888a99a00cb9be4cbf3ee3b66a6ad79c8036d71c7fa69b6e43	T	a_onratechange		Xml.event_handler -> [> `OnRateChange ] attrib	
+val	lib/html_sigs.mli	205	854c88f0a0a18cedb684f13d383005344fd8c0550d083146ab158d11ea64bd6c	T	a_onreadystatechange		Xml.event_handler -> [> `OnReadyStateChange ] attrib	
+val	lib/html_sigs.mli	206	71a926bf77a51390d17e6298fe64daeee8f36ebc07136ea20e98e4d71dfca802	T	a_onredo		Xml.event_handler -> [> `OnRedo ] attrib	
+val	lib/html_sigs.mli	207	02b3871da7e537387bd127bced4f9b6d4789d52d6308d4679f2a03e020bf1f31	T	a_onresize		Xml.event_handler -> [> `OnResize ] attrib	
+val	lib/html_sigs.mli	208	100cdba031246d002db407cf308209727914394fe9e2b3a3b09465465337991b	T	a_onscroll		Xml.event_handler -> [> `OnScroll ] attrib	
+val	lib/html_sigs.mli	209	45acc3d69ceee244341dcf726f201bb9edff615e034a89510fd732ee3b5ced16	T	a_onseeked		Xml.event_handler -> [> `OnSeeked ] attrib	
+val	lib/html_sigs.mli	210	7ecd4e0d839cfeecc37da4b7fea6d91f9a108f6c47837ae44ac1075d5731e791	T	a_onseeking		Xml.event_handler -> [> `OnSeeking ] attrib	
+val	lib/html_sigs.mli	211	fefeb0040d783d1ed0ffb34d43931950181b84ff9f9499e8573520291be0187b	T	a_onselect		Xml.event_handler -> [> `OnSelect ] attrib	
+val	lib/html_sigs.mli	212	da136cbf74b08f20f955eb2c710a8dc18a737e50d367b6939bdfcd87017e0f00	T	a_onshow		Xml.event_handler -> [> `OnShow ] attrib	
+val	lib/html_sigs.mli	213	2a2d25d1f09dd03685f90fce7c398bbbe54471652ab523bdc99792c08beeb299	T	a_onstalled		Xml.event_handler -> [> `OnStalled ] attrib	
+val	lib/html_sigs.mli	214	e3c1db7ea94abdf5c1a8a557ca72d4ee9de26deb81c3ffb94af13a8a329b0340	T	a_onstorage		Xml.event_handler -> [> `OnStorage ] attrib	
+val	lib/html_sigs.mli	215	6edb8cac206da5eecbbf1c75b2798920024841d0b92beef182a8fcbee8c373ed	T	a_onsubmit		Xml.event_handler -> [> `OnSubmit ] attrib	
+val	lib/html_sigs.mli	216	a4ce57324012221a141087436571abaadaa038f3bf9777b2335846c74b806934	T	a_onsuspend		Xml.event_handler -> [> `OnSuspend ] attrib	
+val	lib/html_sigs.mli	217	4f23e2ef3d838395cc1006ab5af349fd3e3816401dca01cfad42ef15d2065e88	T	a_ontimeupdate		Xml.event_handler -> [> `OnTimeUpdate ] attrib	
+val	lib/html_sigs.mli	218	bbef5dc795272d13d52a2b4951826beb39ee01c4a395c07875379ebb51dcbbc2	T	a_onundo		Xml.event_handler -> [> `OnUndo ] attrib	
+val	lib/html_sigs.mli	219	2855f51d150a707405e3997f762d1a9662c77d3fb1b8590dd6258f1fdc07079e	T	a_onunload		Xml.event_handler -> [> `OnUnload ] attrib	
+val	lib/html_sigs.mli	220	e00385e84602c6d9c6506136eaa5f90ff0c9b5c761caef25b1dfb871c0050cf3	T	a_onvolumechange		Xml.event_handler -> [> `OnVolumeChange ] attrib	
+val	lib/html_sigs.mli	221	051a67135ffd69f5282e3b4e1befed8d46ac619d9c4a417f6a0d12104a7eda7d	T	a_onwaiting		Xml.event_handler -> [> `OnWaiting ] attrib	
+val	lib/html_sigs.mli	222	30bbd978e7e8cb03f8cd44cce10149ea679f8046ffa8ceafb82b919b47d1cb3e	T	a_onload		Xml.event_handler -> [> `OnLoad ] attrib	
+val	lib/html_sigs.mli	223	27e15188c9f8d00c87cf8bdcafafb3ca99241a94ef28a1211f781409cd4e2732	T	a_onloadeddata		Xml.event_handler -> [> `OnLoadedData ] attrib	
+val	lib/html_sigs.mli	224	dd1716eeb8ee69cfe4ac79f77522480270e4f63436e654c2fd34cb0b6854d1af	T	a_onloadedmetadata		Xml.event_handler -> [> `OnLoadedMetaData ] attrib	
+val	lib/html_sigs.mli	225	8f25dbc0c0604ef619740f45dd46171c49b77cc1ab261e61cdc39454b72623f2	T	a_onloadstart		Xml.event_handler -> [> `OnLoadStart ] attrib	
+val	lib/html_sigs.mli	226	6c4c3cbc081c11f09deefea62f6871f0ba5904b035a239f8312cda94906d4494	T	a_onmessage		Xml.event_handler -> [> `OnMessage ] attrib	
+val	lib/html_sigs.mli	230	504395e5ee79c3bdad3bf0ad27be0b143b8075ac066f964b0421fdc3f01bf246	T	a_onclick		Xml.mouse_event_handler -> [> `OnClick ] attrib	
+val	lib/html_sigs.mli	231	0b9189a5942bb619c067f7a03a5f618cf095c834515a67d0a9f565487a49cd54	T	a_oncontextmenu		Xml.mouse_event_handler -> [> `OnContextMenu ] attrib	
+val	lib/html_sigs.mli	232	5f4cdba66f87b3950ae098d88cdeb6605d071b93219df1f9ed473f7243fe9459	T	a_ondblclick		Xml.mouse_event_handler -> [> `OnDblClick ] attrib	
+val	lib/html_sigs.mli	233	eabf1170395fc581afa04e038affeaccbfeb2fca2c45356786e670496f1247a7	T	a_ondrag		Xml.mouse_event_handler -> [> `OnDrag ] attrib	
+val	lib/html_sigs.mli	234	9cc72187dcac2db5c7a78d14387ab95382907f122d7f5a955ebcf3d69164f742	T	a_ondragend		Xml.mouse_event_handler -> [> `OnDragEnd ] attrib	
+val	lib/html_sigs.mli	235	625c9ff286a0211827b1be4a1d9bc3c6b2b743e45d1ae9e7613d91b6fffde221	T	a_ondragenter		Xml.mouse_event_handler -> [> `OnDragEnter ] attrib	
+val	lib/html_sigs.mli	236	4e1cc5c457b1d40bb15f1719619ca7baaff80c173cd1b507b77991d5d7804204	T	a_ondragleave		Xml.mouse_event_handler -> [> `OnDragLeave ] attrib	
+val	lib/html_sigs.mli	237	169798a2d96b2cc83331fa374859416cf5e8af434280b0d64abf17acb3fb2e24	T	a_ondragover		Xml.mouse_event_handler -> [> `OnDragOver ] attrib	
+val	lib/html_sigs.mli	238	3c774fbae47cca329c3e3045c7a69ea773cd7793990264a2026142ce096f29ce	T	a_ondragstart		Xml.mouse_event_handler -> [> `OnDragStart ] attrib	
+val	lib/html_sigs.mli	239	7078fc5a45140646b122cb9ceded0377b54ff2531d5d798d2d8c947f90c92c0b	T	a_ondrop		Xml.mouse_event_handler -> [> `OnDrop ] attrib	
+val	lib/html_sigs.mli	240	a179cc20627f97793f6a3239a70c92ea0fe8df87b9be2a96ad5ad97a0d69f300	T	a_onmousedown		Xml.mouse_event_handler -> [> `OnMouseDown ] attrib	
+val	lib/html_sigs.mli	241	90965547a91336ae2e69ccad04828413bf983dfba35b25abab9c98fa173ee8ef	T	a_onmouseup		Xml.mouse_event_handler -> [> `OnMouseUp ] attrib	
+val	lib/html_sigs.mli	242	310fc48ac67d5a8a883da945a40f85b932fd6252606ec1b2be0154feed19110b	T	a_onmouseover		Xml.mouse_event_handler -> [> `OnMouseOver ] attrib	
+val	lib/html_sigs.mli	243	e272d800e691450f1e7cb2e5b5b1b71b81c48e02ec3af47437f7cc4bddb68638	T	a_onmousemove		Xml.mouse_event_handler -> [> `OnMouseMove ] attrib	
+val	lib/html_sigs.mli	244	777b7b951813d0fecaead22d656282fe92df87e57541491eec4d12b5bf19991f	T	a_onmouseout		Xml.mouse_event_handler -> [> `OnMouseOut ] attrib	
+val	lib/html_sigs.mli	247	54ea63db49cac4b201354d78cca6dab120c8fc8f1d689eecf40f39f2a25d17be	T	a_ontouchstart		Xml.touch_event_handler -> [> `OnTouchStart ] attrib	
+val	lib/html_sigs.mli	248	8e62fa5a95c2c37c36062796865a66cdf456fbad278e9be7558d44990751ba56	T	a_ontouchend		Xml.touch_event_handler -> [> `OnTouchEnd ] attrib	
+val	lib/html_sigs.mli	249	f0b51ba664e0fe60ff8eb659853e5f956152d5e4ff8bae4809261825166cf7b1	T	a_ontouchmove		Xml.touch_event_handler -> [> `OnTouchMove ] attrib	
+val	lib/html_sigs.mli	250	5037bfe52b84dd3e061dfdf6e6b8271481d9e9fff13efdf2e6a405d89019c5ee	T	a_ontouchcancel		Xml.touch_event_handler -> [> `OnTouchCancel ] attrib	
+val	lib/html_sigs.mli	254	9d9e9dc66ca8d37eda1b2d140b6dd41cfd6e93620e284761185df95f769e8d7d	T	a_onkeypress		Xml.keyboard_event_handler -> [> `OnKeyPress ] attrib	
+val	lib/html_sigs.mli	255	ae2c9f39caf9231f136bf8b85c14c9f9ec21b9cd0d66e8325265a93215b81e6f	T	a_onkeydown		Xml.keyboard_event_handler -> [> `OnKeyDown ] attrib	
+val	lib/html_sigs.mli	256	5a5a914d358c5745b64bc3cea7b158d8f5dc0264f049c3621981a5fdc45937b1	T	a_onkeyup		Xml.keyboard_event_handler -> [> `OnKeyUp ] attrib	
+val	lib/html_sigs.mli	260	c3e3d21f4e810471f08d63daae539a6812a923aff73ac8b60d3c3c28a35eeb29	T	a_allowfullscreen		unit -> [> `Allowfullscreen ] attrib	
+val	lib/html_sigs.mli	262	bb24b03c1c1f873467eeb9303555cbaf1ac89f3ea598a09ca76823bc874fa48f	T	a_allowpaymentrequest		unit -> [> `Allowpaymentrequest ] attrib	
+val	lib/html_sigs.mli	264	038f51530ef62b4a74c8e36de8518354ff221373d6e0aae397777d9f4a6e86ce	T	a_autocomplete		autocomplete_option wrap -> [> `Autocomplete ] attrib	
+val	lib/html_sigs.mli	267	7e87145cd7a11e063593b7a5ef1c1364fb62b88f443a658c5cad814e78ad9672	T	a_async		unit -> [> `Async ] attrib	
+val	lib/html_sigs.mli	269	677d0968bdefb252c56de6ff27a9a9dfba41ecc4ada841dbcbcfe939a3492569	T	a_autofocus		unit -> [> `Autofocus ] attrib	
+val	lib/html_sigs.mli	271	f7f6bf230ca3c286b4000b713d5209a47b393da3357b7bc05866c77154831d4e	T	a_autoplay		unit -> [> `Autoplay ] attrib	
+val	lib/html_sigs.mli	273	bc2c03fc5cd14431946158e76644de78e63789aa6cb5be8975fe9c0c0f141860	T	a_muted		unit -> [> `Muted ] attrib	
+val	lib/html_sigs.mli	275	8d5b5901550e4f01742e25ba334caad2c0d6afcd042fcf439c6982540d5d73e9	T	a_crossorigin		[< `Anonymous | `Use_credentials ] wrap -> [> `Crossorigin ] attrib	
+val	lib/html_sigs.mli	278	eca3eba4f19307de7dff8fa659dc45375c845102e527f63648c214b9127bfa46	T	a_integrity		string wrap -> [> `Integrity ] attrib	
+val	lib/html_sigs.mli	281	b80fca699c930296a6f0b64c4cfe6c341e267fd565169c3678cec4b69d02b755	T	a_mediagroup		string wrap -> [> `Mediagroup ] attrib	
+val	lib/html_sigs.mli	283	6d8f2afe2251c61cd87608d570b39dfc2cb2229dd97cf66333b20099a153fb6c	T	a_challenge		text wrap -> [> `Challenge ] attrib	
+val	lib/html_sigs.mli	285	29c754091b6b6355ff4b68d775baf7d1fc1f3ab594e839290b1482038f79f4e8	T	a_contenteditable		bool wrap -> [> `Contenteditable ] attrib	
+val	lib/html_sigs.mli	287	e8cfc9d62eefd48968ca89ce9d2ace2bab8cebab1d8d2c6a024ad41f1f77a615	T	a_contextmenu		idref wrap -> [> `Contextmenu ] attrib	
+val	lib/html_sigs.mli	289	4a23981a540af299c860994927110277581a9b51fb4973006a7c0baf0b4dfc5b	T	a_controls		unit -> [> `Controls ] attrib	
+val	lib/html_sigs.mli	291	568a21765567e10a89c20ff678cdd950380df2495c66d5db40a0f5fba5d227b9	T	a_dir		[< `Rtl | `Ltr ] wrap -> [> `Dir ] attrib	
+val	lib/html_sigs.mli	293	07bc31e9ee0c9726b83474355fbc858efe9ede9291c9e68904dcf6e38a156bce	T	a_draggable		bool wrap -> [> `Draggable ] attrib	
+val	lib/html_sigs.mli	295	b5bdef1ed07d985202913515a2fa396b13ff807d42790960188a41a26c1afed1	T	a_form		idref wrap -> [> `Form ] attrib	
+val	lib/html_sigs.mli	297	4b64d4f41e3d290dc821373e4874ae84a6a239b304969016d0cc7c88498a5ce6	T	a_formaction		Xml.uri wrap -> [> `Formaction ] attrib	
+val	lib/html_sigs.mli	299	d7ab9a78ac92c2f81d24df615ec5973695e31735a0bca2818bfe3aca47ece2b6	T	a_formenctype		contenttype wrap -> [> `Formenctype ] attrib	
+val	lib/html_sigs.mli	301	db6474625c8e6666f6304a2aae226ea15429a92271c9feecca4f630a0da1df71	T	a_formnovalidate		unit -> [> `Formnovalidate ] attrib	
+val	lib/html_sigs.mli	303	85a23c0521fb43c759223cae9d3defb144b565c3b9b5a781a8b598e0c9d8e5bd	T	a_formtarget		text wrap -> [> `Formtarget ] attrib	
+val	lib/html_sigs.mli	305	da5656c761043d9732c881cc8735e11a225c93da0707a0da23b2a8ecf9b2b628	T	a_hidden		unit -> [> `Hidden ] attrib	
+val	lib/html_sigs.mli	307	9590d32b0bed6a2ed42333bf7ea616bf4dc27bd97986ff93e403b0beda7106f5	T	a_high		float_number wrap -> [> `High ] attrib	
+val	lib/html_sigs.mli	309	761d3e3e31b580fa4cba511890ae05b00dc8c02ae5b21d1cab3fa4e7c433274d	T	a_icon		Xml.uri wrap -> [> `Icon ] attrib	
+val	lib/html_sigs.mli	311	887634578c0d806ca3c319108056c6339bd504cbd93c6a06015a7c288a87bc88	T	a_ismap		unit -> [> `Ismap ] attrib	
+val	lib/html_sigs.mli	313	233ec3fe5199a2c9dcbf19cd4da7aaa74264a5363a4656b73b1af0e4c1d99372	T	a_keytype		text wrap -> [> `Keytype ] attrib	
+val	lib/html_sigs.mli	315	c5749383bc7b9aad4ccf73a3b3ba245a2a95f7a678d918ca5d0797c3aed69715	T	a_list		idref wrap -> [> `List ] attrib	
+val	lib/html_sigs.mli	317	509cd7fd1b2201ab2630f806a99e5af7f5ce8e9fe6d23248ff55fd04208865b3	T	a_loop		unit -> [> `Loop ] attrib	
+val	lib/html_sigs.mli	319	43518ba08dfd933bbc53d5ab0819eced5cd3208014d58e23465d9054bb4faa05	T	a_low		float_number wrap -> [> `High ] attrib	
+val	lib/html_sigs.mli	321	09fea1c27defe318aae0411e0bb0662df581d5a4a156b8a0563f2a901fabaa2f	T	a_max		float_number wrap -> [> `Max ] attrib	
+val	lib/html_sigs.mli	323	ce6e8d56a0de6dbd1576199e94633b18013e57c7d516f58e022d6b3c8b817a0c	T	a_input_max		number_or_datetime wrap -> [> `Input_Max ] attrib	reflect.attribute "max" [ "input" ]
+val	lib/html_sigs.mli	326	de90e42b6ce4ae2826a59b8f5a36513e2078980625ae620f0322fdf5b9775145	T	a_min		float_number wrap -> [> `Min ] attrib	
+val	lib/html_sigs.mli	328	4779c0befd56fa6c309dfffe62bb2e7da1324d31a5e419719d984a62b22c1c4f	T	a_input_min		number_or_datetime wrap -> [> `Input_Min ] attrib	reflect.attribute "min" [ "input" ]
+val	lib/html_sigs.mli	331	e75f62057810d7e7ddaabc90f68decacc1c7e84ca9f0f2e1c71916245b55b24f	T	a_inputmode		[< `None | `Text | `Decimal | `Numeric | `Tel | `Search | `Email | `Url ] wrap -> [> `Inputmode ] attrib	
+val	lib/html_sigs.mli	336	cfe82d10e9bf9a9fbebdfb8dde2bfeb5650edbecd53db8e955235b2418d4d185	T	a_novalidate		unit -> [> `Novalidate ] attrib	
+val	lib/html_sigs.mli	338	1cb0d081481727e44c1b957559a84e3437f2cfe214c8250a065f1c9fc0971817	T	a_open		unit -> [> `Open ] attrib	
+val	lib/html_sigs.mli	340	6ed449636c40d64d5dc1e8ce000ce0338af78d1dec1acdb85279de04c22b977b	T	a_optimum		float_number wrap -> [> `Optimum ] attrib	
+val	lib/html_sigs.mli	342	5955443d27045e1663c08e8a20fdd07d405dc9705f0b7fb71a4ef9433233efc3	T	a_pattern		text wrap -> [> `Pattern ] attrib	
+val	lib/html_sigs.mli	344	c16cb73e9313df8a6505e66c12c5bc3e2da8af4820404821704c03f238a7a6b2	T	a_placeholder		text wrap -> [> `Placeholder ] attrib	
+val	lib/html_sigs.mli	346	f47fc19c7f179c7f52e4757146cac235ba9b05c9d31af72eff5b3377f4c1ff4f	T	a_poster		Xml.uri wrap -> [> `Poster ] attrib	
+val	lib/html_sigs.mli	348	cec759cc944d2503bdc65e935b670d3ba2e09416e4ca31dcc9b9c3968d9622b7	T	a_preload		[< `None | `Metadata | `Audio ] wrap -> [> `Preload ] attrib	
+val	lib/html_sigs.mli	350	9a2431f8b5a302d2be59c0d9134ec5585fa140addc6728eb4f0b5d9c7eb98f18	T	a_pubdate		unit -> [> `Pubdate ] attrib	
+val	lib/html_sigs.mli	352	5e115d60c262e9ee15928ba6925b5495321f88f39652151c8947bdc8a0fa0d3b	T	a_radiogroup		text wrap -> [> `Radiogroup ] attrib	
+val	lib/html_sigs.mli	354	30c81280c2792d1c09d1a1aaf36cb6e8b5e78bbcb7d3c6b8b251b73cfc7150fc	T	a_referrerpolicy		referrerpolicy wrap -> [> `Referrerpolicy ] attrib	
+val	lib/html_sigs.mli	358	40a6f821cb1332e85b6cb302db118d56bbc827db9e0cedc0fcb73b14524eb946	T	a_required		unit -> [> `Required ] attrib	
+val	lib/html_sigs.mli	360	ae5c9067ae8187397859d70ba98ad4e71dc61adb18e2e4200f4a163b15d3b16d	T	a_reversed		unit -> [> `Reversed ] attrib	
+val	lib/html_sigs.mli	362	2f9d2aecac19324da74131e38df1ba805bce06105d8883d5b185412d5c17d0e2	T	a_sandbox		[< sandbox_token ] list wrap -> [> `Sandbox ] attrib	
+val	lib/html_sigs.mli	364	ecabe559bb7233efb5a7b401350366e8f9743907d8781d716fd40e898d28a9e6	T	a_spellcheck		bool wrap -> [> `Spellcheck ] attrib	
+val	lib/html_sigs.mli	366	7b853b48f324c5426b1f9a6f59bbece161ed0d37e023267d6c35869e4d0a74e0	T	a_scoped		unit -> [> `Scoped ] attrib	
+val	lib/html_sigs.mli	368	47321124538336a7407d38382bb16eafd0929608a48f897b1ebca750a6b81f41	T	a_seamless		unit -> [> `Seamless ] attrib	
+val	lib/html_sigs.mli	370	f0892d26572a3a2d2462693bfcd52662568d79cb1661c4a3370c5e3a485566ef	T	a_sizes		(number * number) list option wrap -> [> `Sizes ] attrib	
+val	lib/html_sigs.mli	372	3d22a665fe95f452de6040ddbe14af8a0d42c98080f7de39c80a3481ba1aedf2	T	a_span		number wrap -> [> `Span ] attrib	
+val	lib/html_sigs.mli	375	a86c190d0c4cd2e4fd279cdc32f2a7b10ba0f35cf3df050e3a8e32fd821a5c7c	T	a_srclang		nmtoken wrap -> [> `XML_lang ] attrib	ocaml.deprecated "Use a_xml_lang instead."
+type	lib/html_sigs.mli	378	cba399a22ff47112a7179d8bac4da3628bffa081b84033164d4f3ef3138419eb	T	image_candidate		[ `Url of uri | `Url_width of uri * number | `Url_pixel of uri * float_number ]	
+val	lib/html_sigs.mli	383	742f4405db9e9c7732711d450f1785a060d221430165ae82edeb6f464832503f	T	a_srcset		image_candidate list wrap -> [> `Srcset ] attrib	
+val	lib/html_sigs.mli	385	fe0cfa549e113b42e24d88383de9c061c20643b04ba069bc3f27af463721c8b2	T	a_img_sizes		text list wrap -> [> `Img_sizes ] attrib	reflect.attribute "sizes" [ "img" ]
+val	lib/html_sigs.mli	388	05ac7b231b0e8c146f476a9c8b0765a27a8e5e06c7201e493503927005e9baef	T	a_start		number wrap -> [> `Start ] attrib	
+val	lib/html_sigs.mli	390	bf511384086a35dc9df3fb9063966307ee018bd98c0231aae5c78ffd0be9ca8e	T	a_step		float_number option wrap -> [> `Step ] attrib	
+val	lib/html_sigs.mli	392	ae415a3afb7e0c2fa0ed8c651168ba66afba2bf303fbaa5d213ba921f67eda65	T	a_translate		[< `Yes | `No ] wrap -> [> `Translate ] attrib	
+val	lib/html_sigs.mli	395	a0455f31f99087b5abbbfa3aee25f88904aeaf4ea4420d0f313b40d04d4e2c68	T	a_wrap		[< `Soft | `Hard ] wrap -> [> `Wrap ] attrib	
+val	lib/html_sigs.mli	397	0bc865c7cf3351d05c5273b0133208718e8902763e6060d19fbebe56a41f0c53	T	a_version		cdata wrap -> [> `Version ] attrib	
+val	lib/html_sigs.mli	399	c9f3fb519e91fc8f4cc580c38ad49cc9c50542f7975afb9e14a0e2fa4b010e0e	T	a_xmlns		[< `W3_org_1999_xhtml ] wrap -> [> `XMLns ] attrib	
+val	lib/html_sigs.mli	401	3e62a4bd0af63110820cfaf5b6cb20723f6f3ab0ff077fc08854f1e6c173199a	T	a_manifest		Xml.uri wrap -> [> `Manifest ] attrib	
+val	lib/html_sigs.mli	403	b2707ed4f2552451ab58c5eebd2bb1e5e131af63cc78f618a67536c0007002f3	T	a_cite		Xml.uri wrap -> [> `Cite ] attrib	
+val	lib/html_sigs.mli	405	f1c581f8346f85d23003915261f01dd06d3f7dc8ea61d4ec76e7c9da5770e262	T	a_xml_space		[< `Default | `Preserve ] wrap -> [> `XML_space ] attrib	
+val	lib/html_sigs.mli	407	9a8129cc424e547bf4b90b53d048e37b82c95bce156e4a3d1d2effc511483eb4	T	a_accesskey		character wrap -> [> `Accesskey ] attrib	
+val	lib/html_sigs.mli	413	f3a3fd062da2fcf9135c52f5d3de43c87f48a828ea9ce93f0b7dbbf89897bcf2	T	a_charset		charset wrap -> [> `Charset ] attrib	
+val	lib/html_sigs.mli	418	55676df601fd4ceb3d4fa20d953a1fe9a870115b3503867296e0f98a5b74939f	T	a_accept_charset		charsets wrap -> [> `Accept_charset ] attrib	
+val	lib/html_sigs.mli	420	3267707f46de361c8d904c58e8f765900d1c9ae7fd3fb4a1a2a870a0b9a7a551	T	a_accept		contenttypes wrap -> [> `Accept ] attrib	
+val	lib/html_sigs.mli	422	ae9a9bb75c2ad3e7a7fe021e9c67670daeeee8f7c1e8d876a970e4e51ace95b8	T	a_href		Xml.uri wrap -> [> `Href ] attrib	
+val	lib/html_sigs.mli	427	d3eedb55a6c6663a29ed1950cd5bfe36688c6061dd36316f7017b120f4fc17eb	T	a_hreflang		languagecode wrap -> [> `Hreflang ] attrib	
+val	lib/html_sigs.mli	431	7ccdf920159b23cdd338fedeaa02d89ad670c9b020f3b3d8b3ad56883d343095	T	a_download		string option wrap -> [> `Download ] attrib	
+val	lib/html_sigs.mli	433	87977a0360749983edf5a8678c8a13131c541cda36610c54e6975111f421cf92	T	a_rel		linktypes wrap -> [> `Rel ] attrib	
+val	lib/html_sigs.mli	444	ff857f623d858c370ecbfce5bd83d1c046401d861f985df1cda36a8f8f068887	T	a_tabindex		number wrap -> [> `Tabindex ] attrib	
+val	lib/html_sigs.mli	450	3d92776a970c8f071a70ad33cafeb3ec7f2247fd098948dc0957a5f51a9559fd	T	a_mime_type		contenttype wrap -> [> `Mime_type ] attrib	reflect.attribute "type" [ "object" ; "embed" ; "area" ; "link" ; "source" ]
+val	lib/html_sigs.mli	461	162b596d2287d5c6fcd8b21878dac68eecce126f591db73780df35e144f4b723	T	a_datetime		cdata wrap -> [> `Datetime ] attrib	
+val	lib/html_sigs.mli	463	20406207cbe72a11735894e41b9fb4169345cae61ead3442613c1613c5f4208f	T	a_action		Xml.uri wrap -> [> `Action ] attrib	
+val	lib/html_sigs.mli	467	405f494f5a97cb9388320b61f9d14661b55a86a11743a203c89bbf245476df15	T	a_checked		unit -> [> `Checked ] attrib	
+val	lib/html_sigs.mli	473	6fca33fca6123243ec5c0857398ded3deeeac6b4ce09f1548b4af45996ab4cd1	T	a_cols		number wrap -> [> `Cols ] attrib	
+val	lib/html_sigs.mli	482	a1c22124ce1e4654d35f61c2d74025d138a25992c0c8c17298bf6b5512603797	T	a_enctype		contenttype wrap -> [> `Enctype ] attrib	
+val	lib/html_sigs.mli	484	9ba7b4c5cb059e043943d369525f040824be7bb27886fa5860c94aa6344a3310	T	a_label_for		idref wrap -> [> `Label_for ] attrib	reflect.attribute "for" [ "label" ]
+val	lib/html_sigs.mli	487	692cef3b7490994bea8d6c0ab2b3058fa50604aeabdb89605f0bcfd5dcad8343	T	a_for		idref wrap -> [> `Label_for ] attrib	ocaml.deprecated "Use a_label_for"
+val	lib/html_sigs.mli	491	3154e08f4c4a3fb75d35fa0ae783f03d2336ed8c7f63378ed5362d5eecdf5538	T	a_output_for		idrefs wrap -> [> `Output_for ] attrib	reflect.attribute "for" [ "output" ]
+val	lib/html_sigs.mli	494	a18919f5850132af54ff4aa478f8fba1cd2b0712edf04c62772a7694782af2b7	T	a_for_list		idrefs wrap -> [> `Output_for ] attrib	ocaml.deprecated "Use a_output_for"
+val	lib/html_sigs.mli	498	ff3521866f1bc82415958d962d26b94a8e0d6cb684ec83ad44fb12e88258ef1e	T	a_maxlength		number wrap -> [> `Maxlength ] attrib	
+val	lib/html_sigs.mli	500	e4c7b3d03b63b945a19759404fcc8edcec401da93e27d43cf82d47731c33980c	T	a_minlength		number wrap -> [> `Minlength ] attrib	
+val	lib/html_sigs.mli	502	04f029331d59a682e29e5b030b8abdf9122348725cc9d78c72acf49d6335c2ca	T	a_method		[< `Get | `Post ] wrap -> [> `Method ] attrib	
+val	lib/html_sigs.mli	505	c6e1b74c54e2f2ff78a10ad255d44033ce7020f0c717ff63d4ccdb71ee669715	T	a_formmethod		[< `Get | `Post ] wrap -> [> `Formmethod ] attrib	
+val	lib/html_sigs.mli	508	43d202565749e99d21b2a745591fb4fe253f366e7c3d3ce23852c4a230236dd4	T	a_multiple		unit -> [> `Multiple ] attrib	
+val	lib/html_sigs.mli	510	e59bece9b94ad1c30815418dd73e79159f3e5c9c8218edc6f99f72189d614885	T	a_name		text wrap -> [> `Name ] attrib	
+val	lib/html_sigs.mli	513	1e3f2071b49b6f9db307bf033e1b30fd3b1ab254d922857c8ba0966437d57268	T	a_rows		number wrap -> [> `Rows ] attrib	
+val	lib/html_sigs.mli	520	e90fa026a7a5f27cf06922ba007d9ef99df1a46f4d5962102be2f4ecc4d6e4ff	T	a_selected		unit -> [> `Selected ] attrib	
+val	lib/html_sigs.mli	524	87038977005be458c10ba07eb4dd4485fcfc85e99ac269bf75ed3f9ba796b149	T	a_size		number wrap -> [> `Size ] attrib	
+val	lib/html_sigs.mli	526	11e1074725ed8664f5c0251641408934d48d8048f0e811d1380f9e9b41f19325	T	a_src		Xml.uri wrap -> [> `Src ] attrib	
+val	lib/html_sigs.mli	528	44a0e87c3b8f033ad9529e17ca454ed4fbaae442ac3f82da9136a09ae7f63289	T	a_input_type		[< `Url | `Tel | `Text | `Time | `Search | `Password | `Checkbox | `Range | `Radio | `Submit | `Reset | `Number | `Hidden | `Month | `Week | `File | `Email | `Image | `Datetime_local | `Datetime | `Date | `Color | `Button ] wrap -> [> `Input_Type ] attrib	reflect.attribute "type" [ "input" ]
+val	lib/html_sigs.mli	554	7139c8871453ba31200fd24a20db43c67a75f4f1a146b136ce39f4c8b52965c6	T	a_text_value		text wrap -> [> `Text_Value ] attrib	reflect.attribute "value" [ "param" ; "button" ; "option" ]
+val	lib/html_sigs.mli	560	0f4fba5e5328cce915b26ee33f1adaa58a58f1e7e1d16b3a5bb6feb29b249ca9	T	a_int_value		number wrap -> [> `Int_Value ] attrib	reflect.attribute "value" [ "li" ]
+val	lib/html_sigs.mli	563	f10400cefcbe609da34cdbaa6e645460a8881cf4837cdf6cbdd59fd9aa9edeb5	T	a_value		cdata wrap -> [> `Value ] attrib	
+val	lib/html_sigs.mli	565	94f63f46d28419ba5ae2074dfc0fd72045a9e4e6c0ae8b928334786633b9c0e7	T	a_float_value		float_number wrap -> [> `Float_Value ] attrib	reflect.attribute "value" [ "progress" ; "meter" ]
+val	lib/html_sigs.mli	568	3af4aa976ea85c23aaa5a73aa30556a5b9030a3b2ce1722c6b36819492bda5ec	T	a_disabled		unit -> [> `Disabled ] attrib	
+val	lib/html_sigs.mli	570	b0e6b3d075d33d7d7dd2bf6e84331b5daec90e2056e494bb470f1ac92e8cb0b7	T	a_readonly		unit -> [> `ReadOnly ] attrib	
+val	lib/html_sigs.mli	571	a4719b2a3ac88bbc23378bd8bc9119d8a65900db3a9adc31aa4b26a9151e2d56	T	a_button_type		[< `Button | `Submit | `Reset ] wrap -> [> `Button_Type ] attrib	reflect.attribute "type" [ "button" ]
+val	lib/html_sigs.mli	575	d010801c8dc8c946e840c7419dca3355818e5fe4dfebc7415cd9060e3d663bd4	T	a_script_type		Html_types.script_type wrap -> [> `Script_type ] attrib	reflect.attribute "type" [ "script" ]
+val	lib/html_sigs.mli	579	124bfa40f52a3a2528026c314851bcef068cd170d987f87bea7b0e4e28ffe73a	T	a_command_type		[< `Command | `Checkbox | `Radio ] wrap -> [> `Command_Type ] attrib	reflect.attribute "type" [ "command" ]
+val	lib/html_sigs.mli	583	cf6dae97997a81f3147afbbabb11a80617fe9b4126fc8d0b9187243b29d4f820	T	a_menu_type		[< `Context | `Toolbar ] wrap -> [> `Menu_Type ] attrib	reflect.attribute "type" [ "menu" ]
+val	lib/html_sigs.mli	586	1c8d794ece4a4a39f1f22db5fab753b511edeb098d8f9d2f780ea0250e7bcf9e	T	a_label		text wrap -> [> `Label ] attrib	
+val	lib/html_sigs.mli	588	e1bc7b44ec96c2e88043858919ddee5a4c3ad87390017becf342f613ebaca148	T	a_align		[< `Left | `Right | `Justify | `Char ] wrap -> [> `Align ] attrib	ocaml.deprecated "Use CSS text-align"
+val	lib/html_sigs.mli	593	594333572674d54609c611902ec153557772052c56bed64ff745e118e3ad7ba2	T	a_axis		cdata wrap -> [> `Axis ] attrib	ocaml.deprecated "Not supported in HTML5"
+val	lib/html_sigs.mli	597	454f4de2de03fb6664bf9379488fc9233ef1b58832c313c74aa4ef66f0035f3a	T	a_colspan		number wrap -> [> `Colspan ] attrib	
+val	lib/html_sigs.mli	599	139c1c3cc955dd124391ff283bad8b4d976558811c6d04d17b17207511d45b99	T	a_headers		idrefs wrap -> [> `Headers ] attrib	
+val	lib/html_sigs.mli	601	54747b064216142f548ff832b02f9f9c2fdce30539f9e1951ae9b5f550dcf537	T	a_rowspan		number wrap -> [> `Rowspan ] attrib	
+val	lib/html_sigs.mli	603	25ffad83e1c62acead923ee49ad67343ffe20c30dd7768375ae18eb877e31a13	T	a_scope		[< `Row | `Col | `Rowgroup | `Colgroup ] wrap -> [> `Scope ] attrib	ocaml.deprecated "Not supported in HTML5"
+val	lib/html_sigs.mli	608	bf4e85098d0dae4686d86ae4d339ad2ecd4b53b8ce94aa43df36ed8274d8b85e	T	a_summary		text wrap -> [> `Summary ] attrib	ocaml.deprecated "Move content elsewhere or to a <caption> child"
+val	lib/html_sigs.mli	612	92cdbde52469e0cfc0c908a89f3348f69d72923cd6620fbe13f21f5bd7ea21d9	T	a_border		pixels wrap -> [> `Border ] attrib	ocaml.deprecated "Use CSS border and/or border-width"
+val	lib/html_sigs.mli	616	879be617ec265ad3b96a728cede98089fe5c77c338a72e0b3919304a50e6473e	T	a_rules		[< `None | `Groups | `Rows | `Cols | `All ] wrap -> [> `Rules ] attrib	ocaml.deprecated "Use CSS border"
+val	lib/html_sigs.mli	621	1ae3e6cd5a5bc9ecb3c9a73fc5403d4da220eedf5b8f1e426179f08fafc300ab	T	a_char		character wrap -> [> `Char ] attrib	ocaml.deprecated "The char attribute is not supported in HTML5"
+val	lib/html_sigs.mli	625	03f97e8b74325cad0b24014fe742ded4b686babc839ad2b8e528c0cbed1b46e3	T	a_alt		text wrap -> [> `Alt ] attrib	
+val	lib/html_sigs.mli	627	ffbe0cce9e5a20176c669e7ca26b91194cc428d71ca4a11e9bb0b4de93227cf8	T	a_height		number wrap -> [> `Height ] attrib	
+val	lib/html_sigs.mli	629	b2ff931c8336278634806885b7086f7fb4c4852df60156c5528a662f6c12033b	T	a_width		number wrap -> [> `Width ] attrib	
+type	lib/html_sigs.mli	631	6c2ac819fba254a6dad2b526fca9ad1282b3d8ee8fe34828edba26b61965eae8	T	shape		[ `Rect | `Circle | `Poly | `Default ]	
+val	lib/html_sigs.mli	633	4230289817b23881c011c1e5abfa49c9707da9d321dcca87963ba70ff7307198	T	a_shape		shape wrap -> [> `Shape ] attrib	
+val	lib/html_sigs.mli	635	31d52344019f3f0dd651e557f342241ace07339a4f4f5fa0952a81672b376044	T	a_coords		numbers wrap -> [> `Coords ] attrib	
+val	lib/html_sigs.mli	637	ba8c04460b4fa1efb123e75318bd4f4964ff5a5cb81c042605146e4a1ede9e9a	T	a_usemap		idref wrap -> [> `Usemap ] attrib	
+val	lib/html_sigs.mli	639	f92f51933d6671bc76f847d0786822d41ad7cc84cf3baeaded4b8f560a07cd4f	T	a_data		Xml.uri wrap -> [> `Data ] attrib	
+val	lib/html_sigs.mli	641	cc094ecd895681159b7e2a84f120bc6e7bc497df9c532b3f76d37331771901dc	T	a_codetype		contenttype wrap -> [> `Codetype ] attrib	ocaml.deprecated "Not supported in HTML5"
+val	lib/html_sigs.mli	645	99bfb852e05f3ef19aedafcfbad305196ecd4559c47895a08bb1c3ec8108db58	T	a_frameborder		[< `Zero | `One ] wrap -> [> `Frameborder ] attrib	ocaml.deprecated "Use CSS border"
+val	lib/html_sigs.mli	649	e34a0168b8ca08165fdf96ff1aaccec3905570530883a2b51b311c7c7797d08a	T	a_marginheight		pixels wrap -> [> `Marginheight ] attrib	ocaml.deprecated "Use CSS margin"
+val	lib/html_sigs.mli	653	d741f2f7318be9f57f093a626e60caf75c89ef14e7d64379b75d61a4c4bda0ed	T	a_marginwidth		pixels wrap -> [> `Marginwidth ] attrib	ocaml.deprecated "Use CSS margin"
+val	lib/html_sigs.mli	657	3527f57b8a4c3fb732c2cd0c8ff7b76685e73accb9a1aa40cf11c42a79a9c95e	T	a_scrolling		[< `Yes | `No | `Auto ] wrap -> [> `Scrolling ] attrib	
+val	lib/html_sigs.mli	659	f0147f280d2118ffbe0ae96522c37e54f8e3efd935eabf631ddc8b5c3a0abb95	T	a_target		frametarget wrap -> [> `Target ] attrib	
+val	lib/html_sigs.mli	661	8b5af8dc5670ddf91dc72a50e2b15a89447f8562270a252a8e5001a308a2982f	T	a_content		text wrap -> [> `Content ] attrib	
+val	lib/html_sigs.mli	663	5ba2b5d1cf94c4f2026d36fd874104de0c6894292d27a2aeb1a848268d1e22ad	T	a_http_equiv		text wrap -> [> `Http_equiv ] attrib	
+val	lib/html_sigs.mli	665	362dbbb57cd531415117c05ad83fe674ed9fe1cee8b1f20d94229ea25261060f	T	a_defer		unit -> [> `Defer ] attrib	
+val	lib/html_sigs.mli	667	581c6307d81794acd8527af2896938d8de9b7b2ce3ff47206300ae4dc0fb1c4f	T	a_media		mediadesc wrap -> [> `Media ] attrib	
+val	lib/html_sigs.mli	669	870ca9a3bb2f9aa7a3e2bc3287f67f3d6742d31fff7f5fbac3484bdcd7e5d9f6	T	a_style		string wrap -> [> `Style_Attr ] attrib	
+val	lib/html_sigs.mli	671	ed916756f11fee551e1aa71f197c53d70273d925eb76e5247cd889f29de99a4c	T	a_property		string wrap -> [> `Property ] attrib	
+val	lib/html_sigs.mli	685	691cbf038ddad78cdb1e4c916a939a5ac93a34147389a88b5d70a273350c0b2a	T	a_role		string list wrap -> [> `Role ] attrib	
+val	lib/html_sigs.mli	690	027e21ac7e0c5f5fba5fd8a83581a1cae28ea6b9e5e34b78f0398cd9eef66395	T	a_aria		string -> string list wrap -> [> `Aria ] attrib	
+val	lib/html_sigs.mli	699	1600765f4d71db2bc43d781f60ee81447cdeed4da716057655924abe2d72d61a	T	txt		string wrap -> [> txt ] elt	
+val	lib/html_sigs.mli	701	49a038ae571c48fde1c8dd45bec399920a8557cbb237323f2e27a7236832f87a	T	html		?a:html_attrib attrib list -> [< head ] elt wrap -> [< body ] elt wrap -> [> html ] elt	reflect.filter_whitespace; reflect.element "html"
+val	lib/html_sigs.mli	707	010cf9ee39e75cf3511a93e272ec65688331a2a2340cd37c691a746b1d979a63	T	head		?a:head_attrib attrib list -> [< title ] elt wrap -> head_content_fun elt list_wrap -> [> head ] elt	reflect.filter_whitespace; reflect.element "head"
+val	lib/html_sigs.mli	713	e8c654e4bdede05eca0e0edad41b58dbc255066a682aa2b1c3b0e0d1150cf8b8	T	base		([< base_attrib ], [> base ]) nullary	
+val	lib/html_sigs.mli	715	c5fa8464e75dba214557a18b211a63e6b5804294a1b591023af0393353b5d7b2	T	title		(title_attrib, [< title_content_fun ], [> title ]) unary	
+val	lib/html_sigs.mli	717	820fc648bc7fb5ab4eb2df4762f460aea7c058275c4e7c95bed3bed1ddebe997	T	body		([< body_attrib ], [< body_content_fun ], [> body ]) star	
+val	lib/html_sigs.mli	720	ff15bbff8d0e731688e303738ccf68f749db3e8d89b425e10c11cdf539d723c3	T	svg		?a:[< svg_attrib ] Svg.attrib list -> [< svg_content ] Svg.elt list_wrap -> [> svg ] elt	
+val	lib/html_sigs.mli	724	d89bbdc09f6e6ebdf2fe6014e5981a15d0af6e10fa7b33095c30c52b90a07e2f	T	footer		([< footer_attrib ], [< footer_content_fun ], [> footer ]) star	
+val	lib/html_sigs.mli	727	9155286fba8020f76d5854cef9e9624abc2559811506c6a0d59db0e6bb1ccbec	T	header		([< header_attrib ], [< header_content_fun ], [> header ]) star	
+val	lib/html_sigs.mli	730	31247dac01e1495013eac813fb92e77536f98d5e0882661698160838f04752ad	T	section		([< section_attrib ], [< section_content_fun ], [> section ]) star	
+val	lib/html_sigs.mli	733	1cd73054e3b33147d0d49f9a8d86045a9341c25f53f5879c96f8240476b2a96c	T	nav		([< nav_attrib ], [< nav_content_fun ], [> nav ]) star	
+val	lib/html_sigs.mli	735	81e11b3984248af76585aaf6abaf035baa99999a81a40dc79eefb50e8e1bf1a1	T	h1		([< h1_attrib ], [< h1_content_fun ], [> h1 ]) star	
+val	lib/html_sigs.mli	737	6b63fc6d8bfa841ec4ca8903e6715e78642725c4491481df6738340344dd5ac0	T	h2		([< h2_attrib ], [< h2_content_fun ], [> h2 ]) star	
+val	lib/html_sigs.mli	739	f6bfcc7f1bc95c028abe440c877c451c47629a0a02bdf249227070e78c0ccf6e	T	h3		([< h3_attrib ], [< h3_content_fun ], [> h3 ]) star	
+val	lib/html_sigs.mli	741	c5b2c7ccd23fea9339f91eb942d34c11c67efe68fb9a7e57c2e60788344c2ebd	T	h4		([< h4_attrib ], [< h4_content_fun ], [> h4 ]) star	
+val	lib/html_sigs.mli	743	ef500afb30b9da6ce80d2f94b56abd9dcb5b72fc2f935deb7bad6f0ee224a7af	T	h5		([< h5_attrib ], [< h5_content_fun ], [> h5 ]) star	
+val	lib/html_sigs.mli	745	472ac9da770816c26c474be18608f35090024dcf71d51a3a8dec62111144c908	T	h6		([< h6_attrib ], [< h6_content_fun ], [> h6 ]) star	
+val	lib/html_sigs.mli	747	3dcd589f343b22ad5e3b7575d40fc807ddaf0fe125f8cef147005801dbf88ff5	T	hgroup		([< hgroup_attrib ], [< hgroup_content_fun ], [> hgroup ]) star	
+val	lib/html_sigs.mli	750	87878ee86376b68f1ae4cf90f91a3e0d6c0ef356f792a2082b815d1c8b23a71e	T	address		([< address_attrib ], [< address_content_fun ], [> address ]) star	
+val	lib/html_sigs.mli	753	4373e486c9101a5433b31699f7612c2fbe151440f509cd9c077d16e3e09f36c5	T	article		([< article_attrib ], [< article_content_fun ], [> article ]) star	
+val	lib/html_sigs.mli	756	ebca997369d3ad5508ff7b249eaac9d599f6fb4b1800480f684b42b1a89e35aa	T	aside		([< aside_attrib ], [< aside_content_fun ], [> aside ]) star	
+val	lib/html_sigs.mli	759	495c89db7b60eb8fadc2a7d97aeed4e635635cf44e87122a1fa4d09e5ea87046	T	main		([< main_attrib ], [< main_content_fun ], [> main ]) star	
+val	lib/html_sigs.mli	764	0858e2f90859ad379d99de75efe299c2696441ac9da009acd509807421ac2089	T	p		([< p_attrib ], [< p_content_fun ], [> p ]) star	
+val	lib/html_sigs.mli	766	cf280b89031993fb678f866c8f7c26f422304f36c4c8d100f804024c6112904f	T	pre		([< pre_attrib ], [< pre_content_fun ], [> pre ]) star	
+val	lib/html_sigs.mli	768	8de5134bdb0785d9d08319932a601f768843ee57ca369668427c571437f38a47	T	blockquote		([< blockquote_attrib ], [< blockquote_content_fun ], [> blockquote ]) star	
+val	lib/html_sigs.mli	772	293aace1ee307cb70ad64ed5012349beddd9cafcf9e3dc86839f9e81703b1613	T	dialog		([< dialog_attrib ], [< dialog_content_fun ], [> dialog ]) star	
+val	lib/html_sigs.mli	776	de4317350d69addf43e75363cab20734e688ef0de80811ac75caffb37030af4f	T	div		([< div_attrib ], [< div_content_fun ], [> div ]) star	
+val	lib/html_sigs.mli	778	dddb796c693ca8aa449c1a3bf60382e9772a809f017c1536a1051ccdc7d9639b	T	dl		([< dl_attrib ], [< dl_content_fun ], [> dl ]) star	
+val	lib/html_sigs.mli	780	126e72f36010132d04b68777d6c0b14d972c5de291079ee259b3ac1f8b394f29	T	ol		([< ol_attrib ], [< ol_content_fun ], [> ol ]) star	reflect.filter_whitespace
+val	lib/html_sigs.mli	783	39cfe08cef2b2af670290804180d1880944d4c9fbc939c71e5adb92dd10c6a28	T	ul		([< ul_attrib ], [< ul_content_fun ], [> ul ]) star	reflect.filter_whitespace
+val	lib/html_sigs.mli	786	33d88bfa5a2084c4e186e1c34e859ca2f19b30b53e3a79778914599a58e1b7c0	T	dd		([< dd_attrib ], [< dd_content_fun ], [> dd ]) star	
+val	lib/html_sigs.mli	788	4d804d5b39027e91ba3deb69f5081960d3445513d670aca1ac474c54720e2b7d	T	dt		([< dt_attrib ], [< dt_content_fun ], [> dt ]) star	
+val	lib/html_sigs.mli	790	dd8585f6198a6b9348ee276352a5751534cfda0110e3ffd166ac55b97e5450af	T	li		([< li_attrib ], [< li_content_fun ], [> li ]) star	
+val	lib/html_sigs.mli	792	5a1e5356a32c12462d49c084b12208945b5e965721a8156905707e817f1bf18f	T	figcaption		([< figcaption_attrib ], [< figcaption_content_fun ], [> figcaption ]) star	
+val	lib/html_sigs.mli	795	4d65358c4e0078a5d7aabb24bab583902be6357c253c1b45318389ac4df45d0f	T	figure		?figcaption:[ `Top of [< figcaption ] elt wrap | `Bottom of [< figcaption ] elt wrap ] -> ([< figure_attrib ], [< figure_content_fun ], [> figure ]) star	reflect.element "figure"
+val	lib/html_sigs.mli	800	5ca52dbac25400a358e9d00d8d3aab80dfe2c2f0f4b7d56020214c6bb61752e3	T	hr		([< hr_attrib ], [> hr ]) nullary	
+val	lib/html_sigs.mli	804	588120b42fdfb65789caef5bb1b02d41e4b26b388af8d69d8f05e040a155ec55	T	b		([< b_attrib ], [< b_content_fun ], [> b ]) star	
+val	lib/html_sigs.mli	806	11655dc78ca85ae161e7c7c2988557d30a1f2fcedaa9a8e806370724c5a4fb61	T	i		([< i_attrib ], [< i_content_fun ], [> i ]) star	
+val	lib/html_sigs.mli	808	f4b62c0c23a19ece9f74fd5882298fb93ab87d61fab1e11b0367a60b793cffee	T	u		([< u_attrib ], [< u_content_fun ], [> u ]) star	
+val	lib/html_sigs.mli	810	c5d7c1ba816e11fad9a840c46c64f4ff4dac7d9dbc8c003472491b8bdb713c61	T	small		([< small_attrib ], [< small_content_fun ], [> small ]) star	
+val	lib/html_sigs.mli	813	8e0128b1df8ceb5409169bd4518a080caed001c8292d64b5f4e3b2454d809787	T	sub		([< sub_attrib ], [< sub_content_fun ], [> sub ]) star	
+val	lib/html_sigs.mli	815	ff20e1750e7c57d76ca055dad55ee4ca0474b7674c9a418068a60ce8b0700cca	T	sup		([< sup_attrib ], [< sup_content_fun ], [> sup ]) star	
+val	lib/html_sigs.mli	817	1d708c90f04ef9f7d2be13eeda2e4989fce0e2028e599fa001d7b67f054216d1	T	mark		([< mark_attrib ], [< mark_content_fun ], [> mark ]) star	
+val	lib/html_sigs.mli	819	410299690f6fa3a3a9ff99882e122b5ebb4c9503c9215e5efe4b692c4162567f	T	wbr		([< wbr_attrib ], [> wbr ]) nullary	
+val	lib/html_sigs.mli	821	c42c06915589636def4d1dc241184795c34f8ada5df7dd62aa71f3a5d684f14a	T	bdo		dir:[< `Ltr | `Rtl ] wrap -> ([< bdo_attrib ], [< bdo_content_fun ], [> bdo ]) star	
+val	lib/html_sigs.mli	825	4e2e5ade5e916c9a81df0d137360bbeefec0f675949cc17fe8f24e1b49298a79	T	abbr		([< abbr_attrib ], [< abbr_content_fun ], [> abbr ]) star	
+val	lib/html_sigs.mli	827	b84678cd3b81e674c591111bf9f36ccb3a49be321a848e4d4bba9e5301d7f758	T	br		([< br_attrib ], [> br ]) nullary	
+val	lib/html_sigs.mli	829	4d5fc0f24b93812fd16084bfa3b982906fb00d96b081bd6ee730374175d0a5bf	T	cite		([< cite_attrib ], [< cite_content_fun ], [> cite ]) star	
+val	lib/html_sigs.mli	831	938aa8c6f830ebd65f95cf3a68f901a2d4775914c9033ac3678b89d9e129536d	T	code		([< code_attrib ], [< code_content_fun ], [> code ]) star	
+val	lib/html_sigs.mli	833	9fd8d5a241ba8485d288bf9170368681008c13ac8d2eee44a1e6ae841e8a3429	T	dfn		([< dfn_attrib ], [< dfn_content_fun ], [> dfn ]) star	
+val	lib/html_sigs.mli	835	dafc62bbaa1a0445e92db532d644d0ee89ba5b8442ca902ddfdc49198d6520c7	T	em		([< em_attrib ], [< em_content_fun ], [> em ]) star	
+val	lib/html_sigs.mli	837	6f1e2b8690a010863c5434d131c6d73ead24e5e5f99f69b8cc5542c92cf26052	T	kbd		([< kbd_attrib ], [< kbd_content_fun ], [> kbd ]) star	
+val	lib/html_sigs.mli	839	c70c66e268fa403dbd868d11570f05141c797a95631f575f876de03d1b94120d	T	q		([< q_attrib ], [< q_content_fun ], [> q ]) star	
+val	lib/html_sigs.mli	841	8ea6e629a0cb234d82c3c0e28c08c1ea1b0594ded89300263c6cf7c48e266a74	T	samp		([< samp_attrib ], [< samp_content_fun ], [> samp ]) star	
+val	lib/html_sigs.mli	843	4f5cc067217198cdbd7c791f56b43d00af5075fcaba18fd117bc0503cf6b8701	T	span		([< span_attrib ], [< span_content_fun ], [> span ]) star	
+val	lib/html_sigs.mli	845	8264e1a8b919fc3c7a73120d365bcbf383207edd264b6c74db97745fe5dc9df2	T	strong		([< strong_attrib ], [< strong_content_fun ], [> strong ]) star	
+val	lib/html_sigs.mli	848	93721c75e53e86c761e164c0c398333c62715417d0709796caa6993bedf80e44	T	time		([< time_attrib ], [< time_content_fun ], [> time ]) star	
+val	lib/html_sigs.mli	850	5f4ec9c57fd4c84c4cf7b96cb2ae2a4b55d63b0c97f5ad1c45728f69f99c18a7	T	var		([< var_attrib ], [< var_content_fun ], [> var ]) star	
+val	lib/html_sigs.mli	854	baf70ad0abfe056b60ea9ba749708255e2d9aede4b3195114fc5b6504c8966be	T	a		([< a_attrib ], 'a, [> 'a a ]) star	
+val	lib/html_sigs.mli	858	7499199a07aafdb7a81e71dd5d7249aeb46b09c0920d61c3bdb21a661f99d7e2	T	del		([< del_attrib ], 'a, [> 'a del ]) star	
+val	lib/html_sigs.mli	859	c2b43223e9d1669ba2d98fa062b218de59ed4cabdaf9c3ee0892f15dbcc959b6	T	ins		([< ins_attrib ], 'a, [> 'a ins ]) star	
+val	lib/html_sigs.mli	863	793c83a224a642c169af0cf50661781cc4b1803364075a43f3f996a1b3445697	T	img		src:Xml.uri wrap -> alt:text wrap -> ([< img_attrib ], [> img ]) nullary	
+val	lib/html_sigs.mli	868	ea087c23489d92b32c52d71e690f6295c35f7dd96cd90ccf8429f73ec903027b	T	picture		img:[< img ] elt wrap -> ([< picture_attrib ], [< picture_content_fun ], [> picture ]) star	reflect.filter_whitespace; reflect.element "picture"
+val	lib/html_sigs.mli	874	3d2c508d20f385a80fd09ee01f9ea7c5e5a6921dd87f715a51b134777565e9fd	T	iframe		([< iframe_attrib ], [< iframe_content_fun ], [> iframe ]) star	
+val	lib/html_sigs.mli	877	fc62b64dd74105953e3067ad6a399197bb87a5de3178694de183cbb79ee26da8	T	object_		?params:[< param ] elt list_wrap -> ([< object__attrib ], 'a, [> `Object of 'a ]) star	reflect.element "object_" "object"
+val	lib/html_sigs.mli	882	6885c75122d628476147e63a8e307841232d5fd2eb2fba2471eff5d8257ea6a3	T	param		([< param_attrib ], [> param ]) nullary	
+val	lib/html_sigs.mli	884	d10e087aae6d396add6e7eb33e81f42560b3e2329a9ceee6389fe11177035df1	T	embed		([< embed_attrib ], [> embed ]) nullary	
+val	lib/html_sigs.mli	886	5b2532ff732e424008d707f5c25e1abeb531bb23989f7866adefe26f7b64a33a	T	audio		?src:Xml.uri wrap -> ?srcs:[< source ] elt list_wrap -> ([< audio_attrib ], 'a, [> 'a audio ]) star	reflect.element "audio_video"
+val	lib/html_sigs.mli	892	fd037a5383391a9ad16921396a1c4250918de2f15322073382ec54d1f373f3dc	T	video		?src:Xml.uri wrap -> ?srcs:[< source ] elt list_wrap -> ([< video_attrib ], 'a, [> 'a video ]) star	reflect.element "audio_video"
+val	lib/html_sigs.mli	898	52c17c437723d3c299affcccb3b986ba036fa18aec1b27112cdac1a3b8bf7716	T	canvas		([< canvas_attrib ], 'a, [> 'a canvas ]) star	
+val	lib/html_sigs.mli	900	81aa13ca6ffbdb849c67a1c017e885de5c88902237ad81c4f786a7830c5543f9	T	source		([< source_attrib ], [> source ]) nullary	
+val	lib/html_sigs.mli	902	4d7cb7c20581a83c89a5dc333629d89e7aaba8ecf7c9f1bd6a63521081c40986	T	area		alt:text wrap -> ([< common | `Alt | `Coords | `Shape | `Target | `Rel | `Media | `Hreflang | `Mime_type ], [> area ]) nullary	
+val	lib/html_sigs.mli	916	d9c05d1252d78654baee43875b80589815818fb2d69d8097c8aec92e84bf773f	T	map		([< map_attrib ], 'a, [> 'a map ]) star	
+val	lib/html_sigs.mli	920	37c23fc2bbdd25ef77ce9ac25066f5bec6b3b8453b3d79302e0073a32f3cc05e	T	caption		([< caption_attrib ], [< caption_content_fun ], [> caption ]) star	
+val	lib/html_sigs.mli	923	18724686f98d3516ab2efc2e617aee389b2007624597c92cfcee009bb19f58ac	T	table		?caption:[< caption ] elt wrap -> ?columns:[< colgroup ] elt list_wrap -> ?thead:[< thead ] elt wrap -> ?tfoot:[< tfoot ] elt wrap -> ([< table_attrib ], [< table_content_fun ], [> table ]) star	reflect.filter_whitespace; reflect.element "table"
+val	lib/html_sigs.mli	932	70f9464050e4153b6d85058d6b42df6b5d6450164ec69dca21283fc3a2aab225	T	tablex		?caption:[< caption ] elt wrap -> ?columns:[< colgroup ] elt list_wrap -> ?thead:[< thead ] elt wrap -> ?tfoot:[< tfoot ] elt wrap -> ([< tablex_attrib ], [< tablex_content_fun ], [> tablex ]) star	reflect.filter_whitespace; reflect.element "table" "table"
+val	lib/html_sigs.mli	941	304bc8b9a41692c6bc87eefecbb8c545a149f441318600bf94a3530903d4cefb	T	colgroup		([< colgroup_attrib ], [< colgroup_content_fun ], [> colgroup ]) star	reflect.filter_whitespace
+val	lib/html_sigs.mli	945	ccac212a6466ae1aa04ea6fe8a6fed83b1d656d936d87e74fbe05228bd443e5b	T	col		([< col_attrib ], [> col ]) nullary	
+val	lib/html_sigs.mli	947	fce1e127a3671f1a18c7879b4c055d2bac3ceb8c0cf0251f9e988d2f588cef20	T	thead		([< thead_attrib ], [< thead_content_fun ], [> thead ]) star	reflect.filter_whitespace
+val	lib/html_sigs.mli	951	363e3d3629bc0ff371a2219c4ccc5ca7609f7dfd4cf3868cf39f41a3aab5aa19	T	tbody		([< tbody_attrib ], [< tbody_content_fun ], [> tbody ]) star	reflect.filter_whitespace
+val	lib/html_sigs.mli	955	0bd2c2918c30afa29d31c97f50800c5a11482ed48de0ace90866208bd7c4a9ba	T	tfoot		([< tfoot_attrib ], [< tfoot_content_fun ], [> tfoot ]) star	reflect.filter_whitespace
+val	lib/html_sigs.mli	959	9fe6d92ed6e5330d2395ba38d75c9f7085bc9e3de37b0ace62cc2383b527b0f2	T	td		([< td_attrib ], [< td_content_fun ], [> td ]) star	
+val	lib/html_sigs.mli	961	2e06ab7b6ae09c3bc1fb9b612a03cfa1dec34c1d93bf20e42f745ab6fb14c268	T	th		([< th_attrib ], [< th_content_fun ], [> th ]) star	
+val	lib/html_sigs.mli	963	741e63c68bc1be4efd5885bc164b83c3d5db695d45149ba78811e25af64ebe3f	T	tr		([< tr_attrib ], [< tr_content_fun ], [> tr ]) star	reflect.filter_whitespace
+val	lib/html_sigs.mli	968	2c68379ea13c2b5f01f585296b6be495c0cf7635959336a3706370bb43d8b588	T	form		([< form_attrib ], [< form_content_fun ], [> form ]) star	
+val	lib/html_sigs.mli	970	d4511bef344d2115fca4b74ec42af3d064f82f9edc05f3f622b80b3a443a1573	T	fieldset		?legend:[< legend ] elt wrap -> ([< fieldset_attrib ], [< fieldset_content_fun ], [> fieldset ]) star	reflect.element "fieldset"
+val	lib/html_sigs.mli	975	0bdc7c774fcfce03947dfbcdc3c24fe42861a32bdd1bb0dbb00553689b68fc57	T	legend		([< legend_attrib ], [< legend_content_fun ], [> legend ]) star	
+val	lib/html_sigs.mli	982	8d15d4a903edefd14b5d463d549663ebc029e07ea03243fef944af83f89adb39	T	label		([< label_attrib ], [< label_content_fun ], [> label ]) star	
+val	lib/html_sigs.mli	985	256b8b35b26f5cdf7d823a70126208afd44f8499e32364707cc45b3db142a43b	T	input		([< input_attrib ], [> input ]) nullary	
+val	lib/html_sigs.mli	987	ffa4f0a3dbe86aa93c48464d2e816979bf7dc32d63493548662818f3d2f1724c	T	button		([< button_attrib ], [< button_content_fun ], [> button ]) star	
+val	lib/html_sigs.mli	990	7914f00950bfe29475be8071c92a343d4a9b3501784b8c601ceb2dbb4995874b	T	select		([< select_attrib ], [< select_content_fun ], [> select ]) star	reflect.filter_whitespace
+val	lib/html_sigs.mli	994	097d32ed29f58dbfe73a7490724cc43adf00158a1a0ff71a05e5b8f48b335f99	T	datalist		?children:[< `Options of [< selectoption ] elt list_wrap | `Phras of [< phrasing ] elt list_wrap ] -> ([< datalist_attrib ], [> datalist ]) nullary	reflect.filter_whitespace; reflect.element "datalist"
+val	lib/html_sigs.mli	1004	6eabfc150ee1e6b684be32bd6ab8a16b48ec89f9924ea7f915229d782c4b0643	T	optgroup		label:text wrap -> ([< optgroup_attrib ], [< optgroup_content_fun ], [> optgroup ]) star	
+val	lib/html_sigs.mli	1008	5d7209870a0e69bdef01c16119196e6ee07c58039bb94372d80e3fc9e8dd4ac1	T	option		([< option_attrib ], [< option_content_fun ], [> selectoption ]) unary	
+val	lib/html_sigs.mli	1011	46cf7ee0e0e1803b00a2e1b808d3d950336e3285fc1fb0ca536dac8b7507feff	T	textarea		([< textarea_attrib ], [< textarea_content_fun ], [> textarea ]) unary	reflect.element "textarea"
+val	lib/html_sigs.mli	1015	1a428813926e6b95b48f09a3b839a70abdfabc7b35ed3b840885b78331f10e80	T	keygen		([< keygen_attrib ], [> keygen ]) nullary	
+val	lib/html_sigs.mli	1017	18d07b43d9ac59ee46bbee83bc233192bb6e5087c884f06f0e96d243ba5da25f	T	progress		([< progress_attrib ], [< progress_content_fun ], [> progress ]) star	
+val	lib/html_sigs.mli	1020	54c98f4e19397a77bd23f9a48c64d7f6868918e4ba727e2e26ac0aaa519cafec	T	meter		([< meter_attrib ], [< meter_content_fun ], [> meter ]) star	
+val	lib/html_sigs.mli	1023	6b4b270c748b549831d5a714c351191351e345c92bcfb43be291dd1ae1bfe821	T	output_elt		([< output_elt_attrib ], [< output_elt_content_fun ], [> output_elt ]) star	reflect.element "star" "output"
+val	lib/html_sigs.mli	1034	7491674a951e8cd0d7d9fb65c41fd233a912a55156ce72465a544bfa39dfa6b0	T	entity		string -> [> txt ] elt	
+val	lib/html_sigs.mli	1036	d029e1976a39537f143a390f2c13509addf82add247e86b15ea700948e75221d	T	space		unit -> [> txt ] elt	
+val	lib/html_sigs.mli	1038	76105fd8f3cd34804910ced08b8b0512780fbe3b4975221fa5818f22b4cf52c9	T	cdata		string -> [> txt ] elt	
+val	lib/html_sigs.mli	1039	8ff4e2b40121d1b67f8708dba179919d896cb9f03c2a4fb6aa48992fecebe0a8	T	cdata_script		string -> [> txt ] elt	
+val	lib/html_sigs.mli	1040	f2f0f9d1645ccd5d390c621fdcd9a51c38aaa5c3cec3c90aa4db29b676b9ce29	T	cdata_style		string -> [> txt ] elt	
+val	lib/html_sigs.mli	1045	765bceff0aad4a1b530f439d42d63c5914439f29ec42225af621e496730c9dde	T	details		[< summary ] elt wrap -> ([< details_attrib ], [< details_content_fun ], [> details ]) star	reflect.element "details"
+val	lib/html_sigs.mli	1050	8e9401f1adfe85ebaf45dcaff1cdd6ca4aa46d669b58bc9780bfffbba7c72a78	T	summary		([< summary_attrib ], [< summary_content_fun ], [> summary ]) star	
+val	lib/html_sigs.mli	1053	c571112e43fae7c66ceb1ec65b6fd5b09d3acd889f8dfa34532f0b6e36651588	T	command		label:text wrap -> ([< command_attrib ], [> command ]) nullary	
+val	lib/html_sigs.mli	1057	53ae5e18fe656a33ed13002431cba3be48fb5d035e9b7a04846c022eccbb45c3	T	menu		?children:[< `Lis of [< `Li of [< common ] ] elt list_wrap | `Flows of [< flow5 ] elt list_wrap ] -> ([< menu_attrib ], [> menu ]) nullary	reflect.element "menu"
+val	lib/html_sigs.mli	1068	1170d32abc0256106ff9ff5c337613eae50fea543a91139134cdd356de0be873	T	script		([< script_attrib ], [< script_content_fun ], [> script ]) unary	reflect.element "script"
+val	lib/html_sigs.mli	1072	b2b28c669d88708509a1b92f14950c32e51cf8ca1293f55e62e4ff715ca575db	T	noscript		([< noscript_attrib ], [< noscript_content_fun ], [> noscript ]) star	
+val	lib/html_sigs.mli	1075	2a184346ea0b1dd1cdcbcf69bed88f303384296a32356fc0a265562680ade046	T	template		([< template_attrib ], [< template_content_fun ], [> template ]) star	
+val	lib/html_sigs.mli	1080	00e809820a884f9d4ebfad88b90cabdee4cc5335a9193a1bc77e9b60dd76f72f	T	meta		([< meta_attrib ], [> meta ]) nullary	
+val	lib/html_sigs.mli	1084	801668449a53e19bb4d20800723fc6712b850246f02fafa5bf63555867db35cd	T	style		([< style_attrib ], [< style_content_fun ], [> style ]) star	
+val	lib/html_sigs.mli	1087	bd39eb378c976b36d80514381c69bd3af85019c294def7bfd50436ce292c1ae0	T	link		rel:linktypes wrap -> href:Xml.uri wrap -> ([< link_attrib ], [> link ]) nullary	
+val	lib/html_sigs.mli	1094	87fe4ce9e04c7705e14343e09e883af656915d9cc99536bc7c095720a59a0d01	T	rt		([< rt_attrib ], [< rt_content_fun ], [> rt ]) star	
+val	lib/html_sigs.mli	1096	498cf87596f4b97f92d02974a9b7b6a1ce6e778f7b09426f2434e42dc6343b0c	T	rp		([< rp_attrib ], [< rp_content_fun ], [> rp ]) star	
+val	lib/html_sigs.mli	1098	4eba4ea65f804763add756692033630e07be1bc2345f951e01aae9905d1b2755	T	ruby		([< ruby_attrib ], [< ruby_content_fun ], [> ruby ]) star	
+val	lib/html_sigs.mli	1102	995fe15012a14a5d412e715a861f5cc8c6e9fb09750477351c2930b5dfc23fc8	T	pcdata		string wrap -> [> pcdata ] elt	ocaml.deprecated "Use txt instead"
+val	lib/html_sigs.mli	1116	10e15b92b3062c94c6536b97958ffe8419392d1fc474a14a01befd9984c93910	T	of_seq		Xml_stream.signal Seq.t -> 'a elt list_wrap	
+val	lib/html_sigs.mli	1118	9c3c3e906ad94eb341533b347208b49da44bef4bb85e1d1da7eccbc14c429f0f	T	tot		Xml.elt -> 'a elt	
+val	lib/html_sigs.mli	1119	98f9f2c19ff755cd9e41378e99ce7d9de395a6579d9302acc7f7d376dbba28ff	T	totl		Xml.elt list_wrap -> 'a elt list_wrap	
+val	lib/html_sigs.mli	1120	215812c1216501ab2ccb936f62d09c5a9da7d08825def9a8a12c76c71f132bf3	T	toelt		'a elt -> Xml.elt	
+val	lib/html_sigs.mli	1121	c1a9021be553f8c247c1a8563789e9a3080fb738419c20909651c78748bf031b	T	toeltl		'a elt list_wrap -> Xml.elt list_wrap	
+val	lib/html_sigs.mli	1123	37ecb243439c9ce5558c0e1ff90275f9eb4622a2d88571f7cee754e134c006ad	T	doc_toelt		doc -> Xml.elt	
+val	lib/html_sigs.mli	1124	d321c8781b298506dbc9b0e271766197cdbbae9d1a283dee66474a14d4ea80a5	T	to_xmlattribs		'a attrib list -> Xml.attrib list	
+val	lib/html_sigs.mli	1125	f6d602a2a08e6e649ae226b1c66ffdc69b00924b479dc5cf43f55f6f7e14cec6	T	to_attrib		Xml.attrib -> 'a attrib	
+val	lib/html_sigs.mli	1137	1c4baf3bf84861ee2118dd9814e1b529cc8b4e4f8c46f9383453111bad48ba8d	T.Unsafe	data		string wrap -> 'a elt	
+val	lib/html_sigs.mli	1143	261e0f311d7bb3ccc1649d15632db950db64b19e76ea2cdb94a8515c1759148d	T.Unsafe	node		string -> ?a:'a attrib list -> 'b elt list_wrap -> 'c elt	
+val	lib/html_sigs.mli	1150	fbe6cd0e4335c590f5ebcf912c1c1d482b555274760521f82ef90b75a2bde021	T.Unsafe	leaf		string -> ?a:'a attrib list -> unit -> 'b elt	
+val	lib/html_sigs.mli	1155	78a97f774b70829a6faf0c0528a0415e61a853b7112722e76c26e7525dfba0e2	T.Unsafe	coerce_elt		'a elt -> 'b elt	
+val	lib/html_sigs.mli	1161	3b22d2627ed8666a6f2624a8a1e923bac6df8550c630b8b1b9bee17feb961871	T.Unsafe	string_attrib		string -> string wrap -> 'a attrib	
+val	lib/html_sigs.mli	1164	b2bcb1dbe0df91fe600906e92a43064dd8ba73b6669e119be35a8e7c062bd415	T.Unsafe	float_attrib		string -> float wrap -> 'a attrib	
+val	lib/html_sigs.mli	1167	467a0ab9cefede0269f917e51a94350c0e89eda45d7cf215fb6a99e1b3ecd1bc	T.Unsafe	int_attrib		string -> int wrap -> 'a attrib	
+val	lib/html_sigs.mli	1170	95951f2ca431223c8b9c85c03026b09b14379a9e20c6051127b37358b5b0362d	T.Unsafe	uri_attrib		string -> uri wrap -> 'a attrib	
+val	lib/html_sigs.mli	1173	6190cb714c688b862d00e4ceeffe85f8f87fbf08ab678ef85fb74775e20b71c0	T.Unsafe	space_sep_attrib		string -> string list wrap -> 'a attrib	
+val	lib/html_sigs.mli	1176	610e5308df959990a16e65d7112ddb8df01c57294a90eb8f590e879048f75271	T.Unsafe	comma_sep_attrib		string -> string list wrap -> 'a attrib	
+val	lib/html_sigs.mli	1215	3a3c90a024ac29d9919aeff22eded6de50c30e50d18af4a45dbb5b8e366d54dc	Wrapped_functions	string_of_big_variant		([< Html_types.big_variant ], string) Xml.W.ft	
+val	lib/html_sigs.mli	1218	ba8f349c5ec7505774fed8476f62f49b5772e2dd2022d4d53bc16d88d5a8f39c	Wrapped_functions	string_of_bool		(bool, string) Xml.W.ft	
+val	lib/html_sigs.mli	1220	caeba8077a40cc05883949e07f0f4e49669388e41cd4cd7b82148816147aeece	Wrapped_functions	onoff_of_bool		(bool, string) Xml.W.ft	
+val	lib/html_sigs.mli	1222	0b85ef0506d08f111920fcbe4f70b3820daacebe6fd4a9ec1a90a5689464e6c3	Wrapped_functions	string_of_character		(Html_types.character, string) Xml.W.ft	
+val	lib/html_sigs.mli	1224	16d991bc6e20cf389a9bacf8f07500a8fd1844b6f9840133d1a56fa2864bcf8b	Wrapped_functions	string_of_input_type		([< Html_types.input_type ], string) Xml.W.ft	
+val	lib/html_sigs.mli	1227	b4304af6346c6d331ca2d9a8bcfc088928da71566ef72ca6c32b56a63cf1f9e5	Wrapped_functions	string_of_script_type		([< Html_types.script_type ], string) Xml.W.ft	
+val	lib/html_sigs.mli	1230	d5b48e213d9f326eee3310cea40dece51371a78ab7bc0686faa73584a5fbc248	Wrapped_functions	string_of_number_or_datetime		([< Html_types.number_or_datetime ], string) Xml.W.ft	
+val	lib/html_sigs.mli	1233	a264703f6aca9733db132dec213b239be99440852b884319d73c06163e46108c	Wrapped_functions	string_of_linktypes		([< Html_types.linktype ] list, string) Xml.W.ft	
+val	lib/html_sigs.mli	1236	d900adcfd0d5bca7d61cefb23e0e7972bd69147545038cbef23a929903f030e5	Wrapped_functions	string_of_mediadesc		([< Html_types.mediadesc_token ] list, string) Xml.W.ft	
+val	lib/html_sigs.mli	1239	db02577387a04d253b72c6abd1f80e98f22637990be22ad7c3b2bc8aef2b9982	Wrapped_functions	string_of_referrerpolicy		([< Html_types.referrerpolicy ], string) Xml.W.ft	
+val	lib/html_sigs.mli	1242	bb6c3f8cfb66ac02d0f409a2f993515c8cd4615e0df5b391397d65dd9168e35d	Wrapped_functions	string_of_numbers		(Html_types.numbers, string) Xml.W.ft	
+val	lib/html_sigs.mli	1244	c7056cb5e59f09d72ee85beb57d4160e3d71297a3d2561e0e2bf159343a24d1e	Wrapped_functions	string_of_sandbox		([< Html_types.sandbox_token ] list, string) Xml.W.ft	
+val	lib/html_sigs.mli	1247	7d51c25ef5ca19b336ef73a43547b371a5f7e441ad864b2439b2cd45811e045d	Wrapped_functions	string_of_sizes		((Html_types.number * Html_types.number) list option, string) Xml.W.ft	
+type	lib/html_sigs.mli	1250	ff627d3c40958ec9a927960b0a8f9979cdd1088690996c959e9875fa7ba63cc1	Wrapped_functions	image_candidate		[ `Url of Xml.uri | `Url_width of Xml.uri * Html_types.number | `Url_pixel of Xml.uri * Html_types.float_number ]	
+val	lib/html_sigs.mli	1255	0a71077b9bf07d2031918de94f3db0cf9813839c7839cde84c5e9c435427d71d	Wrapped_functions	string_of_srcset		([< image_candidate ] list, string) Xml.W.ft	
+val	lib/html_sigs.mli	1258	5811d98ae947063c16becb5702b1e7d28a33b350cd708543aba965946ce89fa3	Wrapped_functions	string_of_autocomplete		(Html_types.autocomplete_option, string) Xml.W.ft	
+val	lib/html_sigs.mli	1261	c13914c4b7ca9941fb71ce36d0531d33531d6dd3583d1be0e5416310e8bf8447	Wrapped_functions	string_of_step		(float option, string) Xml.W.ft	
+val	lib/html_sigs.mli	1263	89cbc29d12796de37816be6ed01c103a3417ac78fe6bca376cfdc482e8825aee	Wrapped_functions	unoption_string		(string option, string) Xml.W.ft	
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		area			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		base			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		br			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		col			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		command			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		embed			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		hr			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		img			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		input			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		keygen			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		link			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		meta			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		param			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		source			
+emptytag	lib/html_f.ml	42	680eaf61b06f3ceeced65675bdb37a13413fb12d4a9b629adaa5c914927f9908		wbr			

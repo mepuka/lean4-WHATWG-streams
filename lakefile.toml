@@ -5,7 +5,7 @@ keywords = ["whatwg", "streams", "infra", "verified", "lean4"]
 license = "MIT"
 readmeFile = "README.md"
 defaultTargets = ["Whatwg", "Gates", "WhatwgTest",
-                  "vendorseal", "citations", "trustselftest", "census"]
+                  "vendorseal", "citations", "census", "tyxmlschema"]
 
 # Ruling R-6 (docs/SHA256-DAG.md §9), package-wide: no implicit binder is
 # invented from a free variable, and every warning is an error at elaboration
@@ -48,6 +48,16 @@ name = "trustselftest"
 srcDir = "bin"
 root = "TrustSelfTest"
 
+# The TyXML schema projection: `generated/tyxml-html-schema.tsv` regenerated
+# from the sealed `vendor/tyxml-d2916535/lib/{html_types.mli,html_sigs.mli,
+# html_f.ml}` and checked for byte drift (slice H1 of
+# docs/HTML-PACKAGE-PLAN.md). The generated `Whatwg.Html.Schema` modules of
+# H2 read this projection and nothing else.
+[[lean_exe]]
+name = "tyxmlschema"
+srcDir = "bin"
+root = "TyxmlSchema"
+
 # The P1 specification-algorithm census. `root = "bin.Census"` under the
 # default `srcDir` resolves to `bin/Census.lean`, matching the `sha256`
 # entry point above; there is no `Census` library root to collide with today,
@@ -63,13 +73,22 @@ root = "bin.Census"
 [[require]]
 name = "hash"
 git = "https://github.com/pure-algebra/lean4-hash"
-rev = "0168306b7068b97758e3f2d4307eeb97aa31a104"
+rev = "2447edd76649f035e989914ac899831d66e7dad2"
 
 # The generic effect algebra every standard here builds against (RS-D1 as
-# ruled in lean4-effect4 docs/EFFECTS-SPLIT-PLAN.md, EP-9). Exact commit of
-# tag v0.1.0 of mepuka/lean4-effects; acceptance probe recorded in PLAN.md.
-# Nothing imports it until the first Stratum S packet (P4).
+# ruled in lean4-effect4 docs/EFFECTS-SPLIT-PLAN.md, EP-9), now with signature
+# morphisms, handler transport, families, and the generic first-order Flow.
+# Exact commit of tag v0.6.0 of pure-algebra/lean4-effects. Nothing imports it
+# until the first Stratum S packet (P4).
 [[require]]
 name = "effects"
 git = "https://github.com/pure-algebra/lean4-effects"
-rev = "5611c3a3cd4cd4b830c76d6c25c7dba6034c973a"
+rev = "c28833b3c14431ba2886a0fb66bcc688c86c2589"
+
+# TypeScript as a target: syntax, renderer, identifier profile, host pins.
+# Exact commit of tag v0.2.0 of pure-algebra/lean4-typescript. P11 lowers
+# through it instead of declaring a second intermediate representation.
+[[require]]
+name = "typescript"
+git = "https://github.com/pure-algebra/lean4-typescript"
+rev = "fcbc05a40e52f9bbe8a8e3ee0f4a746ebd4e9554"

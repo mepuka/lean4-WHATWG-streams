@@ -1,7 +1,7 @@
 # Gates tooling routing
 
 This boundary contains the repository's gates implemented in Lean: the digest
-face of the required `hash` package, the vendor seal, the internal-citation gate, and the trust self-test. It is
+face of the required `hash` package, the vendor seal, the internal-citation gate, the trust self-test, the census, and the TyXML schema projection. It is
 the sixth authored router because this tree has a distinct trust boundary
 from the other five: it is tooling that reads files, spawns processes, and
 produces projections, and it is admitted to the implementation ceiling as a
@@ -51,7 +51,9 @@ they decide nothing.
 | `lake exe vendorseal` | `vendor/` against `generated/vendor-manifest.tsv` in both directions; Windows path validity | nothing |
 | `lake exe vendorseal --write` | Windows path validity | `generated/vendor-manifest.tsv` |
 | `lake exe citations` | no line-numbered citation into a protected authored document | nothing |
-| `lake exe trustselftest` | the declared red set; then planted `partial`, `unsafe`, `sorry`, `native_decide`, malformed literals, and an unreachable module are each rejected for the stated reason (the `Classical.choice` plant was retired by ruling R-11) | a throwaway copy outside the tree, removed afterwards |
+| `lake exe trustselftest` (on demand, not a default target and not in CI since 2026-09-03) | the declared red set; then planted `partial`, `unsafe`, `sorry`, `native_decide`, malformed literals, and an unreachable module are each rejected for the stated reason | a throwaway copy outside the tree, seeded from `.lake`, removed afterwards |
+| `lake exe tyxmlschema` | the three sealed TyXML inputs carry their pinned digests; `html_types.mli` and `html_sigs.mli` parse completely (an unhandled shape is a failure, never a skipped row); `generated/tyxml-html-schema.tsv` is byte-identical to a fresh regeneration; the four generated `Whatwg/Html/Schema/*.lean` modules are byte-identical to a fresh emission from the same parse (`Gates/TyxmlSchemaEmit.lean`) | nothing |
+| `lake exe tyxmlschema --write` | the same, before writing | `generated/tyxml-html-schema.tsv` and `Whatwg/Html/Schema/{Tags,Attributes,Families,ContentModel}.lean`, the one case of generated Lean source under `Whatwg/` (ruling HP-10) |
 | `lake exe census` | the pinned `index.bs` digest; every census anchor occurs exactly once at its span start; every span digest recomputes; every row has exactly one disposition from the authored inputs under `census/`, with no unused entry; both projections are byte-identical to a fresh regeneration; and the numerator's coverage emit carries the same ids, order and dispositions as that regeneration, with no witness on an absent row and none on a row outside the denominator | nothing |
 | `lake exe census --write` | the same, apart from the emit, before writing | `generated/spec-algorithm-census.tsv` and `WhatwgTest/Audit/SpecCoverageRows.lean` |
 | `lake exe census --report` | the emit against a fresh regeneration, as above; then prints the coverage block of `docs/SPEC-COVERAGE.md` from the emit's states | nothing |

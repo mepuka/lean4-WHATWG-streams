@@ -3,6 +3,8 @@ import Gates.Sha256
 import Gates.VendorSeal
 import Gates.Citations
 import Gates.Census
+import Gates.TyxmlSchema
+import Gates.TyxmlSchemaEmit
 import Gates.TrustSelfTest
 
 /-!
